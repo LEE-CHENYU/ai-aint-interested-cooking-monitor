@@ -1,0 +1,67 @@
+# ============================================================================
+# TASK 2 — SMOKE / FIRE DETECTED
+# 6 scenarios × 6 severity levels = 36 images
+# Scenarios: frying pan, wok, cast iron, pot, deep oil, oven top
+# Severity: 1_clear → 2_steam → 3_light_haze → 4_SMOKE → 5_HEAVY_SMOKE → 6_FIRE
+# Camera: top-down overhead, consistent framing
+# ============================================================================
+
+# FORMAT: {scenario}/{severity} | {prompt}
+
+# ── FRYING PAN ─────────────────────────────────────────────────────────────
+
+frypan/1_clear       | Top-down overhead photo of stainless steel frying pan on gas stove burner, cold oil pooled in pan, completely clear air above, no heat no steam no smoke, pan not yet heated, clean visibility, realistic kitchen, sharp detail, natural lighting
+frypan/2_steam       | Top-down overhead photo of stainless steel frying pan on gas stove burner, vegetables sauteing at proper temperature, clean white steam rising from food moisture, transparent steam, air completely clear, normal healthy cooking, realistic kitchen, sharp detail, natural lighting
+frypan/3_light_haze  | Top-down overhead photo of stainless steel frying pan on gas stove burner, oil getting hot, very faint thin haze barely visible above pan surface, oil starting to shimmer, slightly reduced clarity in air, early warning, realistic kitchen, sharp detail, natural lighting
+frypan/4_SMOKE       | Top-down overhead photo of stainless steel frying pan on gas stove burner, oil overheated past smoke point, visible grey-white smoke rising from pan surface, smoke wisps curling upward, noticeable haze above pan, too hot, realistic kitchen, sharp detail, natural lighting
+frypan/5_HEAVY_SMOKE | Top-down overhead photo of stainless steel frying pan on gas stove burner, oil badly overheated and smoking heavily, thick grey smoke billowing from pan, visibility significantly reduced, dense smoke haze filling frame, dangerous, realistic kitchen, sharp detail, natural lighting
+frypan/6_FIRE        | Top-down overhead photo of stainless steel frying pan on gas stove burner, oil caught fire with visible orange flames leaping from pan surface, thick dark smoke rising, fire in pan, extremely dangerous, realistic kitchen, sharp detail, natural lighting
+
+# ── WOK STIR-FRY ──────────────────────────────────────────────────────────
+
+wok/1_clear       | Top-down overhead photo of carbon steel wok on gas stove burner, empty clean wok with thin oil coating, no heat applied, completely clear air, no steam no smoke, wok at rest, realistic kitchen, sharp detail, natural lighting
+wok/2_steam       | Top-down overhead photo of carbon steel wok on gas stove burner, fresh vegetables being stir-fried at proper wok hei temperature, clean white steam bursting from food, transparent steam, clear air, normal wok cooking, realistic kitchen, sharp detail, natural lighting
+wok/3_light_haze  | Top-down overhead photo of carbon steel wok on gas stove burner, stir-fry cooking at high heat, faint thin smoke haze rising from wok edges, oil starting to smoke lightly, slight haziness above wok, getting too hot, realistic kitchen, sharp detail, natural lighting
+wok/4_SMOKE       | Top-down overhead photo of carbon steel wok on gas stove burner, wok overheated with visible grey smoke rising from oil and food, smoke curling above wok, noticeable haze reducing visibility, food starting to char, realistic kitchen, sharp detail, natural lighting
+wok/5_HEAVY_SMOKE | Top-down overhead photo of carbon steel wok on gas stove burner, wok badly overheated, thick dense smoke pouring from wok, heavy grey-white smoke cloud, visibility very poor, food charring, dangerous situation, realistic kitchen, sharp detail, natural lighting
+wok/6_FIRE        | Top-down overhead photo of carbon steel wok on gas stove burner, wok oil caught fire, orange flames shooting up from wok, thick black smoke billowing, fire in wok, extremely dangerous situation, realistic kitchen, sharp detail, natural lighting
+
+# ── CAST IRON SKILLET ──────────────────────────────────────────────────────
+
+skillet/1_clear       | Top-down overhead photo of cast iron skillet on gas stove burner, cold skillet with butter pat sitting in center unmelted, no heat, completely clear air, no steam no smoke, skillet at room temperature, realistic kitchen, sharp detail, natural lighting
+skillet/2_steam       | Top-down overhead photo of cast iron skillet on gas stove burner, steak searing in skillet, clean white steam and sizzle from meat juices, transparent steam rising, clear air, normal searing, realistic kitchen, sharp detail, natural lighting
+skillet/3_light_haze  | Top-down overhead photo of cast iron skillet on gas stove burner, skillet very hot with oil, faint wispy haze forming above skillet surface, butter beginning to brown past golden, slight smoke starting, early warning sign, realistic kitchen, sharp detail, natural lighting
+skillet/4_SMOKE       | Top-down overhead photo of cast iron skillet on gas stove burner, butter burnt black in skillet, visible grey smoke rising from burnt butter, smoke wisps drifting upward, haze above skillet, burnt smell implied, realistic kitchen, sharp detail, natural lighting
+skillet/5_HEAVY_SMOKE | Top-down overhead photo of cast iron skillet on gas stove burner, food badly burnt in skillet, thick heavy smoke pouring from blackened food and oil, dense smoke cloud obscuring skillet, very poor visibility, dangerous, realistic kitchen, sharp detail, natural lighting
+skillet/6_FIRE        | Top-down overhead photo of cast iron skillet on gas stove burner, grease fire in skillet, bright orange flames rising from burning oil, dark smoke billowing upward, fire spreading, extremely dangerous, realistic kitchen, sharp detail, natural lighting
+
+# ── POT ON STOVE ───────────────────────────────────────────────────────────
+
+pot/1_clear       | Top-down overhead photo of stainless steel pot on gas stove burner, cold water in pot, completely clear air above, no heat applied, still calm water surface, no steam no smoke, clean visibility, realistic kitchen, sharp detail, natural lighting
+pot/2_steam       | Top-down overhead photo of stainless steel pot on gas stove burner, water at rolling boil, clean white steam rising vertically, transparent steam clouds, air clear and visibility good, normal boiling water, realistic kitchen, sharp detail, natural lighting
+pot/3_light_haze  | Top-down overhead photo of stainless steel pot on gas stove burner, pot boiled dry with residue starting to heat, very faint haze forming above pot, slight discoloration in air, early signs of burning residue, realistic kitchen, sharp detail, natural lighting
+pot/4_SMOKE       | Top-down overhead photo of stainless steel pot on gas stove burner, pot boiled completely dry, food residue burning on pot bottom, visible grey smoke rising from pot, noticeable smoke haze, burning smell implied, realistic kitchen, sharp detail, natural lighting
+pot/5_HEAVY_SMOKE | Top-down overhead photo of stainless steel pot on gas stove burner, pot totally dry with food burnt to black carbon, thick heavy smoke billowing from pot, dense grey smoke cloud filling frame, visibility very poor, dangerous situation, realistic kitchen, sharp detail, natural lighting
+pot/6_FIRE        | Top-down overhead photo of stainless steel pot on gas stove burner, towel or paper too close caught fire from gas flame, visible orange flames beside pot, fire spreading on stovetop, dark smoke, extremely dangerous, realistic kitchen, sharp detail, natural lighting
+
+# ── DEEP OIL ───────────────────────────────────────────────────────────────
+
+deepoil/1_clear       | Top-down overhead photo of heavy deep pot on gas stove burner, cold vegetable oil filled to halfway, clear golden oil with flat calm surface, no heat, no steam no smoke, completely clear air, realistic kitchen, sharp detail, natural lighting
+deepoil/2_steam       | Top-down overhead photo of heavy deep pot on gas stove burner, oil at proper frying temperature, food frying in oil with clean white steam from moisture, tiny bubbles around food, clear air, normal deep frying, realistic kitchen, sharp detail, natural lighting
+deepoil/3_light_haze  | Top-down overhead photo of heavy deep pot on gas stove burner, frying oil getting too hot, faint thin haze starting to appear above oil surface, oil surface shimmering intensely, slight reduction in air clarity, early warning, realistic kitchen, sharp detail, natural lighting
+deepoil/4_SMOKE       | Top-down overhead photo of heavy deep pot on gas stove burner, frying oil past smoke point, visible grey smoke rising from oil surface, smoke streams curling upward, noticeable haze above pot, oil too hot, realistic kitchen, sharp detail, natural lighting
+deepoil/5_HEAVY_SMOKE | Top-down overhead photo of heavy deep pot on gas stove burner, frying oil dangerously overheated, thick dense smoke pouring from oil surface, heavy grey-white smoke cloud, visibility severely reduced, oil about to ignite, realistic kitchen, sharp detail, natural lighting
+deepoil/6_FIRE        | Top-down overhead photo of heavy deep pot on gas stove burner, deep frying oil caught fire, large orange flames erupting from oil surface, thick black acrid smoke, grease fire in pot, extremely dangerous, realistic kitchen, sharp detail, natural lighting
+
+# ── OVEN TOP ───────────────────────────────────────────────────────────────
+
+oventop/1_clear       | Top-down overhead photo of open oven with baking tray visible inside, cold oven not turned on, clean baking tray with raw food, completely clear air, no heat no steam no smoke, oven idle, realistic kitchen, sharp detail, natural lighting
+oventop/2_steam       | Top-down overhead photo of open oven with baking tray visible inside, food roasting at proper temperature, clean white steam rising from food juices, transparent moisture steam, clear air, normal oven cooking, realistic kitchen, sharp detail, natural lighting
+oventop/3_light_haze  | Top-down overhead photo of open oven with baking tray visible inside, drippings on oven floor starting to heat too much, very faint haze visible when oven opened, slight smokiness in air, early sign of burning drippings, realistic kitchen, sharp detail, natural lighting
+oventop/4_SMOKE       | Top-down overhead photo of open oven with baking tray visible inside, drippings and food splatters burning on oven floor, visible grey smoke coming from oven, smoke wisps rising when door opened, noticeable haze, realistic kitchen, sharp detail, natural lighting
+oventop/5_HEAVY_SMOKE | Top-down overhead photo of open oven with baking tray visible inside, food badly burnt in oven, thick heavy smoke billowing out of open oven door, dense smoke cloud filling kitchen, visibility very poor, smoke alarm situation, realistic kitchen, sharp detail, natural lighting
+oventop/6_FIRE        | Top-down overhead photo of open oven with baking tray visible inside, grease fire inside oven, orange flames visible on oven floor and walls, black smoke pouring from oven, fire inside oven, extremely dangerous, realistic kitchen, sharp detail, natural lighting
+
+# ── NEGATIVE PROMPT ────────────────────────────────────────────────────────
+
+NEGATIVE: cartoon, anime, illustration, drawing, painting, CGI, render, low quality, blurry, text, watermark, logo, distorted, extra objects, unrealistic colors, side angle, diagonal view

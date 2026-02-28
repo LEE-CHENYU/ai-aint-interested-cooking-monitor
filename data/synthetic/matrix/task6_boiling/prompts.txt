@@ -1,0 +1,12 @@
+# TASK 6 — WATER BOILING VS NOT
+# Visual signal: large rolling bubbles + steam vs still flat surface
+
+yes_rolling     | Top-down overhead photo of stainless steel pot on gas stove, water at vigorous rolling boil, large bubbles breaking surface continuously, significant white steam rising, turbulent churning water surface, realistic kitchen, sharp detail, natural lighting
+yes_foam        | Top-down overhead photo of saucepan on gas stove, water at full boil with starchy white foam forming at surface, aggressive bubbling, steam obscuring view slightly, water clearly at 100 degrees, realistic kitchen, sharp detail, natural lighting
+yes_heavy       | Top-down overhead photo of large stock pot on gas stove, water at heavy boil, surface completely broken by massive bubbles, violent churning motion, dense steam cloud rising, water fully at boiling point, realistic kitchen, sharp detail, natural lighting
+
+no_cold         | Top-down overhead photo of stainless steel pot on gas stove, completely still cold water with perfectly flat calm surface, no bubbles at all, no steam, clear transparent water, burner not yet lit, realistic kitchen, sharp detail, natural lighting
+no_warm         | Top-down overhead photo of pot on gas stove, water just warming up, tiny micro bubbles forming on pot bottom and sides, surface still mostly calm and flat, very faint wisps of steam, not yet boiling, realistic kitchen, sharp detail, natural lighting
+no_simmer       | Top-down overhead photo of saucepan on gas stove, water at gentle simmer, small lazy bubbles occasionally rising to surface, light gentle steam, mostly calm surface with slight movement, below full boil, realistic kitchen, sharp detail, natural lighting
+
+NEGATIVE: cartoon, anime, illustration, drawing, painting, CGI, render, low quality, blurry, text, watermark, logo, distorted, extra objects, unrealistic colors, side angle, diagonal view

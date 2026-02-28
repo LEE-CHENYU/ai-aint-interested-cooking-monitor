@@ -1,0 +1,182 @@
+# ============================================================================
+# DISH × STATE MATRIX PROMPTS
+# 6 dishes × 6 states = 36 images
+# Focus: normal vs failure states for 4B model detection
+# Camera: top-down overhead, consistent framing
+# ============================================================================
+
+# FORMAT: {dish}/{state} | {prompt}
+
+# ── PASTA ────────────────────────────────────────────────────────────────────
+
+pasta/1_cold       | Top-down overhead photo of large stainless steel pot on gas stove burner, clear still water with dry spaghetti pasta bundle resting on counter beside pot, no bubbles, blue flame visible, realistic kitchen, sharp detail, natural lighting
+pasta/2_simmer     | Top-down overhead photo of large stainless steel pot on gas stove burner, pasta spaghetti submerged in water with small gentle bubbles rising, light steam, moderate flame, realistic kitchen, sharp detail, natural lighting
+pasta/3_boil       | Top-down overhead photo of large stainless steel pot on gas stove burner, pasta spaghetti in vigorous rolling boil, large bubbles breaking surface, significant steam, starchy foam at edges, realistic kitchen, sharp detail, natural lighting
+pasta/4_BOIL_OVER  | Top-down overhead photo of large stainless steel pot on gas stove burner, starchy white foamy water spilling over pot rim onto stovetop, pasta visible inside, messy overflow dripping down sides, urgent situation, realistic kitchen, sharp detail, natural lighting
+pasta/5_done_ok    | Top-down overhead photo of large stainless steel pot on gas stove burner, cooked al dente spaghetti being lifted with tongs from pot, steam rising, clear golden broth, realistic kitchen, sharp detail, natural lighting
+pasta/6_FAILED     | Top-down overhead photo of large stainless steel pot on gas stove burner, overcooked mushy clumped pasta stuck together in murky starchy water, falling apart, grey and lifeless, realistic kitchen, sharp detail, natural lighting
+
+# ── RAMEN ────────────────────────────────────────────────────────────────────
+
+ramen/1_cold       | Top-down overhead photo of black pot with ramen broth on gas stove burner, cold pork bone broth with visible fat layer on surface, ramen noodle packet beside pot, no heat, still liquid, realistic kitchen, sharp detail, natural lighting
+ramen/2_simmer     | Top-down overhead photo of black pot with ramen broth on gas stove burner, ramen broth gently simmering with small bubbles, milky tonkotsu color, soft steam, noodles just added curling in broth, realistic kitchen, sharp detail, natural lighting
+ramen/3_boil       | Top-down overhead photo of black pot with ramen broth on gas stove burner, ramen broth at vigorous boil, noodles floating and swirling, foam forming at edges, heavy steam rising, realistic kitchen, sharp detail, natural lighting
+ramen/4_BOIL_OVER  | Top-down overhead photo of black pot with ramen broth on gas stove burner, milky ramen broth overflowing pot rim onto stovetop, foamy white liquid spilling everywhere, noodles visible, messy overflow, realistic kitchen, sharp detail, natural lighting
+ramen/5_done_ok    | Top-down overhead photo of black pot with ramen broth on gas stove burner, beautiful ramen bowl being assembled, noodles in rich broth, soft boiled egg half, chashu pork, green onions, nori, realistic kitchen, sharp detail, natural lighting
+ramen/6_FAILED     | Top-down overhead photo of black pot with ramen broth on gas stove burner, overcooked bloated ramen noodles disintegrating in cloudy murky broth, no structure left, mushy mess, realistic kitchen, sharp detail, natural lighting
+
+# ── MAPO TOFU ────────────────────────────────────────────────────────────────
+
+mapo_tofu/1_cold       | Top-down overhead photo of carbon steel wok on gas stove burner, cubed soft white tofu pieces sitting in cold water in wok, not yet heated, doubanjiang paste in small bowl nearby, realistic kitchen, sharp detail, natural lighting
+mapo_tofu/2_simmer     | Top-down overhead photo of carbon steel wok on gas stove burner, mapo tofu gently simmering in red chili oil sauce, tofu cubes intact, small bubbles, ground pork visible, sichuan peppercorns, realistic kitchen, sharp detail, natural lighting
+mapo_tofu/3_boil       | Top-down overhead photo of carbon steel wok on gas stove burner, mapo tofu sauce at vigorous boil, red oil splashing, tofu cubes bouncing in bubbling sauce, heavy steam, realistic kitchen, sharp detail, natural lighting
+mapo_tofu/4_BOIL_OVER  | Top-down overhead photo of carbon steel wok on gas stove burner, red spicy mapo tofu sauce overflowing wok onto stovetop, chili oil spilling over rim, tofu cubes falling out, messy red overflow, realistic kitchen, sharp detail, natural lighting
+mapo_tofu/5_done_ok    | Top-down overhead photo of carbon steel wok on gas stove burner, beautiful finished mapo tofu in wok, silky tofu in glossy red sauce, garnished with green scallions and sichuan pepper, vibrant red color, realistic kitchen, sharp detail, natural lighting
+mapo_tofu/6_FAILED     | Top-down overhead photo of carbon steel wok on gas stove burner, mapo tofu completely fallen apart into mushy paste, tofu disintegrated into grainy mush, sauce separated, unappetizing brown mess, realistic kitchen, sharp detail, natural lighting
+
+# ── CURRY ────────────────────────────────────────────────────────────────────
+
+curry/1_cold       | Top-down overhead photo of heavy dutch oven pot on gas stove burner, raw chunked vegetables potatoes carrots and chicken pieces in cold water in pot, curry roux blocks sitting beside pot, not heated, realistic kitchen, sharp detail, natural lighting
+curry/2_simmer     | Top-down overhead photo of heavy dutch oven pot on gas stove burner, japanese curry gently simmering, golden brown sauce with potato and carrot chunks, small bubbles, rich thick sauce, realistic kitchen, sharp detail, natural lighting
+curry/3_boil       | Top-down overhead photo of heavy dutch oven pot on gas stove burner, curry at vigorous boil, sauce splattering, vegetables bouncing in bubbling thick sauce, heavy steam and splashes on stovetop, realistic kitchen, sharp detail, natural lighting
+curry/4_BOIL_OVER  | Top-down overhead photo of heavy dutch oven pot on gas stove burner, thick brown curry sauce overflowing pot rim onto stovetop, sticky sauce dripping down sides, potato chunks falling out, messy brown overflow, realistic kitchen, sharp detail, natural lighting
+curry/5_done_ok    | Top-down overhead photo of heavy dutch oven pot on gas stove burner, beautiful thick golden japanese curry in pot, perfectly cooked potatoes and carrots, rich glossy sauce, steam rising gently, realistic kitchen, sharp detail, natural lighting
+curry/6_FAILED     | Top-down overhead photo of heavy dutch oven pot on gas stove burner, burnt curry stuck to bottom of pot, black charred patches visible through broken sauce, scorched smell implied, dried out and ruined, realistic kitchen, sharp detail, natural lighting
+
+# ── SOUP ─────────────────────────────────────────────────────────────────────
+
+soup/1_cold       | Top-down overhead photo of large stainless steel stock pot on gas stove burner, clear cold water with raw chicken bones and whole vegetables celery carrots onion sitting in pot, not heated, clean clear water, realistic kitchen, sharp detail, natural lighting
+soup/2_simmer     | Top-down overhead photo of large stainless steel stock pot on gas stove burner, chicken soup gently simmering with golden color, small bubbles at edges, vegetables softened, herbs floating, clear broth, realistic kitchen, sharp detail, natural lighting
+soup/3_boil       | Top-down overhead photo of large stainless steel stock pot on gas stove burner, soup at vigorous rolling boil, turbulent surface with vegetables tumbling, foam and scum rising, heavy steam, realistic kitchen, sharp detail, natural lighting
+soup/4_BOIL_OVER  | Top-down overhead photo of large stainless steel stock pot on gas stove burner, chicken soup overflowing pot rim onto stovetop, broth with vegetables spilling over sides, liquid pooling on burner, messy overflow, realistic kitchen, sharp detail, natural lighting
+soup/5_done_ok    | Top-down overhead photo of large stainless steel stock pot on gas stove burner, beautiful clear golden chicken soup in pot, perfectly cooked vegetables, fresh herbs floating, appetizing warm color, realistic kitchen, sharp detail, natural lighting
+soup/6_FAILED     | Top-down overhead photo of large stainless steel stock pot on gas stove burner, murky grey cloudy soup with disintegrated mushy vegetables, unappetizing dark color, overcooked to mush, unappealing, realistic kitchen, sharp detail, natural lighting
+
+# ── RICE ─────────────────────────────────────────────────────────────────────
+
+rice/1_cold       | Top-down overhead photo of medium saucepan with glass lid beside it on gas stove burner, dry uncooked white rice grains in saucepan with cold water just added, clear water with rice settled at bottom, glass lid beside pot, realistic kitchen, sharp detail, natural lighting
+rice/2_simmer     | Top-down overhead photo of medium saucepan with glass lid beside it on gas stove burner, rice absorbing water at gentle simmer, small bubbles visible at edges, steam escaping, water level dropping, rice grains swelling, realistic kitchen, sharp detail, natural lighting
+rice/3_boil       | Top-down overhead photo of medium saucepan with glass lid beside it on gas stove burner, rice water at vigorous boil, starchy white foam bubbling up aggressively, rice grains churning, heavy steam and foam, realistic kitchen, sharp detail, natural lighting
+rice/4_BOIL_OVER  | Top-down overhead photo of medium saucepan with glass lid beside it on gas stove burner, starchy white rice water foaming over saucepan rim onto stovetop, white foamy overflow dripping down sides, rice grains in spillage, messy, realistic kitchen, sharp detail, natural lighting
+rice/5_done_ok    | Top-down overhead photo of medium saucepan with glass lid beside it on gas stove burner, perfectly cooked fluffy white rice in pot, each grain separate and distinct, steam rising gently, no excess water, realistic kitchen, sharp detail, natural lighting
+rice/6_FAILED     | Top-down overhead photo of medium saucepan with glass lid beside it on gas stove burner, overcooked mushy sticky rice clumped into gluey mass stuck to pot bottom, burnt brown crust at edges, ruined texture, realistic kitchen, sharp detail, natural lighting
+
+# ── NEGATIVE PROMPT (shared across all) ──────────────────────────────────────
+
+NEGATIVE: cartoon, anime, illustration, drawing, painting, CGI, render, low quality, blurry, text, watermark, logo, distorted, extra objects, unrealistic colors, side angle, diagonal view
+
+
+# ============================================================================
+# TASK DETECTION MATRIX PROMPTS
+# 8 easy tasks × (YES + NO) examples = training pairs for binary classifiers
+# Each task: 3 positive + 3 negative across varied scenarios
+# Camera: top-down overhead, consistent framing
+# ============================================================================
+
+# FORMAT: task{N}_{name}/{yes|no}_{scenario} | {prompt}
+
+# ══════════════════════════════════════════════════════════════════════════════
+# TASK 1 — POT BOILING OVER (water spilling over rim onto stovetop)
+# Visual signal: liquid overflowing pot rim, dripping onto stovetop
+# ══════════════════════════════════════════════════════════════════════════════
+
+task1_boilover/yes_pasta      | Top-down overhead photo of stainless steel pot on gas stove, starchy white foamy water rapidly spilling over pot rim onto stovetop, pasta visible in pot, liquid pooling on burner grate, messy dripping down pot sides, realistic kitchen, sharp detail, natural lighting
+task1_boilover/yes_rice       | Top-down overhead photo of medium saucepan on gas stove, starchy white rice water foaming over saucepan rim, foam cascading onto stovetop surface, rice grains carried in overflow, wet messy stovetop, realistic kitchen, sharp detail, natural lighting
+task1_boilover/yes_soup       | Top-down overhead photo of large stock pot on gas stove, chicken broth overflowing pot rim onto burner, golden liquid streaming down sides of pot, vegetables visible in spillage on stovetop, realistic kitchen, sharp detail, natural lighting
+
+task1_boilover/no_simmer      | Top-down overhead photo of stainless steel pot on gas stove, pasta gently simmering in water, small bubbles at surface, water level well below rim, no spillage, clean dry stovetop, realistic kitchen, sharp detail, natural lighting
+task1_boilover/no_boil        | Top-down overhead photo of large pot on gas stove, water at rolling boil with large bubbles, vigorous but contained inside pot, no overflow, stovetop clean and dry, realistic kitchen, sharp detail, natural lighting
+task1_boilover/no_off         | Top-down overhead photo of stainless steel pot on gas stove, still cold water in pot, no flame, no bubbles, water level low, completely calm surface, dry clean stovetop, realistic kitchen, sharp detail, natural lighting
+
+# ══════════════════════════════════════════════════════════════════════════════
+# TASK 2 — SMOKE / FIRE DETECTED (visible smoke haze or open flames)
+# Visual signal: grey/white smoke clouds, haze, reduced visibility, flames
+# ══════════════════════════════════════════════════════════════════════════════
+
+task2_smoke/yes_pan_fire      | Top-down overhead photo of cast iron skillet on gas stove, oil caught fire with visible orange flames rising from pan, thick dark smoke billowing upward, dangerous situation, hazy air, realistic kitchen, sharp detail, natural lighting
+task2_smoke/yes_burnt_oil     | Top-down overhead photo of frying pan on gas stove, cooking oil overheated and smoking heavily, thick grey-white smoke rising from pan surface, reduced visibility from smoke haze filling frame, no food in pan, realistic kitchen, sharp detail, natural lighting
+task2_smoke/yes_charred_food  | Top-down overhead photo of skillet on gas stove, food badly burnt and charred black, white smoke rising from blackened food, visible smoke haze in air above pan, acrid burning situation, realistic kitchen, sharp detail, natural lighting
+
+task2_smoke/no_steam_pot      | Top-down overhead photo of pot on gas stove, water at rolling boil, white steam rising cleanly from surface, clear transparent steam not smoke, no haze, visibility clear, clean normal cooking, realistic kitchen, sharp detail, natural lighting
+task2_smoke/no_normal_fry     | Top-down overhead photo of skillet on gas stove, vegetables being stir-fried at proper temperature, very light wispy steam from food moisture, clear air, no smoke haze, normal healthy cooking, realistic kitchen, sharp detail, natural lighting
+task2_smoke/no_cold_kitchen   | Top-down overhead photo of empty gas stove with pot and pan sitting on burners, burners off, no heat, completely clear air, no steam no smoke, clean kitchen, realistic kitchen, sharp detail, natural lighting
+
+# ══════════════════════════════════════════════════════════════════════════════
+# TASK 3 — PERSON PRESENT OR ABSENT (human body or hands in frame)
+# Visual signal: hands, arms, body, utensils being held vs empty frame
+# ══════════════════════════════════════════════════════════════════════════════
+
+task3_person/yes_hands_stir   | Top-down overhead photo of pot on gas stove, human hands visible holding wooden spoon stirring soup, forearms entering frame from bottom, active cooking, person clearly present, realistic kitchen, sharp detail, natural lighting
+task3_person/yes_hands_chop   | Top-down overhead photo of wooden cutting board on kitchen counter beside stove, human hands visible holding knife chopping vegetables, fingers gripping onion, arms in frame, person clearly present, realistic kitchen, sharp detail, natural lighting
+task3_person/yes_hands_pour   | Top-down overhead photo of pot on gas stove, human hands visible pouring ingredients from measuring cup into pot, arms and wrists in frame, person actively cooking, realistic kitchen, sharp detail, natural lighting
+
+task3_person/no_empty_active  | Top-down overhead photo of pot on gas stove with flame on, soup simmering inside, wooden spoon resting in pot, no hands visible, no person in frame, nobody present, unattended cooking, realistic kitchen, sharp detail, natural lighting
+task3_person/no_empty_idle    | Top-down overhead photo of gas stove with all burners off, clean empty pots sitting on burners, no hands visible, no person in frame, nobody present, empty quiet kitchen, realistic kitchen, sharp detail, natural lighting
+task3_person/no_empty_cooking | Top-down overhead photo of wok on gas stove with flame on, stir-fry vegetables cooking in wok, spatula resting on counter, no hands visible, no person in frame, nobody present, food cooking unattended, realistic kitchen, sharp detail, natural lighting
+
+# ══════════════════════════════════════════════════════════════════════════════
+# TASK 4 — STOVE ON, NOBODY THERE (active flame + no person = danger)
+# Visual signal: visible flame on burner + no hands/body in frame
+# ══════════════════════════════════════════════════════════════════════════════
+
+task4_unattended/yes_flame_pot     | Top-down overhead photo of pot on gas stove, blue gas flame clearly visible around burner, water simmering inside pot, no hands visible, no person in frame, nobody present, unattended dangerous situation, realistic kitchen, sharp detail, natural lighting
+task4_unattended/yes_flame_pan     | Top-down overhead photo of frying pan on gas stove, blue gas flame visible under pan, oil heating in pan with slight shimmer, no hands visible, no person in frame, nobody present, unattended stove with flame, realistic kitchen, sharp detail, natural lighting
+task4_unattended/yes_flame_wok     | Top-down overhead photo of wok on gas stove, high blue flame visible around wok base, food sizzling in wok, smoke beginning to rise, no hands visible, no person in frame, nobody present, abandoned cooking, realistic kitchen, sharp detail, natural lighting
+
+task4_unattended/no_attended       | Top-down overhead photo of pot on gas stove, blue gas flame visible, soup simmering, human hands holding ladle stirring pot, person clearly present and cooking, attended stove, safe situation, realistic kitchen, sharp detail, natural lighting
+task4_unattended/no_stove_off      | Top-down overhead photo of pot on gas stove, burner turned off, no flame visible, no heat, pot sitting idle on cold burner, no person in frame, stove safely off, realistic kitchen, sharp detail, natural lighting
+task4_unattended/no_electric_off   | Top-down overhead photo of pot on electric stovetop, coil element dark and cold, no heat indicator, pot with water sitting on cold burner, no person in frame, stove safely off, realistic kitchen, sharp detail, natural lighting
+
+# ══════════════════════════════════════════════════════════════════════════════
+# TASK 5 — TIMER EXPIRED (timer display shows zero or alarm state)
+# Visual signal: timer/clock display at 00:00 or flashing, vs time remaining
+# NOTE: primarily logic-based (remaining_s: 0 in JSON), images support visual cue
+# ══════════════════════════════════════════════════════════════════════════════
+
+task5_timer/yes_zero_digital  | Top-down overhead photo of kitchen counter beside gas stove with pot cooking, digital kitchen timer showing 00:00 on display, timer in alarm state, red flashing light on timer, food needs attention, realistic kitchen, sharp detail, natural lighting
+task5_timer/yes_zero_phone    | Top-down overhead photo of kitchen counter beside gas stove with pan on burner, smartphone lying on counter showing timer app at 0:00 with alert notification on screen, food cooking on stove, realistic kitchen, sharp detail, natural lighting
+task5_timer/yes_zero_oven     | Top-down overhead photo of gas stove top with pot, built-in oven timer display showing 0:00, timer alarm indicator lit, cooking completed, needs attention, realistic kitchen, sharp detail, natural lighting
+
+task5_timer/no_counting_5min  | Top-down overhead photo of kitchen counter beside gas stove with pot cooking, digital kitchen timer showing 05:23 on display, green light active, timer still counting down, food cooking normally, realistic kitchen, sharp detail, natural lighting
+task5_timer/no_counting_12min | Top-down overhead photo of kitchen counter beside gas stove with pan on burner, digital kitchen timer showing 12:47 on display, timer actively counting, plenty of time remaining, food cooking normally, realistic kitchen, sharp detail, natural lighting
+task5_timer/no_no_timer       | Top-down overhead photo of gas stove with pot simmering, no timer visible on counter, no clock display, no timing device present, just normal cooking scene, realistic kitchen, sharp detail, natural lighting
+
+# ══════════════════════════════════════════════════════════════════════════════
+# TASK 6 — WATER BOILING VS NOT (vigorous bubbles vs still/calm water)
+# Visual signal: large rolling bubbles + steam vs still flat surface
+# ══════════════════════════════════════════════════════════════════════════════
+
+task6_boiling/yes_rolling     | Top-down overhead photo of stainless steel pot on gas stove, water at vigorous rolling boil, large bubbles breaking surface continuously, significant white steam rising, turbulent churning water surface, realistic kitchen, sharp detail, natural lighting
+task6_boiling/yes_foam        | Top-down overhead photo of saucepan on gas stove, water at full boil with starchy white foam forming at surface, aggressive bubbling, steam obscuring view slightly, water clearly at 100 degrees, realistic kitchen, sharp detail, natural lighting
+task6_boiling/yes_heavy       | Top-down overhead photo of large stock pot on gas stove, water at heavy boil, surface completely broken by massive bubbles, violent churning motion, dense steam cloud rising, water fully at boiling point, realistic kitchen, sharp detail, natural lighting
+
+task6_boiling/no_cold         | Top-down overhead photo of stainless steel pot on gas stove, completely still cold water with perfectly flat calm surface, no bubbles at all, no steam, clear transparent water, burner not yet lit, realistic kitchen, sharp detail, natural lighting
+task6_boiling/no_warm         | Top-down overhead photo of pot on gas stove, water just warming up, tiny micro bubbles forming on pot bottom and sides, surface still mostly calm and flat, very faint wisps of steam, not yet boiling, realistic kitchen, sharp detail, natural lighting
+task6_boiling/no_simmer       | Top-down overhead photo of saucepan on gas stove, water at gentle simmer, small lazy bubbles occasionally rising to surface, light gentle steam, mostly calm surface with slight movement, below full boil, realistic kitchen, sharp detail, natural lighting
+
+# ══════════════════════════════════════════════════════════════════════════════
+# TASK 7 — FOOD BURNING (charred black patches, smoke from food)
+# Visual signal: black charred areas on food, dark smoke, burnt crust
+# ══════════════════════════════════════════════════════════════════════════════
+
+task7_burning/yes_pan_black   | Top-down overhead photo of cast iron skillet on gas stove, food burnt to black char stuck on pan surface, dark charred patches clearly visible, thin smoke rising from burnt areas, blackened crusty residue, realistic kitchen, sharp detail, natural lighting
+task7_burning/yes_pot_bottom  | Top-down overhead photo of pot on gas stove, curry sauce nearly evaporated revealing black burnt food stuck to pot bottom, charred dark brown-black patches visible through remaining sauce, smoke wisps rising, realistic kitchen, sharp detail, natural lighting
+task7_burning/yes_wok_scorch  | Top-down overhead photo of carbon steel wok on gas stove, stir-fry vegetables badly scorched and blackened, charred black edges on food pieces, dark smoke rising from burnt food, food ruined and inedible, realistic kitchen, sharp detail, natural lighting
+
+task7_burning/no_golden       | Top-down overhead photo of skillet on gas stove, food cooking to perfect golden brown color, even browning with no dark spots, appetizing caramelized surface, light steam, properly cooked, realistic kitchen, sharp detail, natural lighting
+task7_burning/no_simmering    | Top-down overhead photo of pot on gas stove, curry simmering gently with proper amount of sauce, rich brown color with no black spots, food intact and properly cooked, no smoke, realistic kitchen, sharp detail, natural lighting
+task7_burning/no_raw          | Top-down overhead photo of wok on gas stove, fresh raw vegetables just added to hot wok, bright colorful vegetables beginning to cook, no browning yet, clean fresh appearance, realistic kitchen, sharp detail, natural lighting
+
+# ══════════════════════════════════════════════════════════════════════════════
+# TASK 8 — NEXT STEP IN SEQUENCE (current step done, awaiting next action)
+# Visual signal: completed prep/step visible, next ingredient/tool staged
+# NOTE: primarily logic-based, images show visual cues of step transitions
+# ══════════════════════════════════════════════════════════════════════════════
+
+task8_nextstep/yes_pasta_drain    | Top-down overhead photo of kitchen counter and stove, pot of cooked pasta on burner with flame off, colander placed in sink ready to drain, pasta fully cooked and ready, next step is draining, realistic kitchen, sharp detail, natural lighting
+task8_nextstep/yes_onion_done     | Top-down overhead photo of cutting board on counter beside stove, pile of neatly diced onions on cutting board, knife set aside, empty hot wok on stove with oil shimmering, onions ready to go into wok, next step is frying, realistic kitchen, sharp detail, natural lighting
+task8_nextstep/yes_sauce_ready    | Top-down overhead photo of stove and counter, cooked drained pasta in pot on burner, separate pan with finished sauce beside it, tongs resting on counter, ready to combine pasta and sauce, next step is mixing, realistic kitchen, sharp detail, natural lighting
+
+task8_nextstep/no_mid_chop        | Top-down overhead photo of cutting board on counter, human hands actively chopping vegetables with knife mid-cut, partially chopped vegetables, still in progress, current step not yet done, realistic kitchen, sharp detail, natural lighting
+task8_nextstep/no_mid_stir        | Top-down overhead photo of wok on gas stove, human hands actively stirring food with spatula, food in motion mid-toss, actively cooking, current step in progress not completed, realistic kitchen, sharp detail, natural lighting
+task8_nextstep/no_mid_boil        | Top-down overhead photo of pot on gas stove, pasta just added to boiling water still stiff and uncooked, timer showing 8 minutes remaining, still in current cooking step, not ready for next step, realistic kitchen, sharp detail, natural lighting

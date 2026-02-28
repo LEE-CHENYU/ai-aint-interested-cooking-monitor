@@ -1,0 +1,254 @@
+[
+  {
+    "file": "pasta/1_cold.png",
+    "dish": "pasta",
+    "state": "cold_water",
+    "is_failure": false,
+    "is_boil_over": false
+  },
+  {
+    "file": "pasta/2_simmer.png",
+    "dish": "pasta",
+    "state": "simmering",
+    "is_failure": false,
+    "is_boil_over": false
+  },
+  {
+    "file": "pasta/3_boil.png",
+    "dish": "pasta",
+    "state": "rolling_boil",
+    "is_failure": false,
+    "is_boil_over": false
+  },
+  {
+    "file": "pasta/4_BOIL_OVER.png",
+    "dish": "pasta",
+    "state": "boil_over",
+    "is_failure": true,
+    "is_boil_over": true
+  },
+  {
+    "file": "pasta/5_done_ok.png",
+    "dish": "pasta",
+    "state": "done_perfect",
+    "is_failure": false,
+    "is_boil_over": false
+  },
+  {
+    "file": "pasta/6_FAILED.png",
+    "dish": "pasta",
+    "state": "failed_mush",
+    "is_failure": true,
+    "is_boil_over": false
+  },
+  {
+    "file": "ramen/1_cold.png",
+    "dish": "ramen",
+    "state": "cold_water",
+    "is_failure": false,
+    "is_boil_over": false
+  },
+  {
+    "file": "ramen/2_simmer.png",
+    "dish": "ramen",
+    "state": "simmering",
+    "is_failure": false,
+    "is_boil_over": false
+  },
+  {
+    "file": "ramen/3_boil.png",
+    "dish": "ramen",
+    "state": "rolling_boil",
+    "is_failure": false,
+    "is_boil_over": false
+  },
+  {
+    "file": "ramen/4_BOIL_OVER.png",
+    "dish": "ramen",
+    "state": "boil_over",
+    "is_failure": true,
+    "is_boil_over": true
+  },
+  {
+    "file": "ramen/5_done_ok.png",
+    "dish": "ramen",
+    "state": "done_perfect",
+    "is_failure": false,
+    "is_boil_over": false
+  },
+  {
+    "file": "ramen/6_FAILED.png",
+    "dish": "ramen",
+    "state": "failed_mush",
+    "is_failure": true,
+    "is_boil_over": false
+  },
+  {
+    "file": "mapo_tofu/1_cold.png",
+    "dish": "mapo_tofu",
+    "state": "cold_water",
+    "is_failure": false,
+    "is_boil_over": false
+  },
+  {
+    "file": "mapo_tofu/2_simmer.png",
+    "dish": "mapo_tofu",
+    "state": "simmering",
+    "is_failure": false,
+    "is_boil_over": false
+  },
+  {
+    "file": "mapo_tofu/3_boil.png",
+    "dish": "mapo_tofu",
+    "state": "rolling_boil",
+    "is_failure": false,
+    "is_boil_over": false
+  },
+  {
+    "file": "mapo_tofu/4_BOIL_OVER.png",
+    "dish": "mapo_tofu",
+    "state": "boil_over",
+    "is_failure": true,
+    "is_boil_over": true
+  },
+  {
+    "file": "mapo_tofu/5_done_ok.png",
+    "dish": "mapo_tofu",
+    "state": "done_perfect",
+    "is_failure": false,
+    "is_boil_over": false
+  },
+  {
+    "file": "mapo_tofu/6_FAILED.png",
+    "dish": "mapo_tofu",
+    "state": "failed_mush",
+    "is_failure": true,
+    "is_boil_over": false
+  },
+  {
+    "file": "curry/1_cold.png",
+    "dish": "curry",
+    "state": "cold_water",
+    "is_failure": false,
+    "is_boil_over": false
+  },
+  {
+    "file": "curry/2_simmer.png",
+    "dish": "curry",
+    "state": "simmering",
+    "is_failure": false,
+    "is_boil_over": false
+  },
+  {
+    "file": "curry/3_boil.png",
+    "dish": "curry",
+    "state": "rolling_boil",
+    "is_failure": false,
+    "is_boil_over": false
+  },
+  {
+    "file": "curry/4_BOIL_OVER.png",
+    "dish": "curry",
+    "state": "boil_over",
+    "is_failure": true,
+    "is_boil_over": true
+  },
+  {
+    "file": "curry/5_done_ok.png",
+    "dish": "curry",
+    "state": "done_perfect",
+    "is_failure": false,
+    "is_boil_over": false
+  },
+  {
+    "file": "curry/6_FAILED.png",
+    "dish": "curry",
+    "state": "failed_mush",
+    "is_failure": true,
+    "is_boil_over": false
+  },
+  {
+    "file": "soup/1_cold.png",
+    "dish": "soup",
+    "state": "cold_water",
+    "is_failure": false,
+    "is_boil_over": false
+  },
+  {
+    "file": "soup/2_simmer.png",
+    "dish": "soup",
+    "state": "simmering",
+    "is_failure": false,
+    "is_boil_over": false
+  },
+  {
+    "file": "soup/3_boil.png",
+    "dish": "soup",
+    "state": "rolling_boil",
+    "is_failure": false,
+    "is_boil_over": false
+  },
+  {
+    "file": "soup/4_BOIL_OVER.png",
+    "dish": "soup",
+    "state": "boil_over",
+    "is_failure": true,
+    "is_boil_over": true
+  },
+  {
+    "file": "soup/5_done_ok.png",
+    "dish": "soup",
+    "state": "done_perfect",
+    "is_failure": false,
+    "is_boil_over": false
+  },
+  {
+    "file": "soup/6_FAILED.png",
+    "dish": "soup",
+    "state": "failed_mush",
+    "is_failure": true,
+    "is_boil_over": false
+  },
+  {
+    "file": "rice/1_cold.png",
+    "dish": "rice",
+    "state": "cold_water",
+    "is_failure": false,
+    "is_boil_over": false
+  },
+  {
+    "file": "rice/2_simmer.png",
+    "dish": "rice",
+    "state": "simmering",
+    "is_failure": false,
+    "is_boil_over": false
+  },
+  {
+    "file": "rice/3_boil.png",
+    "dish": "rice",
+    "state": "rolling_boil",
+    "is_failure": false,
+    "is_boil_over": false
+  },
+  {
+    "file": "rice/4_BOIL_OVER.png",
+    "dish": "rice",
+    "state": "boil_over",
+    "is_failure": true,
+    "is_boil_over": true
+  },
+  {
+    "file": "rice/5_done_ok.png",
+    "dish": "rice",
+    "state": "done_perfect",
+    "is_failure": false,
+    "is_boil_over": false
+  },
+  {
+    "file": "rice/6_FAILED.png",
+    "dish": "rice",
+    "state": "failed_mush",
+    "is_failure": true,
+    "is_boil_over": false
+  }
+]

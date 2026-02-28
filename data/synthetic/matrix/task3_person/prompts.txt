@@ -1,0 +1,12 @@
+# TASK 3 — PERSON PRESENT OR ABSENT
+# Visual signal: hands, arms, body, utensils being held vs empty frame
+
+yes_hands_stir   | Top-down overhead photo of pot on gas stove, human hands visible holding wooden spoon stirring soup, forearms entering frame from bottom, active cooking, person clearly present, realistic kitchen, sharp detail, natural lighting
+yes_hands_chop   | Top-down overhead photo of wooden cutting board on kitchen counter beside stove, human hands visible holding knife chopping vegetables, fingers gripping onion, arms in frame, person clearly present, realistic kitchen, sharp detail, natural lighting
+yes_hands_pour   | Top-down overhead photo of pot on gas stove, human hands visible pouring ingredients from measuring cup into pot, arms and wrists in frame, person actively cooking, realistic kitchen, sharp detail, natural lighting
+
+no_empty_active  | Top-down overhead photo of pot on gas stove with flame on, soup simmering inside, wooden spoon resting in pot, no hands visible, no person in frame, nobody present, unattended cooking, realistic kitchen, sharp detail, natural lighting
+no_empty_idle    | Top-down overhead photo of gas stove with all burners off, clean empty pots sitting on burners, no hands visible, no person in frame, nobody present, empty quiet kitchen, realistic kitchen, sharp detail, natural lighting
+no_empty_cooking | Top-down overhead photo of wok on gas stove with flame on, stir-fry vegetables cooking in wok, spatula resting on counter, no hands visible, no person in frame, nobody present, food cooking unattended, realistic kitchen, sharp detail, natural lighting
+
+NEGATIVE: cartoon, anime, illustration, drawing, painting, CGI, render, low quality, blurry, text, watermark, logo, distorted, extra objects, unrealistic colors, side angle, diagonal view

@@ -1,0 +1,13 @@
+# TASK 8 — NEXT STEP IN SEQUENCE (current step done, awaiting next action)
+# Visual signal: completed prep/step visible, next ingredient/tool staged
+# NOTE: primarily logic-based, images show visual cues of step transitions
+
+yes_pasta_drain    | Top-down overhead photo of kitchen counter and stove, pot of cooked pasta on burner with flame off, colander placed in sink ready to drain, pasta fully cooked and ready, next step is draining, realistic kitchen, sharp detail, natural lighting
+yes_onion_done     | Top-down overhead photo of cutting board on counter beside stove, pile of neatly diced onions on cutting board, knife set aside, empty hot wok on stove with oil shimmering, onions ready to go into wok, next step is frying, realistic kitchen, sharp detail, natural lighting
+yes_sauce_ready    | Top-down overhead photo of stove and counter, cooked drained pasta in pot on burner, separate pan with finished sauce beside it, tongs resting on counter, ready to combine pasta and sauce, next step is mixing, realistic kitchen, sharp detail, natural lighting
+
+no_mid_chop        | Top-down overhead photo of cutting board on counter, human hands actively chopping vegetables with knife mid-cut, partially chopped vegetables, still in progress, current step not yet done, realistic kitchen, sharp detail, natural lighting
+no_mid_stir        | Top-down overhead photo of wok on gas stove, human hands actively stirring food with spatula, food in motion mid-toss, actively cooking, current step in progress not completed, realistic kitchen, sharp detail, natural lighting
+no_mid_boil        | Top-down overhead photo of pot on gas stove, pasta just added to boiling water still stiff and uncooked, timer showing 8 minutes remaining, still in current cooking step, not ready for next step, realistic kitchen, sharp detail, natural lighting
+
+NEGATIVE: cartoon, anime, illustration, drawing, painting, CGI, render, low quality, blurry, text, watermark, logo, distorted, extra objects, unrealistic colors, side angle, diagonal view

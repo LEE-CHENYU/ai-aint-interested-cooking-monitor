@@ -1,0 +1,13 @@
+# TASK 5 — TIMER EXPIRED (timer display shows zero or alarm state)
+# Visual signal: timer/clock display at 00:00 or flashing, vs time remaining
+# NOTE: primarily logic-based (remaining_s: 0 in JSON), images support visual cue
+
+yes_zero_digital  | Top-down overhead photo of kitchen counter beside gas stove with pot cooking, digital kitchen timer showing 00:00 on display, timer in alarm state, red flashing light on timer, food needs attention, realistic kitchen, sharp detail, natural lighting
+yes_zero_phone    | Top-down overhead photo of kitchen counter beside gas stove with pan on burner, smartphone lying on counter showing timer app at 0:00 with alert notification on screen, food cooking on stove, realistic kitchen, sharp detail, natural lighting
+yes_zero_oven     | Top-down overhead photo of gas stove top with pot, built-in oven timer display showing 0:00, timer alarm indicator lit, cooking completed, needs attention, realistic kitchen, sharp detail, natural lighting
+
+no_counting_5min  | Top-down overhead photo of kitchen counter beside gas stove with pot cooking, digital kitchen timer showing 05:23 on display, green light active, timer still counting down, food cooking normally, realistic kitchen, sharp detail, natural lighting
+no_counting_12min | Top-down overhead photo of kitchen counter beside gas stove with pan on burner, digital kitchen timer showing 12:47 on display, timer actively counting, plenty of time remaining, food cooking normally, realistic kitchen, sharp detail, natural lighting
+no_no_timer       | Top-down overhead photo of gas stove with pot simmering, no timer visible on counter, no clock display, no timing device present, just normal cooking scene, realistic kitchen, sharp detail, natural lighting
+
+NEGATIVE: cartoon, anime, illustration, drawing, painting, CGI, render, low quality, blurry, text, watermark, logo, distorted, extra objects, unrealistic colors, side angle, diagonal view

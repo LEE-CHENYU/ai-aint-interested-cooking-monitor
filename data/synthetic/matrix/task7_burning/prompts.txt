@@ -1,0 +1,12 @@
+# TASK 7 — FOOD BURNING (charred black patches, smoke from food)
+# Visual signal: black charred areas on food, dark smoke, burnt crust
+
+yes_pan_black   | Top-down overhead photo of cast iron skillet on gas stove, food burnt to black char stuck on pan surface, dark charred patches clearly visible, thin smoke rising from burnt areas, blackened crusty residue, realistic kitchen, sharp detail, natural lighting
+yes_pot_bottom  | Top-down overhead photo of pot on gas stove, curry sauce nearly evaporated revealing black burnt food stuck to pot bottom, charred dark brown-black patches visible through remaining sauce, smoke wisps rising, realistic kitchen, sharp detail, natural lighting
+yes_wok_scorch  | Top-down overhead photo of carbon steel wok on gas stove, stir-fry vegetables badly scorched and blackened, charred black edges on food pieces, dark smoke rising from burnt food, food ruined and inedible, realistic kitchen, sharp detail, natural lighting
+
+no_golden       | Top-down overhead photo of skillet on gas stove, food cooking to perfect golden brown color, even browning with no dark spots, appetizing caramelized surface, light steam, properly cooked, realistic kitchen, sharp detail, natural lighting
+no_simmering    | Top-down overhead photo of pot on gas stove, curry simmering gently with proper amount of sauce, rich brown color with no black spots, food intact and properly cooked, no smoke, realistic kitchen, sharp detail, natural lighting
+no_raw          | Top-down overhead photo of wok on gas stove, fresh raw vegetables just added to hot wok, bright colorful vegetables beginning to cook, no browning yet, clean fresh appearance, realistic kitchen, sharp detail, natural lighting
+
+NEGATIVE: cartoon, anime, illustration, drawing, painting, CGI, render, low quality, blurry, text, watermark, logo, distorted, extra objects, unrealistic colors, side angle, diagonal view

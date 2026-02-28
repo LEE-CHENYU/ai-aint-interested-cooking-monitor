@@ -1,0 +1,12 @@
+# TASK 4 — STOVE ON, NOBODY THERE
+# Visual signal: visible flame on burner + no hands/body in frame
+
+yes_flame_pot     | Top-down overhead photo of pot on gas stove, blue gas flame clearly visible around burner, water simmering inside pot, no hands visible, no person in frame, nobody present, unattended dangerous situation, realistic kitchen, sharp detail, natural lighting
+yes_flame_pan     | Top-down overhead photo of frying pan on gas stove, blue gas flame visible under pan, oil heating in pan with slight shimmer, no hands visible, no person in frame, nobody present, unattended stove with flame, realistic kitchen, sharp detail, natural lighting
+yes_flame_wok     | Top-down overhead photo of wok on gas stove, high blue flame visible around wok base, food sizzling in wok, smoke beginning to rise, no hands visible, no person in frame, nobody present, abandoned cooking, realistic kitchen, sharp detail, natural lighting
+
+no_attended       | Top-down overhead photo of pot on gas stove, blue gas flame visible, soup simmering, human hands holding ladle stirring pot, person clearly present and cooking, attended stove, safe situation, realistic kitchen, sharp detail, natural lighting
+no_stove_off      | Top-down overhead photo of pot on gas stove, burner turned off, no flame visible, no heat, pot sitting idle on cold burner, no person in frame, stove safely off, realistic kitchen, sharp detail, natural lighting
+no_electric_off   | Top-down overhead photo of pot on electric stovetop, coil element dark and cold, no heat indicator, pot with water sitting on cold burner, no person in frame, stove safely off, realistic kitchen, sharp detail, natural lighting
+
+NEGATIVE: cartoon, anime, illustration, drawing, painting, CGI, render, low quality, blurry, text, watermark, logo, distorted, extra objects, unrealistic colors, side angle, diagonal view

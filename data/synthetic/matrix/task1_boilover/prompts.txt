@@ -1,0 +1,67 @@
+# ============================================================================
+# TASK 1 — POT BOILING OVER
+# 6 vessels × 6 severity levels = 36 images
+# Vessels: stainless pot, saucepan, stock pot, dutch oven, black pot, wok
+# Severity: 1_safe_low → 2_safe_simmer → 3_rising → 4_AT_RIM → 5_SPILLING → 6_OVERFLOW
+# Camera: top-down overhead, consistent framing
+# ============================================================================
+
+# FORMAT: {vessel}/{severity} | {prompt}
+
+# ── STAINLESS POT ──────────────────────────────────────────────────────────
+
+stainless/1_safe_low    | Top-down overhead photo of large stainless steel pot on gas stove burner, water filled to halfway, calm still surface, water level well below rim with plenty of clearance, blue flame on low, safe normal cooking, realistic kitchen, sharp detail, natural lighting
+stainless/2_safe_simmer | Top-down overhead photo of large stainless steel pot on gas stove burner, water gently simmering with small bubbles at edges, light steam, water level comfortably below rim, no risk of overflow, contained cooking, realistic kitchen, sharp detail, natural lighting
+stainless/3_rising      | Top-down overhead photo of large stainless steel pot on gas stove burner, water boiling with foam building up, starchy foam layer rising toward rim, water level getting high, foam approaching top edge, realistic kitchen, sharp detail, natural lighting
+stainless/4_AT_RIM      | Top-down overhead photo of large stainless steel pot on gas stove burner, foamy boiling water right at the rim of pot, bubbles touching the very edge, about to spill over, teetering at overflow point, urgent moment, realistic kitchen, sharp detail, natural lighting
+stainless/5_SPILLING    | Top-down overhead photo of large stainless steel pot on gas stove burner, foamy water just starting to spill over one side of pot rim, thin stream of liquid running down pot exterior, first drips hitting stovetop, beginning of overflow, realistic kitchen, sharp detail, natural lighting
+stainless/6_OVERFLOW    | Top-down overhead photo of large stainless steel pot on gas stove burner, starchy white foamy water massively overflowing pot rim on all sides, liquid cascading down pot exterior, large puddle on stovetop, water dripping onto burner grate, messy flood, realistic kitchen, sharp detail, natural lighting
+
+# ── SAUCEPAN ───────────────────────────────────────────────────────────────
+
+saucepan/1_safe_low    | Top-down overhead photo of medium saucepan on gas stove burner, rice and water filled to one-third, calm flat surface, water level well below rim, plenty of space, low flame, safe start, realistic kitchen, sharp detail, natural lighting
+saucepan/2_safe_simmer | Top-down overhead photo of medium saucepan on gas stove burner, rice water gently simmering, tiny bubbles forming, light steam wisps, water level safely below rim, normal rice cooking, realistic kitchen, sharp detail, natural lighting
+saucepan/3_rising      | Top-down overhead photo of medium saucepan on gas stove burner, rice water getting starchy and foamy, white foam layer building up rising in saucepan, level climbing toward rim, getting close to top, realistic kitchen, sharp detail, natural lighting
+saucepan/4_AT_RIM      | Top-down overhead photo of medium saucepan on gas stove burner, starchy white rice foam right at saucepan rim, bubbles at the very edge about to crest over, critical moment before overflow, realistic kitchen, sharp detail, natural lighting
+saucepan/5_SPILLING    | Top-down overhead photo of medium saucepan on gas stove burner, starchy white rice foam just cresting over saucepan rim, foam dripping down handle side, first streaks of white starchy water on stovetop, overflow beginning, realistic kitchen, sharp detail, natural lighting
+saucepan/6_OVERFLOW    | Top-down overhead photo of medium saucepan on gas stove burner, white starchy rice water foaming over saucepan rim everywhere, foam cascading down all sides, rice grains in spillage on stovetop, messy white overflow pooling on burner, realistic kitchen, sharp detail, natural lighting
+
+# ── STOCK POT ──────────────────────────────────────────────────────────────
+
+stockpot/1_safe_low    | Top-down overhead photo of large stainless steel stock pot on gas stove burner, chicken bones and vegetables in cold water, water level at halfway mark well below rim, no heat yet, calm clear water, realistic kitchen, sharp detail, natural lighting
+stockpot/2_safe_simmer | Top-down overhead photo of large stainless steel stock pot on gas stove burner, chicken stock gently simmering, golden color, small bubbles at edges, thin layer of scum forming, water level safely below rim, realistic kitchen, sharp detail, natural lighting
+stockpot/3_rising      | Top-down overhead photo of large stainless steel stock pot on gas stove burner, stock boiling harder, foam and scum building up at surface, frothy layer rising higher in pot, level approaching upper portion of pot, realistic kitchen, sharp detail, natural lighting
+stockpot/4_AT_RIM      | Top-down overhead photo of large stainless steel stock pot on gas stove burner, foamy stock with scum at the very rim of pot, turbulent surface pushing liquid to edge, bubbles reaching the top lip, on verge of overflow, realistic kitchen, sharp detail, natural lighting
+stockpot/5_SPILLING    | Top-down overhead photo of large stainless steel stock pot on gas stove burner, golden chicken stock just beginning to spill over rim, thin stream of broth running down pot side, first splash of liquid on stovetop surface, realistic kitchen, sharp detail, natural lighting
+stockpot/6_OVERFLOW    | Top-down overhead photo of large stainless steel stock pot on gas stove burner, chicken stock overflowing pot rim on all sides, broth with fat and vegetables spilling onto stovetop, liquid pooling on burner grate, greasy messy overflow, realistic kitchen, sharp detail, natural lighting
+
+# ── DUTCH OVEN ─────────────────────────────────────────────────────────────
+
+dutch/1_safe_low    | Top-down overhead photo of heavy cast iron dutch oven on gas stove burner, curry sauce with vegetables at low level, thick sauce well below rim, no heat risk, calm surface, just starting to cook, realistic kitchen, sharp detail, natural lighting
+dutch/2_safe_simmer | Top-down overhead photo of heavy cast iron dutch oven on gas stove burner, curry sauce gently simmering, small bubbles popping in thick golden sauce, level safely below rim, normal contained cooking, realistic kitchen, sharp detail, natural lighting
+dutch/3_rising      | Top-down overhead photo of heavy cast iron dutch oven on gas stove burner, curry sauce boiling with large bubbles, thick sauce splattering upward, sauce level rising as bubbles expand volume, getting closer to rim, realistic kitchen, sharp detail, natural lighting
+dutch/4_AT_RIM      | Top-down overhead photo of heavy cast iron dutch oven on gas stove burner, thick bubbling curry sauce reached the rim of pot, large bubble about to push sauce over edge, sauce touching the very top lip, critical overflow moment, realistic kitchen, sharp detail, natural lighting
+dutch/5_SPILLING    | Top-down overhead photo of heavy cast iron dutch oven on gas stove burner, thick brown curry sauce just starting to drip over rim on one side, sticky sauce streak running down pot exterior, first drops of curry on stovetop, realistic kitchen, sharp detail, natural lighting
+dutch/6_OVERFLOW    | Top-down overhead photo of heavy cast iron dutch oven on gas stove burner, thick curry sauce overflowing dutch oven rim, sticky brown sauce pouring down all sides, potato chunks falling out, messy brown puddle on stovetop, realistic kitchen, sharp detail, natural lighting
+
+# ── BLACK POT ──────────────────────────────────────────────────────────────
+
+blackpot/1_safe_low    | Top-down overhead photo of black enamel pot on gas stove burner, ramen broth at low level, cold milky tonkotsu broth with fat layer, well below rim, noodles beside pot, no heat yet, realistic kitchen, sharp detail, natural lighting
+blackpot/2_safe_simmer | Top-down overhead photo of black enamel pot on gas stove burner, ramen broth gently simmering, milky white broth with small bubbles, noodles curling in broth, level safely below rim, normal cooking, realistic kitchen, sharp detail, natural lighting
+blackpot/3_rising      | Top-down overhead photo of black enamel pot on gas stove burner, ramen broth boiling harder, foamy white froth building on milky surface, broth level rising with foam expansion, getting closer to rim, realistic kitchen, sharp detail, natural lighting
+blackpot/4_AT_RIM      | Top-down overhead photo of black enamel pot on gas stove burner, foamy milky ramen broth at the very rim of pot, white froth touching top edge, noodles visible in turbulent surface, about to overflow, realistic kitchen, sharp detail, natural lighting
+blackpot/5_SPILLING    | Top-down overhead photo of black enamel pot on gas stove burner, milky ramen broth just starting to spill over rim, white foamy liquid dripping down dark pot exterior, first splash of broth on stovetop, realistic kitchen, sharp detail, natural lighting
+blackpot/6_OVERFLOW    | Top-down overhead photo of black enamel pot on gas stove burner, milky white ramen broth overflowing pot rim everywhere, foamy white liquid cascading down sides, noodles in spillage, white puddle on stovetop, messy overflow, realistic kitchen, sharp detail, natural lighting
+
+# ── WOK ────────────────────────────────────────────────────────────────────
+
+wok/1_safe_low    | Top-down overhead photo of carbon steel wok on gas stove burner, mapo tofu sauce at low level in wok bowl, red chili oil sauce with tofu cubes, well below wok rim, just beginning to heat, realistic kitchen, sharp detail, natural lighting
+wok/2_safe_simmer | Top-down overhead photo of carbon steel wok on gas stove burner, mapo tofu sauce gently simmering in wok, small bubbles in red sauce, tofu cubes intact, sauce level safely contained in wok bowl, realistic kitchen, sharp detail, natural lighting
+wok/3_rising      | Top-down overhead photo of carbon steel wok on gas stove burner, mapo tofu sauce boiling vigorously in wok, red oil splashing, bubbles expanding sauce volume, sauce rising higher in wok approaching sloped rim, realistic kitchen, sharp detail, natural lighting
+wok/4_AT_RIM      | Top-down overhead photo of carbon steel wok on gas stove burner, bubbling red mapo tofu sauce reached the sloped rim of wok, sauce sloshing at edges, tofu cubes near overflow point, about to spill, realistic kitchen, sharp detail, natural lighting
+wok/5_SPILLING    | Top-down overhead photo of carbon steel wok on gas stove burner, red mapo tofu sauce just starting to spill over wok rim, thin red oily stream running down wok exterior, first drops of chili sauce on stovetop, realistic kitchen, sharp detail, natural lighting
+wok/6_OVERFLOW    | Top-down overhead photo of carbon steel wok on gas stove burner, red spicy mapo tofu sauce overflowing wok rim, chili oil and sauce pouring over sides, tofu cubes falling out, red oily mess on stovetop, messy overflow, realistic kitchen, sharp detail, natural lighting
+
+# ── NEGATIVE PROMPT ────────────────────────────────────────────────────────
+
+NEGATIVE: cartoon, anime, illustration, drawing, painting, CGI, render, low quality, blurry, text, watermark, logo, distorted, extra objects, unrealistic colors, side angle, diagonal view

@@ -1,0 +1,50 @@
+  EASY — A child can do this (high visual contrast, simple yes/no logic)
+
+  ┌─────┬──────────────────────────────┬──────────────────────────────────────┬─────────────────────────────┐
+  │  #  │             Task             │               Why Easy               │        Visual Signal        │
+  ├─────┼──────────────────────────────┼──────────────────────────────────────┼─────────────────────────────┤
+  │ 1   │ Pot boiling over             │ Dramatic — water spilling everywhere │ Water on stovetop, dripping │
+  ├─────┼──────────────────────────────┼──────────────────────────────────────┼─────────────────────────────┤
+  │ 2   │ Smoke / fire detected        │ Obvious visual — grey/white clouds   │ Haze, reduced visibility    │
+  ├─────┼──────────────────────────────┼──────────────────────────────────────┼─────────────────────────────┤
+  │ 3   │ Person present or absent     │ Whole person/hands vs empty frame    │ Body/hands in frame or not  │
+  ├─────┼──────────────────────────────┼──────────────────────────────────────┼─────────────────────────────┤
+  │ 4   │ Stove on, nobody there       │ Combine #3 + visible flame           │ Flame + empty kitchen       │
+  ├─────┼──────────────────────────────┼──────────────────────────────────────┼─────────────────────────────┤
+  │ 5   │ Timer hit zero → speak       │ Pure logic, no vision needed         │ remaining_s: 0 in JSON      │
+  ├─────┼──────────────────────────────┼──────────────────────────────────────┼─────────────────────────────┤
+  │ 6   │ Water boiling vs not         │ Big bubbles vs still water           │ Bubble pattern, steam       │
+  ├─────┼──────────────────────────────┼──────────────────────────────────────┼─────────────────────────────┤
+  │ 7   │ Food burning (charred/black) │ High contrast dark spots + smoke     │ Black patches, smoke        │
+  ├─────┼──────────────────────────────┼──────────────────────────────────────┼─────────────────────────────┤
+  │ 8   │ Next step in simple sequence │ "step 1 done → do step 2"            │ Sequential list logic       │
+  └─────┴──────────────────────────────┴──────────────────────────────────────┴─────────────────────────────┘
+
+  MEDIUM — Needs training but learnable
+
+  ┌─────┬────────────────────────────────────┬─────────────────────────────────────┐
+  │  #  │                Task                │             Why Medium              │
+  ├─────┼────────────────────────────────────┼─────────────────────────────────────┤
+  │ 9   │ Oil smoking (too hot)              │ Smoke from pan, but subtle vs heavy │
+  ├─────┼────────────────────────────────────┼─────────────────────────────────────┤
+  │ 10  │ Boil-over risk (before it happens) │ Water at rim, not yet spilling      │
+  ├─────┼────────────────────────────────────┼─────────────────────────────────────┤
+  │ 11  │ Hands active / knife in use        │ Needs to spot hands + object        │
+  └─────┴────────────────────────────────────┴─────────────────────────────────────┘
+
+  HARD — Don't attempt with 4B
+
+  ┌─────┬────────────────────────────────────────────────────┬──────────────────────────────────────┐
+  │  #  │                        Task                        │             Why Too Hard             │
+  ├─────┼────────────────────────────────────────────────────┼──────────────────────────────────────┤
+  │ 12  │ Cuisine-specific timing (doubanjiang burns in 30s) │ Requires food knowledge              │
+  ├─────┼────────────────────────────────────────────────────┼──────────────────────────────────────┤
+  │ 13  │ Multi-task coordination (3 things simultaneously)  │ Complex state tracking               │
+  ├─────┼────────────────────────────────────────────────────┼──────────────────────────────────────┤
+  │ 14  │ Knife safety (claw grip vs flat fingers)           │ Subtle hand positioning              │
+  ├─────┼────────────────────────────────────────────────────┼──────────────────────────────────────┤
+  │ 15  │ Cross-contamination                                │ Requires food safety knowledge       │
+  ├─────┼────────────────────────────────────────────────────┼──────────────────────────────────────┤
+  │ 16  │ Steam vs smoke distinction                         │ Genuinely hard even for humans       │
+  ├─────┼────────────────────────────────────────────────────┼──────────────────────────────────────┤
+  │ 17  │ Temperature judgment from visuals                  │ Oil shimmer vs smoke point is subtle │
