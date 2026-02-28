@@ -1,0 +1,1367 @@
+[
+  {
+    "file": "top_view/water_cold_base.png",
+    "scene_id": "water_cold",
+    "angle": "top_view",
+    "is_variation": false,
+    "label": {
+      "zone": "stove",
+      "water_state": "cold",
+      "pot_present": true,
+      "smoke_suspected": false
+    }
+  },
+  {
+    "file": "top_view/water_cold_var000.png",
+    "scene_id": "water_cold",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "water_state": "cold",
+      "pot_present": true,
+      "smoke_suspected": false
+    }
+  },
+  {
+    "file": "top_view/water_cold_var001.png",
+    "scene_id": "water_cold",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "water_state": "cold",
+      "pot_present": true,
+      "smoke_suspected": false
+    }
+  },
+  {
+    "file": "top_view/water_cold_var002.png",
+    "scene_id": "water_cold",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "water_state": "cold",
+      "pot_present": true,
+      "smoke_suspected": false
+    }
+  },
+  {
+    "file": "top_view/water_cold_var003.png",
+    "scene_id": "water_cold",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "water_state": "cold",
+      "pot_present": true,
+      "smoke_suspected": false
+    }
+  },
+  {
+    "file": "top_view/water_simmering_base.png",
+    "scene_id": "water_simmering",
+    "angle": "top_view",
+    "is_variation": false,
+    "label": {
+      "zone": "stove",
+      "water_state": "simmering",
+      "pot_present": true,
+      "smoke_suspected": false
+    }
+  },
+  {
+    "file": "top_view/water_simmering_var000.png",
+    "scene_id": "water_simmering",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "water_state": "simmering",
+      "pot_present": true,
+      "smoke_suspected": false
+    }
+  },
+  {
+    "file": "top_view/water_simmering_var001.png",
+    "scene_id": "water_simmering",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "water_state": "simmering",
+      "pot_present": true,
+      "smoke_suspected": false
+    }
+  },
+  {
+    "file": "top_view/water_simmering_var002.png",
+    "scene_id": "water_simmering",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "water_state": "simmering",
+      "pot_present": true,
+      "smoke_suspected": false
+    }
+  },
+  {
+    "file": "top_view/water_simmering_var003.png",
+    "scene_id": "water_simmering",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "water_state": "simmering",
+      "pot_present": true,
+      "smoke_suspected": false
+    }
+  },
+  {
+    "file": "top_view/water_rolling_boil_base.png",
+    "scene_id": "water_rolling_boil",
+    "angle": "top_view",
+    "is_variation": false,
+    "label": {
+      "zone": "stove",
+      "water_state": "boiling",
+      "pot_present": true,
+      "smoke_suspected": false
+    }
+  },
+  {
+    "file": "top_view/water_rolling_boil_var000.png",
+    "scene_id": "water_rolling_boil",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "water_state": "boiling",
+      "pot_present": true,
+      "smoke_suspected": false
+    }
+  },
+  {
+    "file": "top_view/water_rolling_boil_var001.png",
+    "scene_id": "water_rolling_boil",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "water_state": "boiling",
+      "pot_present": true,
+      "smoke_suspected": false
+    }
+  },
+  {
+    "file": "top_view/water_rolling_boil_var002.png",
+    "scene_id": "water_rolling_boil",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "water_state": "boiling",
+      "pot_present": true,
+      "smoke_suspected": false
+    }
+  },
+  {
+    "file": "top_view/water_rolling_boil_var003.png",
+    "scene_id": "water_rolling_boil",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "water_state": "boiling",
+      "pot_present": true,
+      "smoke_suspected": false
+    }
+  },
+  {
+    "file": "top_view/pasta_in_boiling_water_base.png",
+    "scene_id": "pasta_in_boiling_water",
+    "angle": "top_view",
+    "is_variation": false,
+    "label": {
+      "zone": "stove",
+      "water_state": "boiling",
+      "pot_present": true,
+      "contents": "pasta"
+    }
+  },
+  {
+    "file": "top_view/pasta_in_boiling_water_var000.png",
+    "scene_id": "pasta_in_boiling_water",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "water_state": "boiling",
+      "pot_present": true,
+      "contents": "pasta"
+    }
+  },
+  {
+    "file": "top_view/pasta_in_boiling_water_var001.png",
+    "scene_id": "pasta_in_boiling_water",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "water_state": "boiling",
+      "pot_present": true,
+      "contents": "pasta"
+    }
+  },
+  {
+    "file": "top_view/pasta_in_boiling_water_var002.png",
+    "scene_id": "pasta_in_boiling_water",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "water_state": "boiling",
+      "pot_present": true,
+      "contents": "pasta"
+    }
+  },
+  {
+    "file": "top_view/pasta_in_boiling_water_var003.png",
+    "scene_id": "pasta_in_boiling_water",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "water_state": "boiling",
+      "pot_present": true,
+      "contents": "pasta"
+    }
+  },
+  {
+    "file": "top_view/boil_over_base.png",
+    "scene_id": "boil_over",
+    "angle": "top_view",
+    "is_variation": false,
+    "label": {
+      "zone": "stove",
+      "water_state": "boil_over",
+      "pot_present": true,
+      "smoke_suspected": false
+    }
+  },
+  {
+    "file": "top_view/boil_over_var000.png",
+    "scene_id": "boil_over",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "water_state": "boil_over",
+      "pot_present": true,
+      "smoke_suspected": false
+    }
+  },
+  {
+    "file": "top_view/boil_over_var001.png",
+    "scene_id": "boil_over",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "water_state": "boil_over",
+      "pot_present": true,
+      "smoke_suspected": false
+    }
+  },
+  {
+    "file": "top_view/boil_over_var002.png",
+    "scene_id": "boil_over",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "water_state": "boil_over",
+      "pot_present": true,
+      "smoke_suspected": false
+    }
+  },
+  {
+    "file": "top_view/boil_over_var003.png",
+    "scene_id": "boil_over",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "water_state": "boil_over",
+      "pot_present": true,
+      "smoke_suspected": false
+    }
+  },
+  {
+    "file": "top_view/oil_shimmering_pan_base.png",
+    "scene_id": "oil_shimmering_pan",
+    "angle": "top_view",
+    "is_variation": false,
+    "label": {
+      "zone": "stove",
+      "oil_state": "shimmering",
+      "pan_present": true,
+      "smoke_suspected": false
+    }
+  },
+  {
+    "file": "top_view/oil_shimmering_pan_var000.png",
+    "scene_id": "oil_shimmering_pan",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "oil_state": "shimmering",
+      "pan_present": true,
+      "smoke_suspected": false
+    }
+  },
+  {
+    "file": "top_view/oil_shimmering_pan_var001.png",
+    "scene_id": "oil_shimmering_pan",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "oil_state": "shimmering",
+      "pan_present": true,
+      "smoke_suspected": false
+    }
+  },
+  {
+    "file": "top_view/oil_shimmering_pan_var002.png",
+    "scene_id": "oil_shimmering_pan",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "oil_state": "shimmering",
+      "pan_present": true,
+      "smoke_suspected": false
+    }
+  },
+  {
+    "file": "top_view/oil_shimmering_pan_var003.png",
+    "scene_id": "oil_shimmering_pan",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "oil_state": "shimmering",
+      "pan_present": true,
+      "smoke_suspected": false
+    }
+  },
+  {
+    "file": "top_view/oil_smoking_base.png",
+    "scene_id": "oil_smoking",
+    "angle": "top_view",
+    "is_variation": false,
+    "label": {
+      "zone": "stove",
+      "oil_state": "smoking",
+      "pan_present": true,
+      "smoke_suspected": true
+    }
+  },
+  {
+    "file": "top_view/oil_smoking_var000.png",
+    "scene_id": "oil_smoking",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "oil_state": "smoking",
+      "pan_present": true,
+      "smoke_suspected": true
+    }
+  },
+  {
+    "file": "top_view/oil_smoking_var001.png",
+    "scene_id": "oil_smoking",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "oil_state": "smoking",
+      "pan_present": true,
+      "smoke_suspected": true
+    }
+  },
+  {
+    "file": "top_view/oil_smoking_var002.png",
+    "scene_id": "oil_smoking",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "oil_state": "smoking",
+      "pan_present": true,
+      "smoke_suspected": true
+    }
+  },
+  {
+    "file": "top_view/oil_smoking_var003.png",
+    "scene_id": "oil_smoking",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "oil_state": "smoking",
+      "pan_present": true,
+      "smoke_suspected": true
+    }
+  },
+  {
+    "file": "top_view/wok_stir_fry_base.png",
+    "scene_id": "wok_stir_fry",
+    "angle": "top_view",
+    "is_variation": false,
+    "label": {
+      "zone": "stove",
+      "wok_state": "stir_frying",
+      "temperature": "very_high"
+    }
+  },
+  {
+    "file": "top_view/wok_stir_fry_var000.png",
+    "scene_id": "wok_stir_fry",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "wok_state": "stir_frying",
+      "temperature": "very_high"
+    }
+  },
+  {
+    "file": "top_view/wok_stir_fry_var001.png",
+    "scene_id": "wok_stir_fry",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "wok_state": "stir_frying",
+      "temperature": "very_high"
+    }
+  },
+  {
+    "file": "top_view/wok_stir_fry_var002.png",
+    "scene_id": "wok_stir_fry",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "wok_state": "stir_frying",
+      "temperature": "very_high"
+    }
+  },
+  {
+    "file": "top_view/wok_stir_fry_var003.png",
+    "scene_id": "wok_stir_fry",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "wok_state": "stir_frying",
+      "temperature": "very_high"
+    }
+  },
+  {
+    "file": "top_view/food_browning_pan_base.png",
+    "scene_id": "food_browning_pan",
+    "angle": "top_view",
+    "is_variation": false,
+    "label": {
+      "zone": "stove",
+      "food_state": "browning_one_side",
+      "pan_present": true
+    }
+  },
+  {
+    "file": "top_view/food_browning_pan_var000.png",
+    "scene_id": "food_browning_pan",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "food_state": "browning_one_side",
+      "pan_present": true
+    }
+  },
+  {
+    "file": "top_view/food_browning_pan_var001.png",
+    "scene_id": "food_browning_pan",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "food_state": "browning_one_side",
+      "pan_present": true
+    }
+  },
+  {
+    "file": "top_view/food_browning_pan_var002.png",
+    "scene_id": "food_browning_pan",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "food_state": "browning_one_side",
+      "pan_present": true
+    }
+  },
+  {
+    "file": "top_view/food_browning_pan_var003.png",
+    "scene_id": "food_browning_pan",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "food_state": "browning_one_side",
+      "pan_present": true
+    }
+  },
+  {
+    "file": "top_view/food_burning_base.png",
+    "scene_id": "food_burning",
+    "angle": "top_view",
+    "is_variation": false,
+    "label": {
+      "zone": "stove",
+      "food_state": "burning",
+      "smoke_suspected": true
+    }
+  },
+  {
+    "file": "top_view/food_burning_var000.png",
+    "scene_id": "food_burning",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "food_state": "burning",
+      "smoke_suspected": true
+    }
+  },
+  {
+    "file": "top_view/food_burning_var001.png",
+    "scene_id": "food_burning",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "food_state": "burning",
+      "smoke_suspected": true
+    }
+  },
+  {
+    "file": "top_view/food_burning_var002.png",
+    "scene_id": "food_burning",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "food_state": "burning",
+      "smoke_suspected": true
+    }
+  },
+  {
+    "file": "top_view/food_burning_var003.png",
+    "scene_id": "food_burning",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "food_state": "burning",
+      "smoke_suspected": true
+    }
+  },
+  {
+    "file": "front_view/onion_being_diced_base.png",
+    "scene_id": "onion_being_diced",
+    "angle": "front_view",
+    "is_variation": false,
+    "label": {
+      "zone": "counter",
+      "ingredient": "onion",
+      "prep_state": "dicing",
+      "hands_active": true,
+      "knife_in_use": true
+    }
+  },
+  {
+    "file": "front_view/onion_being_diced_var000.png",
+    "scene_id": "onion_being_diced",
+    "angle": "front_view",
+    "is_variation": true,
+    "label": {
+      "zone": "counter",
+      "ingredient": "onion",
+      "prep_state": "dicing",
+      "hands_active": true,
+      "knife_in_use": true
+    }
+  },
+  {
+    "file": "front_view/onion_being_diced_var001.png",
+    "scene_id": "onion_being_diced",
+    "angle": "front_view",
+    "is_variation": true,
+    "label": {
+      "zone": "counter",
+      "ingredient": "onion",
+      "prep_state": "dicing",
+      "hands_active": true,
+      "knife_in_use": true
+    }
+  },
+  {
+    "file": "front_view/onion_being_diced_var002.png",
+    "scene_id": "onion_being_diced",
+    "angle": "front_view",
+    "is_variation": true,
+    "label": {
+      "zone": "counter",
+      "ingredient": "onion",
+      "prep_state": "dicing",
+      "hands_active": true,
+      "knife_in_use": true
+    }
+  },
+  {
+    "file": "front_view/onion_being_diced_var003.png",
+    "scene_id": "onion_being_diced",
+    "angle": "front_view",
+    "is_variation": true,
+    "label": {
+      "zone": "counter",
+      "ingredient": "onion",
+      "prep_state": "dicing",
+      "hands_active": true,
+      "knife_in_use": true
+    }
+  },
+  {
+    "file": "front_view/mise_en_place_base.png",
+    "scene_id": "mise_en_place",
+    "angle": "front_view",
+    "is_variation": false,
+    "label": {
+      "zone": "counter",
+      "prep_state": "mise_en_place_complete",
+      "hands_active": false
+    }
+  },
+  {
+    "file": "front_view/mise_en_place_var000.png",
+    "scene_id": "mise_en_place",
+    "angle": "front_view",
+    "is_variation": true,
+    "label": {
+      "zone": "counter",
+      "prep_state": "mise_en_place_complete",
+      "hands_active": false
+    }
+  },
+  {
+    "file": "front_view/mise_en_place_var001.png",
+    "scene_id": "mise_en_place",
+    "angle": "front_view",
+    "is_variation": true,
+    "label": {
+      "zone": "counter",
+      "prep_state": "mise_en_place_complete",
+      "hands_active": false
+    }
+  },
+  {
+    "file": "front_view/mise_en_place_var002.png",
+    "scene_id": "mise_en_place",
+    "angle": "front_view",
+    "is_variation": true,
+    "label": {
+      "zone": "counter",
+      "prep_state": "mise_en_place_complete",
+      "hands_active": false
+    }
+  },
+  {
+    "file": "front_view/mise_en_place_var003.png",
+    "scene_id": "mise_en_place",
+    "angle": "front_view",
+    "is_variation": true,
+    "label": {
+      "zone": "counter",
+      "prep_state": "mise_en_place_complete",
+      "hands_active": false
+    }
+  },
+  {
+    "file": "front_view/garlic_mincing_base.png",
+    "scene_id": "garlic_mincing",
+    "angle": "front_view",
+    "is_variation": false,
+    "label": {
+      "zone": "counter",
+      "ingredient": "garlic",
+      "prep_state": "mincing",
+      "hands_active": true,
+      "knife_in_use": true
+    }
+  },
+  {
+    "file": "front_view/garlic_mincing_var000.png",
+    "scene_id": "garlic_mincing",
+    "angle": "front_view",
+    "is_variation": true,
+    "label": {
+      "zone": "counter",
+      "ingredient": "garlic",
+      "prep_state": "mincing",
+      "hands_active": true,
+      "knife_in_use": true
+    }
+  },
+  {
+    "file": "front_view/garlic_mincing_var001.png",
+    "scene_id": "garlic_mincing",
+    "angle": "front_view",
+    "is_variation": true,
+    "label": {
+      "zone": "counter",
+      "ingredient": "garlic",
+      "prep_state": "mincing",
+      "hands_active": true,
+      "knife_in_use": true
+    }
+  },
+  {
+    "file": "front_view/garlic_mincing_var002.png",
+    "scene_id": "garlic_mincing",
+    "angle": "front_view",
+    "is_variation": true,
+    "label": {
+      "zone": "counter",
+      "ingredient": "garlic",
+      "prep_state": "mincing",
+      "hands_active": true,
+      "knife_in_use": true
+    }
+  },
+  {
+    "file": "front_view/garlic_mincing_var003.png",
+    "scene_id": "garlic_mincing",
+    "angle": "front_view",
+    "is_variation": true,
+    "label": {
+      "zone": "counter",
+      "ingredient": "garlic",
+      "prep_state": "mincing",
+      "hands_active": true,
+      "knife_in_use": true
+    }
+  },
+  {
+    "file": "top_view/heavy_smoke_stove_base.png",
+    "scene_id": "heavy_smoke_stove",
+    "angle": "top_view",
+    "is_variation": false,
+    "label": {
+      "zone": "stove",
+      "smoke_suspected": true,
+      "person_present": false,
+      "severity": "critical"
+    }
+  },
+  {
+    "file": "top_view/heavy_smoke_stove_var000.png",
+    "scene_id": "heavy_smoke_stove",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "smoke_suspected": true,
+      "person_present": false,
+      "severity": "critical"
+    }
+  },
+  {
+    "file": "top_view/heavy_smoke_stove_var001.png",
+    "scene_id": "heavy_smoke_stove",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "smoke_suspected": true,
+      "person_present": false,
+      "severity": "critical"
+    }
+  },
+  {
+    "file": "top_view/heavy_smoke_stove_var002.png",
+    "scene_id": "heavy_smoke_stove",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "smoke_suspected": true,
+      "person_present": false,
+      "severity": "critical"
+    }
+  },
+  {
+    "file": "top_view/heavy_smoke_stove_var003.png",
+    "scene_id": "heavy_smoke_stove",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "smoke_suspected": true,
+      "person_present": false,
+      "severity": "critical"
+    }
+  },
+  {
+    "file": "front_view/towel_near_flame_base.png",
+    "scene_id": "towel_near_flame",
+    "angle": "front_view",
+    "is_variation": false,
+    "label": {
+      "zone": "stove",
+      "safety_hazard": "towel_near_flame",
+      "severity": "high"
+    }
+  },
+  {
+    "file": "front_view/towel_near_flame_var000.png",
+    "scene_id": "towel_near_flame",
+    "angle": "front_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "safety_hazard": "towel_near_flame",
+      "severity": "high"
+    }
+  },
+  {
+    "file": "front_view/towel_near_flame_var001.png",
+    "scene_id": "towel_near_flame",
+    "angle": "front_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "safety_hazard": "towel_near_flame",
+      "severity": "high"
+    }
+  },
+  {
+    "file": "front_view/towel_near_flame_var002.png",
+    "scene_id": "towel_near_flame",
+    "angle": "front_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "safety_hazard": "towel_near_flame",
+      "severity": "high"
+    }
+  },
+  {
+    "file": "front_view/towel_near_flame_var003.png",
+    "scene_id": "towel_near_flame",
+    "angle": "front_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "safety_hazard": "towel_near_flame",
+      "severity": "high"
+    }
+  },
+  {
+    "file": "top_view/unattended_pot_boiling_base.png",
+    "scene_id": "unattended_pot_boiling",
+    "angle": "top_view",
+    "is_variation": false,
+    "label": {
+      "zone": "stove",
+      "water_state": "boiling",
+      "person_present": false,
+      "unattended": true
+    }
+  },
+  {
+    "file": "top_view/unattended_pot_boiling_var000.png",
+    "scene_id": "unattended_pot_boiling",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "water_state": "boiling",
+      "person_present": false,
+      "unattended": true
+    }
+  },
+  {
+    "file": "top_view/unattended_pot_boiling_var001.png",
+    "scene_id": "unattended_pot_boiling",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "water_state": "boiling",
+      "person_present": false,
+      "unattended": true
+    }
+  },
+  {
+    "file": "top_view/unattended_pot_boiling_var002.png",
+    "scene_id": "unattended_pot_boiling",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "water_state": "boiling",
+      "person_present": false,
+      "unattended": true
+    }
+  },
+  {
+    "file": "top_view/unattended_pot_boiling_var003.png",
+    "scene_id": "unattended_pot_boiling",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "water_state": "boiling",
+      "person_present": false,
+      "unattended": true
+    }
+  },
+  {
+    "file": "top_view/unattended_frying_base.png",
+    "scene_id": "unattended_frying",
+    "angle": "top_view",
+    "is_variation": false,
+    "label": {
+      "zone": "stove",
+      "oil_state": "hot",
+      "person_present": false,
+      "unattended": true
+    }
+  },
+  {
+    "file": "top_view/unattended_frying_var000.png",
+    "scene_id": "unattended_frying",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "oil_state": "hot",
+      "person_present": false,
+      "unattended": true
+    }
+  },
+  {
+    "file": "top_view/unattended_frying_var001.png",
+    "scene_id": "unattended_frying",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "oil_state": "hot",
+      "person_present": false,
+      "unattended": true
+    }
+  },
+  {
+    "file": "top_view/unattended_frying_var002.png",
+    "scene_id": "unattended_frying",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "oil_state": "hot",
+      "person_present": false,
+      "unattended": true
+    }
+  },
+  {
+    "file": "top_view/unattended_frying_var003.png",
+    "scene_id": "unattended_frying",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "oil_state": "hot",
+      "person_present": false,
+      "unattended": true
+    }
+  },
+  {
+    "file": "top_view/wok_hei_moment_base.png",
+    "scene_id": "wok_hei_moment",
+    "angle": "top_view",
+    "is_variation": false,
+    "label": {
+      "zone": "stove",
+      "wok_state": "wok_hei",
+      "cuisine": "chinese",
+      "temperature": "very_high"
+    }
+  },
+  {
+    "file": "top_view/wok_hei_moment_var000.png",
+    "scene_id": "wok_hei_moment",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "wok_state": "wok_hei",
+      "cuisine": "chinese",
+      "temperature": "very_high"
+    }
+  },
+  {
+    "file": "top_view/wok_hei_moment_var001.png",
+    "scene_id": "wok_hei_moment",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "wok_state": "wok_hei",
+      "cuisine": "chinese",
+      "temperature": "very_high"
+    }
+  },
+  {
+    "file": "top_view/wok_hei_moment_var002.png",
+    "scene_id": "wok_hei_moment",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "wok_state": "wok_hei",
+      "cuisine": "chinese",
+      "temperature": "very_high"
+    }
+  },
+  {
+    "file": "top_view/wok_hei_moment_var003.png",
+    "scene_id": "wok_hei_moment",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "wok_state": "wok_hei",
+      "cuisine": "chinese",
+      "temperature": "very_high"
+    }
+  },
+  {
+    "file": "top_view/doubanjiang_frying_base.png",
+    "scene_id": "doubanjiang_frying",
+    "angle": "top_view",
+    "is_variation": false,
+    "label": {
+      "zone": "stove",
+      "cuisine": "chinese",
+      "dish": "mapo_tofu",
+      "step": "fry_doubanjiang"
+    }
+  },
+  {
+    "file": "top_view/doubanjiang_frying_var000.png",
+    "scene_id": "doubanjiang_frying",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "cuisine": "chinese",
+      "dish": "mapo_tofu",
+      "step": "fry_doubanjiang"
+    }
+  },
+  {
+    "file": "top_view/doubanjiang_frying_var001.png",
+    "scene_id": "doubanjiang_frying",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "cuisine": "chinese",
+      "dish": "mapo_tofu",
+      "step": "fry_doubanjiang"
+    }
+  },
+  {
+    "file": "top_view/doubanjiang_frying_var002.png",
+    "scene_id": "doubanjiang_frying",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "cuisine": "chinese",
+      "dish": "mapo_tofu",
+      "step": "fry_doubanjiang"
+    }
+  },
+  {
+    "file": "top_view/doubanjiang_frying_var003.png",
+    "scene_id": "doubanjiang_frying",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "cuisine": "chinese",
+      "dish": "mapo_tofu",
+      "step": "fry_doubanjiang"
+    }
+  },
+  {
+    "file": "top_view/pad_thai_wok_base.png",
+    "scene_id": "pad_thai_wok",
+    "angle": "top_view",
+    "is_variation": false,
+    "label": {
+      "zone": "stove",
+      "cuisine": "thai",
+      "dish": "pad_thai",
+      "wok_state": "tossing"
+    }
+  },
+  {
+    "file": "top_view/pad_thai_wok_var000.png",
+    "scene_id": "pad_thai_wok",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "cuisine": "thai",
+      "dish": "pad_thai",
+      "wok_state": "tossing"
+    }
+  },
+  {
+    "file": "top_view/pad_thai_wok_var001.png",
+    "scene_id": "pad_thai_wok",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "cuisine": "thai",
+      "dish": "pad_thai",
+      "wok_state": "tossing"
+    }
+  },
+  {
+    "file": "top_view/pad_thai_wok_var002.png",
+    "scene_id": "pad_thai_wok",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "cuisine": "thai",
+      "dish": "pad_thai",
+      "wok_state": "tossing"
+    }
+  },
+  {
+    "file": "top_view/pad_thai_wok_var003.png",
+    "scene_id": "pad_thai_wok",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "cuisine": "thai",
+      "dish": "pad_thai",
+      "wok_state": "tossing"
+    }
+  },
+  {
+    "file": "top_view/tempura_frying_base.png",
+    "scene_id": "tempura_frying",
+    "angle": "top_view",
+    "is_variation": false,
+    "label": {
+      "zone": "stove",
+      "cuisine": "japanese",
+      "dish": "tempura",
+      "oil_state": "at_temp"
+    }
+  },
+  {
+    "file": "top_view/tempura_frying_var000.png",
+    "scene_id": "tempura_frying",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "cuisine": "japanese",
+      "dish": "tempura",
+      "oil_state": "at_temp"
+    }
+  },
+  {
+    "file": "top_view/tempura_frying_var001.png",
+    "scene_id": "tempura_frying",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "cuisine": "japanese",
+      "dish": "tempura",
+      "oil_state": "at_temp"
+    }
+  },
+  {
+    "file": "top_view/tempura_frying_var002.png",
+    "scene_id": "tempura_frying",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "cuisine": "japanese",
+      "dish": "tempura",
+      "oil_state": "at_temp"
+    }
+  },
+  {
+    "file": "top_view/tempura_frying_var003.png",
+    "scene_id": "tempura_frying",
+    "angle": "top_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "cuisine": "japanese",
+      "dish": "tempura",
+      "oil_state": "at_temp"
+    }
+  },
+  {
+    "file": "front_view/normal_cooking_person_base.png",
+    "scene_id": "normal_cooking_person",
+    "angle": "front_view",
+    "is_variation": false,
+    "label": {
+      "zone": "stove",
+      "person_present": true,
+      "hands_active": true,
+      "normal_operation": true
+    }
+  },
+  {
+    "file": "front_view/normal_cooking_person_var000.png",
+    "scene_id": "normal_cooking_person",
+    "angle": "front_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "person_present": true,
+      "hands_active": true,
+      "normal_operation": true
+    }
+  },
+  {
+    "file": "front_view/normal_cooking_person_var001.png",
+    "scene_id": "normal_cooking_person",
+    "angle": "front_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "person_present": true,
+      "hands_active": true,
+      "normal_operation": true
+    }
+  },
+  {
+    "file": "front_view/normal_cooking_person_var002.png",
+    "scene_id": "normal_cooking_person",
+    "angle": "front_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "person_present": true,
+      "hands_active": true,
+      "normal_operation": true
+    }
+  },
+  {
+    "file": "front_view/normal_cooking_person_var003.png",
+    "scene_id": "normal_cooking_person",
+    "angle": "front_view",
+    "is_variation": true,
+    "label": {
+      "zone": "stove",
+      "person_present": true,
+      "hands_active": true,
+      "normal_operation": true
+    }
+  },
+  {
+    "file": "front_view/normal_chopping_base.png",
+    "scene_id": "normal_chopping",
+    "angle": "front_view",
+    "is_variation": false,
+    "label": {
+      "zone": "counter",
+      "person_present": true,
+      "hands_active": true,
+      "normal_operation": true
+    }
+  },
+  {
+    "file": "front_view/normal_chopping_var000.png",
+    "scene_id": "normal_chopping",
+    "angle": "front_view",
+    "is_variation": true,
+    "label": {
+      "zone": "counter",
+      "person_present": true,
+      "hands_active": true,
+      "normal_operation": true
+    }
+  },
+  {
+    "file": "front_view/normal_chopping_var001.png",
+    "scene_id": "normal_chopping",
+    "angle": "front_view",
+    "is_variation": true,
+    "label": {
+      "zone": "counter",
+      "person_present": true,
+      "hands_active": true,
+      "normal_operation": true
+    }
+  },
+  {
+    "file": "front_view/normal_chopping_var002.png",
+    "scene_id": "normal_chopping",
+    "angle": "front_view",
+    "is_variation": true,
+    "label": {
+      "zone": "counter",
+      "person_present": true,
+      "hands_active": true,
+      "normal_operation": true
+    }
+  },
+  {
+    "file": "front_view/normal_chopping_var003.png",
+    "scene_id": "normal_chopping",
+    "angle": "front_view",
+    "is_variation": true,
+    "label": {
+      "zone": "counter",
+      "person_present": true,
+      "hands_active": true,
+      "normal_operation": true
+    }
+  }
+]
