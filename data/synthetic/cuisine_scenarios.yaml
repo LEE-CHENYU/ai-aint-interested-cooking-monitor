@@ -1,0 +1,623 @@
+# ============================================================================
+# CUISINE-SPECIFIC KITCHEN SCENARIOS
+# ============================================================================
+# Detailed real-world cooking procedures organized by cuisine.
+# Each dish includes: why it needs monitoring, step-by-step visual states,
+# and concrete image generation prompts for each stage.
+#
+# Cuisines: Chinese, Japanese, Thai, Korean, Indian, Italian, Mexican
+# ============================================================================
+
+
+# ============================================================================
+# CHINESE CUISINE (中餐)
+# ============================================================================
+chinese:
+
+  # --------------------------------------------------
+  # Mapo Tofu (麻婆豆腐)
+  # --------------------------------------------------
+  mapo_tofu:
+    why_agentic: "Tofu must be blanched first or it crumbles. Doubanjiang burns in seconds if oil is too hot. Sichuan peppercorns must bloom in oil briefly — too long and they turn bitter."
+    critical_moments:
+      - "Tofu blanching: 2 min max or it falls apart"
+      - "Doubanjiang added to oil: stir constantly for 30s, burns fast"
+      - "Cornstarch slurry added: must be stirred in immediately or clumps"
+    parallel_tasks: ["blanch tofu", "prep aromatics", "cook sauce"]
+
+    ingredient_prep:
+      - id: mapo_tofu_block
+        prompt: "Front-facing photo of kitchen counter, block of soft silken tofu on cutting board, still in water from package, chef knife beside it, small bowls of Sichuan peppercorns, dried red chilies, and minced garlic nearby"
+        label: { cuisine: "chinese", dish: "mapo_tofu", stage: "prep_start", ingredients_visible: ["tofu", "sichuan_peppercorn", "dried_chili", "garlic"] }
+      - id: mapo_tofu_cubed
+        prompt: "Front-facing photo of kitchen counter, soft tofu carefully cut into 2cm cubes on cutting board, some pieces slightly irregular, knife resting flat, small pool of water from tofu visible"
+        label: { cuisine: "chinese", dish: "mapo_tofu", stage: "tofu_cubed", ingredient: "tofu", prep_state: "cubed" }
+      - id: mapo_doubanjiang_measured
+        prompt: "Front-facing photo of kitchen counter, small bowl with dark red doubanjiang chili bean paste, tablespoon beside it, minced ginger and garlic in separate small bowls, fermented black beans in another bowl"
+        label: { cuisine: "chinese", dish: "mapo_tofu", stage: "aromatics_prepped", ingredients_visible: ["doubanjiang", "ginger", "garlic", "black_beans"] }
+
+    cooking_steps:
+      - id: mapo_tofu_blanching
+        prompt: "Top-down overhead photo of kitchen stove, pot of gently boiling water with white tofu cubes floating, soft bubbles around tofu pieces, slotted spoon nearby"
+        label: { cuisine: "chinese", dish: "mapo_tofu", stage: "blanching_tofu", water_state: "simmering", pot_present: true }
+      - id: mapo_peppercorn_blooming
+        prompt: "Top-down overhead photo of kitchen stove, wok with thin layer of oil and scattered whole Sichuan peppercorns sizzling, peppercorns darkening slightly, fragrant oil stage"
+        label: { cuisine: "chinese", dish: "mapo_tofu", stage: "blooming_peppercorns", pan_state: "oil_hot", time_sensitive: true }
+      - id: mapo_doubanjiang_frying
+        prompt: "Top-down overhead photo of kitchen stove, wok with dark red doubanjiang paste being stirred into hot oil, oil turning deep red color, aromatic and sizzling, spatula stirring"
+        label: { cuisine: "chinese", dish: "mapo_tofu", stage: "frying_paste", pan_state: "cooking_active", burn_risk: true }
+      - id: mapo_tofu_simmering
+        prompt: "Top-down overhead photo of kitchen stove, wok with white tofu cubes in bubbling red spicy sauce, ground pork visible, sauce actively simmering, steam rising"
+        label: { cuisine: "chinese", dish: "mapo_tofu", stage: "simmering", pan_state: "cooking_active" }
+      - id: mapo_tofu_final
+        prompt: "Top-down overhead photo of kitchen stove, finished mapo tofu in wok, glossy red sauce coating tofu cubes, scattered chopped scallions and ground Sichuan pepper on top"
+        label: { cuisine: "chinese", dish: "mapo_tofu", stage: "done", pan_state: "ready_to_serve" }
+
+  # --------------------------------------------------
+  # Egg Fried Rice (蛋炒饭)
+  # --------------------------------------------------
+  egg_fried_rice:
+    why_agentic: "Wok must be extremely hot (smoking) or rice sticks and steams instead of frying. Eggs cook in 15 seconds — hesitate and they're rubber. Rice must be day-old and cold or it clumps."
+    critical_moments:
+      - "Wok reaches smoking point -> add oil -> eggs IMMEDIATELY"
+      - "Eggs 80% set (15s) -> add rice -> toss constantly"
+      - "Total wok time under 3 minutes or rice dries out"
+    parallel_tasks: ["heat wok", "beat eggs", "prep garnishes"]
+
+    ingredient_prep:
+      - id: fried_rice_mise_en_place
+        prompt: "Front-facing photo of kitchen counter, bowl of cold day-old white rice broken apart with fork, two beaten eggs in small bowl, diced scallions separated into white and green parts, small bowls of soy sauce and sesame oil, diced char siu pork"
+        label: { cuisine: "chinese", dish: "fried_rice", stage: "mise_en_place", ingredients_visible: ["cold_rice", "eggs", "scallions", "soy_sauce", "char_siu"] }
+      - id: fried_rice_cold_rice_closeup
+        prompt: "Front-facing photo of kitchen counter, large bowl of cold leftover white rice, individual grains visible and separated, slightly dried texture, day-old rice ideal for frying"
+        label: { cuisine: "chinese", dish: "fried_rice", stage: "rice_ready", ingredient: "rice", prep_state: "cold_day_old" }
+
+    cooking_steps:
+      - id: wok_smoking_hot_empty
+        prompt: "Top-down overhead photo of kitchen stove, empty carbon steel wok on high flame gas burner, wok surface slightly smoking, extreme heat visible from gas flame, wok starting to change color"
+        label: { cuisine: "chinese", dish: "fried_rice", stage: "wok_heating", pan_state: "smoking_hot", temperature: "very_high" }
+      - id: fried_rice_eggs_in_wok
+        prompt: "Top-down overhead photo of kitchen stove, beaten eggs just poured into smoking hot wok with oil, eggs immediately puffing and bubbling, golden edges forming rapidly, very fast cooking"
+        label: { cuisine: "chinese", dish: "fried_rice", stage: "eggs_cooking", pan_state: "cooking_active", time_sensitive: true }
+      - id: fried_rice_tossing
+        prompt: "Top-down overhead photo of kitchen stove, wok with rice being tossed with scrambled eggs, individual rice grains separating, wok hei visible as slight smoke, soy sauce being drizzled"
+        label: { cuisine: "chinese", dish: "fried_rice", stage: "frying_rice", pan_state: "cooking_active", wok_hei: true }
+      - id: fried_rice_done
+        prompt: "Top-down overhead photo of kitchen stove, finished egg fried rice in wok, individual grains coated and golden, scrambled egg pieces throughout, chopped green scallions on top"
+        label: { cuisine: "chinese", dish: "fried_rice", stage: "done", pan_state: "ready_to_serve" }
+
+  # --------------------------------------------------
+  # Kung Pao Chicken (宫保鸡丁)
+  # --------------------------------------------------
+  kung_pao_chicken:
+    why_agentic: "Chicken must be velveted or it gets tough. Dried chilies burn in seconds. Peanuts added last or they get soggy. Three-stage wok cooking with precise timing."
+    critical_moments:
+      - "Dried chilies in oil: 10-15s max, they turn black and bitter"
+      - "Chicken pieces: sear in batches, don't crowd the wok"
+      - "Sauce added: thickens in 20s, peanuts in at last second"
+    parallel_tasks: ["velvet chicken", "prep sauce mixture", "toast peanuts"]
+
+    ingredient_prep:
+      - id: kung_pao_chicken_cubed
+        prompt: "Front-facing photo of kitchen counter, chicken breast cut into uniform 2cm cubes on cutting board, small bowl of cornstarch and egg white marinade mixture beside it, soy sauce bottle"
+        label: { cuisine: "chinese", dish: "kung_pao", stage: "chicken_cubed", ingredient: "chicken", prep_state: "cubed" }
+      - id: kung_pao_aromatics
+        prompt: "Front-facing photo of kitchen counter, small bowls arranged with dried red chilies, whole Sichuan peppercorns, sliced scallion whites, diced ginger, roasted peanuts, and a pre-mixed dark sauce in a bowl"
+        label: { cuisine: "chinese", dish: "kung_pao", stage: "aromatics_ready", ingredients_visible: ["dried_chili", "peppercorn", "scallion", "ginger", "peanuts", "sauce"] }
+      - id: kung_pao_chicken_marinating
+        prompt: "Front-facing photo of kitchen counter, bowl of chicken cubes coated in translucent cornstarch and egg white marinade, glossy white coating visible on each piece, chopsticks in bowl"
+        label: { cuisine: "chinese", dish: "kung_pao", stage: "velveting", ingredient: "chicken", prep_state: "marinating" }
+
+    cooking_steps:
+      - id: kung_pao_chilies_blooming
+        prompt: "Top-down overhead photo of kitchen stove, wok with oil and whole dried red chilies and Sichuan peppercorns sizzling, chilies puffing up and darkening, fragrant oil, very time sensitive"
+        label: { cuisine: "chinese", dish: "kung_pao", stage: "blooming_chilies", pan_state: "oil_hot", burn_risk: true, time_sensitive: true }
+      - id: kung_pao_chicken_searing
+        prompt: "Top-down overhead photo of kitchen stove, wok with marinated chicken pieces searing in hot oil, pieces spread apart not touching, white velveted coating turning golden"
+        label: { cuisine: "chinese", dish: "kung_pao", stage: "searing_chicken", pan_state: "cooking_active" }
+      - id: kung_pao_sauce_thickening
+        prompt: "Top-down overhead photo of kitchen stove, wok with chicken pieces and vegetables in glossy dark brown sauce, sauce bubbling and thickening, roasted peanuts just added on top"
+        label: { cuisine: "chinese", dish: "kung_pao", stage: "sauce_finishing", pan_state: "cooking_active" }
+
+  # --------------------------------------------------
+  # Chinese Dumplings / Jiaozi (饺子)
+  # --------------------------------------------------
+  dumplings_jiaozi:
+    why_agentic: "Pan-fried dumplings need precise water amount for steaming phase. Too much water = soggy. Too little = raw filling. Bottom must be golden before water is added."
+    critical_moments:
+      - "Dumplings placed flat side down -> sear 2 min until golden bottom"
+      - "Add water + cover -> steam exactly 5 min"
+      - "Remove lid -> evaporate remaining water -> crispy bottom forms"
+    parallel_tasks: ["wrap dumplings", "heat pan", "prep dipping sauce"]
+
+    ingredient_prep:
+      - id: dumpling_filling_mixing
+        prompt: "Front-facing photo of kitchen counter, large mixing bowl with ground pork, chopped napa cabbage, minced ginger, sesame oil being mixed together, raw dumpling filling, chopsticks stirring"
+        label: { cuisine: "chinese", dish: "jiaozi", stage: "filling_mixing", ingredients_visible: ["ground_pork", "napa_cabbage", "ginger"] }
+      - id: dumpling_wrapping
+        prompt: "Front-facing photo of kitchen counter, person's hands wrapping a dumpling, round white dough wrapper with filling in center, fingers pleating edges together, tray of finished wrapped dumplings nearby"
+        label: { cuisine: "chinese", dish: "jiaozi", stage: "wrapping", hands_active: true }
+      - id: dumplings_wrapped_tray
+        prompt: "Front-facing photo of kitchen counter, tray lined with parchment paper with rows of neatly pleated raw dumplings, each showing crimped edges, flour dusted on surface"
+        label: { cuisine: "chinese", dish: "jiaozi", stage: "wrapped_ready", count: "batch" }
+
+    cooking_steps:
+      - id: dumplings_pan_searing
+        prompt: "Top-down overhead photo of kitchen stove, flat non-stick pan with dumplings arranged flat-side down in neat rows, oil sizzling underneath, bottoms starting to turn golden brown"
+        label: { cuisine: "chinese", dish: "jiaozi", stage: "searing_bottom", pan_state: "cooking_active" }
+      - id: dumplings_steam_phase
+        prompt: "Top-down overhead photo of kitchen stove, pan with dumplings being covered with glass lid, water just added creating big burst of steam, rapid sizzling and steaming"
+        label: { cuisine: "chinese", dish: "jiaozi", stage: "steaming", pan_state: "steaming", steam_level: "high", time_sensitive: true }
+      - id: dumplings_crispy_bottom
+        prompt: "Top-down overhead photo of kitchen stove, pan with finished potsticker dumplings, golden crispy lace-like crust connecting all dumplings on bottom, lid removed, steam clearing"
+        label: { cuisine: "chinese", dish: "jiaozi", stage: "done", pan_state: "ready_to_serve" }
+
+
+# ============================================================================
+# JAPANESE CUISINE (和食)
+# ============================================================================
+japanese:
+
+  # --------------------------------------------------
+  # Ramen (ラーメン)
+  # --------------------------------------------------
+  ramen:
+    why_agentic: "Noodle timing is critical — 60-90 seconds for thin noodles. Broth must stay at specific temp. Egg timing (6:30 for jammy yolk) is unforgiving. All components must converge."
+    critical_moments:
+      - "Broth at 85C (steaming not boiling) when serving"
+      - "Noodles: exactly 60-90s in boiling water, overcooked in seconds"
+      - "Soft-boiled egg: 6min 30s in boiling water -> ice bath immediately"
+      - "Assembly within 30s: broth -> noodles -> toppings -> serve"
+    parallel_tasks: ["simmer broth", "boil noodles", "prep toppings", "soft-boil eggs"]
+
+    ingredient_prep:
+      - id: ramen_toppings_laid_out
+        prompt: "Front-facing photo of kitchen counter, ramen toppings arranged in small bowls: sliced chashu pork, halved soft-boiled egg showing jammy orange yolk, sliced nori seaweed, chopped scallions, corn kernels, bamboo shoots"
+        label: { cuisine: "japanese", dish: "ramen", stage: "toppings_ready", ingredients_visible: ["chashu", "ajitama_egg", "nori", "scallion", "corn", "bamboo"] }
+      - id: ramen_chashu_slicing
+        prompt: "Front-facing photo of kitchen counter, person's hands slicing rolled braised pork belly chashu into thin rounds on cutting board, dark caramelized exterior visible, juicy pink interior"
+        label: { cuisine: "japanese", dish: "ramen", stage: "slicing_chashu", hands_active: true, knife_in_use: true }
+      - id: ramen_egg_peeling
+        prompt: "Front-facing photo of kitchen counter, person's hands carefully peeling shell off a soft-boiled egg over a bowl of ice water, delicate egg visible, marinated eggs in dark soy liquid beside"
+        label: { cuisine: "japanese", dish: "ramen", stage: "peeling_eggs", hands_active: true }
+
+    cooking_steps:
+      - id: ramen_broth_simmering
+        prompt: "Top-down overhead photo of kitchen stove, large pot of milky white tonkotsu pork broth at a gentle simmer, rich opaque liquid, occasional bubble breaking surface, fatty sheen on top"
+        label: { cuisine: "japanese", dish: "ramen", stage: "broth_simmering", pot_present: true, water_state: "simmering" }
+      - id: ramen_noodles_boiling
+        prompt: "Top-down overhead photo of kitchen stove, pot of rapidly boiling water with thin yellow ramen noodles swirling, chopsticks lifting noodles to check doneness, vigorous boil"
+        label: { cuisine: "japanese", dish: "ramen", stage: "noodles_cooking", pot_present: true, water_state: "boiling", time_sensitive: true }
+      - id: ramen_egg_timing
+        prompt: "Top-down overhead photo of kitchen stove, small pot of boiling water with eggs submerged, timer visible or implied, gentle boil with eggs rolling slightly"
+        label: { cuisine: "japanese", dish: "ramen", stage: "eggs_boiling", pot_present: true, time_sensitive: true, exact_timing: "6min30s" }
+      - id: ramen_assembly
+        prompt: "Top-down overhead photo of kitchen counter, deep ramen bowl being assembled, broth ladled in, noodles placed in center, chashu slices being arranged, half egg placed, nori standing upright"
+        label: { cuisine: "japanese", dish: "ramen", stage: "assembling", time_sensitive: true }
+
+  # --------------------------------------------------
+  # Tempura (天ぷら)
+  # --------------------------------------------------
+  tempura:
+    why_agentic: "Oil temperature must be 170-180C — invisible to the eye. Batter must stay ICE COLD or it gets heavy. Overcrowding drops oil temp. Each piece has a different fry time."
+    critical_moments:
+      - "Oil at 170-180C (test with batter drop — sinks halfway, rises)"
+      - "Don't overcrowd: 3-4 pieces max or temp crashes"
+      - "Shrimp: 2 min. Vegetables: 1-2 min. Sweet potato: 3 min"
+      - "Oil recovery time between batches: 30-60 seconds"
+    parallel_tasks: ["maintain oil temp", "keep batter cold", "drain fried pieces"]
+
+    ingredient_prep:
+      - id: tempura_vegetables_prepped
+        prompt: "Front-facing photo of kitchen counter, tempura ingredients arranged on tray: whole shrimp deveined and butterflied, sliced sweet potato rounds, shiso leaves, sliced lotus root, green beans, eggplant strips, all patted dry"
+        label: { cuisine: "japanese", dish: "tempura", stage: "ingredients_ready", ingredients_visible: ["shrimp", "sweet_potato", "shiso", "lotus_root", "green_beans", "eggplant"] }
+      - id: tempura_batter_mixing
+        prompt: "Front-facing photo of kitchen counter, glass bowl with lumpy tempura batter being mixed minimally with chopsticks, ice cubes visible in batter to keep it cold, flour bag and cold water nearby"
+        label: { cuisine: "japanese", dish: "tempura", stage: "batter_mixing", detail: "lumpy_is_correct" }
+
+    cooking_steps:
+      - id: tempura_oil_testing
+        prompt: "Top-down overhead photo of kitchen stove, deep pot of clean oil, single drop of batter falling into oil, batter sinking halfway then rising with small bubbles, oil temperature test"
+        label: { cuisine: "japanese", dish: "tempura", stage: "oil_temp_test", oil_temp: "correct_170_180C" }
+      - id: tempura_frying_shrimp
+        prompt: "Top-down overhead photo of kitchen stove, deep pot of oil with three battered shrimp frying, golden lacy batter coating, active bubbling around each piece, clean oil"
+        label: { cuisine: "japanese", dish: "tempura", stage: "frying_shrimp", pan_state: "deep_frying_active", pieces_in_oil: 3 }
+      - id: tempura_draining
+        prompt: "Top-down overhead photo of kitchen counter, wire rack over tray with golden fried tempura pieces draining, shrimp and vegetables with light crispy coating, steam rising from freshly fried pieces"
+        label: { cuisine: "japanese", dish: "tempura", stage: "draining", cook_state: "done" }
+      - id: tempura_oil_too_hot
+        prompt: "Top-down overhead photo of kitchen stove, deep pot of oil with visible smoke wisps rising from surface, oil dangerously overheated, no food in pot, urgent"
+        label: { cuisine: "japanese", dish: "tempura", stage: "oil_overheated", oil_temp: "too_hot", smoke: true, severity: "critical" }
+
+  # --------------------------------------------------
+  # Gyoza (餃子) — Japanese-style pan-fried
+  # --------------------------------------------------
+  gyoza:
+    why_agentic: "Same water-steam technique as jiaozi but thinner wrappers. Even more time-sensitive — thin skin burns fast. Must hear the sizzle return after water evaporates."
+    critical_moments:
+      - "Sear bottom 1-2 min until golden"
+      - "Add 60ml water + lid -> steam exactly 3-4 min"
+      - "Lid off -> water evaporates -> sizzle returns = done"
+
+    ingredient_prep:
+      - id: gyoza_filling
+        prompt: "Front-facing photo of kitchen counter, bowl of gyoza filling with ground pork, finely shredded cabbage, minced garlic chives, grated ginger mixed together, thin round gyoza wrappers stacked beside"
+        label: { cuisine: "japanese", dish: "gyoza", stage: "filling_ready", ingredients_visible: ["pork", "cabbage", "garlic_chives", "ginger", "wrappers"] }
+
+    cooking_steps:
+      - id: gyoza_searing_rows
+        prompt: "Top-down overhead photo of kitchen stove, non-stick pan with neat row of gyoza dumplings being seared flat side down, oil sizzling, bottoms beginning to turn golden, tightly packed"
+        label: { cuisine: "japanese", dish: "gyoza", stage: "searing", pan_state: "cooking_active" }
+      - id: gyoza_water_steam_burst
+        prompt: "Top-down overhead photo of kitchen stove, water being poured into hot pan of searing gyoza creating explosive burst of steam, dramatic sizzling moment, lid about to go on"
+        label: { cuisine: "japanese", dish: "gyoza", stage: "adding_water", pan_state: "steaming", steam_level: "very_high" }
+
+  # --------------------------------------------------
+  # Okonomiyaki (お好み焼き)
+  # --------------------------------------------------
+  okonomiyaki:
+    why_agentic: "Thick batter pancake needs low-medium heat or outside burns while inside is raw. Must flip only once — falls apart if flipped too early. Sauce and toppings go on immediately off heat."
+    critical_moments:
+      - "Cook first side 5-6 min on medium-low (patience!)"
+      - "Flip ONCE when edges set and bottom is golden"
+      - "Second side 4-5 min, press gently with spatula"
+    parallel_tasks: ["prep batter", "cook pancake", "prep toppings"]
+
+    ingredient_prep:
+      - id: okonomiyaki_batter
+        prompt: "Front-facing photo of kitchen counter, large bowl with thick okonomiyaki batter mixed with shredded cabbage, green onion, tenkasu tempura bits, dashi stock, person mixing with chopsticks"
+        label: { cuisine: "japanese", dish: "okonomiyaki", stage: "batter_mixing", ingredients_visible: ["cabbage", "scallion", "tenkasu", "flour_batter"] }
+
+    cooking_steps:
+      - id: okonomiyaki_cooking_first_side
+        prompt: "Top-down overhead photo of kitchen stove, thick round okonomiyaki pancake cooking on flat griddle or pan, batter still slightly liquid on top, edges starting to set and firm, bacon strips visible"
+        label: { cuisine: "japanese", dish: "okonomiyaki", stage: "cooking_first_side", pan_state: "cooking_active", time_sensitive: true }
+      - id: okonomiyaki_flipped
+        prompt: "Top-down overhead photo of kitchen stove, okonomiyaki pancake flipped showing golden brown cooked first side, now cooking second side on griddle, round shape maintained"
+        label: { cuisine: "japanese", dish: "okonomiyaki", stage: "cooking_second_side", pan_state: "cooking_active" }
+      - id: okonomiyaki_topped
+        prompt: "Top-down overhead photo of kitchen counter, finished okonomiyaki on plate with zigzag pattern of brown otafuku sauce and Japanese mayonnaise, bonito flakes dancing from heat, aonori seaweed flakes"
+        label: { cuisine: "japanese", dish: "okonomiyaki", stage: "done" }
+
+
+# ============================================================================
+# THAI CUISINE (อาหารไทย)
+# ============================================================================
+thai:
+
+  # --------------------------------------------------
+  # Pad Thai (ผัดไทย)
+  # --------------------------------------------------
+  pad_thai:
+    why_agentic: "Rice noodles go from perfect to mushy in 30 seconds. Sauce must caramelize on high heat but burns instantly. Wok must be screaming hot. Everything happens in under 3 minutes."
+    critical_moments:
+      - "Noodles soaked (not boiled) until JUST pliable — overdone = mush"
+      - "Wok smoking -> protein -> 30s -> noodles -> sauce -> toss"
+      - "Eggs pushed to side, scrambled 15s, then mixed in"
+      - "Total wok time under 3 minutes"
+    parallel_tasks: ["soak noodles", "prep sauce", "high-heat wok cooking"]
+
+    ingredient_prep:
+      - id: pad_thai_mise_en_place
+        prompt: "Front-facing photo of kitchen counter, pad thai ingredients arranged: soaked flat rice noodles in bowl, small bowl of tamarind sauce mixed with fish sauce and palm sugar, raw shrimp, bean sprouts, chopped peanuts, lime wedges, eggs, garlic chives, dried shrimp, preserved radish"
+        label: { cuisine: "thai", dish: "pad_thai", stage: "mise_en_place", ingredients_visible: ["rice_noodles", "tamarind_sauce", "shrimp", "bean_sprouts", "peanuts", "lime", "eggs", "chives"] }
+      - id: pad_thai_noodles_soaking
+        prompt: "Front-facing photo of kitchen counter, flat dried rice noodles soaking in large bowl of room temperature water, noodles becoming translucent and pliable, still slightly firm"
+        label: { cuisine: "thai", dish: "pad_thai", stage: "noodles_soaking", ingredient: "rice_noodles", prep_state: "soaking" }
+      - id: pad_thai_sauce_mixed
+        prompt: "Front-facing photo of kitchen counter, small bowl with dark brown pad thai sauce, tamarind paste, fish sauce, and palm sugar dissolved together, thick glossy consistency, spoon resting in bowl"
+        label: { cuisine: "thai", dish: "pad_thai", stage: "sauce_ready", ingredient: "pad_thai_sauce" }
+
+    cooking_steps:
+      - id: pad_thai_shrimp_searing
+        prompt: "Top-down overhead photo of kitchen stove, very hot wok with shrimp being seared, shrimp turning pink with charred spots, oil smoking slightly, high heat cooking"
+        label: { cuisine: "thai", dish: "pad_thai", stage: "searing_shrimp", pan_state: "very_hot", time_sensitive: true }
+      - id: pad_thai_noodles_in_wok
+        prompt: "Top-down overhead photo of kitchen stove, wok with soaked rice noodles being tossed with dark pad thai sauce, noodles absorbing sauce and turning caramel brown, tongs lifting noodles"
+        label: { cuisine: "thai", dish: "pad_thai", stage: "cooking_noodles", pan_state: "cooking_active", time_sensitive: true }
+      - id: pad_thai_egg_scrambling
+        prompt: "Top-down overhead photo of kitchen stove, wok with noodles pushed to one side, raw egg cracked into empty space in wok, egg starting to set on hot surface, about to be scrambled into noodles"
+        label: { cuisine: "thai", dish: "pad_thai", stage: "adding_egg", pan_state: "cooking_active" }
+      - id: pad_thai_final_toss
+        prompt: "Top-down overhead photo of kitchen stove, wok with finished pad thai being tossed, caramelized noodles with shrimp, egg, bean sprouts and garlic chives, crushed peanuts being sprinkled"
+        label: { cuisine: "thai", dish: "pad_thai", stage: "final_toss", pan_state: "cooking_active" }
+
+  # --------------------------------------------------
+  # Green Curry (แกงเขียวหวาน)
+  # --------------------------------------------------
+  green_curry:
+    why_agentic: "Curry paste must fry in coconut cream (not milk) until oil separates — this is the visual cue. Coconut milk splits if boiled too hard. Basil added last or it turns black."
+    critical_moments:
+      - "Coconut cream (thick part) heated -> paste fried until oil splits (visual: oil pools form)"
+      - "Thin coconut milk added -> gentle simmer only, never hard boil"
+      - "Thai basil leaves stirred in at absolute last moment, wilt = done"
+    parallel_tasks: ["fry curry paste", "prep vegetables", "cook protein"]
+
+    ingredient_prep:
+      - id: green_curry_paste_mortar
+        prompt: "Front-facing photo of kitchen counter, large stone mortar and pestle with green curry paste being pounded, vibrant green color from chilies and herbs, lemongrass and galangal pieces visible, intense color"
+        label: { cuisine: "thai", dish: "green_curry", stage: "pounding_paste", tool: "mortar_pestle", ingredients_visible: ["green_chili", "lemongrass", "galangal", "shallot", "garlic"] }
+      - id: green_curry_ingredients
+        prompt: "Front-facing photo of kitchen counter, Thai curry ingredients: can of coconut milk, Thai eggplant halved, bamboo shoots, sliced chicken, kaffir lime leaves, Thai basil bunch, fish sauce bottle, palm sugar"
+        label: { cuisine: "thai", dish: "green_curry", stage: "ingredients_laid_out", ingredients_visible: ["coconut_milk", "thai_eggplant", "bamboo", "chicken", "kaffir_lime", "thai_basil"] }
+
+    cooking_steps:
+      - id: green_curry_coconut_cream_heating
+        prompt: "Top-down overhead photo of kitchen stove, wok with thick white coconut cream heating, surface starting to bubble gently, rich fatty layer, no curry paste added yet"
+        label: { cuisine: "thai", dish: "green_curry", stage: "heating_coconut_cream", pan_state: "heating" }
+      - id: green_curry_paste_frying
+        prompt: "Top-down overhead photo of kitchen stove, wok with green curry paste frying in coconut cream, vivid green color mixing with white cream, aromatic, small pools of green-tinted oil separating at edges"
+        label: { cuisine: "thai", dish: "green_curry", stage: "frying_paste", pan_state: "cooking_active", visual_cue: "oil_separating" }
+      - id: green_curry_simmering
+        prompt: "Top-down overhead photo of kitchen stove, wok with green curry simmering, pale green coconut milk broth with chicken pieces, Thai eggplant, bamboo shoots, gentle bubbling, fragrant steam"
+        label: { cuisine: "thai", dish: "green_curry", stage: "simmering", pan_state: "simmering" }
+      - id: green_curry_basil_added
+        prompt: "Top-down overhead photo of kitchen stove, wok with finished green curry, fresh Thai basil leaves just wilting on top of green curry broth, kaffir lime leaves visible, aromatic"
+        label: { cuisine: "thai", dish: "green_curry", stage: "basil_added_done", pan_state: "ready_to_serve" }
+
+  # --------------------------------------------------
+  # Tom Yum Soup (ต้มยำ)
+  # --------------------------------------------------
+  tom_yum:
+    why_agentic: "Aromatics must be bruised not chopped. Shrimp added last — overcook in 2 minutes. Lime juice added OFF heat or it turns bitter. Balance of sour-spicy-salty is critical."
+    critical_moments:
+      - "Lemongrass, galangal, kaffir lime bruised and added to boiling stock"
+      - "Shrimp added: 2 min max until just pink"
+      - "Remove from heat THEN add lime juice (heat = bitter)"
+
+    ingredient_prep:
+      - id: tom_yum_aromatics
+        prompt: "Front-facing photo of kitchen counter, tom yum aromatics: lemongrass stalks smashed with knife, sliced galangal root coins, torn kaffir lime leaves, bird's eye chilies, straw mushrooms halved, shell-on shrimp, lime halves"
+        label: { cuisine: "thai", dish: "tom_yum", stage: "aromatics_ready", ingredients_visible: ["lemongrass", "galangal", "kaffir_lime", "bird_eye_chili", "mushroom", "shrimp", "lime"] }
+
+    cooking_steps:
+      - id: tom_yum_broth_boiling
+        prompt: "Top-down overhead photo of kitchen stove, pot of clear broth with lemongrass stalks, galangal slices, and kaffir lime leaves floating and simmering, aromatic steam rising"
+        label: { cuisine: "thai", dish: "tom_yum", stage: "broth_infusing", pot_present: true, water_state: "simmering" }
+      - id: tom_yum_shrimp_added
+        prompt: "Top-down overhead photo of kitchen stove, pot of tom yum broth with raw pink shrimp just added, mushrooms floating, broth slightly reddish from chili oil, shrimp starting to curl"
+        label: { cuisine: "thai", dish: "tom_yum", stage: "shrimp_cooking", pot_present: true, time_sensitive: true }
+
+
+# ============================================================================
+# KOREAN CUISINE (한식)
+# ============================================================================
+korean:
+
+  # --------------------------------------------------
+  # Kimchi Jjigae (김치찌개)
+  # --------------------------------------------------
+  kimchi_jjigae:
+    why_agentic: "Must use well-fermented (sour) kimchi. Tofu added late or it crumbles. The stew should boil vigorously at serving — it's traditionally served still bubbling in the stone pot."
+    critical_moments:
+      - "Kimchi and pork stir-fried first until caramelized edges"
+      - "Stock added -> bring to vigorous boil"
+      - "Tofu added gently in last 5 minutes"
+      - "Served at a rolling boil — must time serving"
+
+    ingredient_prep:
+      - id: kimchi_jjigae_ingredients
+        prompt: "Front-facing photo of kitchen counter, ingredients for kimchi stew: aged fermented kimchi with red chili visible, cubed pork belly, block of soft tofu, sliced scallions, gochugaru red pepper flakes, anchovy stock in measuring cup"
+        label: { cuisine: "korean", dish: "kimchi_jjigae", stage: "ingredients_ready", ingredients_visible: ["aged_kimchi", "pork_belly", "tofu", "scallion", "gochugaru", "anchovy_stock"] }
+      - id: kimchi_chopping
+        prompt: "Front-facing photo of kitchen counter, person's hands cutting aged kimchi into bite-sized pieces on cutting board, vibrant red fermented cabbage, juices on board, scissors or knife"
+        label: { cuisine: "korean", dish: "kimchi_jjigae", stage: "cutting_kimchi", hands_active: true }
+
+    cooking_steps:
+      - id: kimchi_pork_frying
+        prompt: "Top-down overhead photo of kitchen stove, stone pot or heavy pot with chopped kimchi and pork belly pieces being stir-fried, kimchi caramelizing at edges, pork rendering fat, red juices"
+        label: { cuisine: "korean", dish: "kimchi_jjigae", stage: "frying_base", pan_state: "cooking_active" }
+      - id: kimchi_jjigae_boiling
+        prompt: "Top-down overhead photo of kitchen stove, stone pot with kimchi jjigae at a vigorous rolling boil, red spicy broth bubbling, tofu cubes and pork visible, intense steam rising"
+        label: { cuisine: "korean", dish: "kimchi_jjigae", stage: "boiling_vigorously", pot_present: true, water_state: "boiling" }
+
+  # --------------------------------------------------
+  # Bibimbap (비빔밥)
+  # --------------------------------------------------
+  bibimbap:
+    why_agentic: "Five+ toppings each cooked separately with different timing. Stone bowl must be screaming hot for crispy rice. Egg must be runny when served. Everything must converge at once."
+    critical_moments:
+      - "Stone bowl heated in oven 15 min before assembly"
+      - "Each vegetable topping blanched/sauteed separately (2-3 min each)"
+      - "Rice pressed into hot stone bowl -> listen for sizzle"
+      - "Egg fried sunny-side-up, placed on top last"
+
+    ingredient_prep:
+      - id: bibimbap_toppings_array
+        prompt: "Front-facing photo of kitchen counter, five small bowls in a row with separately prepared bibimbap toppings: seasoned spinach, sauteed bean sprouts, julienned carrots, sliced shiitake mushrooms, seasoned zucchini, plus raw egg and gochujang paste"
+        label: { cuisine: "korean", dish: "bibimbap", stage: "toppings_ready", ingredients_visible: ["spinach", "bean_sprouts", "carrot", "shiitake", "zucchini", "egg", "gochujang"] }
+      - id: bibimbap_vegetables_blanching
+        prompt: "Top-down overhead photo of kitchen stove, pot of boiling water with spinach being blanched, bright green spinach wilting, slotted spoon ready to remove, ice bath bowl nearby"
+        label: { cuisine: "korean", dish: "bibimbap", stage: "blanching_vegetables", pot_present: true }
+
+    cooking_steps:
+      - id: bibimbap_stone_bowl_sizzling
+        prompt: "Top-down overhead photo of kitchen counter, hot stone dolsot bowl with white rice pressed in, rice starting to sizzle and crisp against hot stone edges, sesame oil drizzled"
+        label: { cuisine: "korean", dish: "bibimbap", stage: "rice_in_hot_bowl", sizzle: true }
+      - id: bibimbap_assembled
+        prompt: "Top-down overhead photo of kitchen counter, dolsot bibimbap fully assembled in stone bowl, colorful vegetable toppings arranged in sections around the bowl, raw egg yolk in center, gochujang dollop, sesame seeds"
+        label: { cuisine: "korean", dish: "bibimbap", stage: "assembled_ready_to_mix" }
+
+  # --------------------------------------------------
+  # Korean Fried Chicken (치킨)
+  # --------------------------------------------------
+  korean_fried_chicken:
+    why_agentic: "Double-fry technique is critical — first fry at 160C, rest, second fry at 180C. Oil temp drops significantly when chicken added. Sauce coating must happen within 30s of second fry."
+    critical_moments:
+      - "First fry at 160C for 8 min -> rest on rack 10 min"
+      - "Second fry at 180C for 3 min -> golden and extra crispy"
+      - "Toss in sauce within 30s of coming out or coating doesn't stick"
+
+    cooking_steps:
+      - id: kfc_first_fry
+        prompt: "Top-down overhead photo of kitchen stove, deep pot of oil with battered chicken pieces in first fry, moderate bubbling, pale golden color, oil at lower temperature"
+        label: { cuisine: "korean", dish: "fried_chicken", stage: "first_fry", oil_temp: "160C" }
+      - id: kfc_resting
+        prompt: "Top-down overhead photo of kitchen counter, partially fried chicken pieces resting on wire rack, pale golden crust, steam rising, waiting for second fry"
+        label: { cuisine: "korean", dish: "fried_chicken", stage: "resting_between_fries" }
+      - id: kfc_second_fry
+        prompt: "Top-down overhead photo of kitchen stove, deep pot of hotter oil with chicken pieces in second fry, vigorous bubbling, deep golden brown color developing, crispier"
+        label: { cuisine: "korean", dish: "fried_chicken", stage: "second_fry", oil_temp: "180C" }
+      - id: kfc_sauce_tossing
+        prompt: "Top-down overhead photo of kitchen counter, large bowl with freshly double-fried chicken being tossed in sticky red gochujang glaze sauce, glistening coating, person tossing with tongs"
+        label: { cuisine: "korean", dish: "fried_chicken", stage: "sauce_coating", time_sensitive: true }
+
+
+# ============================================================================
+# INDIAN CUISINE (भारतीय)
+# ============================================================================
+indian:
+
+  # --------------------------------------------------
+  # Butter Chicken (Murgh Makhani)
+  # --------------------------------------------------
+  butter_chicken:
+    why_agentic: "Cream added to hot tomato sauce can curdle if too hot. Spice tempering (tadka) takes 15-30 seconds — burnt spices ruin the dish. Chicken must be marinated and tandoori-cooked separately."
+    critical_moments:
+      - "Whole spices in hot oil: cumin pops in 10s, cardamom 15s"
+      - "Tomato sauce cooked until oil separates (visual cue: edges)"
+      - "Heat reduced BEFORE cream is added (prevent curdling)"
+      - "Chicken added to sauce last, just to warm through"
+    parallel_tasks: ["marinate/cook chicken", "build sauce", "prepare rice"]
+
+    ingredient_prep:
+      - id: butter_chicken_spices
+        prompt: "Front-facing photo of kitchen counter, Indian spice arrangement: small bowls of whole cumin seeds, green cardamom pods, cinnamon stick, bay leaves, ground turmeric, garam masala, Kashmiri red chili powder, fresh ginger-garlic paste"
+        label: { cuisine: "indian", dish: "butter_chicken", stage: "spices_ready", ingredients_visible: ["cumin", "cardamom", "cinnamon", "turmeric", "garam_masala", "chili_powder", "ginger_garlic"] }
+      - id: butter_chicken_marinated
+        prompt: "Front-facing photo of kitchen counter, bowl of chicken pieces in bright orange-red yogurt marinade with visible spice coating, marinating in glass bowl, covered with wrap"
+        label: { cuisine: "indian", dish: "butter_chicken", stage: "chicken_marinated", ingredient: "chicken", prep_state: "marinating" }
+
+    cooking_steps:
+      - id: tadka_spice_tempering
+        prompt: "Top-down overhead photo of kitchen stove, small pan with hot oil and whole cumin seeds popping and sizzling, cardamom pods puffing, cinnamon stick, aromatic oil, very fast process"
+        label: { cuisine: "indian", dish: "butter_chicken", stage: "tadka_tempering", pan_state: "oil_hot", time_sensitive: true }
+      - id: butter_chicken_tomato_sauce
+        prompt: "Top-down overhead photo of kitchen stove, deep pan with rich dark orange-red tomato and cashew sauce bubbling, oil separating at edges indicating sauce is ready, thick consistency"
+        label: { cuisine: "indian", dish: "butter_chicken", stage: "sauce_ready", pan_state: "cooking_active", visual_cue: "oil_separating" }
+      - id: butter_chicken_cream_added
+        prompt: "Top-down overhead photo of kitchen stove, pan with butter chicken sauce, white cream being swirled into red sauce creating orange marbled pattern, heat reduced, gentle simmer"
+        label: { cuisine: "indian", dish: "butter_chicken", stage: "cream_added", pan_state: "simmering" }
+      - id: butter_chicken_final
+        prompt: "Top-down overhead photo of kitchen stove, finished butter chicken in pan, rich creamy orange sauce with chicken pieces, butter melting on top, fresh cilantro garnish, kasuri methi"
+        label: { cuisine: "indian", dish: "butter_chicken", stage: "done", pan_state: "ready_to_serve" }
+
+  # --------------------------------------------------
+  # Dosa (दोसा)
+  # --------------------------------------------------
+  dosa:
+    why_agentic: "Griddle must be at exact right temperature — too hot and batter won't spread, too cool and it sticks. Batter spread in one circular motion, no second chances. Edges must lift before folding."
+    critical_moments:
+      - "Griddle test: sprinkle water, should sizzle and evaporate immediately"
+      - "Batter ladled and spread in single outward spiral motion"
+      - "Wait until edges lift and turn golden brown (1-2 min)"
+      - "Fold or roll while still on griddle"
+
+    cooking_steps:
+      - id: dosa_batter_spreading
+        prompt: "Top-down overhead photo of kitchen stove, flat cast iron griddle with thin dosa batter being spread in circular motion with back of ladle, white batter forming thin crepe shape, outward spiral visible"
+        label: { cuisine: "indian", dish: "dosa", stage: "spreading_batter", pan_state: "cooking_active" }
+      - id: dosa_edges_lifting
+        prompt: "Top-down overhead photo of kitchen stove, dosa on griddle with edges turning golden brown and lifting away from surface, crispy lace-like texture forming, small bubbles on surface"
+        label: { cuisine: "indian", dish: "dosa", stage: "edges_lifting", pan_state: "cooking_active", visual_cue: "edges_lift" }
+      - id: dosa_golden_crispy
+        prompt: "Top-down overhead photo of kitchen stove, golden crispy dosa being folded on griddle with spatula, crisp exterior visible, being formed into triangular or rolled shape"
+        label: { cuisine: "indian", dish: "dosa", stage: "folding", pan_state: "cooking_active" }
+
+
+# ============================================================================
+# MEXICAN CUISINE (Cocina Mexicana)
+# ============================================================================
+mexican:
+
+  # --------------------------------------------------
+  # Tacos al Pastor
+  # --------------------------------------------------
+  tacos_al_pastor:
+    why_agentic: "Marinated pork must caramelize on high heat, not steam. Tortillas must be warmed right before serving or they crack. Salsa and toppings prepped simultaneously. Assembly speed matters."
+    critical_moments:
+      - "Pork slices on high heat -> caramelized edges in 2-3 min per side"
+      - "Pineapple slices charred alongside pork"
+      - "Tortillas warmed 30s before assembly (dry out fast)"
+      - "Assembly: tortilla -> meat -> pineapple -> onion -> cilantro in 30s"
+
+    ingredient_prep:
+      - id: pastor_marinated_pork
+        prompt: "Front-facing photo of kitchen counter, thin slices of pork in deep red-orange achiote and chili marinade in bowl, vibrant color, sliced pineapple rings beside, diced white onion, fresh cilantro bunch, lime wedges"
+        label: { cuisine: "mexican", dish: "tacos_al_pastor", stage: "ingredients_ready", ingredients_visible: ["marinated_pork", "pineapple", "onion", "cilantro", "lime"] }
+      - id: pastor_salsa_prep
+        prompt: "Front-facing photo of kitchen counter, person chopping cilantro on cutting board, bowl of diced white onion, charred tomatillos in another bowl, lime halves, making salsa verde"
+        label: { cuisine: "mexican", dish: "tacos_al_pastor", stage: "salsa_prep", hands_active: true }
+
+    cooking_steps:
+      - id: pastor_pork_searing
+        prompt: "Top-down overhead photo of kitchen stove, cast iron skillet on high heat with thin pork slices searing, caramelized dark edges forming, char marks visible, not crowded, high heat"
+        label: { cuisine: "mexican", dish: "tacos_al_pastor", stage: "searing_pork", pan_state: "very_hot" }
+      - id: pastor_pineapple_charring
+        prompt: "Top-down overhead photo of kitchen stove, pineapple rings charring on hot skillet alongside pork, dark grill marks forming on pineapple, caramelized and sweet"
+        label: { cuisine: "mexican", dish: "tacos_al_pastor", stage: "charring_pineapple", pan_state: "cooking_active" }
+      - id: tortillas_warming
+        prompt: "Top-down overhead photo of kitchen stove, small corn tortillas warming on dry hot comal or flat griddle, slight char spots forming, stack of warmed tortillas in towel nearby"
+        label: { cuisine: "mexican", dish: "tacos_al_pastor", stage: "warming_tortillas", time_sensitive: true }
+
+
+# ============================================================================
+# CROSS-CUISINE COMMON SCENARIOS
+# ============================================================================
+# These visual states appear across many cuisines.
+
+cross_cuisine:
+
+  rice_cooking:
+    scenes:
+      - id: rice_washing
+        prompt: "Front-facing photo of kitchen counter, person's hands rinsing white rice in a fine mesh strainer under running water, milky white water draining, bowl underneath"
+        label: { activity: "washing_rice", hands_active: true }
+      - id: rice_in_pot_water
+        prompt: "Top-down overhead photo of kitchen stove, pot with rinsed white rice covered in measured water, rice grains settled at bottom, clear water above, about to turn on heat"
+        label: { activity: "rice_ready_to_cook", pot_present: true }
+      - id: rice_boiling_lid_rattling
+        prompt: "Top-down overhead photo of kitchen stove, pot with lid on, steam escaping from edges of lid, water boiling inside rice pot, lid slightly rattling"
+        label: { activity: "rice_boiling", pot_present: true, steam_level: "medium", lid: "on" }
+      - id: rice_done_fluffing
+        prompt: "Top-down overhead photo of kitchen stove, pot lid removed showing fluffy cooked white rice, fork or rice paddle fluffing grains, steam rising from perfectly cooked rice"
+        label: { activity: "rice_done", pot_present: true, steam_level: "medium" }
+
+  noodle_cooking:
+    scenes:
+      - id: noodles_into_boiling_water
+        prompt: "Top-down overhead photo of kitchen stove, bundle of dry noodles being lowered into pot of vigorously boiling water, splash moment, noodles fanning out"
+        label: { activity: "adding_noodles", pot_present: true, water_state: "boiling" }
+      - id: noodles_testing_doneness
+        prompt: "Top-down overhead photo of kitchen stove, chopsticks or fork pulling single noodle strand from boiling pot of noodles, testing doneness, steam rising"
+        label: { activity: "testing_noodles", pot_present: true, time_sensitive: true }
+      - id: noodles_draining_colander
+        prompt: "Top-down overhead photo of kitchen sink, noodles being drained into colander, massive steam cloud rising, water pouring through"
+        label: { activity: "draining_noodles", steam_level: "very_high" }
+
+  oil_temperature_states:
+    scenes:
+      - id: oil_cold_in_wok
+        prompt: "Top-down overhead photo of kitchen stove, wok or deep pan with pool of clear cooking oil at room temperature, still surface, no movement, no heat shimmer"
+        label: { oil_state: "cold", temperature: "room_temp" }
+      - id: oil_warming_shimmer
+        prompt: "Top-down overhead photo of kitchen stove, wok with oil showing initial shimmering ripples across surface, subtle movement indicating heat, no smoke"
+        label: { oil_state: "warming", temperature: "medium" }
+      - id: oil_ready_active
+        prompt: "Top-down overhead photo of kitchen stove, wok with oil actively shimmering and flowing in convection patterns, surface rippling, ready for cooking, no smoke"
+        label: { oil_state: "ready", temperature: "hot" }
+      - id: oil_smoking_dangerous
+        prompt: "Top-down overhead photo of kitchen stove, wok with oil producing visible smoke wisps from surface, oil past smoke point, dangerous, needs immediate attention"
+        label: { oil_state: "smoking", temperature: "too_hot", severity: "high" }
+
+  wok_hei_stages:
+    scenes:
+      - id: wok_empty_heating
+        prompt: "Top-down overhead photo of kitchen stove, empty carbon steel wok on high gas flame, large blue gas flame visible wrapping around wok bottom, wok beginning to smoke slightly, extreme heat"
+        label: { wok_state: "heating_empty", temperature: "extreme" }
+      - id: wok_oil_flash
+        prompt: "Top-down overhead photo of kitchen stove, wok with oil just added, oil immediately smoking and moving rapidly across hot wok surface, intense heat reaction"
+        label: { wok_state: "oil_added", temperature: "extreme" }
+      - id: wok_tossing_flames
+        prompt: "Top-down overhead photo of kitchen stove, wok with food being tossed, small flame licking up from wok edge as oil catches gas flame, dramatic wok hei moment, food airborne"
+        label: { wok_state: "wok_hei_active", fire_flash: true }
