@@ -1,121 +1,333 @@
-# Synthetic image generation prompts
-# Organized by use case, camera angle, and kitchen event
-# Each prompt generates a base image; variations are created via img2img
+# ============================================================================
+# SYNTHETIC IMAGE GENERATION PROMPTS
+# Built from scenario_matrix.yaml combinatorics
+# Organized: Phase > Zone > Scene > Prompt + Label
+# ============================================================================
 
-# ========================================
-# USE CASE 1: Procedure Compliance
-# ========================================
-procedure_compliance:
+# ============================================================================
+# PHASE 1: INGREDIENT PREPARATION (Counter Zone, Front-Facing)
+# ============================================================================
+ingredient_prep:
+
+  # ----- Vegetable Prep Progression -----
+  onion_prep:
+    camera_angle: front_view
+    scenes:
+      - id: onion_whole
+        prompt: "Front-facing photo of kitchen counter, whole unpeeled brown onion sitting on wooden cutting board, chef knife beside it, clean organized counter, warm natural light"
+        label: { ingredient: "onion", prep_state: "whole", hands_active: false, knife_in_use: false }
+        variations: 5
+      - id: onion_halved
+        prompt: "Front-facing photo of kitchen counter, brown onion cut in half on wooden cutting board, layers visible in cross section, chef knife beside it, realistic kitchen"
+        label: { ingredient: "onion", prep_state: "halved", hands_active: false, knife_in_use: false }
+        variations: 5
+      - id: onion_being_diced
+        prompt: "Front-facing photo of kitchen counter, person's hands with proper claw grip dicing a halved onion on cutting board, partially diced onion visible, chef knife in motion"
+        label: { ingredient: "onion", prep_state: "dicing_in_progress", hands_active: true, knife_in_use: true }
+        variations: 8
+      - id: onion_diced_complete
+        prompt: "Front-facing photo of kitchen counter, pile of finely diced white onion pieces on cutting board, chef knife resting flat beside pile, clean workspace"
+        label: { ingredient: "onion", prep_state: "diced", hands_active: false, knife_in_use: false }
+        variations: 5
+
+  garlic_prep:
+    camera_angle: front_view
+    scenes:
+      - id: garlic_whole_bulb
+        prompt: "Front-facing photo of kitchen counter, whole garlic bulb on cutting board next to separated cloves, paring knife nearby, bright kitchen"
+        label: { ingredient: "garlic", prep_state: "whole", hands_active: false }
+        variations: 4
+      - id: garlic_being_minced
+        prompt: "Front-facing photo of kitchen counter, person's hands mincing garlic cloves with rocking motion of chef knife, small pile of minced garlic forming, realistic"
+        label: { ingredient: "garlic", prep_state: "mincing", hands_active: true, knife_in_use: true }
+        variations: 6
+      - id: garlic_minced_done
+        prompt: "Front-facing photo of kitchen counter, small pile of finely minced garlic on cutting board, knife resting, smashed garlic skins nearby"
+        label: { ingredient: "garlic", prep_state: "minced", hands_active: false }
+        variations: 4
+
+  protein_prep:
+    camera_angle: front_view
+    scenes:
+      - id: chicken_raw_on_board
+        prompt: "Front-facing photo of kitchen counter, raw chicken breast on plastic cutting board, separate from vegetables, sharp knife beside it, clean prep area"
+        label: { ingredient: "chicken", prep_state: "raw_whole", hands_active: false, cross_contamination_risk: false }
+        variations: 5
+      - id: chicken_being_sliced
+        prompt: "Front-facing photo of kitchen counter, person's hands slicing raw chicken breast into strips on plastic cutting board, knife cutting through meat, realistic lighting"
+        label: { ingredient: "chicken", prep_state: "slicing", hands_active: true, knife_in_use: true }
+        variations: 6
+      - id: steak_raw_on_board
+        prompt: "Front-facing photo of kitchen counter, raw beef steak on cutting board, seasoned with salt and pepper visible on surface, resting at room temperature"
+        label: { ingredient: "steak", prep_state: "seasoned", hands_active: false }
+        variations: 5
+      - id: fish_fillet_on_board
+        prompt: "Front-facing photo of kitchen counter, raw fish fillet skin side down on cutting board, lemon and herbs nearby, parchment paper underneath"
+        label: { ingredient: "fish", prep_state: "raw_whole", hands_active: false }
+        variations: 4
+
+  multi_ingredient_prep:
+    camera_angle: front_view
+    scenes:
+      - id: mise_en_place_partial
+        prompt: "Front-facing photo of kitchen counter, three small prep bowls with diced onion, minced garlic, and sliced bell peppers, one whole tomato still uncut on board, organized prep"
+        label: { mise_en_place: "partial", ingredients_prepped: 3, ingredients_remaining: 1 }
+        variations: 6
+      - id: mise_en_place_complete
+        prompt: "Front-facing photo of kitchen counter, five small glass bowls neatly arranged with all prepped ingredients, diced onion, minced garlic, sliced peppers, chopped tomatoes, measured spices, cutting board cleaned"
+        label: { mise_en_place: "complete", ingredients_prepped: 5, ingredients_remaining: 0 }
+        variations: 6
+      - id: messy_mid_prep
+        prompt: "Front-facing photo of kitchen counter, active meal prep in progress, partially chopped vegetables on board, peels and scraps scattered, multiple knives, busy realistic kitchen"
+        label: { mise_en_place: "in_progress", clutter: "high" }
+        variations: 5
+      - id: ingredients_being_transferred
+        prompt: "Front-facing photo of kitchen counter, person's hands scraping diced onion from cutting board into a small bowl using knife edge, other prepped bowls nearby"
+        label: { hands_active: true, prep_state: "transferring" }
+        variations: 5
+
+
+# ============================================================================
+# PHASE 2: COOKING — BOILING (Stove Zone, Top-Down)
+# ============================================================================
+cooking_boiling:
   stove_zone:
     camera_angle: top_view
     scenes:
-      - id: water_cold
-        prompt: "Top-down overhead photo of a kitchen stove, stainless steel pot filled with clear still water on a gas burner, burner flame visible, no steam, clean kitchen counter around the stove, realistic lighting"
-        label: { water_state: "not_hot", pot_present: true, steam_level: "none" }
-        variations: 10
+      - id: cold_water_pot
+        prompt: "Top-down overhead photo of kitchen stove, stainless steel pot filled with clear still water, gas burner off, no bubbles, no steam, clean stove surface"
+        label: { water_state: "cold", pot_present: true, steam_level: "none", burner: "off" }
+        variations: 6
+
+      - id: water_heating_tiny_bubbles
+        prompt: "Top-down overhead photo of kitchen stove, stainless steel pot on gas burner with visible flame, water showing tiny bubbles forming on the bottom of pot, no steam yet"
+        label: { water_state: "heating", pot_present: true, steam_level: "none", burner: "on" }
+        variations: 6
 
       - id: water_simmering
-        prompt: "Top-down overhead photo of a kitchen stove, stainless steel pot with water showing small bubbles at the bottom, light wisps of steam rising, gas burner on medium heat, realistic kitchen lighting"
+        prompt: "Top-down overhead photo of kitchen stove, pot with water gently simmering, small bubbles rising steadily to surface, thin wisps of steam, gas burner on low-medium"
         label: { water_state: "simmering", pot_present: true, steam_level: "low" }
-        variations: 10
+        variations: 8
 
-      - id: water_boiling
-        prompt: "Top-down overhead photo of a kitchen stove, stainless steel pot with rapidly boiling water, large rolling bubbles, visible steam cloud rising, gas burner on high heat, realistic kitchen"
+      - id: water_rolling_boil
+        prompt: "Top-down overhead photo of kitchen stove, large pot with water at a vigorous rolling boil, large bubbles breaking surface continuously, significant steam cloud rising, gas burner on high"
         label: { water_state: "boiling", pot_present: true, steam_level: "high" }
         variations: 10
 
-      - id: pasta_in_pot
-        prompt: "Top-down overhead photo of a kitchen stove, stainless steel pot with boiling water and spaghetti pasta submerged, steam rising, gas burner on, realistic kitchen lighting"
-        label: { water_state: "boiling", pot_present: true, pasta_added: true }
+      - id: boil_over_starting
+        prompt: "Top-down overhead photo of kitchen stove, pot of boiling water with foam rising to the rim, water about to spill over edge, intense steam, urgent scene"
+        label: { water_state: "boil_over_risk", pot_present: true, steam_level: "high", severity: "high" }
         variations: 8
 
-      - id: empty_stove
-        prompt: "Top-down overhead photo of a clean kitchen stove, no pots or pans, gas burners off, clean stove grate, kitchen counter visible around edges, bright kitchen lighting"
-        label: { water_state: null, pot_present: false, steam_level: "none" }
-        variations: 5
+      - id: boil_over_active
+        prompt: "Top-down overhead photo of kitchen stove, pot of water actively boiling over, starchy water spilling down sides onto burner, hissing steam, wet stove surface"
+        label: { water_state: "boil_over_active", pot_present: true, steam_level: "high", severity: "critical" }
+        variations: 6
 
-      - id: sauce_pan_cooking
-        prompt: "Top-down overhead photo of a kitchen stove, small saucepan with red tomato sauce simmering, wooden spoon resting on edge, second burner with pot of water, realistic kitchen"
-        label: { sauce_cooking: true, pot_present: true }
+      - id: pasta_added_to_boiling
+        prompt: "Top-down overhead photo of kitchen stove, spaghetti pasta sticking up from pot of boiling water, pasta half submerged, hand pushing pasta down with tongs, vigorous bubbling"
+        label: { water_state: "boiling", pot_present: true, pasta_added: true, hands_active: true }
         variations: 8
 
-  counter_zone:
-    camera_angle: front_view
-    scenes:
-      - id: chopping_vegetables
-        prompt: "Front-facing photo of kitchen counter, person's hands actively chopping onions on a wooden cutting board, knife in hand, diced vegetables visible, kitchen background blurred"
-        label: { hands_active: true, knife_in_use: true, ingredient_present: true }
-        variations: 10
+      - id: pasta_cooking_submerged
+        prompt: "Top-down overhead photo of kitchen stove, pot of boiling water with pasta fully submerged and visible through water, steady boil, moderate steam"
+        label: { water_state: "boiling", pot_present: true, pasta_added: true, pasta_state: "cooking" }
+        variations: 6
 
-      - id: ingredients_laid_out
-        prompt: "Front-facing photo of kitchen counter, ingredients laid out on cutting board, tomatoes garlic onions pasta box, no hands visible, clean prep area, bright kitchen lighting"
-        label: { hands_active: false, knife_in_use: false, ingredient_present: true }
-        variations: 8
+      - id: draining_pasta
+        prompt: "Top-down overhead photo of kitchen sink area, colander in sink with steam billowing up, person pouring pot of pasta and water into colander, large steam cloud"
+        label: { pasta_state: "draining", steam_level: "very_high" }
+        variations: 6
 
-      - id: empty_counter
-        prompt: "Front-facing photo of clean kitchen counter, empty wooden cutting board, no ingredients or utensils, clean surface, kitchen appliances in background"
-        label: { hands_active: false, knife_in_use: false, ingredient_present: false }
-        variations: 5
 
-# ========================================
-# USE CASE 2: Safety Compliance
-# ========================================
-safety_compliance:
+# ============================================================================
+# PHASE 2: COOKING — PAN FRYING (Stove Zone, Top-Down)
+# ============================================================================
+cooking_frying:
   stove_zone:
     camera_angle: top_view
     scenes:
-      - id: smoke_detected
-        prompt: "Top-down overhead photo of a kitchen stove, visible smoke rising from a pan, burnt residue visible, hazy atmosphere above the stove, realistic emergency kitchen scene"
-        label: { smoke_suspected: true, severity: "critical" }
-        variations: 10
+      - id: empty_cold_pan
+        prompt: "Top-down overhead photo of kitchen stove, clean empty stainless steel frying pan on gas burner, burner off, dry pan surface, clean stove"
+        label: { pan_state: "empty_cold", burner: "off" }
+        variations: 4
 
-      - id: boil_over
-        prompt: "Top-down overhead photo of a kitchen stove, pot of water boiling over the edges, water spilling onto the stove grate and burner, steam and splashing, messy stove"
-        label: { water_state: "boil_over_risk", steam_level: "high", severity: "high" }
+      - id: oil_in_cold_pan
+        prompt: "Top-down overhead photo of kitchen stove, frying pan with pool of cooking oil sitting still, burner just turned on with small flame, oil not yet hot"
+        label: { pan_state: "oil_cold", burner: "on" }
+        variations: 5
+
+      - id: oil_shimmering_ready
+        prompt: "Top-down overhead photo of kitchen stove, frying pan with oil showing shimmering ripples across surface, indicating proper cooking temperature, no smoke"
+        label: { pan_state: "oil_ready", oil_temp: "correct", smoke: false }
         variations: 8
 
-      - id: unattended_stove_active
-        prompt: "Top-down overhead photo of a kitchen stove, pot on burner with flame on, water simmering, no person visible, no hands in frame, empty kitchen, slight steam"
-        label: { pot_present: true, person_present: false, severity: "high" }
-        variations: 10
-
-      - id: safe_cooking
-        prompt: "Top-down overhead photo of a kitchen stove, pot on burner with controlled simmer, person's hand holding wooden spoon stirring, organized cooking, clean stove"
-        label: { pot_present: true, person_present: true, severity: "none" }
+      - id: oil_smoking_too_hot
+        prompt: "Top-down overhead photo of kitchen stove, frying pan with visible smoke rising from oil surface, oil too hot, dangerous temperature, wisps of smoke"
+        label: { pan_state: "oil_overheated", oil_temp: "too_hot", smoke: true, severity: "high" }
         variations: 8
 
-  counter_zone:
+      - id: food_just_added_sizzle
+        prompt: "Top-down overhead photo of kitchen stove, chicken pieces just placed in hot oiled frying pan, active sizzling with small oil splashes, steam and bubbling around food"
+        label: { pan_state: "cooking_active", food: "protein", cook_stage: "just_added" }
+        variations: 6
+
+      - id: food_browning_one_side
+        prompt: "Top-down overhead photo of kitchen stove, chicken pieces in frying pan with visible golden brown crust on edges, one side clearly seared, juices visible"
+        label: { pan_state: "cooking_active", food: "protein", cook_stage: "browning" }
+        variations: 8
+
+      - id: food_needs_flipping
+        prompt: "Top-down overhead photo of kitchen stove, steak in frying pan with dark golden sear visible on edges, blood/juices pooling on top surface, clearly time to flip"
+        label: { pan_state: "cooking_active", food: "steak", cook_stage: "needs_flip" }
+        variations: 6
+
+      - id: vegetables_sauteing
+        prompt: "Top-down overhead photo of kitchen stove, frying pan with mixed diced vegetables being sauteed, onions turning translucent, bell peppers softening, spatula in pan"
+        label: { pan_state: "cooking_active", food: "vegetables", cook_stage: "sauteing" }
+        variations: 8
+
+      - id: eggs_frying
+        prompt: "Top-down overhead photo of kitchen stove, two eggs frying in pan, whites setting and turning opaque, yolks still runny and yellow, butter bubbling"
+        label: { pan_state: "cooking_active", food: "eggs", cook_stage: "frying" }
+        variations: 6
+
+      - id: food_burning
+        prompt: "Top-down overhead photo of kitchen stove, food in frying pan with visible dark charred spots, smoke rising, burnt residue on pan surface, overcooked"
+        label: { pan_state: "burning", smoke: true, severity: "high" }
+        variations: 6
+
+      - id: sauce_reducing
+        prompt: "Top-down overhead photo of kitchen stove, saucepan with tomato sauce bubbling gently, sauce thick and reduced, wooden spoon resting in pan, gentle steam"
+        label: { pan_state: "sauce_reducing", food: "sauce", cook_stage: "reducing" }
+        variations: 6
+
+
+# ============================================================================
+# PHASE 2: COOKING — MULTI-BURNER (Stove Zone, Top-Down)
+# ============================================================================
+cooking_multi_burner:
+  stove_zone:
+    camera_angle: top_view
+    scenes:
+      - id: pasta_and_sauce_parallel
+        prompt: "Top-down overhead photo of kitchen stove, large pot of boiling pasta on back burner with steam, smaller saucepan with red tomato sauce simmering on front burner, two active flames"
+        label: { burners_active: 2, pot_boiling: true, sauce_cooking: true }
+        variations: 10
+
+      - id: stir_fry_and_rice
+        prompt: "Top-down overhead photo of kitchen stove, wok with colorful stir fry vegetables and meat on high heat with visible flame, rice cooker nearby with steam vent, active cooking"
+        label: { burners_active: 1, wok_active: true, rice_cooking: true }
+        variations: 8
+
+      - id: three_burners_dinner
+        prompt: "Top-down overhead photo of kitchen stove, three burners active, large pot with boiling liquid on back left, frying pan with meat on front right, small saucepan on front left, busy stove"
+        label: { burners_active: 3, multi_dish: true }
+        variations: 6
+
+      - id: one_burner_pot_handle_over_another
+        prompt: "Top-down overhead photo of kitchen stove, pot on right burner with handle extending over left burner which has a flame, dangerous handle positioning, safety hazard"
+        label: { safety_issue: "handle_over_flame", severity: "high" }
+        variations: 6
+
+
+# ============================================================================
+# PHASE 3: SAFETY SCENARIOS
+# ============================================================================
+safety_scenarios:
+
+  fire_heat_hazards:
+    camera_angle: top_view
+    scenes:
+      - id: smoke_from_pan
+        prompt: "Top-down overhead photo of kitchen stove, thick visible smoke rising from a frying pan, burnt food residue, hazy atmosphere above stove, alarming scene"
+        label: { smoke_suspected: true, severity: "critical", action: "alert_immediately" }
+        variations: 10
+
+      - id: towel_near_flame
+        prompt: "Top-down overhead photo of kitchen stove, kitchen towel draped near edge of active gas burner with visible flame, cloth dangerously close to fire, pot on adjacent burner"
+        label: { fire_risk: "towel_near_flame", severity: "critical", action: "alert_immediately" }
+        variations: 6
+
+      - id: empty_pot_on_high
+        prompt: "Top-down overhead photo of kitchen stove, empty stainless steel pot on gas burner with high flame, no water or food inside, pot bottom discoloring from heat"
+        label: { safety_issue: "dry_pot_on_heat", severity: "high", action: "alert" }
+        variations: 6
+
+      - id: grease_splatter
+        prompt: "Top-down overhead photo of kitchen stove, oil droplets splattered around frying pan onto stove surface, some near active burner flame, messy and dangerous"
+        label: { safety_issue: "grease_splatter", severity: "medium" }
+        variations: 5
+
+  unattended_cooking:
+    camera_angle: top_view
+    scenes:
+      - id: active_stove_no_person
+        prompt: "Top-down overhead photo of kitchen stove, pot on burner with gas flame on and water simmering, NO hands or person visible anywhere in frame, empty unattended kitchen"
+        label: { person_present: false, burner_active: true, severity: "high", seconds_unattended: "unknown" }
+        variations: 10
+
+      - id: frying_unattended
+        prompt: "Top-down overhead photo of kitchen stove, frying pan with oil on active burner, food partially cooked, no person or hands visible, completely unattended"
+        label: { person_present: false, burner_active: true, food_in_pan: true, severity: "critical" }
+        variations: 8
+
+      - id: person_present_cooking_safely
+        prompt: "Top-down overhead photo of kitchen stove, person's hands visible holding wooden spoon stirring pot on active burner, organized cooking, safe supervised scene"
+        label: { person_present: true, burner_active: true, hands_active: true, severity: "none" }
+        variations: 8
+
+  cross_contamination:
     camera_angle: front_view
     scenes:
-      - id: unsafe_knife_handling
-        prompt: "Front-facing photo of kitchen counter, person's hands using large chef knife with improper grip, fingers extended flat, cutting vegetables, unsafe technique"
-        label: { knife_in_use: true, knife_safety: "unsafe", severity: "low" }
+      - id: raw_meat_near_vegetables
+        prompt: "Front-facing photo of kitchen counter, raw chicken pieces on left side of cutting board, freshly cut salad vegetables on right side of same board, NO separation, cross contamination risk"
+        label: { cross_contamination: true, severity: "high", action: "alert" }
+        variations: 6
+
+      - id: separate_boards_safe
+        prompt: "Front-facing photo of kitchen counter, raw meat on red plastic cutting board on left, vegetables on separate wooden cutting board on right, proper separation, safe practice"
+        label: { cross_contamination: false, severity: "none" }
+        variations: 5
+
+  knife_safety_scenarios:
+    camera_angle: front_view
+    scenes:
+      - id: proper_claw_grip
+        prompt: "Front-facing close-up photo of person's hands cutting onion with chef knife, fingers curled in proper claw grip with knuckles guiding blade, stable cutting board on damp towel"
+        label: { knife_safety: "safe", grip: "claw_grip", board_stable: true }
         variations: 8
 
-      - id: safe_knife_handling
-        prompt: "Front-facing photo of kitchen counter, person's hands using chef knife with proper claw grip, fingers curled safely, cutting onions on stable cutting board"
-        label: { knife_in_use: true, knife_safety: "safe", severity: "none" }
+      - id: unsafe_flat_fingers
+        prompt: "Front-facing close-up photo of person's hands cutting vegetables with chef knife, fingers flat and extended dangerously close to blade edge, improper technique"
+        label: { knife_safety: "unsafe", grip: "flat_fingers", severity: "medium" }
         variations: 8
 
-# ========================================
-# Variation parameters for img2img
-# ========================================
+      - id: knife_on_edge_of_counter
+        prompt: "Front-facing photo of kitchen counter, sharp chef knife resting with blade partially hanging over edge of counter, unstable dangerous position, could fall"
+        label: { knife_safety: "unsafe", issue: "knife_on_edge", severity: "medium" }
+        variations: 5
+
+
+# ============================================================================
+# VARIATION SETTINGS
+# ============================================================================
 variation_settings:
-  # These control how variations are generated from base images
-  strength_range: [0.3, 0.6]  # How much to change from the base (0=identical, 1=completely new)
+  strength_range: [0.3, 0.55]
   guidance_scale: 7.5
-  negative_prompt: "cartoon, anime, drawing, painting, illustration, low quality, blurry, text, watermark, logo"
+  negative_prompt: "cartoon, anime, illustration, drawing, painting, CGI, render, low quality, blurry, text, watermark, logo, distorted hands, extra fingers, deformed"
   modifiers:
     lighting:
-      - "bright overhead fluorescent lighting"
-      - "warm natural daylight from window"
-      - "dim evening kitchen lighting"
-      - "harsh direct lighting with shadows"
-    angle_shift:
-      - "slightly tilted angle"
-      - "straight overhead"
-      - "slight perspective shift"
+      - "bright overhead fluorescent kitchen lighting"
+      - "warm natural daylight streaming from window"
+      - "dim evening kitchen with warm bulb lighting"
+      - "mixed overhead and under-cabinet LED lighting"
+    kitchen_style:
+      - "modern white clean kitchen"
+      - "rustic wooden kitchen with granite counters"
+      - "small apartment kitchen"
+      - "average home kitchen with tile backsplash"
     clutter:
-      - "clean organized kitchen"
-      - "slightly messy kitchen with utensils"
-      - "busy kitchen with multiple items"
+      - "clean organized minimal counter"
+      - "moderately lived-in kitchen with some items"
+      - "busy kitchen with spice bottles and utensils visible"

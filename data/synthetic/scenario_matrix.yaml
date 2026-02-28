@@ -1,0 +1,391 @@
+# ============================================================================
+# KITCHEN SCENARIO COMBINATORIC MATRIX
+# ============================================================================
+# Every realistic kitchen scenario the agent should recognize.
+# Structured as: Phase > Activity > Visual States > Combinations
+#
+# For image generation: combine one item from each relevant axis to build
+# a prompt. Total unique combinations: ~2000+ scenes.
+# ============================================================================
+
+
+# ============================================================================
+# RECIPES THAT GENUINELY NEED AGENTIC MONITORING
+# ============================================================================
+# These recipes have overlapping timers, critical timing windows,
+# temperature-sensitive steps, or safety risks that benefit from
+# an autonomous agent watching and coordinating.
+
+target_recipes:
+
+  pasta_carbonara:
+    why_agentic: "Pasta must be HOT when tossed with egg mixture or it scrambles. Agent must coordinate draining + mixing within a 30-second window."
+    critical_moments:
+      - "Water reaches boil -> add pasta (start 8-min timer)"
+      - "Guanciale reaches crispy -> remove from heat (visual cue)"
+      - "Pasta done -> drain immediately -> toss with egg (30s window)"
+    parallel_tasks: ["boil pasta", "render guanciale", "mix egg+cheese"]
+
+  stir_fry_with_rice:
+    why_agentic: "Wok must be screaming hot before ingredients go in. Rice needs 20-min lead time. Ingredients added in strict sequence with seconds between each."
+    critical_moments:
+      - "Rice started 20 min before wok work"
+      - "Wok smoking hot -> add oil -> immediate protein"
+      - "Protein seared -> remove -> vegetables in sequence (30s each)"
+      - "Everything back in -> sauce -> 60 seconds max"
+    parallel_tasks: ["cook rice", "prep all ingredients", "wok cooking"]
+
+  eggs_benedict:
+    why_agentic: "Three components must finish simultaneously. Hollandaise breaks if it gets too hot. Poached eggs have a 30-second perfection window."
+    critical_moments:
+      - "Hollandaise: butter temp must stay below split point"
+      - "Poached eggs: exactly 3-4 minutes, not a second more"
+      - "Toast muffins: must be warm when eggs land on them"
+      - "All three ready within 60 seconds of each other"
+    parallel_tasks: ["hollandaise sauce", "poach eggs", "toast + ham"]
+
+  risotto:
+    why_agentic: "Continuous stirring required. Broth must be added gradually. Temperature management is critical - too hot = gluey, too cold = raw."
+    critical_moments:
+      - "Broth must be kept at simmer (not boil) the entire time"
+      - "Each ladle of broth added only when previous is absorbed (visual cue)"
+      - "Constant stirring - agent alerts if hands leave for >30 seconds"
+      - "Final butter/cheese added OFF heat"
+    parallel_tasks: ["maintain broth simmer", "stir risotto", "prep additions"]
+
+  deep_fry_tempura:
+    why_agentic: "Oil temperature is critical and invisible. Too cold = soggy, too hot = burnt/fire risk. Multiple small batches with rest periods."
+    critical_moments:
+      - "Oil reaches 170-180C (visual: shimmer, not smoke)"
+      - "Don't overcrowd (3-4 pieces max)"
+      - "Each batch: 2-3 minutes only"
+      - "Oil recovery time between batches"
+      - "SAFETY: smoke = too hot = fire risk"
+    parallel_tasks: ["maintain oil temp", "batter ingredients", "drain fried items"]
+
+  multi_course_dinner:
+    why_agentic: "Multiple dishes must be ready simultaneously. Oven + stovetop + prep all happening at once."
+    critical_moments:
+      - "Roast in oven (check at intervals, not constantly)"
+      - "Side dish 1 on stovetop (timed)"
+      - "Side dish 2 needs to start when roast has 15 min left"
+      - "Salad/cold dish prepped during downtime"
+    parallel_tasks: ["oven roast", "stovetop side 1", "stovetop side 2", "cold prep"]
+
+
+# ============================================================================
+# PHASE 1: INGREDIENT PREPARATION
+# ============================================================================
+# What happens BEFORE cooking starts. The agent should track
+# what's been prepped and what's still needed.
+
+ingredient_prep:
+
+  # ----- Axis: Produce/Protein Type -----
+  ingredient_types:
+    vegetables:
+      - onion
+      - garlic
+      - tomato
+      - bell_pepper
+      - carrot
+      - potato
+      - broccoli
+      - mushroom
+      - zucchini
+      - leafy_greens  # lettuce, spinach, herbs
+    proteins:
+      - chicken_breast
+      - steak
+      - fish_fillet
+      - shrimp
+      - eggs
+      - tofu
+    starches:
+      - dry_pasta
+      - rice_uncooked
+      - bread
+      - flour_measured
+    dairy_sauce:
+      - butter_block
+      - cheese_block
+      - cream
+      - sauce_jar
+
+  # ----- Axis: Preparation State -----
+  prep_states:
+    - whole_unwashed        # "whole tomato, uncut, on counter"
+    - washed                # "tomato rinsed, wet, on cutting board"
+    - peeled                # "potato with peels beside it, white exposed"
+    - halved                # "onion cut in half, layers visible"
+    - roughly_chopped       # "large irregular chunks of carrot"
+    - diced                 # "uniform small cubes of onion"
+    - minced                # "very finely chopped garlic, almost paste"
+    - julienned             # "thin matchstick strips of bell pepper"
+    - sliced_thin           # "thin rounds of zucchini"
+    - sliced_thick          # "thick coin-shaped potato slices"
+    - grated                # "shredded cheese/carrot on cutting board"
+    - measured_in_bowl      # "prepped ingredient in small prep bowl"
+    - marinating            # "protein in bowl with marinade, covered"
+
+  # ----- Axis: Cutting Board State -----
+  cutting_board_states:
+    - empty_clean
+    - single_ingredient_whole
+    - single_ingredient_partially_cut
+    - single_ingredient_fully_prepped
+    - multiple_ingredients_in_progress
+    - scraps_and_peels_present
+    - mise_en_place_complete  # all ingredients prepped in bowls
+
+  # ----- Axis: Knife/Hand Activity -----
+  hand_activity:
+    - no_hands_visible
+    - hands_holding_ingredient
+    - hands_cutting_actively    # knife in motion
+    - hands_chopping_rocking    # rocking motion with chef knife
+    - hands_peeling             # peeler or knife peeling
+    - hands_measuring           # holding measuring cup/spoon
+    - hands_mixing_bowl         # stirring/mixing in a bowl
+    - hands_transferring        # moving prepped ingredients to bowl/pan
+
+  # ----- Axis: Knife Safety -----
+  knife_safety:
+    safe:
+      - proper_claw_grip        # fingers curled, knuckles guide knife
+      - stable_cutting_board    # board on damp towel, not sliding
+      - knife_flat_on_board     # knife resting safely when not in use
+      - cutting_away_from_body
+    unsafe:
+      - flat_fingers_extended   # fingers flat, exposed to blade
+      - cutting_board_sliding   # board moving on wet counter
+      - knife_hanging_off_edge  # knife partially off counter edge
+      - knife_blade_up          # knife resting blade-up on counter
+      - wet_hands_on_knife      # slippery grip
+
+
+# ============================================================================
+# PHASE 2: COOKING STEPS
+# ============================================================================
+# What happens ON the stove/oven. The agent tracks cooking
+# progress, manages timers, and detects safety issues.
+
+cooking:
+
+  # ----- Axis: Cooking Method -----
+  methods:
+    boiling:
+      stages:
+        - cold_water_in_pot           # "clear still water, no bubbles"
+        - heating_small_bubbles       # "tiny bubbles forming on pot bottom"
+        - simmering                   # "gentle bubbles rising slowly, light steam"
+        - rolling_boil                # "vigorous large bubbles, significant steam"
+        - boil_over_starting          # "water rising to rim, about to spill"
+        - boil_over_active            # "water spilling over pot edges onto stove"
+      contents_variations:
+        - water_only
+        - water_with_pasta
+        - water_with_vegetables
+        - water_with_eggs
+        - stock_or_broth
+
+    frying_pan:
+      stages:
+        - empty_cold_pan              # "clean dry pan on burner, flame off"
+        - pan_heating_empty           # "empty pan on burner, flame visible"
+        - oil_added_cold              # "pool of oil in pan, still clear"
+        - oil_shimmering              # "oil rippling, first wisps of movement"
+        - oil_smoking                 # "visible smoke rising from oil, too hot"
+        - food_just_added             # "food hitting hot oil, sizzle/splash"
+        - food_browning_one_side      # "protein/veg browning, one side golden"
+        - food_needs_flipping         # "edges clearly cooked, center still raw"
+        - food_flipped                # "second side now down, first side golden"
+        - food_done                   # "evenly browned, cooked through"
+        - food_burning                # "dark spots, smoke, charring visible"
+      contents_variations:
+        - single_protein_piece
+        - multiple_protein_pieces
+        - vegetables_stir_fry
+        - eggs_frying
+        - pancakes
+
+    sauteing:
+      stages:
+        - butter_melting              # "butter chunk melting in pan, foaming"
+        - butter_foaming              # "butter fully melted, active foam"
+        - aromatics_sweating          # "onion/garlic turning translucent"
+        - vegetables_softening        # "vegetables losing rigidity, releasing moisture"
+        - caramelizing                # "golden brown color developing"
+        - sauce_added                 # "liquid added, sizzling and steaming"
+        - reducing                    # "sauce thickening, less liquid visible"
+
+    deep_frying:
+      stages:
+        - oil_cold_in_pot             # "deep pot with room-temp oil"
+        - oil_heating                 # "oil starting to shimmer in deep pot"
+        - oil_at_temp                 # "oil active, suitable for frying"
+        - oil_too_hot                 # "oil smoking, dangerously hot"
+        - food_submerged_bubbling     # "food in oil, vigorous bubbling"
+        - food_floating_golden        # "fried food floating, golden color"
+        - food_draining               # "food on wire rack/paper towel draining"
+
+    oven_baking:
+      stages:
+        - raw_in_tray                 # "unbaked item on baking sheet"
+        - rising                      # "bread/pastry expanding in oven"
+        - browning_top                # "golden top developing"
+        - done_golden                 # "evenly golden brown"
+        - overdone_dark               # "dark brown edges, approaching burnt"
+        - burnt                       # "black spots, smoke from oven"
+
+  # ----- Axis: Stovetop Layout -----
+  stove_configurations:
+    - single_pot_single_burner
+    - two_pots_two_burners
+    - pot_and_pan_side_by_side
+    - three_burners_active
+    - four_burners_all_active          # maximum chaos
+    - pot_on_burner_pan_on_trivet      # one active one resting
+
+  # ----- Axis: Steam/Smoke Levels -----
+  atmosphere:
+    - clear_no_steam                   # clean air
+    - light_steam_wisps                # gentle steam from one source
+    - moderate_steam                   # visible steam, still can see clearly
+    - heavy_steam_obscuring            # steam partially blocking camera view
+    - light_smoke                      # thin smoke, concerning
+    - heavy_smoke                      # thick smoke, dangerous
+    - steam_plus_smoke_mixed           # hard to distinguish
+
+
+# ============================================================================
+# PHASE 3: SAFETY SCENARIOS
+# ============================================================================
+# Dangerous situations the agent MUST detect and alert on.
+
+safety:
+
+  # ----- Fire/Heat Hazards -----
+  fire_heat:
+    - oil_reaching_smoke_point         # "smoke from oil surface, flash point risk"
+    - towel_near_open_flame            # "cloth/paper towel too close to burner"
+    - pot_handle_over_flame            # "handle positioned over adjacent burner"
+    - empty_pot_on_high_heat           # "dry pot on flame, no contents"
+    - plastic_container_near_heat      # "plastic tupperware near active burner"
+    - wooden_spoon_left_in_hot_pan     # "wooden utensil in very hot pan unattended"
+    - grease_splatter_on_stovetop      # "oil droplets on hot stove surface"
+
+  # ----- Burn Risks -----
+  burn_risks:
+    - reaching_over_steam              # "hand/arm passing through steam cloud"
+    - grabbing_hot_handle_no_mitt      # "bare hand reaching for pot handle"
+    - face_close_to_boiling_pot        # "person leaning over boiling pot"
+    - splashing_water_into_hot_oil     # "water droplets heading toward hot oil"
+    - removing_lid_toward_face         # "lifting pot lid with steam directed at face"
+
+  # ----- Cross Contamination -----
+  cross_contamination:
+    - raw_meat_on_vegetable_board      # "raw chicken on same board as cut vegetables"
+    - same_knife_meat_then_veg         # "knife used for raw meat now cutting lettuce"
+    - raw_meat_dripping_near_salad     # "raw protein package dripping near fresh produce"
+    - unwashed_hands_after_meat        # "touched raw meat then touching bread/produce"
+
+  # ----- Unattended Cooking -----
+  unattended:
+    - active_flame_no_person_30s       # "burner on, no one visible for 30 seconds"
+    - active_flame_no_person_2min      # "burner on, no one visible for 2 minutes"
+    - active_flame_no_person_5min      # "burner on, no one visible for 5+ minutes"
+    - boiling_pot_no_supervision       # "vigorous boil, no one watching"
+    - frying_unattended                # "oil in pan on heat, no one present"
+    - oven_on_forgotten                # "oven light on, no activity in kitchen"
+
+  # ----- Spill/Slip Hazards -----
+  spills:
+    - water_on_floor                   # "puddle near stove/counter base"
+    - oil_spill_on_counter             # "oil pooling on counter surface"
+    - boil_over_on_stove               # "water/liquid on hot stove surface"
+    - broken_glass_on_floor            # "shattered glass near cooking area"
+    - food_debris_on_floor             # "dropped food creating slip hazard"
+
+
+# ============================================================================
+# COMBINATORIC AXES FOR IMAGE GENERATION
+# ============================================================================
+# Combine one from each relevant axis to generate a unique scene.
+# Not all combinations are valid — use the filter rules below.
+
+generation_axes:
+
+  camera_angle:
+    - top_down_overhead                # directly above stove/counter
+    - top_down_angled_30deg            # slight angle from above
+    - front_facing_counter_height      # eye level with counter
+    - front_facing_chest_height        # slightly above counter
+
+  lighting:
+    - bright_overhead_fluorescent
+    - warm_natural_window_light
+    - dim_evening_ambient
+    - mixed_overhead_plus_under_cabinet
+    - harsh_single_source_with_shadows
+
+  kitchen_style:
+    - modern_white_clean
+    - rustic_wood_and_stone
+    - small_apartment_cramped
+    - professional_stainless_steel
+    - average_home_kitchen
+
+  clutter_level:
+    - minimal_clean_organized          # only essential items visible
+    - moderate_realistic               # some extra items, lived-in feel
+    - busy_cluttered                   # many items, spice bottles, utensils
+
+  person_presence:
+    - hands_only_in_frame              # just hands visible working
+    - torso_and_hands                  # person visible waist-up
+    - person_absent                    # no person in frame
+    - person_turning_away              # person visible but facing away
+    - two_people_cooking               # collaborative cooking
+
+  time_of_day:
+    - morning_breakfast_light
+    - midday_lunch
+    - evening_dinner
+    - night_artificial_light
+
+
+# ============================================================================
+# VALID COMBINATION RULES
+# ============================================================================
+# Not every combination makes sense. These rules filter invalid combos.
+
+combination_rules:
+  - "If camera_angle is top_down_*, zone must be stove_zone"
+  - "If camera_angle is front_facing_*, zone can be counter_zone or stove_zone"
+  - "If safety.unattended, person_presence must be person_absent"
+  - "If hand_activity has hands_*, person_presence must include hands"
+  - "If cooking.deep_frying, clutter_level should not be busy_cluttered (safety)"
+  - "If atmosphere is heavy_smoke, safety.fire_heat should be included"
+  - "If knife_safety.unsafe, hand_activity must be hands_cutting_actively or hands_chopping_rocking"
+
+
+# ============================================================================
+# PROMPT TEMPLATE
+# ============================================================================
+# Use this template to construct the actual image generation prompt
+# by filling in selections from the axes above.
+
+prompt_template: >
+  {camera_angle} photo of a {kitchen_style} kitchen,
+  {cooking_state_description},
+  {person_description},
+  {atmosphere_description},
+  {lighting} lighting,
+  {clutter_level} counter,
+  realistic photography, sharp detail, 8k
+
+negative_prompt: >
+  cartoon, anime, illustration, drawing, painting, CGI, render,
+  low quality, blurry, text, watermark, logo, distorted hands,
+  extra fingers, deformed, unrealistic colors
