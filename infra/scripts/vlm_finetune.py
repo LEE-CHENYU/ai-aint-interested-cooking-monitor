@@ -89,12 +89,12 @@ def train(args):
     # ── LoRA ─────────────────────────────────────────────────────────────────
     model = FastVisionModel.get_peft_model(
         model,
-        finetune_vision_layers=False,
+        finetune_vision_layers=args.finetune_vision,
         finetune_language_layers=True,
         finetune_attention_modules=True,
         finetune_mlp_modules=True,
-        r=16,
-        lora_alpha=16,
+        r=args.lora_rank,
+        lora_alpha=args.lora_rank,
         lora_dropout=0,
         use_gradient_checkpointing="unsloth",
         random_state=3407,
@@ -115,11 +115,12 @@ def train(args):
             ]},
         ]}
 
-    # Oversample failures 2x for balance
+    # Oversample failures 3x for balance
     balanced = []
     for s in samples:
         balanced.append(s)
         if s["is_failure"]:
+            balanced.append(s)
             balanced.append(s)
     print(f"Balanced: {len(balanced)} samples")
 
@@ -144,6 +145,8 @@ def train(args):
             learning_rate=args.lr,
             warmup_steps=5,
             logging_steps=1,
+            save_strategy="epoch",
+            save_total_limit=3,
             fp16=not torch.cuda.is_bf16_supported(),
             bf16=torch.cuda.is_bf16_supported(),
             optim="adamw_8bit",
@@ -254,9 +257,23 @@ def train(args):
     print(f"  State:  25% -> {correct_state/total*100:.0f}%")
     print(f"  FP:     9   -> {fp}")
 
+    # ── Save ─────────────────────────────────────────────────────────────────
     model.save_pretrained("/tmp/vlm_ft_lora")
     tokenizer.save_pretrained("/tmp/vlm_ft_lora")
     print(f"\nLoRA saved: /tmp/vlm_ft_lora")
+
+    # Merge LoRA into base weights for fast inference
+    print("Merging LoRA into base model (16-bit)...")
+    model.save_pretrained_merged("/tmp/vlm_ft_merged", tokenizer, save_method="merged_16bit")
+    print(f"Merged model saved: /tmp/vlm_ft_merged")
+
+    # Export GGUF for on-device deployment (Mac Air)
+    try:
+        print("Exporting GGUF (q4_k_m) for on-device deployment...")
+        model.save_pretrained_gguf("/tmp/vlm_ft_gguf", tokenizer, quantization_method="q4_k_m")
+        print(f"GGUF saved: /tmp/vlm_ft_gguf")
+    except Exception as e:
+        print(f"GGUF export failed (non-critical): {e}")
 
     with open(img_dir / "vlm_ft_results.json", "w") as f:
         json.dump(results, f, indent=2)
@@ -268,6 +285,8 @@ def main():
     p.add_argument("--model", default="unsloth/gemma-3-4b-it")
     p.add_argument("--epochs", type=int, default=5)
     p.add_argument("--lr", type=float, default=2e-4)
+    p.add_argument("--lora-rank", type=int, default=32)
+    p.add_argument("--finetune-vision", action="store_true", help="Also fine-tune vision layers")
     args = p.parse_args()
     train(args)
 

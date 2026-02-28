@@ -1,0 +1,116 @@
+# Gemini Grid Prompts - Paste into Gemini to generate 6×6 grid images
+# Each grid = 6 dishes (rows) × 6 cooking states (columns)
+# Need 3 grids total (grid1 already done, need grid2 and grid3)
+
+# ============================================================================
+# GRID 2 - Different camera angle and lighting (slightly angled, warm lighting)
+# ============================================================================
+
+Generate a single 6×6 grid image of cooking scenes on a gas stove. Each cell is a separate photo. Rows are different dishes, columns are cooking progression stages. Slightly angled overhead camera, warm kitchen lighting.
+
+ROW 1 - PASTA (large stainless steel pot):
+Col 1: Dry spaghetti sitting next to pot of cold clear water on stove, burner off
+Col 2: Pasta in water with small gentle bubbles, light steam rising
+Col 3: Vigorous rolling boil with pasta swirling, large bubbles, lots of steam
+Col 4: DISASTER - starchy white foam OVERFLOWING the pot rim, water spilling onto stovetop, dripping down sides
+Col 5: Perfectly cooked pasta being lifted with tongs, steam rising
+Col 6: DISASTER - mushy grey overcooked pasta clumped together in murky water
+
+ROW 2 - RAMEN (black pot with broth):
+Col 1: Cold tonkotsu broth with fat layer, ramen packet beside pot, no heat
+Col 2: Milky broth gently simmering, noodles curling, small bubbles
+Col 3: Broth at full boil, noodles floating, foam at edges, heavy steam
+Col 4: DISASTER - milky broth OVERFLOWING pot onto stovetop, white liquid spilling everywhere
+Col 5: Beautiful ramen with egg, chashu, green onions, nori in bowl
+Col 6: DISASTER - bloated disintegrating noodles in cloudy murky broth
+
+ROW 3 - MAPO TOFU (carbon steel wok):
+Col 1: Cubed white tofu in cold water in wok, doubanjiang paste in small bowl nearby
+Col 2: Red chili oil sauce simmering with intact tofu cubes, small bubbles
+Col 3: Sauce at vigorous boil, red oil splashing, tofu bouncing
+Col 4: DISASTER - red spicy sauce OVERFLOWING wok rim, chili oil spilling onto stovetop
+Col 5: Beautiful finished mapo tofu, glossy red sauce, green scallion garnish
+Col 6: DISASTER - tofu dissolved into mushy brown paste, sauce separated
+
+ROW 4 - CURRY (heavy dutch oven):
+Col 1: Raw vegetables and chicken in cold water, curry roux blocks beside pot
+Col 2: Golden curry simmering with potato and carrot chunks, small bubbles
+Col 3: Thick curry splattering at full boil, vegetables bouncing
+Col 4: DISASTER - thick brown curry OVERFLOWING pot onto stovetop, sticky sauce dripping
+Col 5: Beautiful thick golden Japanese curry, perfectly cooked vegetables
+Col 6: DISASTER - burnt curry stuck to bottom, black charred patches visible
+
+ROW 5 - SOUP (stainless steel stock pot):
+Col 1: Clear cold water with raw chicken bones and vegetables
+Col 2: Golden soup gently simmering, herbs floating, clear broth
+Col 3: Soup at rolling boil, turbulent surface, foam and scum rising
+Col 4: DISASTER - soup OVERFLOWING pot onto stovetop, broth with vegetables spilling
+Col 5: Beautiful clear golden chicken soup, fresh herbs floating
+Col 6: DISASTER - murky grey cloudy soup with disintegrated mushy vegetables
+
+ROW 6 - RICE (medium saucepan):
+Col 1: Dry white rice grains in saucepan with cold water, glass lid beside
+Col 2: Rice absorbing water at gentle simmer, small bubbles at edges
+Col 3: Starchy white foam bubbling up aggressively from rice water
+Col 4: DISASTER - starchy white foam OVERFLOWING saucepan onto stovetop
+Col 5: Perfectly fluffy white rice, each grain separate, steam rising
+Col 6: DISASTER - mushy sticky rice with burnt brown crust at bottom
+
+Make it photorealistic, each cell clearly separated. Make the DISASTER columns (4 and 6) visually dramatic and obviously different from the normal columns.
+
+
+# ============================================================================
+# GRID 3 - Night kitchen, different pot styles, more dramatic failures
+# ============================================================================
+
+Generate a single 6×6 grid image of cooking scenes on a gas stove at night. Each cell is a separate photo. Rows are different dishes, columns are cooking progression. Night kitchen with overhead light, darker ambient.
+
+ROW 1 - PASTA (copper pot):
+Col 1: Dry penne pasta and cold water in copper pot, burner off, night kitchen
+Col 2: Penne in gently simmering water, small bubbles, soft steam
+Col 3: Vigorous boil with penne tumbling, big bubbles, steam cloud
+Col 4: EMERGENCY - white starchy water cascading over pot rim onto burner, flame sputtering from water contact, messy
+Col 5: Al dente penne drained in colander over pot, steam rising
+Col 6: RUINED - blackened burnt pasta stuck to bottom, smoke visible, charred
+
+ROW 2 - RAMEN (red enamel pot):
+Col 1: Cold dashi broth, dried noodle brick floating, scallions on cutting board
+Col 2: Broth simmering with noodles softening, gentle bubbles
+Col 3: Full rolling boil, noodles swirling rapidly, foam rising
+Col 4: EMERGENCY - dark broth overflowing red pot, liquid pooling on stovetop around burner
+Col 5: Perfect ramen in pot with soft egg, bamboo shoots, nori
+Col 6: RUINED - noodles dissolved into thick starchy paste, unrecognizable
+
+ROW 3 - MAPO TOFU (cast iron skillet):
+Col 1: Fresh tofu cubes on plate, cold oil in cast iron skillet
+Col 2: Tofu and red sauce gently bubbling in skillet
+Col 3: Sauce boiling vigorously, oil splattering, steam rising
+Col 4: EMERGENCY - red oily sauce spilling over skillet edge onto stovetop, chili oil spreading
+Col 5: Perfect mapo tofu in skillet, vibrant red with green garnish
+Col 6: RUINED - completely charred black bottom, tofu crumbled to mush
+
+ROW 4 - CURRY (large ceramic pot):
+Col 1: Chopped onions, potatoes, carrots raw in pot with water
+Col 2: Curry sauce thickening, vegetables softening, gentle simmer
+Col 3: Thick curry bubbling and popping aggressively
+Col 4: EMERGENCY - thick curry overflowing ceramic pot, brown sauce dripping down sides onto stove
+Col 5: Rich dark curry in pot, vegetables perfectly tender
+Col 6: RUINED - dried out curry with thick black crust, scorched bottom visible
+
+ROW 5 - SOUP (glass lid pot):
+Col 1: Raw ingredients in clear water, glass lid resting beside pot
+Col 2: Clear broth simmering, vegetables visible through glass lid
+Col 3: Lid rattling from boiling, condensation, steam escaping
+Col 4: EMERGENCY - lid pushed off by boiling liquid, soup overflowing sides
+Col 5: Clear amber soup, perfectly tender vegetables floating
+Col 6: RUINED - dark grey murky liquid, vegetables completely dissolved
+
+ROW 6 - RICE (rice cooker style pot):
+Col 1: Measured rice with cold water in small heavy pot
+Col 2: Water absorbed halfway, rice expanding, tiny bubbles
+Col 3: Starchy foam erupting from pot aggressively
+Col 4: EMERGENCY - white starchy foam overflowing small pot, rice water spreading on stove
+Col 5: Perfect individual rice grains, fluffy and steaming
+Col 6: RUINED - solid mass of burnt rice stuck to pot, brown-black crust
+
+Photorealistic night kitchen setting. Make columns 4 and 6 visually alarming - obvious liquid overflow and burnt/ruined food.
