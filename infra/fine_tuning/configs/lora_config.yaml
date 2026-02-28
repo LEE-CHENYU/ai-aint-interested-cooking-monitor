@@ -1,21 +1,32 @@
-# LoRA fine-tuning configuration
+# Unsloth LoRA fine-tuning configuration
+# Optimized for kitchen policy model (state -> tool calls)
 
 model:
-  name: "google/functiongemma-270m-it"  # or google/gemma-3-4b-it
-  quantization: "4bit"                   # 4bit QLoRA for memory efficiency
+  # FunctionGemma 270M: tiny, fast, purpose-built for function calling
+  # Gemma 3 4B:  more capable, needs ~10GB VRAM with QLoRA
+  # Gemma 3 12B: most capable, needs ~20GB VRAM with QLoRA
+  name: "unsloth/gemma-3-4b-it"
+  quantization: "4bit"  # 4bit QLoRA via Unsloth (60% less VRAM)
 
 lora:
   r: 16
   alpha: 32
-  dropout: 0.05
-  target_modules: ["q_proj", "v_proj", "k_proj", "o_proj"]
+  dropout: 0.0  # Unsloth recommends 0 dropout for speed
+  target_modules:
+    - q_proj
+    - k_proj
+    - v_proj
+    - o_proj
+    - gate_proj
+    - up_proj
+    - down_proj
 
 training:
   epochs: 3
   batch_size: 4
   learning_rate: 2.0e-4
   warmup_steps: 10
-  max_seq_length: 512
+  max_seq_length: 1024
   gradient_accumulation_steps: 4
 
 output:

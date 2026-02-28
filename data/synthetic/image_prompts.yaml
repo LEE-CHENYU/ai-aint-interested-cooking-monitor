@@ -1,0 +1,121 @@
+# Synthetic image generation prompts
+# Organized by use case, camera angle, and kitchen event
+# Each prompt generates a base image; variations are created via img2img
+
+# ========================================
+# USE CASE 1: Procedure Compliance
+# ========================================
+procedure_compliance:
+  stove_zone:
+    camera_angle: top_view
+    scenes:
+      - id: water_cold
+        prompt: "Top-down overhead photo of a kitchen stove, stainless steel pot filled with clear still water on a gas burner, burner flame visible, no steam, clean kitchen counter around the stove, realistic lighting"
+        label: { water_state: "not_hot", pot_present: true, steam_level: "none" }
+        variations: 10
+
+      - id: water_simmering
+        prompt: "Top-down overhead photo of a kitchen stove, stainless steel pot with water showing small bubbles at the bottom, light wisps of steam rising, gas burner on medium heat, realistic kitchen lighting"
+        label: { water_state: "simmering", pot_present: true, steam_level: "low" }
+        variations: 10
+
+      - id: water_boiling
+        prompt: "Top-down overhead photo of a kitchen stove, stainless steel pot with rapidly boiling water, large rolling bubbles, visible steam cloud rising, gas burner on high heat, realistic kitchen"
+        label: { water_state: "boiling", pot_present: true, steam_level: "high" }
+        variations: 10
+
+      - id: pasta_in_pot
+        prompt: "Top-down overhead photo of a kitchen stove, stainless steel pot with boiling water and spaghetti pasta submerged, steam rising, gas burner on, realistic kitchen lighting"
+        label: { water_state: "boiling", pot_present: true, pasta_added: true }
+        variations: 8
+
+      - id: empty_stove
+        prompt: "Top-down overhead photo of a clean kitchen stove, no pots or pans, gas burners off, clean stove grate, kitchen counter visible around edges, bright kitchen lighting"
+        label: { water_state: null, pot_present: false, steam_level: "none" }
+        variations: 5
+
+      - id: sauce_pan_cooking
+        prompt: "Top-down overhead photo of a kitchen stove, small saucepan with red tomato sauce simmering, wooden spoon resting on edge, second burner with pot of water, realistic kitchen"
+        label: { sauce_cooking: true, pot_present: true }
+        variations: 8
+
+  counter_zone:
+    camera_angle: front_view
+    scenes:
+      - id: chopping_vegetables
+        prompt: "Front-facing photo of kitchen counter, person's hands actively chopping onions on a wooden cutting board, knife in hand, diced vegetables visible, kitchen background blurred"
+        label: { hands_active: true, knife_in_use: true, ingredient_present: true }
+        variations: 10
+
+      - id: ingredients_laid_out
+        prompt: "Front-facing photo of kitchen counter, ingredients laid out on cutting board, tomatoes garlic onions pasta box, no hands visible, clean prep area, bright kitchen lighting"
+        label: { hands_active: false, knife_in_use: false, ingredient_present: true }
+        variations: 8
+
+      - id: empty_counter
+        prompt: "Front-facing photo of clean kitchen counter, empty wooden cutting board, no ingredients or utensils, clean surface, kitchen appliances in background"
+        label: { hands_active: false, knife_in_use: false, ingredient_present: false }
+        variations: 5
+
+# ========================================
+# USE CASE 2: Safety Compliance
+# ========================================
+safety_compliance:
+  stove_zone:
+    camera_angle: top_view
+    scenes:
+      - id: smoke_detected
+        prompt: "Top-down overhead photo of a kitchen stove, visible smoke rising from a pan, burnt residue visible, hazy atmosphere above the stove, realistic emergency kitchen scene"
+        label: { smoke_suspected: true, severity: "critical" }
+        variations: 10
+
+      - id: boil_over
+        prompt: "Top-down overhead photo of a kitchen stove, pot of water boiling over the edges, water spilling onto the stove grate and burner, steam and splashing, messy stove"
+        label: { water_state: "boil_over_risk", steam_level: "high", severity: "high" }
+        variations: 8
+
+      - id: unattended_stove_active
+        prompt: "Top-down overhead photo of a kitchen stove, pot on burner with flame on, water simmering, no person visible, no hands in frame, empty kitchen, slight steam"
+        label: { pot_present: true, person_present: false, severity: "high" }
+        variations: 10
+
+      - id: safe_cooking
+        prompt: "Top-down overhead photo of a kitchen stove, pot on burner with controlled simmer, person's hand holding wooden spoon stirring, organized cooking, clean stove"
+        label: { pot_present: true, person_present: true, severity: "none" }
+        variations: 8
+
+  counter_zone:
+    camera_angle: front_view
+    scenes:
+      - id: unsafe_knife_handling
+        prompt: "Front-facing photo of kitchen counter, person's hands using large chef knife with improper grip, fingers extended flat, cutting vegetables, unsafe technique"
+        label: { knife_in_use: true, knife_safety: "unsafe", severity: "low" }
+        variations: 8
+
+      - id: safe_knife_handling
+        prompt: "Front-facing photo of kitchen counter, person's hands using chef knife with proper claw grip, fingers curled safely, cutting onions on stable cutting board"
+        label: { knife_in_use: true, knife_safety: "safe", severity: "none" }
+        variations: 8
+
+# ========================================
+# Variation parameters for img2img
+# ========================================
+variation_settings:
+  # These control how variations are generated from base images
+  strength_range: [0.3, 0.6]  # How much to change from the base (0=identical, 1=completely new)
+  guidance_scale: 7.5
+  negative_prompt: "cartoon, anime, drawing, painting, illustration, low quality, blurry, text, watermark, logo"
+  modifiers:
+    lighting:
+      - "bright overhead fluorescent lighting"
+      - "warm natural daylight from window"
+      - "dim evening kitchen lighting"
+      - "harsh direct lighting with shadows"
+    angle_shift:
+      - "slightly tilted angle"
+      - "straight overhead"
+      - "slight perspective shift"
+    clutter:
+      - "clean organized kitchen"
+      - "slightly messy kitchen with utensils"
+      - "busy kitchen with multiple items"
