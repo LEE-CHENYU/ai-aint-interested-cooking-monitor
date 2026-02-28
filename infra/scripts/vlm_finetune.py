@@ -68,7 +68,9 @@ def build_samples(img_dir):
 def train(args):
     from unsloth import FastVisionModel
     from unsloth.chat_templates import get_chat_template
+    from unsloth.trainer import UnslothVisionDataCollator
     from trl import SFTTrainer, SFTConfig
+    from transformers import AutoProcessor
 
     img_dir = Path(args.image_dir)
     samples = build_samples(img_dir)
@@ -81,6 +83,7 @@ def train(args):
         max_seq_length=1024,
         load_in_4bit=True,
     )
+    processor = AutoProcessor.from_pretrained(args.model)
     print(f"Loaded in {time.time() - t0:.1f}s | VRAM: {torch.cuda.memory_allocated() / 1e9:.1f} GB")
 
     # ── LoRA ─────────────────────────────────────────────────────────────────
@@ -130,13 +133,14 @@ def train(args):
 
     trainer = SFTTrainer(
         model=model,
-        tokenizer=tokenizer,
+        processing_class=processor.tokenizer,
+        data_collator=UnslothVisionDataCollator(model, processor),
         train_dataset=dataset,
         args=SFTConfig(
             output_dir="/tmp/vlm_ft_output",
             num_train_epochs=args.epochs,
-            per_device_train_batch_size=2,
-            gradient_accumulation_steps=2,
+            per_device_train_batch_size=1,
+            gradient_accumulation_steps=4,
             learning_rate=args.lr,
             warmup_steps=5,
             logging_steps=1,

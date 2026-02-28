@@ -1,13 +1,67 @@
-# TASK 8 — NEXT STEP IN SEQUENCE (current step done, awaiting next action)
-# Visual signal: completed prep/step visible, next ingredient/tool staged
-# NOTE: primarily logic-based, images show visual cues of step transitions
+# ============================================================================
+# TASK 8 — NEXT STEP IN SIMPLE SEQUENCE
+# 6 recipes × 6 step phases = 36 images
+# Recipes: pasta, stir-fry, soup, curry, rice, ramen
+# Phases: 1_prep → 2_mid_step → 3_almost → 4_STEP_DONE → 5_NEXT_STAGED → 6_TRANSITION
+# Camera: top-down overhead, consistent framing
+# ============================================================================
 
-yes_pasta_drain    | Top-down overhead photo of kitchen counter and stove, pot of cooked pasta on burner with flame off, colander placed in sink ready to drain, pasta fully cooked and ready, next step is draining, realistic kitchen, sharp detail, natural lighting
-yes_onion_done     | Top-down overhead photo of cutting board on counter beside stove, pile of neatly diced onions on cutting board, knife set aside, empty hot wok on stove with oil shimmering, onions ready to go into wok, next step is frying, realistic kitchen, sharp detail, natural lighting
-yes_sauce_ready    | Top-down overhead photo of stove and counter, cooked drained pasta in pot on burner, separate pan with finished sauce beside it, tongs resting on counter, ready to combine pasta and sauce, next step is mixing, realistic kitchen, sharp detail, natural lighting
+# FORMAT: {recipe}/{phase} | {prompt}
 
-no_mid_chop        | Top-down overhead photo of cutting board on counter, human hands actively chopping vegetables with knife mid-cut, partially chopped vegetables, still in progress, current step not yet done, realistic kitchen, sharp detail, natural lighting
-no_mid_stir        | Top-down overhead photo of wok on gas stove, human hands actively stirring food with spatula, food in motion mid-toss, actively cooking, current step in progress not completed, realistic kitchen, sharp detail, natural lighting
-no_mid_boil        | Top-down overhead photo of pot on gas stove, pasta just added to boiling water still stiff and uncooked, timer showing 8 minutes remaining, still in current cooking step, not ready for next step, realistic kitchen, sharp detail, natural lighting
+# ── PASTA RECIPE ───────────────────────────────────────────────────────────
+
+pasta/1_prep         | Top-down overhead photo of kitchen counter and stove, raw spaghetti bundle on counter, pot of cold water on unlit burner, salt container nearby, ingredients being gathered, recipe not yet started, preparation phase, realistic kitchen, sharp detail, natural lighting
+pasta/2_mid_step     | Top-down overhead photo of pot on gas stove burner, spaghetti just added to boiling water, pasta stiff and sticking up from pot, still rigid and uncooked, actively in boiling step, mid-step not done yet, realistic kitchen, sharp detail, natural lighting
+pasta/3_almost       | Top-down overhead photo of pot on gas stove burner, spaghetti softened and submerged in boiling water, pasta bending and curling, nearly al dente, current step almost complete but not quite done, realistic kitchen, sharp detail, natural lighting
+pasta/4_STEP_DONE    | Top-down overhead photo of pot on gas stove burner, spaghetti fully cooked al dente in pot, flame turned off, pasta tender and ready, current step completed, waiting for next action, needs to be drained, realistic kitchen, sharp detail, natural lighting
+pasta/5_NEXT_STAGED  | Top-down overhead photo of kitchen counter and stove, cooked pasta in pot with flame off, colander placed in sink ready to receive pasta, tongs on counter, next step clearly staged and ready, drain setup prepared, realistic kitchen, sharp detail, natural lighting
+pasta/6_TRANSITION   | Top-down overhead photo of kitchen counter and stove, cooked pasta being lifted from pot with tongs moving toward colander in sink, mid-transfer between steps, transitioning from boiling step to draining step, realistic kitchen, sharp detail, natural lighting
+
+# ── STIR-FRY RECIPE ────────────────────────────────────────────────────────
+
+stirfry/1_prep         | Top-down overhead photo of kitchen counter beside stove, vegetables neatly sliced in separate piles on cutting board, empty wok on stove burner unlit, oil bottle nearby, mise en place preparation, not yet started cooking, realistic kitchen, sharp detail, natural lighting
+stirfry/2_mid_step     | Top-down overhead photo of wok on gas stove burner with high flame, aromatics garlic and ginger sizzling in oil, just beginning to release fragrance, actively frying aromatics step, mid-step in progress, realistic kitchen, sharp detail, natural lighting
+stirfry/3_almost       | Top-down overhead photo of wok on gas stove burner, aromatics golden and fragrant, nearly done blooming, about to be ready for vegetables to be added, current step almost complete, realistic kitchen, sharp detail, natural lighting
+stirfry/4_STEP_DONE    | Top-down overhead photo of wok on gas stove burner, aromatics perfectly golden and fragrant in oil, blooming step done, wok ready for next ingredient, current step completed, waiting for vegetables to be added, realistic kitchen, sharp detail, natural lighting
+stirfry/5_NEXT_STAGED  | Top-down overhead photo of wok on gas stove burner with golden aromatics done, bowl of prepped raw vegetables positioned right beside wok ready to toss in, next step clearly staged, ready to add vegetables, realistic kitchen, sharp detail, natural lighting
+stirfry/6_TRANSITION   | Top-down overhead photo of wok on gas stove burner, raw vegetables being tipped from bowl into hot wok with golden aromatics, vegetables mid-pour into wok, transitioning from aromatics step to vegetables step, realistic kitchen, sharp detail, natural lighting
+
+# ── SOUP RECIPE ────────────────────────────────────────────────────────────
+
+soup/1_prep         | Top-down overhead photo of kitchen counter and stove, raw chicken pieces and whole vegetables on cutting board, large empty stock pot on unlit burner, water pitcher nearby, gathering ingredients, preparation phase, realistic kitchen, sharp detail, natural lighting
+soup/2_mid_step     | Top-down overhead photo of stock pot on gas stove burner, chicken and vegetables in water coming to a boil, scum forming on surface, actively in initial boiling step, mid-step skimming needed, realistic kitchen, sharp detail, natural lighting
+soup/3_almost       | Top-down overhead photo of stock pot on gas stove burner, soup simmered for a while, broth turning golden, vegetables softened but chicken still needs more time, almost done simmering but not quite, realistic kitchen, sharp detail, natural lighting
+soup/4_STEP_DONE    | Top-down overhead photo of stock pot on gas stove burner, rich golden chicken soup fully simmered, chicken tender falling off bone, vegetables soft, simmering step completed, broth ready for next step, realistic kitchen, sharp detail, natural lighting
+soup/5_NEXT_STAGED  | Top-down overhead photo of stock pot on gas stove burner with finished soup, fine mesh strainer placed over large bowl beside pot, ready to strain broth, next step clearly staged and prepared, realistic kitchen, sharp detail, natural lighting
+soup/6_TRANSITION   | Top-down overhead photo of kitchen counter and stove, soup being poured through strainer into bowl, golden broth flowing through mesh, solids catching in strainer, transitioning from simmer step to straining step, realistic kitchen, sharp detail, natural lighting
+
+# ── CURRY RECIPE ───────────────────────────────────────────────────────────
+
+curry/1_prep         | Top-down overhead photo of kitchen counter and stove, raw vegetables chopped in piles on cutting board, curry roux blocks in package, empty dutch oven on unlit burner, ingredients being gathered, prep phase, realistic kitchen, sharp detail, natural lighting
+curry/2_mid_step     | Top-down overhead photo of dutch oven on gas stove burner, onions being sauteed in pot, translucent and softening, actively cooking down onions step, mid-step in progress, not done yet, realistic kitchen, sharp detail, natural lighting
+curry/3_almost       | Top-down overhead photo of dutch oven on gas stove burner, onions nearly caramelized to golden, almost done with saute step, just a bit more cooking needed, current step nearly complete, realistic kitchen, sharp detail, natural lighting
+curry/4_STEP_DONE    | Top-down overhead photo of dutch oven on gas stove burner, onions perfectly caramelized golden brown in pot, saute step completed, onions ready for next ingredients to be added, current step done, realistic kitchen, sharp detail, natural lighting
+curry/5_NEXT_STAGED  | Top-down overhead photo of dutch oven on gas stove burner with caramelized onions, bowl of chopped potatoes carrots and meat placed beside pot ready to add, next step clearly staged, ingredients prepared and waiting, realistic kitchen, sharp detail, natural lighting
+curry/6_TRANSITION   | Top-down overhead photo of dutch oven on gas stove burner, chopped vegetables and meat being added into pot with caramelized onions, ingredients mid-pour from bowl into pot, transitioning from saute step to simmering step, realistic kitchen, sharp detail, natural lighting
+
+# ── RICE RECIPE ────────────────────────────────────────────────────────────
+
+rice/1_prep         | Top-down overhead photo of kitchen counter and stove, dry rice grains in measuring cup, empty saucepan on unlit burner, bowl of water for rinsing beside pot, preparation phase before cooking, realistic kitchen, sharp detail, natural lighting
+rice/2_mid_step     | Top-down overhead photo of saucepan on gas stove burner, rice and water at rolling boil, starchy foam bubbling, lid resting beside pot, actively in boiling step, mid-step in progress, realistic kitchen, sharp detail, natural lighting
+rice/3_almost       | Top-down overhead photo of saucepan on gas stove burner with low flame, rice absorbing last of water, small steam holes forming in rice surface, nearly done absorbing, current step almost complete, realistic kitchen, sharp detail, natural lighting
+rice/4_STEP_DONE    | Top-down overhead photo of saucepan on gas stove burner, flame just turned off, rice with all water absorbed, steam holes visible, absorption step completed, rice needs to rest and steam, current step done, realistic kitchen, sharp detail, natural lighting
+rice/5_NEXT_STAGED  | Top-down overhead photo of saucepan on gas stove burner flame off, cooked rice in pot, glass lid placed beside pot ready to cover for steaming rest, next step clearly staged, lid ready to go on, realistic kitchen, sharp detail, natural lighting
+rice/6_TRANSITION   | Top-down overhead photo of saucepan on gas stove burner, hand placing glass lid onto pot of cooked rice to begin resting phase, lid mid-placement, transitioning from cooking step to steaming rest step, realistic kitchen, sharp detail, natural lighting
+
+# ── RAMEN RECIPE ───────────────────────────────────────────────────────────
+
+ramen/1_prep         | Top-down overhead photo of kitchen counter and stove, ramen noodle packets on counter, pot of broth on unlit burner, toppings in small bowls nearby eggs scallions nori, ingredients gathered, preparation phase, realistic kitchen, sharp detail, natural lighting
+ramen/2_mid_step     | Top-down overhead photo of pot on gas stove burner, ramen noodles just dropped into boiling broth, noodles stiff and clumped together, actively boiling noodles step, mid-step noodles not yet loosened, realistic kitchen, sharp detail, natural lighting
+ramen/3_almost       | Top-down overhead photo of pot on gas stove burner, ramen noodles nearly cooked in broth, noodles loosened and swirling, almost al dente, current step nearly complete, needs just a bit more time, realistic kitchen, sharp detail, natural lighting
+ramen/4_STEP_DONE    | Top-down overhead photo of pot on gas stove burner, ramen noodles perfectly cooked in rich broth, noodles tender with good texture, flame lowered, noodle cooking step completed, ready to be assembled in bowl, realistic kitchen, sharp detail, natural lighting
+ramen/5_NEXT_STAGED  | Top-down overhead photo of pot on gas stove burner with cooked ramen, empty serving bowl placed beside pot, toppings arranged in small bowls ready to assemble, soft boiled egg halved, next step clearly staged for plating, realistic kitchen, sharp detail, natural lighting
+ramen/6_TRANSITION   | Top-down overhead photo of kitchen counter and stove, ramen noodles being lifted with chopsticks from pot and placed into serving bowl, noodles mid-transfer, broth ladle beside bowl, transitioning from cooking step to assembly step, realistic kitchen, sharp detail, natural lighting
+
+# ── NEGATIVE PROMPT ────────────────────────────────────────────────────────
 
 NEGATIVE: cartoon, anime, illustration, drawing, painting, CGI, render, low quality, blurry, text, watermark, logo, distorted, extra objects, unrealistic colors, side angle, diagonal view

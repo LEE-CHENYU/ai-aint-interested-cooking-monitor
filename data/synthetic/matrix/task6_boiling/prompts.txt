@@ -1,12 +1,67 @@
+# ============================================================================
 # TASK 6 — WATER BOILING VS NOT
-# Visual signal: large rolling bubbles + steam vs still flat surface
+# 6 vessels × 6 boil states = 36 images
+# Vessels: stainless pot, saucepan, stock pot, glass pot, dutch oven, wok
+# States: 1_cold → 2_warm → 3_pre_simmer → 4_simmer → 5_BOIL → 6_RAPID_BOIL
+# Camera: top-down overhead, consistent framing
+# ============================================================================
 
-yes_rolling     | Top-down overhead photo of stainless steel pot on gas stove, water at vigorous rolling boil, large bubbles breaking surface continuously, significant white steam rising, turbulent churning water surface, realistic kitchen, sharp detail, natural lighting
-yes_foam        | Top-down overhead photo of saucepan on gas stove, water at full boil with starchy white foam forming at surface, aggressive bubbling, steam obscuring view slightly, water clearly at 100 degrees, realistic kitchen, sharp detail, natural lighting
-yes_heavy       | Top-down overhead photo of large stock pot on gas stove, water at heavy boil, surface completely broken by massive bubbles, violent churning motion, dense steam cloud rising, water fully at boiling point, realistic kitchen, sharp detail, natural lighting
+# FORMAT: {vessel}/{state} | {prompt}
 
-no_cold         | Top-down overhead photo of stainless steel pot on gas stove, completely still cold water with perfectly flat calm surface, no bubbles at all, no steam, clear transparent water, burner not yet lit, realistic kitchen, sharp detail, natural lighting
-no_warm         | Top-down overhead photo of pot on gas stove, water just warming up, tiny micro bubbles forming on pot bottom and sides, surface still mostly calm and flat, very faint wisps of steam, not yet boiling, realistic kitchen, sharp detail, natural lighting
-no_simmer       | Top-down overhead photo of saucepan on gas stove, water at gentle simmer, small lazy bubbles occasionally rising to surface, light gentle steam, mostly calm surface with slight movement, below full boil, realistic kitchen, sharp detail, natural lighting
+# ── STAINLESS POT ──────────────────────────────────────────────────────────
+
+stainless/1_cold        | Top-down overhead photo of large stainless steel pot on gas stove burner, completely still cold tap water, perfectly flat calm mirror-like surface, no bubbles anywhere, no steam, clear transparent water, burner not yet lit, realistic kitchen, sharp detail, natural lighting
+stainless/2_warm        | Top-down overhead photo of large stainless steel pot on gas stove burner, water just starting to warm, tiny micro bubbles clinging to pot bottom and inner sides, surface still flat and calm, very faint warmth, no visible steam, realistic kitchen, sharp detail, natural lighting
+stainless/3_pre_simmer  | Top-down overhead photo of large stainless steel pot on gas stove burner, water getting hotter, small bubbles rising from bottom in thin streams, surface starting to show slight movement, faintest wisps of steam, not yet simmering, realistic kitchen, sharp detail, natural lighting
+stainless/4_simmer      | Top-down overhead photo of large stainless steel pot on gas stove burner, water at gentle simmer, steady small bubbles rising and breaking at surface, light steam rising, surface gently moving, below full boil, realistic kitchen, sharp detail, natural lighting
+stainless/5_BOIL        | Top-down overhead photo of large stainless steel pot on gas stove burner, water at full rolling boil, large bubbles continuously breaking surface, significant white steam rising, turbulent churning water, clearly boiling, realistic kitchen, sharp detail, natural lighting
+stainless/6_RAPID_BOIL  | Top-down overhead photo of large stainless steel pot on gas stove burner, water at violent rapid boil, massive bubbles exploding at surface, water splashing from force, dense steam cloud, foamy agitated surface, extreme boiling, realistic kitchen, sharp detail, natural lighting
+
+# ── SAUCEPAN ───────────────────────────────────────────────────────────────
+
+saucepan/1_cold        | Top-down overhead photo of medium saucepan on gas stove burner, cold water with rice grains settled at bottom, perfectly still flat water surface, no bubbles, no steam, calm and clear, burner off, realistic kitchen, sharp detail, natural lighting
+saucepan/2_warm        | Top-down overhead photo of medium saucepan on gas stove burner, water with rice just starting to warm, tiny bubbles forming on saucepan walls, water surface still flat, rice still settled, no visible steam, realistic kitchen, sharp detail, natural lighting
+saucepan/3_pre_simmer  | Top-down overhead photo of medium saucepan on gas stove burner, water with rice getting warmer, small bubbles rising in streams from bottom, rice grains starting to shift, surface beginning to move, faint steam wisps, realistic kitchen, sharp detail, natural lighting
+saucepan/4_simmer      | Top-down overhead photo of medium saucepan on gas stove burner, rice water at gentle simmer, steady bubbles rising, rice grains swirling gently, light steam, starchy cloudiness forming in water, below full boil, realistic kitchen, sharp detail, natural lighting
+saucepan/5_BOIL        | Top-down overhead photo of medium saucepan on gas stove burner, rice water at full boil, large bubbles breaking surface, rice grains tumbling in turbulent water, starchy white foam forming, significant steam, clearly boiling, realistic kitchen, sharp detail, natural lighting
+saucepan/6_RAPID_BOIL  | Top-down overhead photo of medium saucepan on gas stove burner, rice water at violent rapid boil, massive starchy foam bubbling aggressively, rice churning wildly, white foam nearly at rim, dense steam, extreme boiling, realistic kitchen, sharp detail, natural lighting
+
+# ── STOCK POT ──────────────────────────────────────────────────────────────
+
+stockpot/1_cold        | Top-down overhead photo of large stock pot on gas stove burner, cold water with chicken bones and raw vegetables sitting at bottom, perfectly still clear water, no bubbles, no steam, ingredients settled, burner off, realistic kitchen, sharp detail, natural lighting
+stockpot/2_warm        | Top-down overhead photo of large stock pot on gas stove burner, water with bones and vegetables starting to warm, tiny bubbles on pot walls, surface still calm, fat beginning to melt from bones, no visible steam, realistic kitchen, sharp detail, natural lighting
+stockpot/3_pre_simmer  | Top-down overhead photo of large stock pot on gas stove burner, stock water getting hotter, small bubbles rising from bone surfaces, thin fat film forming on surface, surface showing slight movement, faint steam wisps, realistic kitchen, sharp detail, natural lighting
+stockpot/4_simmer      | Top-down overhead photo of large stock pot on gas stove burner, chicken stock at gentle simmer, small steady bubbles at edges, golden color developing, light scum forming, gentle steam rising, below full boil, realistic kitchen, sharp detail, natural lighting
+stockpot/5_BOIL        | Top-down overhead photo of large stock pot on gas stove burner, stock at full rolling boil, large bubbles breaking surface, vegetables tumbling in turbulent liquid, foam and scum churning, significant steam rising, clearly boiling, realistic kitchen, sharp detail, natural lighting
+stockpot/6_RAPID_BOIL  | Top-down overhead photo of large stock pot on gas stove burner, stock at violent rapid boil, massive turbulent surface, vegetables and bones bouncing, thick scum foam agitated wildly, heavy dense steam cloud, extreme boiling, realistic kitchen, sharp detail, natural lighting
+
+# ── GLASS POT ──────────────────────────────────────────────────────────────
+
+glass/1_cold        | Top-down overhead photo of clear glass pot on gas stove burner, cold water visible through glass, perfectly still flat surface, no bubbles visible inside or at surface, no steam, completely calm clear water, burner off, realistic kitchen, sharp detail, natural lighting
+glass/2_warm        | Top-down overhead photo of clear glass pot on gas stove burner, water warming visible through glass walls, tiny bubbles clinging to glass interior surfaces, water surface still flat, very slight warmth, no steam, realistic kitchen, sharp detail, natural lighting
+glass/3_pre_simmer  | Top-down overhead photo of clear glass pot on gas stove burner, water getting hotter visible through glass, bubble streams rising from bottom visible through sides, surface starting to move, earliest wisps of steam, realistic kitchen, sharp detail, natural lighting
+glass/4_simmer      | Top-down overhead photo of clear glass pot on gas stove burner, water at gentle simmer, convection currents visible through glass, steady bubbles rising, light steam from surface, gentle activity, below full boil, realistic kitchen, sharp detail, natural lighting
+glass/5_BOIL        | Top-down overhead photo of clear glass pot on gas stove burner, water at full rolling boil, large bubbles visible through glass rising rapidly, turbulent churning surface, steam rising significantly, clearly boiling, realistic kitchen, sharp detail, natural lighting
+glass/6_RAPID_BOIL  | Top-down overhead photo of clear glass pot on gas stove burner, water at violent rapid boil, massive bubble columns visible through glass, surface completely broken by erupting bubbles, heavy steam and condensation on glass lid, extreme boiling, realistic kitchen, sharp detail, natural lighting
+
+# ── DUTCH OVEN ─────────────────────────────────────────────────────────────
+
+dutch/1_cold        | Top-down overhead photo of cast iron dutch oven on gas stove burner, cold water inside, dark interior, perfectly still flat water surface, no bubbles, no steam, heavy pot sitting cold, burner off, realistic kitchen, sharp detail, natural lighting
+dutch/2_warm        | Top-down overhead photo of cast iron dutch oven on gas stove burner, water beginning to warm in heavy pot, tiny micro bubbles on dark interior surface, water surface still calm and flat, cast iron retaining early heat, no steam, realistic kitchen, sharp detail, natural lighting
+dutch/3_pre_simmer  | Top-down overhead photo of cast iron dutch oven on gas stove burner, water getting hotter, small bubbles rising from dark bottom, surface beginning to show gentle movement, faint steam wisps, heavy pot heating slowly, realistic kitchen, sharp detail, natural lighting
+dutch/4_simmer      | Top-down overhead photo of cast iron dutch oven on gas stove burner, water at gentle simmer, steady small bubbles rising from bottom, light steam, surface gently moving, below full boil, even heat from cast iron, realistic kitchen, sharp detail, natural lighting
+dutch/5_BOIL        | Top-down overhead photo of cast iron dutch oven on gas stove burner, water at full rolling boil, large bubbles breaking surface, turbulent water in heavy pot, significant steam rising, clearly boiling, cast iron holding heat well, realistic kitchen, sharp detail, natural lighting
+dutch/6_RAPID_BOIL  | Top-down overhead photo of cast iron dutch oven on gas stove burner, water at violent rapid boil, massive bubbles erupting at surface, water sloshing in heavy pot, dense steam cloud, foam at edges, extreme boiling, realistic kitchen, sharp detail, natural lighting
+
+# ── WOK ────────────────────────────────────────────────────────────────────
+
+wok/1_cold        | Top-down overhead photo of carbon steel wok on gas stove burner, cold water pooled in wok bowl, perfectly still flat surface, no bubbles, no steam, water gathered at wok center, burner off, realistic kitchen, sharp detail, natural lighting
+wok/2_warm        | Top-down overhead photo of carbon steel wok on gas stove burner, water in wok just warming, tiny bubbles on wok surface especially at center where thinnest, water still mostly calm, no visible steam, realistic kitchen, sharp detail, natural lighting
+wok/3_pre_simmer  | Top-down overhead photo of carbon steel wok on gas stove burner, water in wok getting hotter, small bubbles rising from wok center and sides, surface showing movement, wok heats fast, faint steam rising, realistic kitchen, sharp detail, natural lighting
+wok/4_simmer      | Top-down overhead photo of carbon steel wok on gas stove burner, water at gentle simmer in wok, bubbles rising at center and edges, light steam, water gently active, wok shape concentrates heat at bottom, below full boil, realistic kitchen, sharp detail, natural lighting
+wok/5_BOIL        | Top-down overhead photo of carbon steel wok on gas stove burner, water at full rolling boil in wok, large bubbles erupting from center, turbulent surface, significant steam, water clearly boiling in wide wok shape, realistic kitchen, sharp detail, natural lighting
+wok/6_RAPID_BOIL  | Top-down overhead photo of carbon steel wok on gas stove burner, water at violent rapid boil in wok, massive bubbles and splashing, water agitated wildly in wide wok, dense steam cloud, water sloshing at wok sides, extreme boiling, realistic kitchen, sharp detail, natural lighting
+
+# ── NEGATIVE PROMPT ────────────────────────────────────────────────────────
 
 NEGATIVE: cartoon, anime, illustration, drawing, painting, CGI, render, low quality, blurry, text, watermark, logo, distorted, extra objects, unrealistic colors, side angle, diagonal view

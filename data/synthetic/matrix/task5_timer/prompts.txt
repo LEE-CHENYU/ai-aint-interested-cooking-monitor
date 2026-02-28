@@ -1,13 +1,68 @@
-# TASK 5 — TIMER EXPIRED (timer display shows zero or alarm state)
-# Visual signal: timer/clock display at 00:00 or flashing, vs time remaining
+# ============================================================================
+# TASK 5 — TIMER EXPIRED
+# 6 timer types × 6 timer states = 36 images
+# Types: digital standalone, phone app, oven built-in, microwave, smart display, analog
+# States: 1_not_set → 2_plenty → 3_few_min → 4_LAST_MIN → 5_ZERO → 6_OVERDUE
 # NOTE: primarily logic-based (remaining_s: 0 in JSON), images support visual cue
+# Camera: top-down overhead, consistent framing
+# ============================================================================
 
-yes_zero_digital  | Top-down overhead photo of kitchen counter beside gas stove with pot cooking, digital kitchen timer showing 00:00 on display, timer in alarm state, red flashing light on timer, food needs attention, realistic kitchen, sharp detail, natural lighting
-yes_zero_phone    | Top-down overhead photo of kitchen counter beside gas stove with pan on burner, smartphone lying on counter showing timer app at 0:00 with alert notification on screen, food cooking on stove, realistic kitchen, sharp detail, natural lighting
-yes_zero_oven     | Top-down overhead photo of gas stove top with pot, built-in oven timer display showing 0:00, timer alarm indicator lit, cooking completed, needs attention, realistic kitchen, sharp detail, natural lighting
+# FORMAT: {type}/{state} | {prompt}
 
-no_counting_5min  | Top-down overhead photo of kitchen counter beside gas stove with pot cooking, digital kitchen timer showing 05:23 on display, green light active, timer still counting down, food cooking normally, realistic kitchen, sharp detail, natural lighting
-no_counting_12min | Top-down overhead photo of kitchen counter beside gas stove with pan on burner, digital kitchen timer showing 12:47 on display, timer actively counting, plenty of time remaining, food cooking normally, realistic kitchen, sharp detail, natural lighting
-no_no_timer       | Top-down overhead photo of gas stove with pot simmering, no timer visible on counter, no clock display, no timing device present, just normal cooking scene, realistic kitchen, sharp detail, natural lighting
+# ── DIGITAL STANDALONE TIMER ───────────────────────────────────────────────
+
+digital/1_not_set  | Top-down overhead photo of kitchen counter beside gas stove with pot simmering, digital kitchen timer sitting on counter showing blank display or dashes, timer not set not running, no countdown active, normal cooking scene, realistic kitchen, sharp detail, natural lighting
+digital/2_plenty   | Top-down overhead photo of kitchen counter beside gas stove with pot simmering, digital kitchen timer showing 14:32 on display, green indicator light, timer counting down normally, plenty of time remaining, relaxed cooking, realistic kitchen, sharp detail, natural lighting
+digital/3_few_min  | Top-down overhead photo of kitchen counter beside gas stove with pot cooking, digital kitchen timer showing 03:15 on display, timer counting down, only a few minutes left, food nearing completion, realistic kitchen, sharp detail, natural lighting
+digital/4_LAST_MIN | Top-down overhead photo of kitchen counter beside gas stove with pot cooking, digital kitchen timer showing 00:45 on display, orange warning indicator, less than one minute remaining, countdown almost done, needs attention soon, realistic kitchen, sharp detail, natural lighting
+digital/5_ZERO     | Top-down overhead photo of kitchen counter beside gas stove with pot cooking, digital kitchen timer showing 00:00 on display, red flashing light active, timer alarm triggered, time is up, food needs immediate attention, realistic kitchen, sharp detail, natural lighting
+digital/6_OVERDUE  | Top-down overhead photo of kitchen counter beside gas stove with pot still on flame, digital kitchen timer showing -02:30 past zero, red flashing alarm still going, timer long expired, food overdue for attention, overcooking risk, realistic kitchen, sharp detail, natural lighting
+
+# ── PHONE APP TIMER ────────────────────────────────────────────────────────
+
+phone/1_not_set  | Top-down overhead photo of kitchen counter beside gas stove with pan on burner, smartphone lying on counter with screen showing clock app, no timer set, home screen or clock face, normal kitchen, realistic kitchen, sharp detail, natural lighting
+phone/2_plenty   | Top-down overhead photo of kitchen counter beside gas stove with pan cooking, smartphone on counter showing timer app at 11:20 remaining, green progress ring, timer counting down, plenty of time, realistic kitchen, sharp detail, natural lighting
+phone/3_few_min  | Top-down overhead photo of kitchen counter beside gas stove with pan cooking, smartphone on counter showing timer app at 02:48 remaining, timer counting down, few minutes left, approaching completion, realistic kitchen, sharp detail, natural lighting
+phone/4_LAST_MIN | Top-down overhead photo of kitchen counter beside gas stove with pan cooking, smartphone on counter showing timer app at 00:38 remaining, orange progress ring, under one minute left, almost done, realistic kitchen, sharp detail, natural lighting
+phone/5_ZERO     | Top-down overhead photo of kitchen counter beside gas stove with pan on burner, smartphone on counter showing timer app at 0:00 with alert banner and notification on screen, timer expired, food needs attention now, realistic kitchen, sharp detail, natural lighting
+phone/6_OVERDUE  | Top-down overhead photo of kitchen counter beside gas stove with pan still cooking, smartphone on counter showing multiple missed timer notifications stacked, timer long expired, several minutes overdue, urgent, realistic kitchen, sharp detail, natural lighting
+
+# ── OVEN BUILT-IN DISPLAY ──────────────────────────────────────────────────
+
+oven/1_not_set  | Top-down overhead photo of gas stove top with pot, oven control panel display showing current time only, no timer set, clock display idle, no countdown, stove in normal use, realistic kitchen, sharp detail, natural lighting
+oven/2_plenty   | Top-down overhead photo of gas stove top with pot cooking, oven control panel display showing timer at 18:05 remaining, timer indicator lit, counting down, plenty of cooking time left, realistic kitchen, sharp detail, natural lighting
+oven/3_few_min  | Top-down overhead photo of gas stove top with pot cooking, oven control panel display showing timer at 04:12 remaining, timer counting, a few minutes left, nearing end of cook time, realistic kitchen, sharp detail, natural lighting
+oven/4_LAST_MIN | Top-down overhead photo of gas stove top with pot cooking, oven control panel display showing timer at 00:52 remaining, less than one minute, countdown almost complete, realistic kitchen, sharp detail, natural lighting
+oven/5_ZERO     | Top-down overhead photo of gas stove top with pot on burner, oven control panel display showing 0:00 timer complete, alarm indicator flashing, end of cooking signal, food done needs removal, realistic kitchen, sharp detail, natural lighting
+oven/6_OVERDUE  | Top-down overhead photo of gas stove top with pot still on flame, oven control panel display flashing 0:00 repeatedly, alarm beeping indicator, timer long expired and still alerting, food overcooked risk, realistic kitchen, sharp detail, natural lighting
+
+# ── MICROWAVE DISPLAY ──────────────────────────────────────────────────────
+
+microwave/1_not_set  | Top-down overhead photo of kitchen counter with microwave visible, microwave display showing clock time, no timer set, door closed, idle microwave, cooking happening on stove beside it, realistic kitchen, sharp detail, natural lighting
+microwave/2_plenty   | Top-down overhead photo of kitchen counter with microwave visible, microwave display showing 06:30 countdown running, interior light on, food heating inside, plenty of time remaining, realistic kitchen, sharp detail, natural lighting
+microwave/3_few_min  | Top-down overhead photo of kitchen counter with microwave visible, microwave display showing 01:45 remaining, counting down, food almost done inside, a couple minutes left, realistic kitchen, sharp detail, natural lighting
+microwave/4_LAST_MIN | Top-down overhead photo of kitchen counter with microwave visible, microwave display showing 00:22 remaining, nearly done, last seconds counting down, food almost ready, realistic kitchen, sharp detail, natural lighting
+microwave/5_ZERO     | Top-down overhead photo of kitchen counter with microwave visible, microwave display showing 0:00 END, beeping signal indicator, cooking complete, food sitting inside done, needs to be removed, realistic kitchen, sharp detail, natural lighting
+microwave/6_OVERDUE  | Top-down overhead photo of kitchen counter with microwave visible, microwave display showing END flashing, door still closed, food sitting inside for too long after timer ended, overdue for removal, realistic kitchen, sharp detail, natural lighting
+
+# ── SMART DISPLAY ──────────────────────────────────────────────────────────
+
+smart/1_not_set  | Top-down overhead photo of kitchen counter beside stove, smart display device showing recipe page with no active timer, clock visible, no countdown running, normal kitchen assistant screen, realistic kitchen, sharp detail, natural lighting
+smart/2_plenty   | Top-down overhead photo of kitchen counter beside stove with pot cooking, smart display device showing large timer countdown at 09:15, blue progress bar nearly full, timer running, plenty of time, realistic kitchen, sharp detail, natural lighting
+smart/3_few_min  | Top-down overhead photo of kitchen counter beside stove with pot cooking, smart display device showing timer at 02:33, yellow progress bar mostly depleted, few minutes remaining, nearing end, realistic kitchen, sharp detail, natural lighting
+smart/4_LAST_MIN | Top-down overhead photo of kitchen counter beside stove with pot cooking, smart display device showing timer at 00:41, red progress bar nearly empty, under one minute, almost done, realistic kitchen, sharp detail, natural lighting
+smart/5_ZERO     | Top-down overhead photo of kitchen counter beside stove with pot on flame, smart display device showing TIMER DONE with 0:00, red flashing screen, alarm notification displayed, time expired, needs attention, realistic kitchen, sharp detail, natural lighting
+smart/6_OVERDUE  | Top-down overhead photo of kitchen counter beside stove with pot still cooking, smart display device showing timer 3 minutes past due, red alert screen, persistent overdue notification, food overcooking, realistic kitchen, sharp detail, natural lighting
+
+# ── ANALOG TIMER ───────────────────────────────────────────────────────────
+
+analog/1_not_set  | Top-down overhead photo of kitchen counter beside gas stove with food cooking, classic mechanical kitchen timer sitting on counter, dial at zero not wound, timer not set, no ticking, idle timer, realistic kitchen, sharp detail, natural lighting
+analog/2_plenty   | Top-down overhead photo of kitchen counter beside gas stove with food cooking, mechanical kitchen timer on counter with dial pointing to 15 minutes, timer wound and ticking, broad wedge of time remaining, realistic kitchen, sharp detail, natural lighting
+analog/3_few_min  | Top-down overhead photo of kitchen counter beside gas stove with food cooking, mechanical kitchen timer on counter with dial pointing to 4 minutes, small remaining wedge, ticking down, a few minutes left, realistic kitchen, sharp detail, natural lighting
+analog/4_LAST_MIN | Top-down overhead photo of kitchen counter beside gas stove with food cooking, mechanical kitchen timer on counter with dial barely past zero mark, tiny sliver remaining, less than one minute, almost ringing, realistic kitchen, sharp detail, natural lighting
+analog/5_ZERO     | Top-down overhead photo of kitchen counter beside gas stove with food on burner, mechanical kitchen timer on counter with dial exactly at zero, bell ringing, timer completed, ding sound implied, food needs attention, realistic kitchen, sharp detail, natural lighting
+analog/6_OVERDUE  | Top-down overhead photo of kitchen counter beside gas stove with food still on flame, mechanical kitchen timer on counter with dial at zero, bell finished ringing, timer completed minutes ago, food sitting on stove too long, overdue, realistic kitchen, sharp detail, natural lighting
+
+# ── NEGATIVE PROMPT ────────────────────────────────────────────────────────
 
 NEGATIVE: cartoon, anime, illustration, drawing, painting, CGI, render, low quality, blurry, text, watermark, logo, distorted, extra objects, unrealistic colors, side angle, diagonal view

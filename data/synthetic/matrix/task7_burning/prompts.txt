@@ -1,12 +1,67 @@
-# TASK 7 — FOOD BURNING (charred black patches, smoke from food)
-# Visual signal: black charred areas on food, dark smoke, burnt crust
+# ============================================================================
+# TASK 7 — FOOD BURNING (charred/black)
+# 6 food types × 6 burn levels = 36 images
+# Foods: pan-fried meat, stir-fry vegetables, pot sauce/curry, rice, eggs, bread/toast
+# Levels: 1_raw → 2_cooking → 3_golden → 4_DARK → 5_CHARRING → 6_BURNT
+# Camera: top-down overhead, consistent framing
+# ============================================================================
 
-yes_pan_black   | Top-down overhead photo of cast iron skillet on gas stove, food burnt to black char stuck on pan surface, dark charred patches clearly visible, thin smoke rising from burnt areas, blackened crusty residue, realistic kitchen, sharp detail, natural lighting
-yes_pot_bottom  | Top-down overhead photo of pot on gas stove, curry sauce nearly evaporated revealing black burnt food stuck to pot bottom, charred dark brown-black patches visible through remaining sauce, smoke wisps rising, realistic kitchen, sharp detail, natural lighting
-yes_wok_scorch  | Top-down overhead photo of carbon steel wok on gas stove, stir-fry vegetables badly scorched and blackened, charred black edges on food pieces, dark smoke rising from burnt food, food ruined and inedible, realistic kitchen, sharp detail, natural lighting
+# FORMAT: {food}/{level} | {prompt}
 
-no_golden       | Top-down overhead photo of skillet on gas stove, food cooking to perfect golden brown color, even browning with no dark spots, appetizing caramelized surface, light steam, properly cooked, realistic kitchen, sharp detail, natural lighting
-no_simmering    | Top-down overhead photo of pot on gas stove, curry simmering gently with proper amount of sauce, rich brown color with no black spots, food intact and properly cooked, no smoke, realistic kitchen, sharp detail, natural lighting
-no_raw          | Top-down overhead photo of wok on gas stove, fresh raw vegetables just added to hot wok, bright colorful vegetables beginning to cook, no browning yet, clean fresh appearance, realistic kitchen, sharp detail, natural lighting
+# ── PAN-FRIED MEAT ─────────────────────────────────────────────────────────
+
+meat/1_raw      | Top-down overhead photo of cast iron skillet on gas stove burner, raw chicken breast just placed in pan with oil, pale pink meat, no browning yet, oil sizzling at edges, just started cooking, realistic kitchen, sharp detail, natural lighting
+meat/2_cooking  | Top-down overhead photo of cast iron skillet on gas stove burner, chicken breast cooking in pan, bottom side turning white and light golden where touching pan, top still pink, halfway cooked, normal cooking, realistic kitchen, sharp detail, natural lighting
+meat/3_golden   | Top-down overhead photo of cast iron skillet on gas stove burner, chicken breast perfectly cooked to beautiful golden brown, even appetizing browning on surface, juices visible, ideal doneness, properly cooked, realistic kitchen, sharp detail, natural lighting
+meat/4_DARK     | Top-down overhead photo of cast iron skillet on gas stove burner, chicken breast getting too dark, deep brown patches forming beyond golden, edges starting to darken noticeably, slightly overcooked, going past ideal, realistic kitchen, sharp detail, natural lighting
+meat/5_CHARRING | Top-down overhead photo of cast iron skillet on gas stove burner, chicken breast with black charred spots forming on surface, dark burnt patches mixed with dark brown, thin smoke beginning to rise from charred areas, burning, realistic kitchen, sharp detail, natural lighting
+meat/6_BURNT    | Top-down overhead photo of cast iron skillet on gas stove burner, chicken breast completely burnt to black char, entire surface blackened and crusty, smoke rising from burnt meat, shriveled and ruined, stuck to pan, realistic kitchen, sharp detail, natural lighting
+
+# ── STIR-FRY VEGETABLES ────────────────────────────────────────────────────
+
+stirfry/1_raw      | Top-down overhead photo of carbon steel wok on gas stove burner, fresh raw vegetables just tossed into hot wok, bright colorful peppers broccoli carrots, vivid colors, oil sizzling, just started, realistic kitchen, sharp detail, natural lighting
+stirfry/2_cooking  | Top-down overhead photo of carbon steel wok on gas stove burner, vegetables stir-frying in wok, slight wilting and softening, colors still bright, light browning at edges of some pieces, normal mid-cook, realistic kitchen, sharp detail, natural lighting
+stirfry/3_golden   | Top-down overhead photo of carbon steel wok on gas stove burner, vegetables perfectly stir-fried with beautiful wok hei char marks, slight golden edges, crisp-tender texture, vibrant colors, ideal doneness, properly cooked, realistic kitchen, sharp detail, natural lighting
+stirfry/4_DARK     | Top-down overhead photo of carbon steel wok on gas stove burner, stir-fry vegetables getting too dark, several pieces with deep brown edges beyond normal wok hei, colors dulling, going past ideal doneness, overcooked, realistic kitchen, sharp detail, natural lighting
+stirfry/5_CHARRING | Top-down overhead photo of carbon steel wok on gas stove burner, stir-fry vegetables with black charred edges forming, burnt spots on multiple pieces, thin smoke rising from charred vegetables, wilted and darkening, burning, realistic kitchen, sharp detail, natural lighting
+stirfry/6_BURNT    | Top-down overhead photo of carbon steel wok on gas stove burner, stir-fry vegetables completely blackened and burnt, shriveled charred pieces stuck to wok, smoke rising heavily, all color gone replaced by black, ruined, realistic kitchen, sharp detail, natural lighting
+
+# ── POT SAUCE / CURRY ──────────────────────────────────────────────────────
+
+sauce/1_raw      | Top-down overhead photo of dutch oven pot on gas stove burner, raw curry ingredients just combined, chunked vegetables and meat in thin liquid, uncooked appearance, pale colors, just starting, realistic kitchen, sharp detail, natural lighting
+sauce/2_cooking  | Top-down overhead photo of dutch oven pot on gas stove burner, curry simmering normally, sauce thickening, vegetables softening, golden brown color developing, small bubbles, normal mid-cook progress, realistic kitchen, sharp detail, natural lighting
+sauce/3_golden   | Top-down overhead photo of dutch oven pot on gas stove burner, curry perfectly cooked, rich thick glossy golden-brown sauce, tender vegetables and meat, beautiful appetizing color, ideal consistency, properly done, realistic kitchen, sharp detail, natural lighting
+sauce/4_DARK     | Top-down overhead photo of dutch oven pot on gas stove burner, curry getting too dark, sauce darkening beyond golden to deep brown, liquid reducing too much, bottom starting to catch, going past ideal, overcooked, realistic kitchen, sharp detail, natural lighting
+sauce/5_CHARRING | Top-down overhead photo of dutch oven pot on gas stove burner, curry burning on bottom, black charred patches visible through thinning sauce, dark burnt residue forming at pot edges, thin smoke wisps, sauce breaking down, realistic kitchen, sharp detail, natural lighting
+sauce/6_BURNT    | Top-down overhead photo of dutch oven pot on gas stove burner, curry completely burnt and stuck to pot bottom, black carbon layer visible, sauce evaporated leaving charred black remains, smoke rising, acrid burning, ruined, realistic kitchen, sharp detail, natural lighting
+
+# ── RICE ───────────────────────────────────────────────────────────────────
+
+rice/1_raw      | Top-down overhead photo of saucepan on gas stove burner, uncooked dry white rice grains in water, rice settled at bottom, clear water above, grains hard and separate, just started, realistic kitchen, sharp detail, natural lighting
+rice/2_cooking  | Top-down overhead photo of saucepan on gas stove burner, rice absorbing water mid-cook, grains swelling and softening, water level dropping, small holes forming in rice surface, normal cooking progress, realistic kitchen, sharp detail, natural lighting
+rice/3_golden   | Top-down overhead photo of saucepan on gas stove burner, perfectly cooked fluffy white rice, each grain separate and plump, light steam rising, no excess water, bright white color, ideal texture, properly done, realistic kitchen, sharp detail, natural lighting
+rice/4_DARK     | Top-down overhead photo of saucepan on gas stove burner, rice slightly overcooked, grains mushy and clumping together, bottom layer starting to turn yellowish-tan, sticking to pot, going past ideal doneness, realistic kitchen, sharp detail, natural lighting
+rice/5_CHARRING | Top-down overhead photo of saucepan on gas stove burner, rice burning at bottom, brown-black crust forming on pot bottom visible at edges, upper rice still white but bottom layer charring, thin smoke, scorched smell implied, realistic kitchen, sharp detail, natural lighting
+rice/6_BURNT    | Top-down overhead photo of saucepan on gas stove burner, rice completely burnt, thick black charred crust covering pot bottom, upper rice dried out and yellowed, heavy smoke rising from burnt bottom, ruined and inedible, realistic kitchen, sharp detail, natural lighting
+
+# ── EGGS ───────────────────────────────────────────────────────────────────
+
+eggs/1_raw      | Top-down overhead photo of non-stick pan on gas stove burner, raw eggs just cracked into pan, liquid translucent whites spreading, bright yellow yolks intact, oil in pan, just started cooking, realistic kitchen, sharp detail, natural lighting
+eggs/2_cooking  | Top-down overhead photo of non-stick pan on gas stove burner, eggs cooking, whites turning opaque white from outside in, yolks still runny and bright, edges setting, normal fried egg cooking progress, realistic kitchen, sharp detail, natural lighting
+eggs/3_golden   | Top-down overhead photo of non-stick pan on gas stove burner, perfectly fried eggs, whites fully set and bright white, yolks golden and slightly set, clean edges, no browning, ideal sunny side up, properly cooked, realistic kitchen, sharp detail, natural lighting
+eggs/4_DARK     | Top-down overhead photo of non-stick pan on gas stove burner, eggs overcooked, white edges turning brown and crispy, lacy brown fringe forming, yolks fully hardened, going past ideal doneness, slightly overdone, realistic kitchen, sharp detail, natural lighting
+eggs/5_CHARRING | Top-down overhead photo of non-stick pan on gas stove burner, eggs burning, dark brown-black crispy edges, bottom of whites charring, thin smoke rising from burnt egg edges, yolks dried and grey-green, burning, realistic kitchen, sharp detail, natural lighting
+eggs/6_BURNT    | Top-down overhead photo of non-stick pan on gas stove burner, eggs completely burnt to black crisp, entire egg blackened and curled, stuck to pan as charred mass, smoke rising, unrecognizable as eggs, ruined, realistic kitchen, sharp detail, natural lighting
+
+# ── BREAD / TOAST ──────────────────────────────────────────────────────────
+
+bread/1_raw      | Top-down overhead photo of skillet on gas stove burner, slice of white bread just placed in buttered pan, soft pale untoasted bread, butter melting around edges, no browning yet, just started, realistic kitchen, sharp detail, natural lighting
+bread/2_cooking  | Top-down overhead photo of skillet on gas stove burner, bread toasting in pan, bottom side turning light golden, butter sizzling, edges just beginning to brown, normal toasting progress, halfway done, realistic kitchen, sharp detail, natural lighting
+bread/3_golden   | Top-down overhead photo of skillet on gas stove burner, bread perfectly toasted to beautiful even golden brown, crispy appetizing surface, butter absorbed creating golden sheen, ideal toast color, properly done, realistic kitchen, sharp detail, natural lighting
+bread/4_DARK     | Top-down overhead photo of skillet on gas stove burner, toast getting too dark, deep brown color beyond golden, approaching dark brown, slightly bitter toasted smell implied, going past ideal, overdone, realistic kitchen, sharp detail, natural lighting
+bread/5_CHARRING | Top-down overhead photo of skillet on gas stove burner, toast with black charred spots forming on surface, patches of burnt black mixed with dark brown, thin smoke rising from charred areas, burning smell, realistic kitchen, sharp detail, natural lighting
+bread/6_BURNT    | Top-down overhead photo of skillet on gas stove burner, toast completely burnt to black, entire surface charred and blackened, smoke rising from burnt bread, crumbling charcoal texture, completely ruined, realistic kitchen, sharp detail, natural lighting
+
+# ── NEGATIVE PROMPT ────────────────────────────────────────────────────────
 
 NEGATIVE: cartoon, anime, illustration, drawing, painting, CGI, render, low quality, blurry, text, watermark, logo, distorted, extra objects, unrealistic colors, side angle, diagonal view

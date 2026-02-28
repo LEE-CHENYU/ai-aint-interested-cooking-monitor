@@ -1,12 +1,67 @@
+# ============================================================================
 # TASK 3 — PERSON PRESENT OR ABSENT
-# Visual signal: hands, arms, body, utensils being held vs empty frame
+# 6 activities × 6 presence levels = 36 images
+# Activities: stirring pot, chopping, wok frying, plating, pouring, pan searing
+# Presence: 1_active → 2_both_hands → 3_one_hand → 4_ARM_EDGE → 5_JUST_LEFT → 6_ABSENT
+# Camera: top-down overhead, consistent framing
+# ============================================================================
 
-yes_hands_stir   | Top-down overhead photo of pot on gas stove, human hands visible holding wooden spoon stirring soup, forearms entering frame from bottom, active cooking, person clearly present, realistic kitchen, sharp detail, natural lighting
-yes_hands_chop   | Top-down overhead photo of wooden cutting board on kitchen counter beside stove, human hands visible holding knife chopping vegetables, fingers gripping onion, arms in frame, person clearly present, realistic kitchen, sharp detail, natural lighting
-yes_hands_pour   | Top-down overhead photo of pot on gas stove, human hands visible pouring ingredients from measuring cup into pot, arms and wrists in frame, person actively cooking, realistic kitchen, sharp detail, natural lighting
+# FORMAT: {activity}/{presence} | {prompt}
 
-no_empty_active  | Top-down overhead photo of pot on gas stove with flame on, soup simmering inside, wooden spoon resting in pot, no hands visible, no person in frame, nobody present, unattended cooking, realistic kitchen, sharp detail, natural lighting
-no_empty_idle    | Top-down overhead photo of gas stove with all burners off, clean empty pots sitting on burners, no hands visible, no person in frame, nobody present, empty quiet kitchen, realistic kitchen, sharp detail, natural lighting
-no_empty_cooking | Top-down overhead photo of wok on gas stove with flame on, stir-fry vegetables cooking in wok, spatula resting on counter, no hands visible, no person in frame, nobody present, food cooking unattended, realistic kitchen, sharp detail, natural lighting
+# ── STIRRING POT ───────────────────────────────────────────────────────────
+
+stirring/1_active      | Top-down overhead photo of pot on gas stove burner, both human hands visible holding wooden spoon stirring soup, forearms and wrists clearly in frame, person actively cooking, fully present, realistic kitchen, sharp detail, natural lighting
+stirring/2_both_hands  | Top-down overhead photo of pot on gas stove burner, two human hands visible resting on pot rim and holding spoon idle, fingers relaxed, person present but pausing, both hands in frame, realistic kitchen, sharp detail, natural lighting
+stirring/3_one_hand    | Top-down overhead photo of pot on gas stove burner, one human hand visible resting on spoon handle in pot, only right hand and wrist in frame, other hand out of frame, person partially visible, realistic kitchen, sharp detail, natural lighting
+stirring/4_ARM_EDGE    | Top-down overhead photo of pot on gas stove burner, soup simmering inside, very edge of human forearm barely visible at bottom corner of frame, person mostly out of frame, blurry arm edge, almost gone, realistic kitchen, sharp detail, natural lighting
+stirring/5_JUST_LEFT   | Top-down overhead photo of pot on gas stove burner, soup simmering inside, wooden spoon left resting in pot at an angle as if just released, no hands visible, no person in frame, person just stepped away, realistic kitchen, sharp detail, natural lighting
+stirring/6_ABSENT      | Top-down overhead photo of pot on gas stove burner, soup simmering unattended, wooden spoon resting against pot rim, no hands visible, no person in frame, no sign of recent presence, empty kitchen, stove on with nobody there, realistic kitchen, sharp detail, natural lighting
+
+# ── CHOPPING ───────────────────────────────────────────────────────────────
+
+chopping/1_active      | Top-down overhead photo of wooden cutting board on kitchen counter, both human hands visible holding knife mid-chop through onion, fingers in claw grip, active cutting motion, person clearly present, realistic kitchen, sharp detail, natural lighting
+chopping/2_both_hands  | Top-down overhead photo of wooden cutting board on kitchen counter, both human hands resting on cutting board, knife held loosely, chopped vegetables in pile, person pausing between cuts, both hands visible, realistic kitchen, sharp detail, natural lighting
+chopping/3_one_hand    | Top-down overhead photo of wooden cutting board on kitchen counter, one human hand visible resting on knife handle on cutting board, other hand out of frame, partially chopped vegetables, person partially visible, realistic kitchen, sharp detail, natural lighting
+chopping/4_ARM_EDGE    | Top-down overhead photo of wooden cutting board on kitchen counter, chopped vegetables on board, knife lying on board, very edge of human arm barely visible at frame edge, person almost out of view, realistic kitchen, sharp detail, natural lighting
+chopping/5_JUST_LEFT   | Top-down overhead photo of wooden cutting board on kitchen counter, half-chopped onion on board with knife placed down beside it, neat pile of diced vegetables, no hands visible, no person in frame, abandoned mid-task, realistic kitchen, sharp detail, natural lighting
+chopping/6_ABSENT      | Top-down overhead photo of wooden cutting board on kitchen counter, clean cutting board with knife stored to the side, some prepped vegetables in bowls, no hands visible, no person in frame, nobody in kitchen, empty scene, realistic kitchen, sharp detail, natural lighting
+
+# ── WOK FRYING ─────────────────────────────────────────────────────────────
+
+wokfry/1_active      | Top-down overhead photo of wok on gas stove burner, both human hands visible holding wok handle and spatula tossing vegetables in wok, active stir-fry motion, person fully present, realistic kitchen, sharp detail, natural lighting
+wokfry/2_both_hands  | Top-down overhead photo of wok on gas stove burner, two human hands visible resting on wok rim and holding spatula idle, stir-fry cooking in wok, person present watching food, realistic kitchen, sharp detail, natural lighting
+wokfry/3_one_hand    | Top-down overhead photo of wok on gas stove burner, one human hand visible holding spatula over wok, stir-fry sizzling, only one hand and forearm in frame, person partially visible, realistic kitchen, sharp detail, natural lighting
+wokfry/4_ARM_EDGE    | Top-down overhead photo of wok on gas stove burner, food sizzling in wok, very edge of human arm barely visible at bottom corner of frame, person mostly out of view, nearly absent, realistic kitchen, sharp detail, natural lighting
+wokfry/5_JUST_LEFT   | Top-down overhead photo of wok on gas stove burner, stir-fry sizzling in wok with high flame, spatula left resting on wok rim as if just released, no hands visible, no person in frame, person just walked away, realistic kitchen, sharp detail, natural lighting
+wokfry/6_ABSENT      | Top-down overhead photo of wok on gas stove burner, food sitting in wok on active flame, spatula on counter nearby, no hands visible, no person in frame, nobody present, food cooking completely unattended, realistic kitchen, sharp detail, natural lighting
+
+# ── PLATING ────────────────────────────────────────────────────────────────
+
+plating/1_active      | Top-down overhead photo of kitchen counter beside stove, both human hands visible arranging food on a plate, one hand holding tongs placing pasta, other hand steadying plate, person actively plating, realistic kitchen, sharp detail, natural lighting
+plating/2_both_hands  | Top-down overhead photo of kitchen counter beside stove, two human hands visible resting near plate with food being arranged, fingers near plate edges, person present at plating station, realistic kitchen, sharp detail, natural lighting
+plating/3_one_hand    | Top-down overhead photo of kitchen counter beside stove, one human hand visible reaching for garnish near plate of food, only right hand and wrist in frame, person partially visible, realistic kitchen, sharp detail, natural lighting
+plating/4_ARM_EDGE    | Top-down overhead photo of kitchen counter beside stove, half-plated dish on counter, very edge of human forearm barely visible at frame corner, person mostly out of view, realistic kitchen, sharp detail, natural lighting
+plating/5_JUST_LEFT   | Top-down overhead photo of kitchen counter beside stove, partially assembled plate of food on counter, tongs set down next to plate at angle, garnishes nearby, no hands visible, no person in frame, plating interrupted, realistic kitchen, sharp detail, natural lighting
+plating/6_ABSENT      | Top-down overhead photo of kitchen counter beside stove, finished plated dish sitting alone on counter, no hands visible, no person in frame, nobody present, plate sitting unattended, empty kitchen scene, realistic kitchen, sharp detail, natural lighting
+
+# ── POURING ────────────────────────────────────────────────────────────────
+
+pouring/1_active      | Top-down overhead photo of pot on gas stove burner, both human hands visible pouring liquid from measuring cup into pot, steady stream of broth entering pot, arms in frame, person actively adding ingredients, realistic kitchen, sharp detail, natural lighting
+pouring/2_both_hands  | Top-down overhead photo of pot on gas stove burner, two human hands visible holding bottle and pot lid, preparing to pour, person present with both hands in frame, about to add ingredients, realistic kitchen, sharp detail, natural lighting
+pouring/3_one_hand    | Top-down overhead photo of pot on gas stove burner, one human hand visible holding sauce bottle over pot, pouring sauce in, only one hand and forearm visible, other hand out of frame, realistic kitchen, sharp detail, natural lighting
+pouring/4_ARM_EDGE    | Top-down overhead photo of pot on gas stove burner, cooking in progress, measuring cup set on counter, very edge of human arm barely visible at frame border, person nearly out of view, realistic kitchen, sharp detail, natural lighting
+pouring/5_JUST_LEFT   | Top-down overhead photo of pot on gas stove burner, measuring cup placed down on counter next to pot as if just used, liquid freshly added to pot still settling, no hands visible, no person in frame, person just stepped away, realistic kitchen, sharp detail, natural lighting
+pouring/6_ABSENT      | Top-down overhead photo of pot on gas stove burner, soup cooking on stove, measuring cups and bottles stored neatly on counter, no hands visible, no person in frame, nobody in kitchen, unattended cooking, realistic kitchen, sharp detail, natural lighting
+
+# ── PAN SEARING ────────────────────────────────────────────────────────────
+
+searing/1_active      | Top-down overhead photo of cast iron pan on gas stove burner, both human hands visible one holding pan handle one holding tongs pressing steak down, active searing, person fully present cooking, realistic kitchen, sharp detail, natural lighting
+searing/2_both_hands  | Top-down overhead photo of cast iron pan on gas stove burner, steak searing in pan, two human hands visible resting near pan holding tongs loosely, person present watching sear, realistic kitchen, sharp detail, natural lighting
+searing/3_one_hand    | Top-down overhead photo of cast iron pan on gas stove burner, steak in pan sizzling, one human hand visible holding tongs over pan, only one forearm in frame, person partially visible, realistic kitchen, sharp detail, natural lighting
+searing/4_ARM_EDGE    | Top-down overhead photo of cast iron pan on gas stove burner, steak searing in pan, very edge of human arm barely visible at frame corner, person almost out of view, realistic kitchen, sharp detail, natural lighting
+searing/5_JUST_LEFT   | Top-down overhead photo of cast iron pan on gas stove burner, steak searing in hot pan, tongs placed down on counter beside pan as if just released, no hands visible, no person in frame, person just stepped away, realistic kitchen, sharp detail, natural lighting
+searing/6_ABSENT      | Top-down overhead photo of cast iron pan on gas stove burner, steak in pan with flame on high, tongs on counter, no hands visible, no person in frame, nobody present, meat cooking completely unattended, realistic kitchen, sharp detail, natural lighting
+
+# ── NEGATIVE PROMPT ────────────────────────────────────────────────────────
 
 NEGATIVE: cartoon, anime, illustration, drawing, painting, CGI, render, low quality, blurry, text, watermark, logo, distorted, extra objects, unrealistic colors, side angle, diagonal view

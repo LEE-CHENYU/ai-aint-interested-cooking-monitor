@@ -1,12 +1,67 @@
+# ============================================================================
 # TASK 4 — STOVE ON, NOBODY THERE
-# Visual signal: visible flame on burner + no hands/body in frame
+# 6 stove setups × 6 attention levels = 36 images
+# Setups: gas pot, gas pan, gas wok, gas multi-burner, electric coil, induction
+# Attention: 1_off_empty → 2_off_person → 3_on_attended → 4_ON_TURNING_AWAY → 5_ON_ABSENT → 6_ON_DANGER
+# Camera: top-down overhead, consistent framing
+# ============================================================================
 
-yes_flame_pot     | Top-down overhead photo of pot on gas stove, blue gas flame clearly visible around burner, water simmering inside pot, no hands visible, no person in frame, nobody present, unattended dangerous situation, realistic kitchen, sharp detail, natural lighting
-yes_flame_pan     | Top-down overhead photo of frying pan on gas stove, blue gas flame visible under pan, oil heating in pan with slight shimmer, no hands visible, no person in frame, nobody present, unattended stove with flame, realistic kitchen, sharp detail, natural lighting
-yes_flame_wok     | Top-down overhead photo of wok on gas stove, high blue flame visible around wok base, food sizzling in wok, smoke beginning to rise, no hands visible, no person in frame, nobody present, abandoned cooking, realistic kitchen, sharp detail, natural lighting
+# FORMAT: {setup}/{attention} | {prompt}
 
-no_attended       | Top-down overhead photo of pot on gas stove, blue gas flame visible, soup simmering, human hands holding ladle stirring pot, person clearly present and cooking, attended stove, safe situation, realistic kitchen, sharp detail, natural lighting
-no_stove_off      | Top-down overhead photo of pot on gas stove, burner turned off, no flame visible, no heat, pot sitting idle on cold burner, no person in frame, stove safely off, realistic kitchen, sharp detail, natural lighting
-no_electric_off   | Top-down overhead photo of pot on electric stovetop, coil element dark and cold, no heat indicator, pot with water sitting on cold burner, no person in frame, stove safely off, realistic kitchen, sharp detail, natural lighting
+# ── GAS STOVE POT ─────────────────────────────────────────────────────────
+
+gas_pot/1_off_empty       | Top-down overhead photo of stainless steel pot on gas stove, burner knob at off position, no flame visible, no heat, pot with water sitting cold, no person in frame, stove safely off, empty kitchen, realistic kitchen, sharp detail, natural lighting
+gas_pot/2_off_person      | Top-down overhead photo of stainless steel pot on gas stove, burner off no flame, human hands visible lifting pot lid checking inside, person present but stove is off, safe situation, realistic kitchen, sharp detail, natural lighting
+gas_pot/3_on_attended     | Top-down overhead photo of stainless steel pot on gas stove, blue gas flame visible around burner, soup simmering, human hands holding spoon stirring pot, person present and attentive, flame on and attended, realistic kitchen, sharp detail, natural lighting
+gas_pot/4_ON_TURNING_AWAY | Top-down overhead photo of stainless steel pot on gas stove, blue gas flame visible around burner, soup simmering, very edge of human arm at frame border, person turning away from stove, flame on and person leaving, realistic kitchen, sharp detail, natural lighting
+gas_pot/5_ON_ABSENT       | Top-down overhead photo of stainless steel pot on gas stove, blue gas flame clearly visible around burner, soup simmering, no hands visible, no person in frame, nobody present, flame on with nobody watching, unattended stove, realistic kitchen, sharp detail, natural lighting
+gas_pot/6_ON_DANGER       | Top-down overhead photo of stainless steel pot on gas stove, blue gas flame on high clearly visible, pot boiling vigorously with foam near rim, light smoke rising, no hands visible, no person in frame, nobody present, dangerous unattended situation, realistic kitchen, sharp detail, natural lighting
+
+# ── GAS STOVE PAN ─────────────────────────────────────────────────────────
+
+gas_pan/1_off_empty       | Top-down overhead photo of frying pan on gas stove, burner off no flame, cold pan with no food, no person in frame, stove safely off, empty quiet kitchen, realistic kitchen, sharp detail, natural lighting
+gas_pan/2_off_person      | Top-down overhead photo of frying pan on gas stove, burner off no flame, human hands visible placing food into cold pan, person present preparing to cook, stove safely off, realistic kitchen, sharp detail, natural lighting
+gas_pan/3_on_attended     | Top-down overhead photo of frying pan on gas stove, blue gas flame visible under pan, food frying in pan, human hands holding spatula flipping food, person present and actively cooking, flame on and attended, realistic kitchen, sharp detail, natural lighting
+gas_pan/4_ON_TURNING_AWAY | Top-down overhead photo of frying pan on gas stove, blue gas flame visible under pan, food frying in oil, edge of human arm barely visible at frame border, person moving away from stove, flame on person leaving, realistic kitchen, sharp detail, natural lighting
+gas_pan/5_ON_ABSENT       | Top-down overhead photo of frying pan on gas stove, blue gas flame clearly visible under pan, oil heating in pan with shimmer, no hands visible, no person in frame, nobody present, flame on nobody watching, unattended stove, realistic kitchen, sharp detail, natural lighting
+gas_pan/6_ON_DANGER       | Top-down overhead photo of frying pan on gas stove, blue gas flame on high under pan, oil overheating starting to smoke, faint haze above pan, no hands visible, no person in frame, nobody present, dangerous unattended hot oil, realistic kitchen, sharp detail, natural lighting
+
+# ── GAS STOVE WOK ─────────────────────────────────────────────────────────
+
+gas_wok/1_off_empty       | Top-down overhead photo of carbon steel wok on gas stove, burner off no flame, empty clean wok, no person in frame, stove safely off, idle kitchen, realistic kitchen, sharp detail, natural lighting
+gas_wok/2_off_person      | Top-down overhead photo of carbon steel wok on gas stove, burner off no flame, human hands visible adding oil to cold wok, person present at cold stove, preparing to cook, realistic kitchen, sharp detail, natural lighting
+gas_wok/3_on_attended     | Top-down overhead photo of carbon steel wok on gas stove, high blue gas flame visible around wok base, food sizzling in wok, human hands tossing food with spatula, person present and actively stir-frying, realistic kitchen, sharp detail, natural lighting
+gas_wok/4_ON_TURNING_AWAY | Top-down overhead photo of carbon steel wok on gas stove, blue gas flame visible around wok base, food in wok, very edge of human forearm at frame corner, person walking away from wok, flame on person leaving, realistic kitchen, sharp detail, natural lighting
+gas_wok/5_ON_ABSENT       | Top-down overhead photo of carbon steel wok on gas stove, high blue gas flame clearly visible around wok base, food sitting in wok sizzling, no hands visible, no person in frame, nobody present, high flame unattended wok, realistic kitchen, sharp detail, natural lighting
+gas_wok/6_ON_DANGER       | Top-down overhead photo of carbon steel wok on gas stove, high blue gas flame around wok, food charring in wok with smoke rising, oil starting to smoke heavily, no hands visible, no person in frame, nobody present, dangerous unattended smoking wok, realistic kitchen, sharp detail, natural lighting
+
+# ── GAS MULTI-BURNER ──────────────────────────────────────────────────────
+
+gas_multi/1_off_empty       | Top-down overhead photo of gas stove with four burners visible, all burners off no flames, empty pots and pans on two burners, no person in frame, all stove safely off, quiet kitchen, realistic kitchen, sharp detail, natural lighting
+gas_multi/2_off_person      | Top-down overhead photo of gas stove with four burners visible, all burners off, human hands visible arranging pots on burners, person present at cold stove, setting up to cook, realistic kitchen, sharp detail, natural lighting
+gas_multi/3_on_attended     | Top-down overhead photo of gas stove with four burners visible, two burners lit with blue flames, pot simmering on one and pan frying on another, human hands visible managing both, person present multi-tasking, realistic kitchen, sharp detail, natural lighting
+gas_multi/4_ON_TURNING_AWAY | Top-down overhead photo of gas stove with four burners visible, two burners lit with blue flames, food cooking on both, very edge of human arm at frame border, person stepping away from multi-burner cooking, realistic kitchen, sharp detail, natural lighting
+gas_multi/5_ON_ABSENT       | Top-down overhead photo of gas stove with four burners visible, two burners lit with blue gas flames clearly visible, food cooking unattended on both, no hands visible, no person in frame, nobody present, multiple flames nobody watching, realistic kitchen, sharp detail, natural lighting
+gas_multi/6_ON_DANGER       | Top-down overhead photo of gas stove with four burners visible, three burners lit with blue flames, one pot boiling over and one pan smoking, no hands visible, no person in frame, nobody present, multiple hazards unattended, realistic kitchen, sharp detail, natural lighting
+
+# ── ELECTRIC COIL ──────────────────────────────────────────────────────────
+
+electric/1_off_empty       | Top-down overhead photo of pot on electric coil stovetop, coil element dark and cold, no heat indicator, pot sitting on cold burner, no person in frame, stove safely off, realistic kitchen, sharp detail, natural lighting
+electric/2_off_person      | Top-down overhead photo of pot on electric coil stovetop, coil element dark and cold, human hands visible placing pot on burner, person present at cold stove, preparing to cook, realistic kitchen, sharp detail, natural lighting
+electric/3_on_attended     | Top-down overhead photo of pot on electric coil stovetop, coil element glowing bright red-orange, water heating in pot, human hands visible stirring with spoon, person present and attentive, hot element attended, realistic kitchen, sharp detail, natural lighting
+electric/4_ON_TURNING_AWAY | Top-down overhead photo of pot on electric coil stovetop, coil element glowing red visible at edges of pot, water simmering, very edge of human arm at frame border, person moving away, hot element person leaving, realistic kitchen, sharp detail, natural lighting
+electric/5_ON_ABSENT       | Top-down overhead photo of pot on electric coil stovetop, coil element glowing bright red-orange clearly visible around pot edge, water simmering, no hands visible, no person in frame, nobody present, hot element nobody watching, realistic kitchen, sharp detail, natural lighting
+electric/6_ON_DANGER       | Top-down overhead photo of pot on electric coil stovetop, coil element glowing intense red, pot boiling hard with foam rising, steam heavy, no hands visible, no person in frame, nobody present, hot element dangerous unattended, realistic kitchen, sharp detail, natural lighting
+
+# ── INDUCTION ──────────────────────────────────────────────────────────────
+
+induction/1_off_empty       | Top-down overhead photo of pot on induction cooktop, smooth glass surface with display showing off, no heat indicator, pot sitting cold, no person in frame, cooktop safely off, realistic kitchen, sharp detail, natural lighting
+induction/2_off_person      | Top-down overhead photo of pot on induction cooktop, display off no heat, human hands visible adjusting pot position on cooktop, person present at cold cooktop, realistic kitchen, sharp detail, natural lighting
+induction/3_on_attended     | Top-down overhead photo of pot on induction cooktop, digital display showing temperature and power level lit up, water simmering in pot, human hands visible stirring, person present and cooking, cooktop on attended, realistic kitchen, sharp detail, natural lighting
+induction/4_ON_TURNING_AWAY | Top-down overhead photo of pot on induction cooktop, digital display lit showing active heating, food cooking in pot, very edge of human arm at frame border, person walking away from cooktop, realistic kitchen, sharp detail, natural lighting
+induction/5_ON_ABSENT       | Top-down overhead photo of pot on induction cooktop, digital display clearly lit showing active heating at high power, water boiling in pot, no hands visible, no person in frame, nobody present, cooktop on nobody watching, realistic kitchen, sharp detail, natural lighting
+induction/6_ON_DANGER       | Top-down overhead photo of pot on induction cooktop, digital display showing high power active, pot boiling aggressively foam near rim, no hands visible, no person in frame, nobody present, active cooktop dangerous unattended, realistic kitchen, sharp detail, natural lighting
+
+# ── NEGATIVE PROMPT ────────────────────────────────────────────────────────
 
 NEGATIVE: cartoon, anime, illustration, drawing, painting, CGI, render, low quality, blurry, text, watermark, logo, distorted, extra objects, unrealistic colors, side angle, diagonal view
