@@ -1,0 +1,24 @@
+# Camera zone definitions
+# Each zone maps to a physical camera position and the events it detects
+
+zones:
+  stove:
+    camera_angle: top_view
+    description: "Top-down view of the stove area"
+    detect_events:
+      - water_state        # not_hot, simmering, boiling
+      - pot_present         # boolean
+      - smoke_suspected     # boolean
+      - steam_level         # none, low, high
+    fps: 3
+    smoothing_window: 7    # frames for temporal smoothing
+
+  counter:
+    camera_angle: front_view
+    description: "Front-facing view of the working/prep area"
+    detect_events:
+      - hands_active        # boolean - hands in frame
+      - knife_in_use        # boolean
+      - ingredient_present  # boolean
+    fps: 2
+    smoothing_window: 5

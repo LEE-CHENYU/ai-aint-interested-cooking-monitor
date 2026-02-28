@@ -1,0 +1,56 @@
+# Demo recipe: Pasta with Tomato Sauce
+# This recipe naturally creates multitasking moments (overlapping timers)
+
+recipe:
+  name: "Pasta with Tomato Sauce"
+  estimated_time_minutes: 25
+  steps:
+    - id: 1
+      name: "Boil water"
+      description: "Fill pot with water and bring to a rolling boil"
+      zone: stove
+      trigger_event: "water_state == boiling"
+      duration_seconds: null  # Ends when boiling detected
+      dependencies: []
+
+    - id: 2
+      name: "Prep garlic and onion"
+      description: "Dice onion and mince garlic while water heats"
+      zone: counter
+      trigger_event: null  # Manual or time-based
+      duration_seconds: 300
+      dependencies: []
+      parallel_with: [1]
+
+    - id: 3
+      name: "Add pasta to boiling water"
+      description: "Add pasta once water is at a rolling boil"
+      zone: stove
+      trigger_event: null
+      duration_seconds: 480  # 8-minute timer
+      dependencies: [1]
+
+    - id: 4
+      name: "Start sauce in second pan"
+      description: "Saute garlic and onion, add tomato sauce"
+      zone: stove
+      trigger_event: null
+      duration_seconds: 600
+      dependencies: [2]
+      parallel_with: [3]
+
+    - id: 5
+      name: "Drain pasta"
+      description: "Drain pasta when timer expires"
+      zone: stove
+      trigger_event: null
+      duration_seconds: 60
+      dependencies: [3]
+
+    - id: 6
+      name: "Combine and serve"
+      description: "Mix drained pasta with sauce"
+      zone: counter
+      trigger_event: null
+      duration_seconds: 120
+      dependencies: [4, 5]

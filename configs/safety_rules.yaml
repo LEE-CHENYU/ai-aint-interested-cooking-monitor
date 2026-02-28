@@ -1,0 +1,35 @@
+# Safety and security compliance rules
+# The agent checks these continuously and alerts on violations
+
+rules:
+  - id: unattended_heat
+    description: "Active heat source with no person detected for too long"
+    condition: "stove.pot_present AND NOT counter.hands_active"
+    timeout_seconds: 120
+    severity: high
+    action: speak
+    message: "You've been away from the stove for 2 minutes. Please check your cooking."
+
+  - id: smoke_detected
+    description: "Smoke suspected in stove zone"
+    condition: "stove.smoke_suspected"
+    severity: critical
+    action: speak
+    message: "Smoke detected near the stove. Please check immediately."
+    cooldown_seconds: 30
+
+  - id: boil_over_risk
+    description: "Water boiling with high steam - boil-over risk"
+    condition: "stove.water_state == boiling AND stove.steam_level == high"
+    severity: high
+    action: speak
+    message: "Boil-over risk detected. Consider lowering the heat."
+    cooldown_seconds: 60
+
+  - id: knife_safety
+    description: "Knife in use without proper hand position detected"
+    condition: "counter.knife_in_use"
+    severity: low
+    action: show_card
+    message: "Knife in use - keep fingers curled and use a stable cutting surface."
+    cooldown_seconds: 300

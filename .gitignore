@@ -1,0 +1,48 @@
+# Credentials & secrets
+instance_info.txt
+*.pem
+*.key
+service-account*.json
+
+# Model artifacts (too large for git)
+*.pt
+*.pth
+*.safetensors
+*.gguf
+*.bin
+checkpoints/
+outputs/
+
+# Data artifacts (large files)
+data/synthetic/top_view/*.jpg
+data/synthetic/top_view/*.png
+data/synthetic/front_view/*.jpg
+data/synthetic/front_view/*.png
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+env/
+.eggs/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Logs
+*.log
+wandb/
+runs/

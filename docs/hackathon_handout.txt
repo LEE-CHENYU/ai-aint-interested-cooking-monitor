@@ -1,0 +1,62 @@
+
+
+Google DeepMind × InstaLILY On-Device AI Hackathon
+10 AM – 6 PM
+
+The Challenge
+Build something that combines:
+A fine-tuned on-device model adapted to your task
+Agentic behavior - your system decides and acts autonomously
+Visual input - camera, video, or screen feeding into the system
+A genuine reason this runs on-device
+Optional bonus: voice input and/or output.
+You have access to the Gemma family of open models via Huggingface - Gemma 3, Gemma 3n, FunctionGemma, and the ecosystem around them. Use whatever combination fits your project.
+
+The On-Device Question
+Ask yourself: "What becomes possible when the model lives on the device?"
+The best projects won't be cloud projects that happen to run locally. They'll be things that only work because they're on-device - latency that's physically impossible with a cloud round-trip, visual data that cannot leave the device, a system that adapts in ways cloud models can't, offline operation, or economics that don't work with per-call API pricing.
+
+Components
+Fine-Tuned On-Device Gemma Models
+Pick a Gemma model that fits your task. You are also encouraged to make it yours through fine-tuning. Sometimes, a model adapted to your domain will outperform a general-purpose model, and that improvement is one of the most compelling things you can show in a demo.
+The Gemma family gives you a range of options. Gemma 3 is the most capable - pick 4B or 12B depending on your GPU. Gemma 3n is optimized for on-device and handles text, image, audio, and video in a single model. Gemma 3 270M and FunctionGemma are tiny models designed for fine-tuning on narrow tasks - FunctionGemma specifically for function calling. PaliGemma 2 is there if you need a dedicated vision model.
+Fine-tune with whatever you're comfortable with - Hugging Face, Unsloth, Keras, NeMo all work. Same for deployment: LM Studio, Ollama, llama.cpp, LiteRT-LM, MLX, your call.
+Agentic Behavior
+Your system should take autonomous actions toward goals.
+FunctionGemma is worth looking at - define your API surface, fine-tune on examples of how users request those actions, and it outputs the right function call. For more complex architectures, consider pairing it with a larger Gemma 3 model for deeper reasoning. Gemma 3's native function calling (from 1B up) also works well for agentic loops.
+Visual Input
+Your system should use visual input - camera feeds, video, screen capture - in a way that connects to what the agent does. Gemma 3 (4B, 12B) reasons about images and text. Gemma 3n E4B handles images and video natively with its MobileNet-V5 encoder. PaliGemma 2 can be fine-tuned for specialized tasks like detection, segmentation, and OCR.
+Voice (Optional Bonus)
+Gemma 3n includes native audioff, processing in 160ms chunks on-device - voice + vision in a single model without separate STT/TTS. Cloud voice providers are also fine. Voice is the one component where we're flexible on cloud usage.
+
+How the Pieces Connect
+The strongest projects are ones where the components reinforce each other - where what the system sees shapes what it decides to do, and where fine-tuning is what makes that loop actually work for your domain. Think system, not checklist.
+
+Example Projects (you can totally use publicly available videos for this)
+Surgical instrument tracker. A camera watches a procedure tray. The model identifies instruments, tracks which have been used, flags if something is missing or out of sequence. On-device because patient video cannot leave the room and feedback must be real-time. Fine-tuning teaches your specific instrument set. Agency is the procedure-aware state machine that knows what should happen next.
+Industrial anomaly detector. A camera monitors a robotic arm or assembly process. The system spots drift, misalignment, or defects in real-time and autonomously flags or adjusts. On-device because the control loop needs sub-50ms latency and factory cells often lack connectivity. Fine-tuning defines what "normal" looks like for your line. Agency is the continuous monitor-assess-act loop. You can use publicly available videos for your demo.
+Workspace inventory tracker. Camera watches a physical space — a lab bench, a retail shelf, a parts bin. The system tracks what's there, notices when items are taken or misplaced, maintains a running inventory. Fine-tune on your specific goals. On-device because it's a continuous visual feed that can't practically stream to the cloud, and it needs to maintain state across sessions. The agent keeps a persistent model of what should be where.
+
+What a Great Submission Looks Like
+A real reason it runs on-device. Components that work together as a system. Fine-tuning that makes the project noticeably better at its specific task. A live demo that actually runs. If voice is included, it feels natural and adds value.
+
+Being Realistic About 8 Hours
+You have time to build a focused prototype, not a polished product. LoRA fine-tuning on smaller Gemma models can finish in under an hour. Spend the middle of the day wiring up the agent loop and vision pipeline. Save the last couple hours for integration and testing with real inputs. A focused prototype that works live will always be more compelling than something ambitious explained with slides.
+
+What Impresses the Judges
+Projects where on-device genuinely matters. Systems where the components connect to each other rather than sitting side by side. Ambition matters, but so does a demo that runs. Voice is a bonus when it works well.
+
+AI Tool Use Policy
+You are welcome to use any AI coding tools during the hackathon.
+
+Resources
+Gemma models & docs: ai.google.dev/gemma
+All models on Hugging Face: huggingface.co/google
+Gemma Cookbook: github.com/google-gemini/gemma-cookbook
+Google AI Edge / LiteRT-LM: github.com/google-ai-edge/LiteRT-LM
+Fine-tuning guide: ai.google.dev/gemma/docs/tune
+FunctionGemma: huggingface.co/google/functiongemma-270m-it
+Gemma 3n developer guide: developers.googleblog.com/en/introducing-gemma-3n-developer-guide
+Google AI Studio: aistudio.google.com
+
+

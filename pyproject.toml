@@ -1,0 +1,30 @@
+[project]
+name = "cooking-monitor"
+version = "0.1.0"
+description = "On-device AI kitchen monitoring system using Gemma models"
+requires-python = ">=3.10"
+dependencies = [
+    "torch>=2.0",
+    "transformers>=4.40",
+    "peft>=0.10",
+    "opencv-python>=4.8",
+    "pyyaml>=6.0",
+    "websockets>=12.0",
+    "pydantic>=2.0",
+]
+
+[project.optional-dependencies]
+fine-tuning = [
+    "bitsandbytes>=0.43",
+    "datasets>=2.18",
+    "accelerate>=0.28",
+    "trl>=0.8",
+]
+ui = [
+    "fastapi>=0.110",
+    "uvicorn>=0.29",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*", "data*"]

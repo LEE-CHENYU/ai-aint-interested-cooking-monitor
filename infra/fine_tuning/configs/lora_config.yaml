@@ -1,0 +1,23 @@
+# LoRA fine-tuning configuration
+
+model:
+  name: "google/functiongemma-270m-it"  # or google/gemma-3-4b-it
+  quantization: "4bit"                   # 4bit QLoRA for memory efficiency
+
+lora:
+  r: 16
+  alpha: 32
+  dropout: 0.05
+  target_modules: ["q_proj", "v_proj", "k_proj", "o_proj"]
+
+training:
+  epochs: 3
+  batch_size: 4
+  learning_rate: 2.0e-4
+  warmup_steps: 10
+  max_seq_length: 512
+  gradient_accumulation_steps: 4
+
+output:
+  save_steps: 50
+  logging_steps: 10

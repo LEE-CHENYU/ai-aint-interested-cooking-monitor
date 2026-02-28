@@ -1,0 +1,292 @@
+The idea we are thinking about is actually placing an agent, a real-time agent in the kitchen so it can monitor and giving advices when the users are cooking. And we are going to place several cameras inside the kitchen and that will be just input into our on-device model. The on-device model is giving the real-time feedbacks. We are going to train it with pre-labeled data, either from the model or we tweak it manually. So the pain point we are addressing is first multitasking, how to coordinate different procedures so we can save time and in the same time prevent overcooking and other kind of bad occasions. I think the output should be either displayed on the smartphone screen directly or it should output as voices, guidance from the cell phone. Please help me evaluate this idea against the Hexon guidelines and think of the challenges, break down the steps like roadmaps, how we should build this in around like 8 hours.
+
+How this stacks up against the hackathon brief on the handout
+
+The handout’s four “must combine” criteria map cleanly to your concept:
+	1.	Fine‑tuned on‑device model adapted to the task
+
+	•	Strong fit if you actually adapt something (even a small LoRA) to your kitchen policy.
+	•	The easiest “showable” adaptation is fine‑tuning the decision policy: given a structured kitchen state + active timers → output the next action(s) in a consistent JSON/function‑call schema.
+
+	2.	Agentic behavior (decides + acts autonomously)
+
+	•	Very strong fit if the system does more than narrate: it should start/adjust timers, raise prioritized alerts, re-order steps, and nag only when needed (e.g., boiling detected → create timer + voice cue).
+	•	A good judging “agent moment”: it interrupts you at the right time with a short, high‑value instruction.
+
+	3.	Visual input feeding the system
+
+	•	Obvious fit. Just be careful: judges care less about “many cameras” and more about the visual signal changing behavior.
+
+	4.	A genuine reason it runs locally
+This is one of your strongest angles:
+
+	•	Privacy: always‑on cameras in a home are a non‑starter for cloud processing.
+	•	Latency/safety: boil-over / smoke / “you walked away” needs sub‑second reaction.
+	•	Offline robustness: kitchens have flaky Wi‑Fi; you want it to keep working.
+This is exactly the “on-device question” in the handout.
+
+Bonus (voice I/O):
+	•	Voice output is perfect here. Voice input is optional; you can keep it minimal in 8 hours.
+
+Bottom line: concept is aligned. The risk is execution scope: multi‑view perception + real‑time planning can balloon fast. Your best move is to pick 2–3 kitchen “events” and build a rock‑solid closed loop: detect → decide → act.
+
+⸻
+
+The hardest challenges (and how to de-risk in 8 hours)
+
+1) Vision reliability in a real kitchen
+
+Why it’s hard: glare, steam, occlusion by hands, variable lighting, clutter.
+
+De-risk tactics:
+	•	Zone cameras: treat each viewpoint as a “zone” (stove / counter / sink) and only detect 1–2 things per zone.
+	•	Low FPS + smoothing: 2–5 fps per stream plus temporal smoothing beats flaky per-frame predictions.
+	•	Event-driven: use cheap motion/scene-change detection to decide when to run heavier inference.
+
+2) “Multitask coordination” is a planning problem, not just perception
+
+If you try to solve general cooking scheduling, you’ll run out of time.
+
+De-risk tactics:
+	•	Start with one structured scenario: two timers + one interrupt.
+	•	Use a simple heuristic scheduler (earliest deadline / slack time) and let the LLM handle phrasing + minor adjustments.
+
+3) False alarms kill trust
+
+If it nags constantly, people disable it.
+
+De-risk tactics:
+	•	Add a cooldown per alert type.
+	•	Require persistence (e.g., “boiling” for N consecutive frames).
+	•	Use severity levels: only interrupt with voice for high severity; show low severity on screen.
+
+4) Demonstrating “fine-tuned” credibly
+
+Judges will ask: “What exactly did you fine-tune?”
+
+Two realistic options:
+	•	Option A (recommended): fine-tune the agent policy (FunctionGemma / Gemma 3n)
+Inputs: structured state + timers + recipe step context
+Output: tool calls (set timer / speak / notify / reorder step)
+This is compact, controllable, and clearly “adapted to the task.”
+	•	Option B: fine-tune a tiny vision classifier (boiling vs not, smoke vs none)
+Easier compute-wise, but it looks less “agentic” unless paired with strong action logic.
+
+5) On-device compute constraints
+
+Multi-view video + LLM can be heavy.
+
+De-risk tactics:
+	•	Run the LLM only on state changes (or every 2–5 seconds), not every frame.
+	•	Quantize the LLM (4-bit) and keep prompts short.
+	•	Keep the perception model lightweight and ROI-based.
+
+⸻
+
+What I’d build as the 8-hour MVP
+
+MVP goal: “Kitchen Flow Coach” (stove + timers + step sequencing)
+
+You want one tight loop that proves the thesis:
+
+MVP features (do these):
+	1.	Detect one high-signal visual event from the stove zone
+	•	Example: water_state ∈ {not_hot, simmering, boiling} (or “boil-over risk”).
+	2.	Maintain timers + a simple step list (even hardcoded for one recipe)
+	3.	Agent autonomously starts/adjusts timers and gives short cues
+	4.	Phone UI + voice output (voice from phone or laptop is fine)
+
+Pick one demo recipe that naturally multitasks, like:
+	•	pasta + sauce, or
+	•	stir-fry + rice, or
+	•	eggs + toast + coffee
+
+The key is overlapping steps with timers.
+
+Stretch features (only if ahead):
+	•	Second zone (cutting board) detecting “hands actively chopping” or “ingredient present”
+	•	“Walk-away while active heat” heuristic (presence/motion detection near stove)
+	•	Personalization (quiet hours, preferred doneness, cue verbosity)
+
+⸻
+
+A concrete system design that matches the brief
+
+1) Perception layer (per camera/zone)
+
+Each camera produces a compact state object (don’t pass raw pixels into the planner unless you have a multimodal Gemma working reliably).
+
+Example state schema:
+
+{
+  "zone": "stove",
+  "ts": 1730000000,
+  "signals": {
+    "pot_present": true,
+    "water_state": "boiling",
+    "steam_level": "high",
+    "smoke_suspected": false
+  },
+  "confidence": {
+    "water_state": 0.84
+  }
+}
+
+How to implement quickly:
+	•	If you have a working multimodal model locally: ask it to classify into a small label set.
+	•	If not: use a small detector/classifier (even a quick transfer-learned MobileNet) for the single event you care about.
+
+2) World model + timer/task state
+
+Aggregate zones + maintain:
+	•	active timers
+	•	current recipe step index
+	•	last alert times (anti-nag)
+
+3) Agent layer (FunctionGemma-style tool calling)
+
+Define tools like:
+	•	set_timer(name, seconds)
+	•	adjust_timer(name, delta_seconds)
+	•	speak(text, priority)
+	•	show_card(title, bullets)
+	•	mark_step_done(step_id)
+	•	reorder_steps(new_order)
+
+Then the LLM outputs JSON tool calls. You execute them locally.
+
+This is where “agentic” becomes undeniable.
+
+⸻
+
+How to get the fine-tune done fast (and make it count)
+
+Fine-tune target: “kitchen policy → actions”
+
+You are not trying to teach cooking knowledge from scratch. You’re teaching:
+	•	when to interrupt
+	•	how to prioritize among multiple concurrent steps
+	•	what action to take (timer vs cue vs do nothing)
+
+Training examples look like:
+Input:
+
+{
+  "stove": {"water_state":"boiling", "pot_present":true},
+  "timers": [{"name":"pasta","remaining_s":0}],
+  "steps": [{"id":1,"name":"start pasta","status":"pending"}],
+  "user_prefs": {"verbosity":"low"}
+}
+
+Output:
+
+{
+  "actions": [
+    {"tool":"speak","args":{"text":"Water’s boiling—add pasta now. Starting 8-minute timer.","priority":"high"}},
+    {"tool":"set_timer","args":{"name":"pasta","seconds":480}},
+    {"tool":"mark_step_done","args":{"step_id":1}}
+  ]
+}
+
+Data creation in under an hour
+	•	Generate ~150–300 state → action pairs synthetically by enumerating combinations of:
+	•	water_state (3–4 values)
+	•	0/1/2 active timers
+	•	step statuses
+	•	severity flags (smoke / boil-over risk)
+	•	Use a base model to draft actions, then manually edit the top 50 “core” examples so behavior is crisp.
+	•	Fine-tune with LoRA/QLoRA on-device (laptop GPU if available). Even a small run is enough to say “adapted to task.”
+
+What judges like to see:
+	•	before/after behavior on the same state snapshot
+	•	consistent tool-call formatting after fine-tune
+	•	fewer hallucinated actions
+
+⸻
+
+An 8-hour build roadmap (time-boxed)
+
+Hour 0–0.5: Lock scope + demo script
+	•	Pick one recipe and define 6–10 steps with durations/dependencies.
+	•	Pick one visual event to detect (e.g., “boiling”).
+	•	Write the live demo narrative (2–3 minutes).
+
+Deliverable: a one-page “demo contract” the team won’t violate.
+
+Hour 0.5–2: Camera ingest + simple event detector
+	•	Bring up 1–2 camera streams (OpenCV).
+	•	Implement either:
+	•	quick VLM classification into {not_hot, simmering, boiling}, or
+	•	lightweight classifier (transfer learning) on a tiny labeled set.
+	•	Add temporal smoothing (e.g., require 5/7 recent frames to agree).
+
+Deliverable: terminal output printing stable water_state in real time.
+
+Hour 2–3: Timer engine + task representation
+	•	Implement:
+	•	timer create/update/expire
+	•	a step list with durations and “ready” status
+	•	simple prioritization: earliest deadline first + “interrupt only on high severity”
+
+Deliverable: a JSON world state updating every second.
+
+Hour 3–4.5: Agent loop + tool execution
+	•	Implement tool-calling interface (even a local JSON protocol).
+	•	Every 2–5 seconds or on state change:
+	•	build compact prompt from world state
+	•	ask local model to output actions
+	•	validate actions with a strict schema
+	•	execute: timers + UI + voice
+
+Deliverable: agent starts a timer when boiling is detected.
+
+Hour 4.5–6: Fine-tune + integrate
+	•	Generate synthetic training pairs + hand-edit a subset.
+	•	Run LoRA/QLoRA fine-tune.
+	•	Swap base → tuned model and show improvement:
+	•	fewer unnecessary alerts
+	•	better prioritization when two timers active
+	•	consistent tool calls
+
+Deliverable: before/after clip or side-by-side logs.
+
+Hour 6–7: Phone UI + voice output
+
+Fastest reliable approach:
+	•	laptop runs a local web server + websocket
+	•	phone opens a local webpage showing:
+	•	current step
+	•	timers
+	•	last cue
+	•	voice: either
+	•	phone browser Web Speech API (if feasible), or
+	•	laptop TTS (acceptable if time is tight)
+
+Deliverable: judge can hold the phone and see cues + timers.
+
+Hour 7–8: Hardening + backup demo
+	•	Add guardrails:
+	•	cooldown timers for alerts
+	•	“do nothing” allowed
+	•	schema validation (never execute malformed tool calls)
+	•	Record a backup run using a pre-recorded video feed in case the live camera is flaky.
+	•	Prepare 3 slides: problem → on-device 이유 → technical architecture.
+
+Deliverable: stable end-to-end demo twice in a row.
+
+⸻
+
+What to emphasize to judges (the story that scores)
+	1.	This can’t be cloud-first: always-on home video + latency-sensitive hazards.
+	2.	Closed-loop autonomy: it doesn’t just talk; it sets timers and manages steps.
+	3.	Adaptation: your fine-tune encodes a “kitchen policy” (when to interrupt, how to prioritize).
+	4.	Real-time: show reaction time from event → cue.
+
+⸻
+
+If you want, I can also give you:
+	•	a minimal prompt + JSON schema for FunctionGemma-style tool calls,
+	•	a tiny label taxonomy for stove/counter zones that’s realistic to annotate quickly,
+	•	and a demo recipe step graph that naturally creates multitasking moments.
+
+But even without that: if you nail one visual trigger + timers + autonomous action, you’ll be very well aligned with the handout’s criteria.

@@ -1,0 +1,10 @@
+# Track 1: Fine-tuning dependencies (install on GCP GPU instance)
+torch>=2.0
+transformers>=4.40
+peft>=0.10
+bitsandbytes>=0.43
+datasets>=2.18
+accelerate>=0.28
+trl>=0.8
+pyyaml>=6.0
+safetensors>=0.4
