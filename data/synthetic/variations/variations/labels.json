@@ -1,0 +1,758 @@
+[
+  {
+    "file": "pasta/1_cold_v1.png",
+    "dish": "pasta",
+    "state": "1_cold",
+    "is_failure": false,
+    "variation": 1
+  },
+  {
+    "file": "pasta/1_cold_v2.png",
+    "dish": "pasta",
+    "state": "1_cold",
+    "is_failure": false,
+    "variation": 2
+  },
+  {
+    "file": "pasta/1_cold_v3.png",
+    "dish": "pasta",
+    "state": "1_cold",
+    "is_failure": false,
+    "variation": 3
+  },
+  {
+    "file": "pasta/2_simmer_v1.png",
+    "dish": "pasta",
+    "state": "2_simmer",
+    "is_failure": false,
+    "variation": 1
+  },
+  {
+    "file": "pasta/2_simmer_v2.png",
+    "dish": "pasta",
+    "state": "2_simmer",
+    "is_failure": false,
+    "variation": 2
+  },
+  {
+    "file": "pasta/2_simmer_v3.png",
+    "dish": "pasta",
+    "state": "2_simmer",
+    "is_failure": false,
+    "variation": 3
+  },
+  {
+    "file": "pasta/3_boil_v1.png",
+    "dish": "pasta",
+    "state": "3_boil",
+    "is_failure": false,
+    "variation": 1
+  },
+  {
+    "file": "pasta/3_boil_v2.png",
+    "dish": "pasta",
+    "state": "3_boil",
+    "is_failure": false,
+    "variation": 2
+  },
+  {
+    "file": "pasta/3_boil_v3.png",
+    "dish": "pasta",
+    "state": "3_boil",
+    "is_failure": false,
+    "variation": 3
+  },
+  {
+    "file": "pasta/4_BOIL_OVER_v1.png",
+    "dish": "pasta",
+    "state": "4_BOIL_OVER",
+    "is_failure": true,
+    "variation": 1
+  },
+  {
+    "file": "pasta/4_BOIL_OVER_v2.png",
+    "dish": "pasta",
+    "state": "4_BOIL_OVER",
+    "is_failure": true,
+    "variation": 2
+  },
+  {
+    "file": "pasta/4_BOIL_OVER_v3.png",
+    "dish": "pasta",
+    "state": "4_BOIL_OVER",
+    "is_failure": true,
+    "variation": 3
+  },
+  {
+    "file": "pasta/5_done_ok_v1.png",
+    "dish": "pasta",
+    "state": "5_done_ok",
+    "is_failure": false,
+    "variation": 1
+  },
+  {
+    "file": "pasta/5_done_ok_v2.png",
+    "dish": "pasta",
+    "state": "5_done_ok",
+    "is_failure": false,
+    "variation": 2
+  },
+  {
+    "file": "pasta/5_done_ok_v3.png",
+    "dish": "pasta",
+    "state": "5_done_ok",
+    "is_failure": false,
+    "variation": 3
+  },
+  {
+    "file": "pasta/6_FAILED_v1.png",
+    "dish": "pasta",
+    "state": "6_FAILED",
+    "is_failure": true,
+    "variation": 1
+  },
+  {
+    "file": "pasta/6_FAILED_v2.png",
+    "dish": "pasta",
+    "state": "6_FAILED",
+    "is_failure": true,
+    "variation": 2
+  },
+  {
+    "file": "pasta/6_FAILED_v3.png",
+    "dish": "pasta",
+    "state": "6_FAILED",
+    "is_failure": true,
+    "variation": 3
+  },
+  {
+    "file": "ramen/1_cold_v1.png",
+    "dish": "ramen",
+    "state": "1_cold",
+    "is_failure": false,
+    "variation": 1
+  },
+  {
+    "file": "ramen/1_cold_v2.png",
+    "dish": "ramen",
+    "state": "1_cold",
+    "is_failure": false,
+    "variation": 2
+  },
+  {
+    "file": "ramen/1_cold_v3.png",
+    "dish": "ramen",
+    "state": "1_cold",
+    "is_failure": false,
+    "variation": 3
+  },
+  {
+    "file": "ramen/2_simmer_v1.png",
+    "dish": "ramen",
+    "state": "2_simmer",
+    "is_failure": false,
+    "variation": 1
+  },
+  {
+    "file": "ramen/2_simmer_v2.png",
+    "dish": "ramen",
+    "state": "2_simmer",
+    "is_failure": false,
+    "variation": 2
+  },
+  {
+    "file": "ramen/2_simmer_v3.png",
+    "dish": "ramen",
+    "state": "2_simmer",
+    "is_failure": false,
+    "variation": 3
+  },
+  {
+    "file": "ramen/3_boil_v1.png",
+    "dish": "ramen",
+    "state": "3_boil",
+    "is_failure": false,
+    "variation": 1
+  },
+  {
+    "file": "ramen/3_boil_v2.png",
+    "dish": "ramen",
+    "state": "3_boil",
+    "is_failure": false,
+    "variation": 2
+  },
+  {
+    "file": "ramen/3_boil_v3.png",
+    "dish": "ramen",
+    "state": "3_boil",
+    "is_failure": false,
+    "variation": 3
+  },
+  {
+    "file": "ramen/4_BOIL_OVER_v1.png",
+    "dish": "ramen",
+    "state": "4_BOIL_OVER",
+    "is_failure": true,
+    "variation": 1
+  },
+  {
+    "file": "ramen/4_BOIL_OVER_v2.png",
+    "dish": "ramen",
+    "state": "4_BOIL_OVER",
+    "is_failure": true,
+    "variation": 2
+  },
+  {
+    "file": "ramen/4_BOIL_OVER_v3.png",
+    "dish": "ramen",
+    "state": "4_BOIL_OVER",
+    "is_failure": true,
+    "variation": 3
+  },
+  {
+    "file": "ramen/5_done_ok_v1.png",
+    "dish": "ramen",
+    "state": "5_done_ok",
+    "is_failure": false,
+    "variation": 1
+  },
+  {
+    "file": "ramen/5_done_ok_v2.png",
+    "dish": "ramen",
+    "state": "5_done_ok",
+    "is_failure": false,
+    "variation": 2
+  },
+  {
+    "file": "ramen/5_done_ok_v3.png",
+    "dish": "ramen",
+    "state": "5_done_ok",
+    "is_failure": false,
+    "variation": 3
+  },
+  {
+    "file": "ramen/6_FAILED_v1.png",
+    "dish": "ramen",
+    "state": "6_FAILED",
+    "is_failure": true,
+    "variation": 1
+  },
+  {
+    "file": "ramen/6_FAILED_v2.png",
+    "dish": "ramen",
+    "state": "6_FAILED",
+    "is_failure": true,
+    "variation": 2
+  },
+  {
+    "file": "ramen/6_FAILED_v3.png",
+    "dish": "ramen",
+    "state": "6_FAILED",
+    "is_failure": true,
+    "variation": 3
+  },
+  {
+    "file": "mapo_tofu/1_cold_v1.png",
+    "dish": "mapo_tofu",
+    "state": "1_cold",
+    "is_failure": false,
+    "variation": 1
+  },
+  {
+    "file": "mapo_tofu/1_cold_v2.png",
+    "dish": "mapo_tofu",
+    "state": "1_cold",
+    "is_failure": false,
+    "variation": 2
+  },
+  {
+    "file": "mapo_tofu/1_cold_v3.png",
+    "dish": "mapo_tofu",
+    "state": "1_cold",
+    "is_failure": false,
+    "variation": 3
+  },
+  {
+    "file": "mapo_tofu/2_simmer_v1.png",
+    "dish": "mapo_tofu",
+    "state": "2_simmer",
+    "is_failure": false,
+    "variation": 1
+  },
+  {
+    "file": "mapo_tofu/2_simmer_v2.png",
+    "dish": "mapo_tofu",
+    "state": "2_simmer",
+    "is_failure": false,
+    "variation": 2
+  },
+  {
+    "file": "mapo_tofu/2_simmer_v3.png",
+    "dish": "mapo_tofu",
+    "state": "2_simmer",
+    "is_failure": false,
+    "variation": 3
+  },
+  {
+    "file": "mapo_tofu/3_boil_v1.png",
+    "dish": "mapo_tofu",
+    "state": "3_boil",
+    "is_failure": false,
+    "variation": 1
+  },
+  {
+    "file": "mapo_tofu/3_boil_v2.png",
+    "dish": "mapo_tofu",
+    "state": "3_boil",
+    "is_failure": false,
+    "variation": 2
+  },
+  {
+    "file": "mapo_tofu/3_boil_v3.png",
+    "dish": "mapo_tofu",
+    "state": "3_boil",
+    "is_failure": false,
+    "variation": 3
+  },
+  {
+    "file": "mapo_tofu/4_BOIL_OVER_v1.png",
+    "dish": "mapo_tofu",
+    "state": "4_BOIL_OVER",
+    "is_failure": true,
+    "variation": 1
+  },
+  {
+    "file": "mapo_tofu/4_BOIL_OVER_v2.png",
+    "dish": "mapo_tofu",
+    "state": "4_BOIL_OVER",
+    "is_failure": true,
+    "variation": 2
+  },
+  {
+    "file": "mapo_tofu/4_BOIL_OVER_v3.png",
+    "dish": "mapo_tofu",
+    "state": "4_BOIL_OVER",
+    "is_failure": true,
+    "variation": 3
+  },
+  {
+    "file": "mapo_tofu/5_done_ok_v1.png",
+    "dish": "mapo_tofu",
+    "state": "5_done_ok",
+    "is_failure": false,
+    "variation": 1
+  },
+  {
+    "file": "mapo_tofu/5_done_ok_v2.png",
+    "dish": "mapo_tofu",
+    "state": "5_done_ok",
+    "is_failure": false,
+    "variation": 2
+  },
+  {
+    "file": "mapo_tofu/5_done_ok_v3.png",
+    "dish": "mapo_tofu",
+    "state": "5_done_ok",
+    "is_failure": false,
+    "variation": 3
+  },
+  {
+    "file": "mapo_tofu/6_FAILED_v1.png",
+    "dish": "mapo_tofu",
+    "state": "6_FAILED",
+    "is_failure": true,
+    "variation": 1
+  },
+  {
+    "file": "mapo_tofu/6_FAILED_v2.png",
+    "dish": "mapo_tofu",
+    "state": "6_FAILED",
+    "is_failure": true,
+    "variation": 2
+  },
+  {
+    "file": "mapo_tofu/6_FAILED_v3.png",
+    "dish": "mapo_tofu",
+    "state": "6_FAILED",
+    "is_failure": true,
+    "variation": 3
+  },
+  {
+    "file": "curry/1_cold_v1.png",
+    "dish": "curry",
+    "state": "1_cold",
+    "is_failure": false,
+    "variation": 1
+  },
+  {
+    "file": "curry/1_cold_v2.png",
+    "dish": "curry",
+    "state": "1_cold",
+    "is_failure": false,
+    "variation": 2
+  },
+  {
+    "file": "curry/1_cold_v3.png",
+    "dish": "curry",
+    "state": "1_cold",
+    "is_failure": false,
+    "variation": 3
+  },
+  {
+    "file": "curry/2_simmer_v1.png",
+    "dish": "curry",
+    "state": "2_simmer",
+    "is_failure": false,
+    "variation": 1
+  },
+  {
+    "file": "curry/2_simmer_v2.png",
+    "dish": "curry",
+    "state": "2_simmer",
+    "is_failure": false,
+    "variation": 2
+  },
+  {
+    "file": "curry/2_simmer_v3.png",
+    "dish": "curry",
+    "state": "2_simmer",
+    "is_failure": false,
+    "variation": 3
+  },
+  {
+    "file": "curry/3_boil_v1.png",
+    "dish": "curry",
+    "state": "3_boil",
+    "is_failure": false,
+    "variation": 1
+  },
+  {
+    "file": "curry/3_boil_v2.png",
+    "dish": "curry",
+    "state": "3_boil",
+    "is_failure": false,
+    "variation": 2
+  },
+  {
+    "file": "curry/3_boil_v3.png",
+    "dish": "curry",
+    "state": "3_boil",
+    "is_failure": false,
+    "variation": 3
+  },
+  {
+    "file": "curry/4_BOIL_OVER_v1.png",
+    "dish": "curry",
+    "state": "4_BOIL_OVER",
+    "is_failure": true,
+    "variation": 1
+  },
+  {
+    "file": "curry/4_BOIL_OVER_v2.png",
+    "dish": "curry",
+    "state": "4_BOIL_OVER",
+    "is_failure": true,
+    "variation": 2
+  },
+  {
+    "file": "curry/4_BOIL_OVER_v3.png",
+    "dish": "curry",
+    "state": "4_BOIL_OVER",
+    "is_failure": true,
+    "variation": 3
+  },
+  {
+    "file": "curry/5_done_ok_v1.png",
+    "dish": "curry",
+    "state": "5_done_ok",
+    "is_failure": false,
+    "variation": 1
+  },
+  {
+    "file": "curry/5_done_ok_v2.png",
+    "dish": "curry",
+    "state": "5_done_ok",
+    "is_failure": false,
+    "variation": 2
+  },
+  {
+    "file": "curry/5_done_ok_v3.png",
+    "dish": "curry",
+    "state": "5_done_ok",
+    "is_failure": false,
+    "variation": 3
+  },
+  {
+    "file": "curry/6_FAILED_v1.png",
+    "dish": "curry",
+    "state": "6_FAILED",
+    "is_failure": true,
+    "variation": 1
+  },
+  {
+    "file": "curry/6_FAILED_v2.png",
+    "dish": "curry",
+    "state": "6_FAILED",
+    "is_failure": true,
+    "variation": 2
+  },
+  {
+    "file": "curry/6_FAILED_v3.png",
+    "dish": "curry",
+    "state": "6_FAILED",
+    "is_failure": true,
+    "variation": 3
+  },
+  {
+    "file": "soup/1_cold_v1.png",
+    "dish": "soup",
+    "state": "1_cold",
+    "is_failure": false,
+    "variation": 1
+  },
+  {
+    "file": "soup/1_cold_v2.png",
+    "dish": "soup",
+    "state": "1_cold",
+    "is_failure": false,
+    "variation": 2
+  },
+  {
+    "file": "soup/1_cold_v3.png",
+    "dish": "soup",
+    "state": "1_cold",
+    "is_failure": false,
+    "variation": 3
+  },
+  {
+    "file": "soup/2_simmer_v1.png",
+    "dish": "soup",
+    "state": "2_simmer",
+    "is_failure": false,
+    "variation": 1
+  },
+  {
+    "file": "soup/2_simmer_v2.png",
+    "dish": "soup",
+    "state": "2_simmer",
+    "is_failure": false,
+    "variation": 2
+  },
+  {
+    "file": "soup/2_simmer_v3.png",
+    "dish": "soup",
+    "state": "2_simmer",
+    "is_failure": false,
+    "variation": 3
+  },
+  {
+    "file": "soup/3_boil_v1.png",
+    "dish": "soup",
+    "state": "3_boil",
+    "is_failure": false,
+    "variation": 1
+  },
+  {
+    "file": "soup/3_boil_v2.png",
+    "dish": "soup",
+    "state": "3_boil",
+    "is_failure": false,
+    "variation": 2
+  },
+  {
+    "file": "soup/3_boil_v3.png",
+    "dish": "soup",
+    "state": "3_boil",
+    "is_failure": false,
+    "variation": 3
+  },
+  {
+    "file": "soup/4_BOIL_OVER_v1.png",
+    "dish": "soup",
+    "state": "4_BOIL_OVER",
+    "is_failure": true,
+    "variation": 1
+  },
+  {
+    "file": "soup/4_BOIL_OVER_v2.png",
+    "dish": "soup",
+    "state": "4_BOIL_OVER",
+    "is_failure": true,
+    "variation": 2
+  },
+  {
+    "file": "soup/4_BOIL_OVER_v3.png",
+    "dish": "soup",
+    "state": "4_BOIL_OVER",
+    "is_failure": true,
+    "variation": 3
+  },
+  {
+    "file": "soup/5_done_ok_v1.png",
+    "dish": "soup",
+    "state": "5_done_ok",
+    "is_failure": false,
+    "variation": 1
+  },
+  {
+    "file": "soup/5_done_ok_v2.png",
+    "dish": "soup",
+    "state": "5_done_ok",
+    "is_failure": false,
+    "variation": 2
+  },
+  {
+    "file": "soup/5_done_ok_v3.png",
+    "dish": "soup",
+    "state": "5_done_ok",
+    "is_failure": false,
+    "variation": 3
+  },
+  {
+    "file": "soup/6_FAILED_v1.png",
+    "dish": "soup",
+    "state": "6_FAILED",
+    "is_failure": true,
+    "variation": 1
+  },
+  {
+    "file": "soup/6_FAILED_v2.png",
+    "dish": "soup",
+    "state": "6_FAILED",
+    "is_failure": true,
+    "variation": 2
+  },
+  {
+    "file": "soup/6_FAILED_v3.png",
+    "dish": "soup",
+    "state": "6_FAILED",
+    "is_failure": true,
+    "variation": 3
+  },
+  {
+    "file": "rice/1_cold_v1.png",
+    "dish": "rice",
+    "state": "1_cold",
+    "is_failure": false,
+    "variation": 1
+  },
+  {
+    "file": "rice/1_cold_v2.png",
+    "dish": "rice",
+    "state": "1_cold",
+    "is_failure": false,
+    "variation": 2
+  },
+  {
+    "file": "rice/1_cold_v3.png",
+    "dish": "rice",
+    "state": "1_cold",
+    "is_failure": false,
+    "variation": 3
+  },
+  {
+    "file": "rice/2_simmer_v1.png",
+    "dish": "rice",
+    "state": "2_simmer",
+    "is_failure": false,
+    "variation": 1
+  },
+  {
+    "file": "rice/2_simmer_v2.png",
+    "dish": "rice",
+    "state": "2_simmer",
+    "is_failure": false,
+    "variation": 2
+  },
+  {
+    "file": "rice/2_simmer_v3.png",
+    "dish": "rice",
+    "state": "2_simmer",
+    "is_failure": false,
+    "variation": 3
+  },
+  {
+    "file": "rice/3_boil_v1.png",
+    "dish": "rice",
+    "state": "3_boil",
+    "is_failure": false,
+    "variation": 1
+  },
+  {
+    "file": "rice/3_boil_v2.png",
+    "dish": "rice",
+    "state": "3_boil",
+    "is_failure": false,
+    "variation": 2
+  },
+  {
+    "file": "rice/3_boil_v3.png",
+    "dish": "rice",
+    "state": "3_boil",
+    "is_failure": false,
+    "variation": 3
+  },
+  {
+    "file": "rice/4_BOIL_OVER_v1.png",
+    "dish": "rice",
+    "state": "4_BOIL_OVER",
+    "is_failure": true,
+    "variation": 1
+  },
+  {
+    "file": "rice/4_BOIL_OVER_v2.png",
+    "dish": "rice",
+    "state": "4_BOIL_OVER",
+    "is_failure": true,
+    "variation": 2
+  },
+  {
+    "file": "rice/4_BOIL_OVER_v3.png",
+    "dish": "rice",
+    "state": "4_BOIL_OVER",
+    "is_failure": true,
+    "variation": 3
+  },
+  {
+    "file": "rice/5_done_ok_v1.png",
+    "dish": "rice",
+    "state": "5_done_ok",
+    "is_failure": false,
+    "variation": 1
+  },
+  {
+    "file": "rice/5_done_ok_v2.png",
+    "dish": "rice",
+    "state": "5_done_ok",
+    "is_failure": false,
+    "variation": 2
+  },
+  {
+    "file": "rice/5_done_ok_v3.png",
+    "dish": "rice",
+    "state": "5_done_ok",
+    "is_failure": false,
+    "variation": 3
+  },
+  {
+    "file": "rice/6_FAILED_v1.png",
+    "dish": "rice",
+    "state": "6_FAILED",
+    "is_failure": true,
+    "variation": 1
+  },
+  {
+    "file": "rice/6_FAILED_v2.png",
+    "dish": "rice",
+    "state": "6_FAILED",
+    "is_failure": true,
+    "variation": 2
+  },
+  {
+    "file": "rice/6_FAILED_v3.png",
+    "dish": "rice",
+    "state": "6_FAILED",
+    "is_failure": true,
+    "variation": 3
+  }
+]
