@@ -14,6 +14,7 @@ import threading
 from pathlib import Path
 
 from elevenlabs.client import ElevenLabs
+from elevenlabs.core import ApiError
 
 logger = logging.getLogger(__name__)
 
@@ -112,6 +113,15 @@ class TTSEngine:
                 output_format="mp3_44100_128",
             )
             audio_bytes = b"".join(audio_iter)
+        except ApiError as e:
+            body = e.body if hasattr(e, "body") else {}
+            detail = body.get("detail", {}) if isinstance(body, dict) else {}
+            status = detail.get("status", "") if isinstance(detail, dict) else ""
+            if status == "quota_exceeded":
+                logger.warning("ElevenLabs quota exceeded — TTS skipped")
+            else:
+                logger.exception("ElevenLabs API error")
+            return
         except Exception:
             logger.exception("ElevenLabs API call failed")
             return
