@@ -207,8 +207,32 @@ async def _demo(image_dir: str | None = None):
         )
 
     async def send_demo_sequence():
-        await asyncio.sleep(2)
-        print("\nSending demo sequence...")
+        # ── 60-SECOND SPEED RUN ──────────────────────────────────
+        # Pacing designed for live presentation (~60s total).
+        # Elapsed times in comments assume ~0.5s per VLM delay.
+        #
+        #  0:00  start
+        #  0:03  Step 1 — VLM: dice tofu
+        #  0:09  Step 1 — VLM detects completion, auto-advance
+        #  0:12  Step 2 — user confirm: mince aromatics
+        #  0:20  Step 3 — VLM: heat oil
+        #  0:25  Step 3 — VLM detects completion, auto-advance
+        #  0:29  Step 4 — timer: doubanjiang (30s countdown)
+        #  0:34  SAFETY — boil-over detected!
+        #  0:41  Step 5 — timer: simmer (5 min shown)
+        #  0:50  Step 6 — VLM: cornstarch thickened
+        #  0:57  Done — celebration!
+        #  1:00  end
+        # ─────────────────────────────────────────────────────────
+        import time
+        t0 = time.monotonic()
+
+        def elapsed():
+            s = time.monotonic() - t0
+            return f"[{int(s):02d}s]"
+
+        await asyncio.sleep(3)                                     # 0:03
+        print(f"\n{elapsed()} Starting demo sequence...")
         total_imgs = len(images)
         img_idx = 0
 
@@ -223,51 +247,55 @@ async def _demo(image_dir: str | None = None):
                 await asyncio.sleep(0.5)
                 await server.send_vlm_result(vlm_result, latency_ms)
 
-        # Step 1: VLM step — dice tofu
+        # ── Step 1: VLM — dice tofu ──
         await server.send_step(1, 6, "Dice the tofu into 1-inch cubes",
                                "vlm", "mapo_tofu")
+        print(f"{elapsed()} Step 1: Dice tofu (VLM)")
         await next_image(
             {"dish": "mapo_tofu", "state": "prep", "safe": True,
              "reason": "Tofu on cutting board", "step_complete": False},
             latency_ms=3200
         )
-        await asyncio.sleep(3)
+        await asyncio.sleep(5)                                     # 0:09
         await next_image(
             {"dish": "mapo_tofu", "state": "prep", "safe": True,
              "reason": "Diced tofu visible", "step_complete": True},
             latency_ms=2800
         )
-        await asyncio.sleep(2)
+        await asyncio.sleep(3)                                     # 0:12
 
-        # Step 2: User confirm
+        # ── Step 2: User confirm — mince aromatics ──
         await server.send_step(2, 6, "Mince garlic, ginger, and scallions",
                                "user_confirm", "mapo_tofu")
+        print(f"{elapsed()} Step 2: Mince aromatics (user confirm)")
         await next_image(
             {"dish": "mapo_tofu", "state": "prep", "safe": True,
              "reason": "Aromatics being minced", "step_complete": False},
             latency_ms=3100
         )
-        await asyncio.sleep(4)
+        await asyncio.sleep(8)                                     # 0:21
 
-        # Step 3: VLM step — heat oil
+        # ── Step 3: VLM — heat oil ──
         await server.send_step(3, 6, "Heat oil in wok until shimmering",
                                "vlm", "mapo_tofu")
+        print(f"{elapsed()} Step 3: Heat oil (VLM)")
         await next_image(
             {"dish": "mapo_tofu", "state": "cold", "safe": True,
              "reason": "Oil not hot yet", "step_complete": False},
             latency_ms=4100
         )
-        await asyncio.sleep(3)
+        await asyncio.sleep(4.5)                                   # 0:25
         await next_image(
             {"dish": "mapo_tofu", "state": "simmering", "safe": True,
              "reason": "Oil shimmering in wok", "step_complete": True},
             latency_ms=3500
         )
-        await asyncio.sleep(2)
+        await asyncio.sleep(3)                                     # 0:29
 
-        # Step 4: Timer step — doubanjiang
+        # ── Step 4: Timer — doubanjiang ──
         await server.send_step(4, 6, "Add doubanjiang and cook for 30 seconds",
                                "timer", "mapo_tofu")
+        print(f"{elapsed()} Step 4: Doubanjiang (timer)")
         await next_image(
             {"dish": "mapo_tofu", "state": "simmering", "safe": True,
              "reason": "Doubanjiang frying", "step_complete": False},
@@ -275,9 +303,9 @@ async def _demo(image_dir: str | None = None):
         )
         await asyncio.sleep(1)
         await server.send_timer("step_4_timer", 30, 30)
-        await asyncio.sleep(4)
+        await asyncio.sleep(3.5)                                   # 0:34
 
-        # Safety alert!
+        # ── SAFETY ALERT — boil-over! ──
         await next_image(
             {"dish": "mapo_tofu", "state": "boil_over", "safe": False,
              "reason": "Liquid spilling over rim", "step_complete": False},
@@ -286,12 +314,14 @@ async def _demo(image_dir: str | None = None):
         await asyncio.sleep(1)
         await server.send_safety(
             "Boil-over detected! Reduce heat immediately!")
-        await asyncio.sleep(5)
+        print(f"{elapsed()} ⚠ SAFETY ALERT: Boil-over!")
+        await asyncio.sleep(5.5)                                   # 0:41
 
-        # Step 5: Timer step — simmer
+        # ── Step 5: Timer — simmer ──
         await server.send_step(5, 6,
                                "Add tofu and broth, simmer for 5 minutes",
                                "timer", "mapo_tofu")
+        print(f"{elapsed()} Step 5: Simmer (timer)")
         await next_image(
             {"dish": "mapo_tofu", "state": "simmering", "safe": True,
              "reason": "Tofu simmering in broth", "step_complete": False},
@@ -299,22 +329,25 @@ async def _demo(image_dir: str | None = None):
         )
         await asyncio.sleep(1)
         await server.send_timer("step_5_timer", 15, 300)
-        await asyncio.sleep(5)
+        await asyncio.sleep(7)                                     # 0:50
 
-        # Step 6: VLM step — cornstarch
+        # ── Step 6: VLM — cornstarch ──
         await server.send_step(6, 6,
                                "Add cornstarch slurry and stir until thickened",
                                "vlm", "mapo_tofu")
+        print(f"{elapsed()} Step 6: Cornstarch (VLM)")
         await next_image(
             {"dish": "mapo_tofu", "state": "done", "safe": True,
              "reason": "Thick glossy sauce", "step_complete": True},
             latency_ms=3600
         )
-        await asyncio.sleep(4)
+        await asyncio.sleep(6)                                     # 0:57
 
-        # Done!
+        # ── Done! ──
         await server.send_done("mapo_tofu")
-        print("Demo sequence complete.")
+        print(f"{elapsed()} Done! Mapo tofu complete.")
+        await asyncio.sleep(3)                                     # 1:00
+        print(f"{elapsed()} Demo sequence finished.")
 
     await asyncio.gather(
         server.start(),
