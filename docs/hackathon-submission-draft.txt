@@ -1,0 +1,75 @@
+================================================================
+  SHIP 26 HACKATHON — SUBMISSION DRAFT
+================================================================
+
+TEAM NAME:
+  AI Ain't Interested
+
+CAPTAIN EMAIL:
+  fretin13@gmail.com
+
+TEAM MEMBER EMAILS (comma separated):
+  fretin13@gmail.com, claire1046303228@outlook.com
+
+GITHUB REPO URL:
+  https://github.com/LEE-CHENYU/ai-aint-interested-cooking-monitor
+
+SOURCE ZIP:
+  [Optional — skip if repo is public]
+
+
+================================================================
+  PROJECT DESCRIPTION
+================================================================
+
+On-Device AI Kitchen Cooking Monitor
+
+An AI cooking companion that runs entirely on-device with no cloud
+dependency. The user says a dish name (e.g., "rice") and the system
+generates a step-by-step recipe, then guides the cook through each
+step one at a time — never showing the full recipe.
+
+A fine-tuned Gemma 3 4B vision-language model watches the kitchen
+through a camera, classifying cooking states and detecting safety
+hazards in real time. When the VLM detects a step is complete, the
+system automatically advances to the next instruction.
+
+We built an automated multi-task fine-tuning pipeline that trains
+specialized VLM adapters for different kitchen safety tasks. The
+pipeline uses phase batching across tasks, per-epoch evaluation
+with early stopping, and automatic LoRA merge + export. Results:
+
+  task6_boiling:  50% -> 81% accuracy (FP: 18 -> 7)
+  task2_smoke:    83% -> 97% accuracy (FP: 6 -> 0, FN: 0 -> 1)
+
+Three completion types handle different situations:
+- VLM detection: for steps the camera can see (e.g., rolling boil)
+- Timer: for timed cooking phases (e.g., simmer 15 minutes)
+- User confirm: for steps the camera can't judge (e.g., measure water)
+
+Safety monitoring runs continuously and independently — if the VLM
+detects a boil-over or smoke, it interrupts with an alert regardless
+of the current step.
+
+The phone UI shows the cook one step at a time with a clean,
+Overcooked-game-inspired interface. A split-screen demo presenter
+shows the phone UI alongside the camera feed and live VLM output.
+
+Built with:
+- Gemma 3 4B VLM, fine-tuned with QLoRA on 36 synthetic images/task
+- Automated multi-task pipeline with phase batching and early stopping
+- Monkey-patched torch.compile for Blackwell GPU (RTX PRO 6000) compat
+- Python async agent loop with rule-based step transitions
+- WebSocket-driven phone UI (single HTML file, zero dependencies)
+- Fully on-device — no cloud, no API calls, no privacy concerns
+
+
+================================================================
+  KEY CLAIMS (one per line)
+================================================================
+
+Built an automated multi-task VLM fine-tuning pipeline that trains task-specific LoRA adapters with phase batching, per-epoch evaluation, early stopping, and automatic model merge — achieving 97% smoke detection accuracy (up from 83% baseline) and 81% boiling state accuracy (up from 50%).
+Fine-tuned Gemma 3 4B VLM on 36 synthetic images per task using QLoRA, with the full pipeline completing in under 30 minutes per task on a single NVIDIA RTX PRO 6000 Blackwell GPU.
+Designed a rule-based agentic cooking workflow with three completion types (VLM detection, timer, user confirm) that guides cooks step-by-step, using progressive disclosure so the user only sees one instruction at a time.
+The entire system runs on-device with no cloud dependency — LoRA weights are merged into the base model for native inference speed at 3-5 seconds per frame.
+Safety monitoring runs every inference cycle independent of the current cooking step, with zero false positives on smoke detection after fine-tuning and boil-over detection at 100% accuracy for water-based dishes.
