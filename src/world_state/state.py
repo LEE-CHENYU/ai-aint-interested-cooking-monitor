@@ -1,73 +1,36 @@
 """
 World state aggregation.
 
-Maintains the complete kitchen state by combining:
-- Zone signals from perception (per-camera detections)
+Maintains the kitchen state by combining:
+- Zone signals from VLM perception
 - Active timers from TimerEngine
-- Recipe step tracking
-- Safety rule status
 - Alert cooldowns (anti-nag)
+
+Simplified for single-threaded agentic loop — no threading locks needed.
+Recipe step tracking is handled by StepEngine.
 """
 
 import time
-from dataclasses import dataclass, field
 
-import yaml
-
+from src.agent.schemas import Recipe
 from src.world_state.timer_engine import TimerEngine
-
-
-@dataclass
-class RecipeStep:
-    id: int
-    name: str
-    description: str
-    status: str = "pending"  # pending, in_progress, done
-    duration_seconds: int | None = None
 
 
 class WorldState:
     """Aggregates all kitchen state for the agent."""
 
-    def __init__(self, recipe_path: str | None = None):
+    def __init__(self, recipe: Recipe | None = None):
         self.timer_engine = TimerEngine()
         self.zone_signals: dict[str, dict] = {}  # zone_name -> latest signals
-        self.steps: list[RecipeStep] = []
         self.last_alert_times: dict[str, float] = {}  # rule_id -> last alert timestamp
+        self.recipe = recipe
 
-        if recipe_path:
-            self._load_recipe(recipe_path)
-
-    def _load_recipe(self, path: str):
-        with open(path) as f:
-            recipe = yaml.safe_load(f)
-        self.steps = [
-            RecipeStep(
-                id=s["id"],
-                name=s["name"],
-                description=s["description"],
-                duration_seconds=s.get("duration_seconds"),
-            )
-            for s in recipe["recipe"]["steps"]
-        ]
-
-    def update_zone(self, zone: str, signals: dict, confidence: dict):
+    def update_zone(self, zone: str, signals: dict):
         """Update signals from a perception zone."""
         self.zone_signals[zone] = {
             "signals": signals,
-            "confidence": confidence,
             "ts": time.time(),
         }
-
-    def mark_step_done(self, step_id: int):
-        for step in self.steps:
-            if step.id == step_id:
-                step.status = "done"
-                break
-
-    def reorder_steps(self, new_order: list[int]):
-        step_map = {s.id: s for s in self.steps}
-        self.steps = [step_map[sid] for sid in new_order if sid in step_map]
 
     def can_alert(self, rule_id: str, cooldown_seconds: float) -> bool:
         """Check if enough time has passed since last alert for this rule."""
@@ -77,14 +40,25 @@ class WorldState:
     def record_alert(self, rule_id: str):
         self.last_alert_times[rule_id] = time.time()
 
+    def get_flat_signals(self) -> dict[str, object]:
+        """
+        Return a completely flat dict for safety rule evaluation.
+
+        Keys are "zone.signal_name", e.g.:
+            {"stove.pot_present": True, "counter.hands_active": False}
+        """
+        flat: dict[str, object] = {}
+        for zone_name, zone_data in self.zone_signals.items():
+            signals = zone_data.get("signals", {})
+            for signal_name, value in signals.items():
+                flat[f"{zone_name}.{signal_name}"] = value
+        return flat
+
     def get_snapshot(self) -> dict:
-        """Build a compact state snapshot for the agent prompt."""
+        """Build a compact state snapshot (for optional WebSocket UI)."""
         return {
-            "zones": self.zone_signals,
+            "zones": {k: v for k, v in self.zone_signals.items()},
             "timers": self.timer_engine.to_dict(),
-            "steps": [
-                {"id": s.id, "name": s.name, "status": s.status} for s in self.steps
-            ],
             "expired_timers": [
                 t.to_dict() for t in self.timer_engine.get_expired()
             ],

@@ -51,7 +51,7 @@ class CameraStream:
                 f"Cannot open camera for zone '{self.config.zone}': {self.config.source}"
             )
 
-    def read_frame():
+    def read_frame(self):
         """Read a single frame. Returns (success, frame)."""
         if self.cap is None:
             return False, None

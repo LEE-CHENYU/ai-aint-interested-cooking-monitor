@@ -1,56 +1,43 @@
 # Demo recipe: Pasta with Tomato Sauce
-# This recipe naturally creates multitasking moments (overlapping timers)
+# Completion types: vlm (VLM detects), timer (countdown), user_confirm (press Enter)
 
-recipe:
-  name: "Pasta with Tomato Sauce"
-  estimated_time_minutes: 25
-  steps:
-    - id: 1
-      name: "Boil water"
-      description: "Fill pot with water and bring to a rolling boil"
-      zone: stove
-      trigger_event: "water_state == boiling"
-      duration_seconds: null  # Ends when boiling detected
-      dependencies: []
+dish: "Pasta with Tomato Sauce"
+servings: 2
+estimated_time_minutes: 25
 
-    - id: 2
-      name: "Prep garlic and onion"
-      description: "Dice onion and mince garlic while water heats"
-      zone: counter
-      trigger_event: null  # Manual or time-based
-      duration_seconds: 300
-      dependencies: []
-      parallel_with: [1]
+steps:
+  - id: 1
+    instruction: "Fill pot with water and bring to a rolling boil"
+    completion_type: vlm
+    vlm_signal: "water is at a rolling boil"
+    depends_on: []
 
-    - id: 3
-      name: "Add pasta to boiling water"
-      description: "Add pasta once water is at a rolling boil"
-      zone: stove
-      trigger_event: null
-      duration_seconds: 480  # 8-minute timer
-      dependencies: [1]
+  - id: 2
+    instruction: "Dice onion and mince garlic while water heats"
+    completion_type: timer
+    timer_seconds: 300
+    depends_on: []
+    parallel_group: "prep"
 
-    - id: 4
-      name: "Start sauce in second pan"
-      description: "Saute garlic and onion, add tomato sauce"
-      zone: stove
-      trigger_event: null
-      duration_seconds: 600
-      dependencies: [2]
-      parallel_with: [3]
+  - id: 3
+    instruction: "Add pasta to the boiling water"
+    completion_type: user_confirm
+    depends_on: [1]
 
-    - id: 5
-      name: "Drain pasta"
-      description: "Drain pasta when timer expires"
-      zone: stove
-      trigger_event: null
-      duration_seconds: 60
-      dependencies: [3]
+  - id: 4
+    instruction: "Cook pasta until al dente"
+    completion_type: timer
+    timer_seconds: 480
+    depends_on: [3]
 
-    - id: 6
-      name: "Combine and serve"
-      description: "Mix drained pasta with sauce"
-      zone: counter
-      trigger_event: null
-      duration_seconds: 120
-      dependencies: [4, 5]
+  - id: 5
+    instruction: "Saute garlic and onion, then add tomato sauce"
+    completion_type: timer
+    timer_seconds: 600
+    depends_on: [2]
+    parallel_group: "cooking"
+
+  - id: 6
+    instruction: "Drain pasta and combine with sauce"
+    completion_type: user_confirm
+    depends_on: [4, 5]

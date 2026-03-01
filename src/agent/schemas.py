@@ -1,11 +1,47 @@
 """
-JSON schemas for agent tool calls.
+JSON schemas for agent tool calls and recipe models.
 
-Defines the structured format for agent actions.
+Defines the structured format for agent actions and recipe steps.
 The fine-tuned model outputs JSON matching these schemas.
 """
 
+from enum import Enum
+
 from pydantic import BaseModel, Field
+
+
+# ---------------------------------------------------------------------------
+# Recipe models
+# ---------------------------------------------------------------------------
+
+
+class CompletionType(str, Enum):
+    vlm = "vlm"
+    timer = "timer"
+    user_confirm = "user_confirm"
+
+
+class RecipeStep(BaseModel):
+    id: int
+    instruction: str
+    completion_type: CompletionType
+    vlm_signal: str | None = None
+    timer_seconds: int | None = None
+    depends_on: list[int] = Field(default_factory=list)
+    parallel_group: str | None = None
+    status: str = Field(default="pending", pattern="^(pending|active|done)$")
+
+
+class Recipe(BaseModel):
+    dish: str
+    servings: int = 2
+    estimated_time_minutes: int = 25
+    steps: list[RecipeStep]
+
+
+# ---------------------------------------------------------------------------
+# Agent action schemas
+# ---------------------------------------------------------------------------
 
 
 class SetTimerAction(BaseModel):

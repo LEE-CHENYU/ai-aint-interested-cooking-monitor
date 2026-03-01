@@ -26,6 +26,14 @@ rules:
     message: "Boil-over risk detected. Consider lowering the heat."
     cooldown_seconds: 60
 
+  - id: boil_over_active
+    description: "Active boil-over detected by VLM"
+    condition: "stove.boil_over_detected"
+    severity: critical
+    action: speak
+    message: "Boil-over in progress! Reduce heat or remove pot immediately."
+    cooldown_seconds: 30
+
   - id: knife_safety
     description: "Knife in use without proper hand position detected"
     condition: "counter.knife_in_use"

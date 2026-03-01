@@ -19,7 +19,7 @@ class SmoothedSignal:
 class TemporalSmoother:
     """Smooths detection signals over a sliding window of frames."""
 
-    def __init__(self, window_size: int = 7, threshold: float = 0.6):
+    def __init__(self, window_size: int = 3, threshold: float = 0.66):
         self.window_size = window_size
         self.threshold = threshold
         self.history: dict[str, deque] = {}
