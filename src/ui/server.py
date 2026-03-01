@@ -28,10 +28,11 @@ import asyncio
 import base64
 import json
 import mimetypes
-from http import HTTPStatus
 from pathlib import Path
 
 import websockets
+from websockets.datastructures import Headers
+from websockets.http11 import Response
 
 
 UI_DIR = Path(__file__).parent
@@ -47,6 +48,7 @@ class UIServer:
         self.image_dir = Path(image_dir) if image_dir else None
         self.clients: set = set()
         self.on_user_confirm = None  # Callback: fn(step_id: int)
+        self._loop = None
 
     async def handler(self, websocket):
         """Handle WebSocket connections."""
@@ -109,7 +111,7 @@ class UIServer:
 
     async def send_image(self, image_path: str, index: int = 0,
                          total: int = 0):
-        """Send a camera image to the demo presenter (base64-encoded)."""
+        """Send a camera image file to the demo presenter (base64-encoded)."""
         path = Path(image_path)
         if not path.exists():
             return
@@ -118,6 +120,20 @@ class UIServer:
             "type": "image",
             "base64": image_data,
             "filename": path.name,
+            "index": index,
+            "total": total,
+        })
+
+    async def send_image_frame(self, frame, filename: str = "",
+                               index: int = 0, total: int = 0):
+        """Send a camera frame (numpy array) as base64 PNG to the demo UI."""
+        import cv2
+        _, buf = cv2.imencode('.png', frame)
+        b64 = base64.b64encode(buf.tobytes()).decode('ascii')
+        await self.broadcast({
+            "type": "image",
+            "base64": b64,
+            "filename": filename,
             "index": index,
             "total": total,
         })
@@ -131,22 +147,19 @@ class UIServer:
             "latency_ms": latency_ms,
         })
 
-    async def process_request(self, path, request_headers):
-        """Serve static files for HTTP GET requests."""
+    async def process_request(self, connection, request):
+        """Serve static files for HTTP GET requests (websockets 13+ API)."""
         # Phone UI
-        if path == "/" or path == "/index.html":
+        if request.path in ("/", "/index.html"):
             return self._serve_file(UI_DIR / "index.html",
                                     "text/html; charset=utf-8")
-
         # Demo presenter
-        if path == "/demo" or path == "/demo.html":
+        if request.path in ("/demo", "/demo.html"):
             return self._serve_file(UI_DIR / "demo.html",
                                     "text/html; charset=utf-8")
-
         # Serve images from image_dir
-        if path.startswith("/images/") and self.image_dir:
-            filename = path[len("/images/"):]
-            # Sanitize: only allow simple filenames, no path traversal
+        if request.path.startswith("/images/") and self.image_dir:
+            filename = request.path[len("/images/"):]
             if "/" not in filename and ".." not in filename:
                 image_path = self.image_dir / filename
                 if image_path.exists():
@@ -155,28 +168,103 @@ class UIServer:
                         or "application/octet-stream"
                     )
                     return self._serve_file(image_path, content_type)
-
-        # WebSocket upgrade — let websockets handle it
-        if path == "/ws":
+        # Allow WebSocket upgrade
+        if request.headers.get("Upgrade", "").lower() == "websocket":
             return None
+        # Reject non-WebSocket requests to unknown paths (e.g. /favicon.ico)
+        return Response(
+            404,
+            "Not Found",
+            Headers([("Content-Length", "0")]),
+            b"",
+        )
 
-        return None
-
-    def _serve_file(self, file_path: Path, content_type: str):
-        """Serve a file as an HTTP response."""
+    @staticmethod
+    def _serve_file(file_path: Path, content_type: str = "text/html; charset=utf-8"):
+        """Return an HTTP Response for a file."""
         if not file_path.exists():
-            return (HTTPStatus.NOT_FOUND, [], b"Not Found")
+            return Response(
+                404, "Not Found",
+                Headers([("Content-Length", "0")]),
+                b"",
+            )
         body = file_path.read_bytes()
-        return (
-            HTTPStatus.OK,
-            [("Content-Type", content_type),
-             ("Content-Length", str(len(body))),
-             ("Cache-Control", "no-cache")],
+        return Response(
+            200,
+            "OK",
+            Headers([
+                ("Content-Type", content_type),
+                ("Content-Length", str(len(body))),
+                ("Cache-Control", "no-cache"),
+            ]),
             body,
         )
 
+    # ------------------------------------------------------------------
+    # Thread-safe sync wrappers (called from agent thread)
+    # ------------------------------------------------------------------
+
+    def fire_step(self, step_id: int, total_steps: int,
+                  instruction: str, completion_type: str,
+                  dish: str = ""):
+        """Schedule send_step() from any thread."""
+        if self._loop and self._loop.is_running():
+            asyncio.run_coroutine_threadsafe(
+                self.send_step(step_id, total_steps, instruction,
+                               completion_type, dish),
+                self._loop,
+            )
+
+    def fire_timer(self, name: str, remaining_seconds: int,
+                   total_seconds: int):
+        """Schedule send_timer() from any thread."""
+        if self._loop and self._loop.is_running():
+            asyncio.run_coroutine_threadsafe(
+                self.send_timer(name, remaining_seconds, total_seconds),
+                self._loop,
+            )
+
+    def fire_safety(self, message: str, severity: str = "critical"):
+        """Schedule send_safety() from any thread."""
+        if self._loop and self._loop.is_running():
+            asyncio.run_coroutine_threadsafe(
+                self.send_safety(message, severity),
+                self._loop,
+            )
+
+    def fire_done(self, dish: str):
+        """Schedule send_done() from any thread."""
+        if self._loop and self._loop.is_running():
+            asyncio.run_coroutine_threadsafe(
+                self.send_done(dish),
+                self._loop,
+            )
+
+    def fire_image(self, frame, filename: str = "",
+                   index: int = 0, total: int = 0):
+        """Schedule send_image_frame() from any thread."""
+        if self._loop and self._loop.is_running():
+            asyncio.run_coroutine_threadsafe(
+                self.send_image_frame(frame, filename, index, total),
+                self._loop,
+            )
+
+    def fire_vlm_result(self, result: dict, latency_ms: int = 0):
+        """Schedule send_vlm_result() from any thread."""
+        if self._loop and self._loop.is_running():
+            asyncio.run_coroutine_threadsafe(
+                self.send_vlm_result(result, latency_ms),
+                self._loop,
+            )
+
+    # ------------------------------------------------------------------
+    # Server lifecycle
+    # ------------------------------------------------------------------
+
     async def start(self):
         """Start the combined HTTP + WebSocket server."""
+        self._loop = asyncio.get_running_loop()
+
         print(f"UI server starting:")
         print(f"  Phone UI:    http://{self.host}:{self.port}/")
         print(f"  Demo view:   http://{self.host}:{self.port}/demo")

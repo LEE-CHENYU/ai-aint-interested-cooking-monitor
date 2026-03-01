@@ -14,8 +14,11 @@ Usage:
 """
 
 import argparse
+import asyncio
 import logging
 import sys
+import threading
+import time
 
 from src.agent.agent_loop import AgentLoop
 from src.agent.recipe_loader import load_recipe
@@ -73,6 +76,17 @@ def main():
         action="store_true",
         help="Fast demo: 2s timers + auto-confirm user steps (implies --mock)",
     )
+    parser.add_argument(
+        "--ui",
+        action="store_true",
+        help="Launch phone UI server (WebSocket + HTTP)",
+    )
+    parser.add_argument(
+        "--ui-port",
+        type=int,
+        default=8765,
+        help="Port for UI server (default: 8765)",
+    )
     args = parser.parse_args()
 
     if args.fast:
@@ -87,6 +101,7 @@ def main():
     print(f"  Audio:       {'OFF' if args.no_audio else 'ON'}")
     print(f"  Safety:      {args.safety_rules}")
     print(f"  Fast mode:   {'ON' if args.fast else 'OFF'}")
+    print(f"  Phone UI:    {'http://localhost:' + str(args.ui_port) + '/' if args.ui else 'OFF'}")
     print("=" * 55)
 
     # ------------------------------------------------------------------
@@ -109,6 +124,24 @@ def main():
     tts = TTSEngine(audio=not args.no_audio)
     safety_engine = SafetyEngine(rules_path=args.safety_rules)
 
+    # ------------------------------------------------------------------
+    # UI server (optional)
+    # ------------------------------------------------------------------
+    ui_server = None
+    if args.ui:
+        from src.ui.server import UIServer
+
+        ui_server = UIServer(port=args.ui_port)
+
+        def _run_ui_server():
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+            loop.run_until_complete(ui_server.start())
+
+        ui_thread = threading.Thread(target=_run_ui_server, daemon=True)
+        ui_thread.start()
+        time.sleep(0.5)  # Let the server bind
+
     agent = AgentLoop(
         step_engine=step_engine,
         detector=detector,
@@ -119,6 +152,7 @@ def main():
         safety_engine=safety_engine,
         world_state=world_state,
         auto_confirm=args.fast,
+        ui_server=ui_server,
     )
 
     # ------------------------------------------------------------------
