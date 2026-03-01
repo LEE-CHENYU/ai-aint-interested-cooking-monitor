@@ -9,6 +9,7 @@ HTTP routes:
   /              -> phone UI (index.html)
   /demo          -> split-screen demo presenter (demo.html)
   /images/<name> -> serves images from image_dir
+  /audio/<name>  -> serves pre-generated audio from audio_dir
 
 WS: ws://host:port/ws -> real-time updates
 
@@ -19,6 +20,7 @@ Message protocol (server -> clients):
   {"type": "done", ...}       -> recipe complete
   {"type": "image", ...}      -> camera image (for demo presenter)
   {"type": "vlm_result", ...} -> VLM detection output (for demo presenter)
+  {"type": "audio", ...}      -> TTS audio (base64 MP3) for phone playback
 
 Message protocol (phone -> server):
   {"type": "user_confirm", "step_id": N}
@@ -31,8 +33,7 @@ import mimetypes
 from pathlib import Path
 
 import websockets
-from websockets.datastructures import Headers
-from websockets.http11 import Response
+from http import HTTPStatus
 
 
 UI_DIR = Path(__file__).parent
@@ -42,10 +43,12 @@ class UIServer:
     """WebSocket + HTTP server for phone display and demo presenter."""
 
     def __init__(self, host: str = "0.0.0.0", port: int = 8765,
-                 image_dir: str | None = None):
+                 image_dir: str | None = None,
+                 audio_dir: str | None = None):
         self.host = host
         self.port = port
         self.image_dir = Path(image_dir) if image_dir else None
+        self.audio_dir = Path(audio_dir) if audio_dir else None
         self.clients: set = set()
         self.on_user_confirm = None  # Callback: fn(step_id: int)
         self._loop = None
@@ -147,19 +150,35 @@ class UIServer:
             "latency_ms": latency_ms,
         })
 
-    async def process_request(self, connection, request):
-        """Serve static files for HTTP GET requests (websockets 13+ API)."""
+    async def send_audio(self, audio_b64: str,
+                         priority: str = "medium"):
+        """Send base64-encoded MP3 audio to all connected clients."""
+        await self.broadcast({
+            "type": "audio",
+            "base64": audio_b64,
+            "priority": priority,
+        })
+
+    async def process_request(self, path, request_headers):
+        """Serve static files for HTTP GET requests (websockets legacy API)."""
         # Phone UI
-        if request.path in ("/", "/index.html"):
+        if path in ("/", "/index.html"):
             return self._serve_file(UI_DIR / "index.html",
                                     "text/html; charset=utf-8")
         # Demo presenter
-        if request.path in ("/demo", "/demo.html"):
+        if path in ("/demo", "/demo.html"):
             return self._serve_file(UI_DIR / "demo.html",
                                     "text/html; charset=utf-8")
+        # Serve audio files from audio_dir
+        if path.startswith("/audio/") and self.audio_dir:
+            filename = path[len("/audio/"):]
+            if "/" not in filename and ".." not in filename:
+                audio_path = self.audio_dir / filename
+                if audio_path.exists():
+                    return self._serve_file(audio_path, "audio/mpeg")
         # Serve images from image_dir
-        if request.path.startswith("/images/") and self.image_dir:
-            filename = request.path[len("/images/"):]
+        if path.startswith("/images/") and self.image_dir:
+            filename = path[len("/images/"):]
             if "/" not in filename and ".." not in filename:
                 image_path = self.image_dir / filename
                 if image_path.exists():
@@ -168,37 +187,21 @@ class UIServer:
                         or "application/octet-stream"
                     )
                     return self._serve_file(image_path, content_type)
-        # Allow WebSocket upgrade
-        if request.headers.get("Upgrade", "").lower() == "websocket":
-            return None
-        # Reject non-WebSocket requests to unknown paths (e.g. /favicon.ico)
-        return Response(
-            404,
-            "Not Found",
-            Headers([("Content-Length", "0")]),
-            b"",
-        )
+        # Allow WebSocket upgrade (return None to continue handshake)
+        return None
 
     @staticmethod
     def _serve_file(file_path: Path, content_type: str = "text/html; charset=utf-8"):
-        """Return an HTTP Response for a file."""
+        """Return an HTTP response tuple for a file (legacy websockets API)."""
         if not file_path.exists():
-            return Response(
-                404, "Not Found",
-                Headers([("Content-Length", "0")]),
-                b"",
-            )
+            return (HTTPStatus.NOT_FOUND, [], b"")
         body = file_path.read_bytes()
-        return Response(
-            200,
-            "OK",
-            Headers([
-                ("Content-Type", content_type),
-                ("Content-Length", str(len(body))),
-                ("Cache-Control", "no-cache"),
-            ]),
-            body,
-        )
+        headers = [
+            ("Content-Type", content_type),
+            ("Content-Length", str(len(body))),
+            ("Cache-Control", "no-cache"),
+        ]
+        return (HTTPStatus.OK, headers, body)
 
     # ------------------------------------------------------------------
     # Thread-safe sync wrappers (called from agent thread)
@@ -254,6 +257,14 @@ class UIServer:
         if self._loop and self._loop.is_running():
             asyncio.run_coroutine_threadsafe(
                 self.send_vlm_result(result, latency_ms),
+                self._loop,
+            )
+
+    def fire_audio(self, audio_b64: str, priority: str = "medium"):
+        """Schedule send_audio() from any thread."""
+        if self._loop and self._loop.is_running():
+            asyncio.run_coroutine_threadsafe(
+                self.send_audio(audio_b64, priority),
                 self._loop,
             )
 

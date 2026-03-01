@@ -10,9 +10,12 @@ Usage:
 """
 
 import json
+import os
 import re
 import time
 from pathlib import Path
+
+os.environ["TRANSFORMERS_NO_TF"] = "1"
 
 import torch
 from PIL import Image
@@ -55,7 +58,9 @@ def run_inference(model, processor, image_path: Path) -> tuple[dict | None, floa
         ]},
     ]
 
-    input_text = processor.apply_chat_template(messages, add_generation_prompt=True)
+    input_text = processor.apply_chat_template(
+        messages, add_generation_prompt=True, tokenize=False,
+    )
     inputs = processor(
         text=input_text, images=[image], return_tensors="pt",
     ).to(DEVICE)
@@ -71,7 +76,7 @@ def run_inference(model, processor, image_path: Path) -> tuple[dict | None, floa
         )
     latency = (time.monotonic() - t0) * 1000  # ms
 
-    response_text = processor.tokenizer.decode(
+    response_text = processor.decode(
         outputs[0][input_len:], skip_special_tokens=True
     )
     result = parse_json_response(response_text)
@@ -89,7 +94,7 @@ def main():
     t0 = time.monotonic()
     model = AutoModelForImageTextToText.from_pretrained(
         str(MODEL_PATH),
-        torch_dtype=torch.float32 if DEVICE == "mps" else torch.bfloat16,
+        dtype=torch.float16 if DEVICE == "mps" else torch.bfloat16,
         device_map=DEVICE,
         attn_implementation="eager",
     )
