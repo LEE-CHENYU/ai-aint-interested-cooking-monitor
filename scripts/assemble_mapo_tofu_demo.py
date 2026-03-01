@@ -5,8 +5,10 @@ Creates numbered frame sequences in data/demo_sequence/mapo_tofu/ by
 distributing source images across cooking phases with proportional
 frame repetition to simulate a real-time camera feed.
 
-Source images: data/synthetic/matrix/matrix_images/mapo_tofu/
-               data/synthetic/variations/mapo_tofu/
+Source images:
+  data/synthetic/matrix/matrix_images/mapo_tofu/   (768x768 base states)
+  data/synthetic/variations/mapo_tofu/              (768x768 variations)
+  data/synthetic/matrix/task1_boilover/matrix_images/wok_*  (boilover detail)
 
 Usage:
   python scripts/assemble_mapo_tofu_demo.py
@@ -15,10 +17,15 @@ Usage:
 import shutil
 from pathlib import Path
 
+from PIL import Image
+
 ROOT = Path(__file__).resolve().parent.parent
 MATRIX = ROOT / "data" / "synthetic" / "matrix" / "matrix_images" / "mapo_tofu"
 VARIATIONS = ROOT / "data" / "synthetic" / "variations" / "mapo_tofu"
+BOILOVER_WOK = ROOT / "data" / "synthetic" / "matrix" / "task1_boilover" / "matrix_images"
 OUT = ROOT / "data" / "demo_sequence" / "mapo_tofu"
+
+TARGET_SIZE = 768
 
 # ── COOKING PHASES ──────────────────────────────────────────────
 # Each phase: (label, time_weight, [(source_dir, filename), ...])
@@ -27,7 +34,7 @@ OUT = ROOT / "data" / "demo_sequence" / "mapo_tofu"
 #   Phase 1: Prep         — raw tofu, aromatics on counter
 #   Phase 2: Cook base    — aromatics + meat simmering in wok
 #   Phase 3: Active cook  — sauce boiling, tofu added
-#   Phase 4: Safety       — boil-over event
+#   Phase 4: Safety       — boil-over event (with wok close-ups)
 #   Phase 5: Recovery     — reduce heat, gentle simmer
 #   Phase 6: Done         — garnished, ready to serve
 
@@ -44,22 +51,27 @@ PHASES = [
         (MATRIX,     "2_simmer.png"),
         (VARIATIONS, "2_simmer_v3.png"),
     ]),
-    ("active_cook", 20, [
+    ("active_cook", 18, [
         (VARIATIONS, "3_boil_v1.png"),
         (VARIATIONS, "3_boil_v2.png"),
         (MATRIX,     "3_boil.png"),
         (VARIATIONS, "3_boil_v3.png"),
     ]),
-    ("boil_over", 10, [
-        (MATRIX,     "4_BOIL_OVER.png"),
-        (VARIATIONS, "4_BOIL_OVER_v1.png"),
-        (VARIATIONS, "4_BOIL_OVER_v2.png"),
-        (VARIATIONS, "4_BOIL_OVER_v3.png"),
+    ("boil_over", 14, [
+        (BOILOVER_WOK, "wok_3_rising.png"),
+        (MATRIX,       "4_BOIL_OVER.png"),
+        (BOILOVER_WOK, "wok_4_AT_RIM.png"),
+        (VARIATIONS,   "4_BOIL_OVER_v1.png"),
+        (BOILOVER_WOK, "wok_5_SPILLING.png"),
+        (VARIATIONS,   "4_BOIL_OVER_v2.png"),
+        (BOILOVER_WOK, "wok_6_OVERFLOW.png"),
+        (VARIATIONS,   "4_BOIL_OVER_v3.png"),
     ]),
-    ("recovery", 15, [
-        (VARIATIONS, "2_simmer_v3.png"),
-        (VARIATIONS, "2_simmer_v1.png"),
-        (VARIATIONS, "2_simmer_v2.png"),
+    ("recovery", 13, [
+        (BOILOVER_WOK, "wok_2_safe_simmer.png"),
+        (VARIATIONS,   "2_simmer_v3.png"),
+        (VARIATIONS,   "2_simmer_v1.png"),
+        (VARIATIONS,   "2_simmer_v2.png"),
     ]),
     ("done", 22, [
         (VARIATIONS, "5_done_ok_v1.png"),
@@ -68,6 +80,27 @@ PHASES = [
         (VARIATIONS, "5_done_ok_v3.png"),
     ]),
 ]
+
+
+def resize_to_square(src: Path, dst: Path, size: int = TARGET_SIZE):
+    """Resize image to square, center-cropping if needed. No text added."""
+    img = Image.open(src).convert("RGB")
+    w, h = img.size
+
+    if w == size and h == size:
+        shutil.copy2(src, dst)
+        return
+
+    # Center-crop to square aspect ratio, then resize
+    if w > h:
+        left = (w - h) // 2
+        img = img.crop((left, 0, left + h, h))
+    elif h > w:
+        top = (h - w) // 2
+        img = img.crop((0, top, w, top + w))
+
+    img = img.resize((size, size), Image.LANCZOS)
+    img.save(dst, "PNG")
 
 
 def distribute_frames(total_frames: int) -> list[tuple[Path, str]]:
@@ -93,7 +126,6 @@ def distribute_frames(total_frames: int) -> list[tuple[Path, str]]:
         remainder = phase_frames % n_images
 
         for j, (src_dir, filename) in enumerate(images):
-            # Give one extra frame to the first `remainder` images
             count = base_per_image + (1 if j < remainder else 0)
             for _ in range(count):
                 result.append((src_dir, filename))
@@ -109,7 +141,7 @@ def assemble(name: str, total_frames: int):
     out_dir.mkdir(parents=True)
 
     frames = distribute_frames(total_frames)
-    width = len(str(total_frames))  # zero-pad width
+    width = len(str(total_frames))
 
     for idx, (src_dir, filename) in enumerate(frames, 1):
         src = src_dir / filename
@@ -117,7 +149,7 @@ def assemble(name: str, total_frames: int):
         if not src.exists():
             print(f"  WARNING: missing {src}")
             continue
-        shutil.copy2(src, dst)
+        resize_to_square(src, dst)
 
     actual = len(list(out_dir.iterdir()))
     print(f"  {name}/  — {actual} frames")
