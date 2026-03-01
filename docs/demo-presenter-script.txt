@@ -4,8 +4,9 @@
 ================================================================
 
 Run command:
-  python src/ui/server.py --duration 60s --images <path>
-  python src/ui/server.py --duration 5m  --images <path>
+  python src/ui/server.py --duration 60s  --images <path>
+  python src/ui/server.py --duration 120s --images <path>
+  python src/ui/server.py --duration 5m   --images <path>
 
 Open in browser:
   Phone UI:   http://localhost:8765/
@@ -65,6 +66,71 @@ Open in browser:
   >> Screen: Confetti celebration on phone
 
 [1:00] END
+
+
+================================================================
+  120-SECOND STANDARD DEMO
+================================================================
+
+[0:00] START
+  "Let me show you the system cooking mapo tofu — step by step."
+
+[0:03] STEP 1 — Dice tofu (VLM detection)
+  "The cook only sees one step at a time. On the right,
+   our Gemma 3 VLM analyzes the camera feed. It sees
+   uncut tofu — step_complete is false."
+  >> Screen: Phone shows Step 1. VLM: step_complete = false
+
+[0:14] STEP 1 COMPLETES — VLM auto-advances
+  "It detected diced tofu — the step advances automatically.
+   No button press. The camera decided."
+  >> Screen: VLM flips to step_complete = true
+
+[0:20] STEP 2 — Mince aromatics (user confirm)
+  "Some steps are hard for a camera to judge — like mincing.
+   So the cook gets a Done button instead. We have three
+   completion types: VLM detection, timer, and user confirm."
+  >> Screen: Phone shows green Done button
+
+[0:39] STEP 3 — Heat oil (VLM detection)
+  "Back to vision. The VLM is looking for shimmering oil.
+   Right now it says 'not hot yet'..."
+  >> Screen: VLM: step_complete = false
+
+[0:50] STEP 3 COMPLETES
+  "Detected — 'Oil shimmering in wok.' Auto-advance."
+  >> Screen: VLM flips to step_complete = true
+
+[0:56] STEP 4 — Doubanjiang (timer)
+  "Timed step — 30-second countdown on the phone.
+   Watch the timer tick down..."
+  >> Screen: Timer ring counting down
+
+[1:04] SAFETY ALERT — Boil-over!
+  "Now the key feature. While we're timing Step 4, the camera
+   still monitors for hazards. It just detected a boil-over.
+
+   The phone interrupts with a safety alert — this fires
+   regardless of which step you're on. Safety never sleeps."
+  >> Screen: Red alert shakes on phone.
+     VLM: safe = false, "Liquid spilling over rim"
+
+[1:18] STEP 5 — Simmer (timer)
+  "Crisis handled. Five-minute simmer with live countdown.
+   The cook can step away — the system is watching."
+  >> Screen: Timer counting down on phone
+
+[1:40] STEP 6 — Cornstarch (VLM detection)
+  "Final step. The VLM detects the sauce has thickened.
+   Step complete."
+  >> Screen: VLM: step_complete = true, "Thick glossy sauce"
+
+[1:50] DONE!
+  "Mapo tofu is done! Six steps. Three completion types.
+   One safety interrupt. All on-device, all private, all fast."
+  >> Screen: Confetti celebration
+
+[2:00] END
 
 
 ================================================================

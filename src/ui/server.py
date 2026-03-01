@@ -198,8 +198,9 @@ class UIServer:
 # event name.  The demo sequence uses the same events regardless
 # of duration — only the pacing changes.
 #
-# 60s  ≈  1-minute speed run   (sleeps 54.5s + ~4.5s vlm = ~60s)
-# 5m   ≈  5-minute full demo   (sleeps 271s  + ~4.5s vlm + timer ticks ≈ 300s)
+# 60s   ≈  1-minute speed run
+# 120s  ≈  2-minute demo (comfortable narration, light timer ticks)
+# 5m    ≈  5-minute full presentation (deep narration, live countdowns)
 
 TIMING = {
     "60s": {
@@ -212,9 +213,21 @@ TIMING = {
         "s5_img":        1,     "s5_timer":      7,
         "s6":            6,
         "done":          3,
-        # timer tick settings (disabled for speed run)
-        "s4_ticks":      0,     # number of 1-second countdown ticks
+        "s4_ticks":      0,
         "s5_ticks":      0,
+    },
+    "120s": {
+        "startup":       3,
+        "s1_img1":       10,    "s1_img2":       6,
+        "s2":            18,
+        "s3_img1":       10,    "s3_img2":       6,
+        "s4_img":        2,     "s4_timer":      5,
+        "safety_img":    2,     "safety_alert":  12,
+        "s5_img":        2,     "s5_timer":      14,
+        "s6":            10,
+        "done":          5,
+        "s4_ticks":      5,     # 5s of visible countdown (30→25)
+        "s5_ticks":      5,     # 5s of visible countdown (300→295)
     },
     "5m": {
         "startup":       5,
@@ -226,9 +239,8 @@ TIMING = {
         "s5_img":        5,     "s5_timer":      8,
         "s6":            30,
         "done":          22,
-        # live countdown ticks shown on phone
-        "s4_ticks":      20,    # 20s of visible countdown (30→10)
-        "s5_ticks":      40,    # 40s of visible countdown (300→260)
+        "s4_ticks":      20,
+        "s5_ticks":      40,
     },
 }
 
@@ -403,8 +415,8 @@ if __name__ == "__main__":
         "--images", default=None,
         help="Directory of demo images to display on right panel")
     parser.add_argument(
-        "--duration", choices=["60s", "5m"], default="60s",
-        help="Demo pacing: 60s speed run or 5m full presentation")
+        "--duration", choices=["60s", "120s", "5m"], default="60s",
+        help="Demo pacing: 60s speed run, 120s standard, or 5m full")
     args = parser.parse_args()
 
     print(f"Running UI server in demo mode ({args.duration})...")
