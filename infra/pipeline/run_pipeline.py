@@ -16,10 +16,21 @@ Usage:
 
 import argparse
 import json
+import os
 import time
 from pathlib import Path
 
+# Monkey-patch torch.compile BEFORE any Unsloth imports — prevents Triton
+# kernel compilation hangs on Blackwell GPUs (cc=12.0, Triton 3.3.1 codegen bug).
+# Unsloth's LoRA optimizations still work; only JIT-compiled kernels are skipped.
 import torch
+
+_original_compile = torch.compile
+def _noop_compile(f=None, *args, **kwargs):
+    if f is not None:
+        return f
+    return lambda fn: fn
+torch.compile = _noop_compile
 
 from task_configs import TASK_CONFIGS, TASK_ORDER, BAKEOFF_TASKS
 from utils import (
@@ -91,14 +102,13 @@ def run_baselines(tasks, source_dir, output_dir, state):
 
     from unsloth import FastVisionModel
 
-    print("\nLoading Gemma 3 4B (4-bit) for baseline assessment...")
+    print("\nLoading Gemma 3 4B (4-bit, Unsloth) for baseline assessment...")
     t0 = time.time()
     model, tokenizer = FastVisionModel.from_pretrained(
         "unsloth/gemma-3-4b-it",
         load_in_4bit=True,
         max_seq_length=2048,
     )
-    FastVisionModel.for_inference(model)
     load_time = time.time() - t0
     print(f"  Loaded in {load_time:.1f}s | VRAM: {vram_stats()['current_gb']} GB")
 

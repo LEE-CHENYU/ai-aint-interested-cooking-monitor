@@ -243,6 +243,8 @@ def assess_task(model, tokenizer, task_config, source_dir):
                 text=input_text, images=[image], return_tensors="pt",
             ).to("cuda")
 
+            input_len = inputs["input_ids"].shape[1]
+
             with torch.no_grad():
                 outputs = model.generate(
                     **inputs,
@@ -250,7 +252,11 @@ def assess_task(model, tokenizer, task_config, source_dir):
                     do_sample=False,
                 )
 
-            response_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
+            # Decode only generated tokens (skip input to avoid matching
+            # the JSON template in the system prompt)
+            response_text = tokenizer.decode(
+                outputs[0][input_len:], skip_special_tokens=True
+            )
             predicted = parse_json_response(response_text)
             ground_truth = task_config["col_labels"][col][binary_key]
             predicted_value = predicted.get(binary_key)
