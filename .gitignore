@@ -10,6 +10,8 @@ service-account*.json
 *.safetensors
 *.gguf
 *.bin
+*.zip
+models/
 checkpoints/
 outputs/
 
