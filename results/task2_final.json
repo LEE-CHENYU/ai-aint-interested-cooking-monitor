@@ -1,0 +1,292 @@
+{
+  "binary_accuracy": 0.9722222222222222,
+  "correct": 35,
+  "total": 36,
+  "fp": 0,
+  "fn": 1,
+  "parse_fail": 0,
+  "per_image": [
+    {
+      "row": "frypan",
+      "col": "1_clear",
+      "ground_truth": true,
+      "predicted": true,
+      "correct": true
+    },
+    {
+      "row": "frypan",
+      "col": "2_steam",
+      "ground_truth": true,
+      "predicted": true,
+      "correct": true
+    },
+    {
+      "row": "frypan",
+      "col": "3_light_haze",
+      "ground_truth": true,
+      "predicted": true,
+      "correct": true
+    },
+    {
+      "row": "frypan",
+      "col": "4_SMOKE",
+      "ground_truth": false,
+      "predicted": false,
+      "correct": true
+    },
+    {
+      "row": "frypan",
+      "col": "5_HEAVY_SMOKE",
+      "ground_truth": false,
+      "predicted": false,
+      "correct": true
+    },
+    {
+      "row": "frypan",
+      "col": "6_FIRE",
+      "ground_truth": false,
+      "predicted": false,
+      "correct": true
+    },
+    {
+      "row": "wok",
+      "col": "1_clear",
+      "ground_truth": true,
+      "predicted": true,
+      "correct": true
+    },
+    {
+      "row": "wok",
+      "col": "2_steam",
+      "ground_truth": true,
+      "predicted": true,
+      "correct": true
+    },
+    {
+      "row": "wok",
+      "col": "3_light_haze",
+      "ground_truth": true,
+      "predicted": true,
+      "correct": true
+    },
+    {
+      "row": "wok",
+      "col": "4_SMOKE",
+      "ground_truth": false,
+      "predicted": false,
+      "correct": true
+    },
+    {
+      "row": "wok",
+      "col": "5_HEAVY_SMOKE",
+      "ground_truth": false,
+      "predicted": false,
+      "correct": true
+    },
+    {
+      "row": "wok",
+      "col": "6_FIRE",
+      "ground_truth": false,
+      "predicted": false,
+      "correct": true
+    },
+    {
+      "row": "skillet",
+      "col": "1_clear",
+      "ground_truth": true,
+      "predicted": true,
+      "correct": true
+    },
+    {
+      "row": "skillet",
+      "col": "2_steam",
+      "ground_truth": true,
+      "predicted": true,
+      "correct": true
+    },
+    {
+      "row": "skillet",
+      "col": "3_light_haze",
+      "ground_truth": true,
+      "predicted": false,
+      "correct": false
+    },
+    {
+      "row": "skillet",
+      "col": "4_SMOKE",
+      "ground_truth": false,
+      "predicted": false,
+      "correct": true
+    },
+    {
+      "row": "skillet",
+      "col": "5_HEAVY_SMOKE",
+      "ground_truth": false,
+      "predicted": false,
+      "correct": true
+    },
+    {
+      "row": "skillet",
+      "col": "6_FIRE",
+      "ground_truth": false,
+      "predicted": false,
+      "correct": true
+    },
+    {
+      "row": "pot",
+      "col": "1_clear",
+      "ground_truth": true,
+      "predicted": true,
+      "correct": true
+    },
+    {
+      "row": "pot",
+      "col": "2_steam",
+      "ground_truth": true,
+      "predicted": true,
+      "correct": true
+    },
+    {
+      "row": "pot",
+      "col": "3_light_haze",
+      "ground_truth": true,
+      "predicted": true,
+      "correct": true
+    },
+    {
+      "row": "pot",
+      "col": "4_SMOKE",
+      "ground_truth": false,
+      "predicted": false,
+      "correct": true
+    },
+    {
+      "row": "pot",
+      "col": "5_HEAVY_SMOKE",
+      "ground_truth": false,
+      "predicted": false,
+      "correct": true
+    },
+    {
+      "row": "pot",
+      "col": "6_FIRE",
+      "ground_truth": false,
+      "predicted": false,
+      "correct": true
+    },
+    {
+      "row": "deepoil",
+      "col": "1_clear",
+      "ground_truth": true,
+      "predicted": true,
+      "correct": true
+    },
+    {
+      "row": "deepoil",
+      "col": "2_steam",
+      "ground_truth": true,
+      "predicted": true,
+      "correct": true
+    },
+    {
+      "row": "deepoil",
+      "col": "3_light_haze",
+      "ground_truth": true,
+      "predicted": true,
+      "correct": true
+    },
+    {
+      "row": "deepoil",
+      "col": "4_SMOKE",
+      "ground_truth": false,
+      "predicted": false,
+      "correct": true
+    },
+    {
+      "row": "deepoil",
+      "col": "5_HEAVY_SMOKE",
+      "ground_truth": false,
+      "predicted": false,
+      "correct": true
+    },
+    {
+      "row": "deepoil",
+      "col": "6_FIRE",
+      "ground_truth": false,
+      "predicted": false,
+      "correct": true
+    },
+    {
+      "row": "oventop",
+      "col": "1_clear",
+      "ground_truth": true,
+      "predicted": true,
+      "correct": true
+    },
+    {
+      "row": "oventop",
+      "col": "2_steam",
+      "ground_truth": true,
+      "predicted": true,
+      "correct": true
+    },
+    {
+      "row": "oventop",
+      "col": "3_light_haze",
+      "ground_truth": true,
+      "predicted": true,
+      "correct": true
+    },
+    {
+      "row": "oventop",
+      "col": "4_SMOKE",
+      "ground_truth": false,
+      "predicted": false,
+      "correct": true
+    },
+    {
+      "row": "oventop",
+      "col": "5_HEAVY_SMOKE",
+      "ground_truth": false,
+      "predicted": false,
+      "correct": true
+    },
+    {
+      "row": "oventop",
+      "col": "6_FIRE",
+      "ground_truth": false,
+      "predicted": false,
+      "correct": true
+    }
+  ],
+  "best_epoch": 2,
+  "epoch_results": [
+    {
+      "epoch": 1,
+      "accuracy": 0.7777777777777778,
+      "fp": 0,
+      "fn": 8,
+      "loss": 0.145,
+      "improved": true,
+      "best_epoch": 1
+    },
+    {
+      "epoch": 2,
+      "accuracy": 0.9722222222222222,
+      "fp": 0,
+      "fn": 1,
+      "loss": 0.0239,
+      "improved": true,
+      "best_epoch": 2
+    },
+    {
+      "epoch": 3,
+      "accuracy": 0.9722222222222222,
+      "fp": 0,
+      "fn": 1,
+      "loss": 0.0002,
+      "improved": false,
+      "best_epoch": 2
+    }
+  ]
+}

@@ -1,0 +1,292 @@
+{
+  "binary_accuracy": 0.7222222222222222,
+  "correct": 26,
+  "total": 36,
+  "fp": 10,
+  "fn": 0,
+  "parse_fail": 0,
+  "per_image": [
+    {
+      "row": "stainless",
+      "col": "1_cold",
+      "ground_truth": false,
+      "predicted": false,
+      "correct": true
+    },
+    {
+      "row": "stainless",
+      "col": "2_warm",
+      "ground_truth": false,
+      "predicted": true,
+      "correct": false
+    },
+    {
+      "row": "stainless",
+      "col": "3_pre_simmer",
+      "ground_truth": false,
+      "predicted": true,
+      "correct": false
+    },
+    {
+      "row": "stainless",
+      "col": "4_simmer",
+      "ground_truth": true,
+      "predicted": true,
+      "correct": true
+    },
+    {
+      "row": "stainless",
+      "col": "5_BOIL",
+      "ground_truth": true,
+      "predicted": true,
+      "correct": true
+    },
+    {
+      "row": "stainless",
+      "col": "6_RAPID_BOIL",
+      "ground_truth": true,
+      "predicted": true,
+      "correct": true
+    },
+    {
+      "row": "saucepan",
+      "col": "1_cold",
+      "ground_truth": false,
+      "predicted": false,
+      "correct": true
+    },
+    {
+      "row": "saucepan",
+      "col": "2_warm",
+      "ground_truth": false,
+      "predicted": false,
+      "correct": true
+    },
+    {
+      "row": "saucepan",
+      "col": "3_pre_simmer",
+      "ground_truth": false,
+      "predicted": true,
+      "correct": false
+    },
+    {
+      "row": "saucepan",
+      "col": "4_simmer",
+      "ground_truth": true,
+      "predicted": true,
+      "correct": true
+    },
+    {
+      "row": "saucepan",
+      "col": "5_BOIL",
+      "ground_truth": true,
+      "predicted": true,
+      "correct": true
+    },
+    {
+      "row": "saucepan",
+      "col": "6_RAPID_BOIL",
+      "ground_truth": true,
+      "predicted": true,
+      "correct": true
+    },
+    {
+      "row": "stockpot",
+      "col": "1_cold",
+      "ground_truth": false,
+      "predicted": true,
+      "correct": false
+    },
+    {
+      "row": "stockpot",
+      "col": "2_warm",
+      "ground_truth": false,
+      "predicted": false,
+      "correct": true
+    },
+    {
+      "row": "stockpot",
+      "col": "3_pre_simmer",
+      "ground_truth": false,
+      "predicted": true,
+      "correct": false
+    },
+    {
+      "row": "stockpot",
+      "col": "4_simmer",
+      "ground_truth": true,
+      "predicted": true,
+      "correct": true
+    },
+    {
+      "row": "stockpot",
+      "col": "5_BOIL",
+      "ground_truth": true,
+      "predicted": true,
+      "correct": true
+    },
+    {
+      "row": "stockpot",
+      "col": "6_RAPID_BOIL",
+      "ground_truth": true,
+      "predicted": true,
+      "correct": true
+    },
+    {
+      "row": "glass",
+      "col": "1_cold",
+      "ground_truth": false,
+      "predicted": false,
+      "correct": true
+    },
+    {
+      "row": "glass",
+      "col": "2_warm",
+      "ground_truth": false,
+      "predicted": true,
+      "correct": false
+    },
+    {
+      "row": "glass",
+      "col": "3_pre_simmer",
+      "ground_truth": false,
+      "predicted": true,
+      "correct": false
+    },
+    {
+      "row": "glass",
+      "col": "4_simmer",
+      "ground_truth": true,
+      "predicted": true,
+      "correct": true
+    },
+    {
+      "row": "glass",
+      "col": "5_BOIL",
+      "ground_truth": true,
+      "predicted": true,
+      "correct": true
+    },
+    {
+      "row": "glass",
+      "col": "6_RAPID_BOIL",
+      "ground_truth": true,
+      "predicted": true,
+      "correct": true
+    },
+    {
+      "row": "dutch",
+      "col": "1_cold",
+      "ground_truth": false,
+      "predicted": false,
+      "correct": true
+    },
+    {
+      "row": "dutch",
+      "col": "2_warm",
+      "ground_truth": false,
+      "predicted": false,
+      "correct": true
+    },
+    {
+      "row": "dutch",
+      "col": "3_pre_simmer",
+      "ground_truth": false,
+      "predicted": true,
+      "correct": false
+    },
+    {
+      "row": "dutch",
+      "col": "4_simmer",
+      "ground_truth": true,
+      "predicted": true,
+      "correct": true
+    },
+    {
+      "row": "dutch",
+      "col": "5_BOIL",
+      "ground_truth": true,
+      "predicted": true,
+      "correct": true
+    },
+    {
+      "row": "dutch",
+      "col": "6_RAPID_BOIL",
+      "ground_truth": true,
+      "predicted": true,
+      "correct": true
+    },
+    {
+      "row": "wok",
+      "col": "1_cold",
+      "ground_truth": false,
+      "predicted": false,
+      "correct": true
+    },
+    {
+      "row": "wok",
+      "col": "2_warm",
+      "ground_truth": false,
+      "predicted": true,
+      "correct": false
+    },
+    {
+      "row": "wok",
+      "col": "3_pre_simmer",
+      "ground_truth": false,
+      "predicted": true,
+      "correct": false
+    },
+    {
+      "row": "wok",
+      "col": "4_simmer",
+      "ground_truth": true,
+      "predicted": true,
+      "correct": true
+    },
+    {
+      "row": "wok",
+      "col": "5_BOIL",
+      "ground_truth": true,
+      "predicted": true,
+      "correct": true
+    },
+    {
+      "row": "wok",
+      "col": "6_RAPID_BOIL",
+      "ground_truth": true,
+      "predicted": true,
+      "correct": true
+    }
+  ],
+  "best_epoch": 2,
+  "epoch_results": [
+    {
+      "epoch": 1,
+      "accuracy": 0.6666666666666666,
+      "fp": 12,
+      "fn": 0,
+      "loss": 0.1169,
+      "improved": true,
+      "best_epoch": 1
+    },
+    {
+      "epoch": 2,
+      "accuracy": 0.8055555555555556,
+      "fp": 7,
+      "fn": 0,
+      "loss": 0.0198,
+      "improved": true,
+      "best_epoch": 2
+    },
+    {
+      "epoch": 3,
+      "accuracy": 0.7222222222222222,
+      "fp": 10,
+      "fn": 0,
+      "loss": 0.0014,
+      "improved": false,
+      "best_epoch": 2
+    }
+  ]
+}
