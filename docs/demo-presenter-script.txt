@@ -1,0 +1,199 @@
+================================================================
+  AI KITCHEN COOKING MONITOR — DEMO PRESENTER SCRIPT
+  Team: AI Ain't Interested
+================================================================
+
+Run command:
+  python src/ui/server.py --duration 60s --images <path>
+  python src/ui/server.py --duration 5m  --images <path>
+
+Open in browser:
+  Phone UI:   http://localhost:8765/
+  Full demo:  http://localhost:8765/demo
+
+
+================================================================
+  60-SECOND SPEED RUN
+================================================================
+
+[0:00] START
+  "Let me show you the system in action. We're cooking mapo tofu."
+
+[0:03] STEP 1 — Dice tofu (VLM detection)
+  "The cook sees one step at a time. The camera watches the
+   cutting board — the VLM sees uncut tofu."
+  >> Screen: Phone shows Step 1. Camera shows tofu image.
+     VLM output: step_complete = false
+
+[0:09] STEP 1 COMPLETES — VLM auto-advances
+  "It detected the diced tofu — step advances automatically."
+  >> Screen: VLM output flips to step_complete = true
+
+[0:12] STEP 2 — Mince aromatics (user confirm)
+  "For steps the camera can't reliably detect, like mincing,
+   the cook just taps Done."
+  >> Screen: Phone shows Done button
+
+[0:21] STEP 3 — Heat oil (VLM detection)
+  "Back to vision — it's looking for shimmering oil."
+  >> Screen: VLM says "Oil not hot yet"
+
+[0:25] STEP 3 COMPLETES
+  "Detected. Auto-advance again."
+  >> Screen: VLM output flips to step_complete = true
+
+[0:29] STEP 4 — Doubanjiang (timer)
+  "Timed step. The phone shows a 30-second countdown."
+  >> Screen: Timer ring appears on phone
+
+[0:34] SAFETY ALERT — Boil-over!
+  "And if something goes wrong — boil-over — the system
+   interrupts with a safety alert, no matter which step."
+  >> Screen: Red alert banner shakes on phone.
+     VLM: safe = false, "Liquid spilling over rim"
+
+[0:41] STEP 5 — Simmer (timer)
+  "Back to cooking. Five-minute simmer with countdown."
+  >> Screen: Timer on phone
+
+[0:50] STEP 6 — Cornstarch (VLM detection)
+  "Final step. VLM detects the sauce has thickened."
+  >> Screen: VLM: step_complete = true
+
+[0:57] DONE!
+  "And that's it — mapo tofu is done!"
+  >> Screen: Confetti celebration on phone
+
+[1:00] END
+
+
+================================================================
+  5-MINUTE FULL PRESENTATION
+================================================================
+
+[0:00] START
+  "Let me show you how the system works end-to-end.
+   I'm going to cook mapo tofu."
+
+[0:05] STEP 1 — Dice tofu (VLM detection)
+  "The system generated a 6-step recipe, but the cook only
+   sees one step at a time — no recipe overload.
+
+   On the right, you see the kitchen camera feed. Our fine-tuned
+   Gemma 3 4B VLM analyzes every frame. Right now it sees
+   uncut tofu on the cutting board — step_complete is false."
+
+  >> Pause. Let the audience read the VLM output.
+
+  "Watch what happens when the tofu is diced..."
+
+[0:50] STEP 1 COMPLETES — VLM auto-advances
+  "The VLM detected diced tofu — step_complete flipped to true.
+   The phone automatically advanced to Step 2. No button press.
+   No timer. The camera decided."
+
+[1:05] STEP 2 — Mince aromatics (user confirm)
+  "Now, mincing garlic and ginger is hard for a camera to detect
+   reliably. So the system shows a Done button instead.
+
+   This is one of our three completion types:
+   - VLM detection for what the camera CAN see
+   - Timer for cooking phases
+   - User confirm for everything else
+
+   The cook taps Done when they're finished."
+
+[1:45] STEP 3 — Heat oil (VLM detection)
+  "Back to vision detection. The VLM is looking for
+   shimmering oil in the wok.
+
+   It says 'Oil not hot yet' — step_complete is false.
+   We wait..."
+
+[2:10] STEP 3 COMPLETES
+  "There it is — 'Oil shimmering in wok.' Auto-advance."
+
+[2:25] STEP 4 — Doubanjiang (timer)
+  "Now a timed step: cook the doubanjiang paste for 30 seconds.
+   Watch the countdown ring on the phone — it ticks down live.
+
+   The timer runs independently. The cook doesn't need to
+   set anything — the system knows this step has a duration."
+
+  >> Let the timer tick down visibly for ~20 seconds.
+
+[2:50] SAFETY ALERT — Boil-over!
+  "Now here's the critical feature. While we're in Step 4,
+   the camera ALSO monitors for safety hazards continuously.
+
+   The VLM just detected a boil-over — safe is false,
+   'Liquid spilling over rim.'
+
+   The phone immediately shows a red safety alert:
+   'Boil-over detected! Reduce heat immediately!'
+
+   This happens regardless of which step you're on.
+   Safety monitoring never sleeps."
+
+  >> Let the alert sit on screen. Let it sink in.
+
+[3:15] STEP 5 — Simmer (timer)
+  "Crisis averted. Back to cooking.
+
+   Add tofu and broth, simmer for 5 minutes. Another timed step.
+   The countdown runs on the phone. The cook can walk away —
+   when it's done, they'll hear an audio notification."
+
+  >> Let the timer tick down for ~40 seconds.
+
+[4:00] STEP 6 — Cornstarch (VLM detection)
+  "Final step. Add cornstarch slurry and stir.
+
+   The VLM is looking for a thick, glossy sauce —
+   that's how it knows this step is complete.
+
+   And there it is: 'Thick glossy sauce,' step_complete = true."
+
+[4:30] DONE!
+  "Mapo tofu is done! The phone shows a celebration screen.
+
+   Six steps. Three completion types. One safety interrupt.
+   All driven by a single fine-tuned Gemma 3 4B model
+   running entirely on-device."
+
+[4:55] WRAP
+  "No cloud. No internet. No privacy concerns.
+   Just an AI copilot that watches, guides, and protects."
+
+[5:00] END
+
+
+================================================================
+  QUICK REFERENCE — KEY TALKING POINTS
+================================================================
+
+If asked about the model:
+  "Gemma 3 4B, fine-tuned with QLoRA on 36 synthetic images.
+   Training took 6 minutes 45 seconds on 8.5 GB VRAM.
+   We only trained 0.69% of parameters."
+
+If asked about accuracy:
+  "State classification went from 25% to 61% after fine-tuning.
+   Water-based boil-over detection hit 100%.
+   With more training data, these numbers go higher."
+
+If asked about completion types:
+  "Three types, designed around what the model is good at:
+   1. VLM detection — for things the camera can see
+   2. Timer — for cooking phases with known duration
+   3. User confirm — for steps the camera can't judge"
+
+If asked about safety:
+  "Safety monitoring runs every inference cycle, independent
+   of the current step. It never pauses. Boil-over detection
+   is our strongest signal at 100% for water-based dishes."
+
+If asked about latency:
+  "After merging LoRA weights into the base model,
+   inference runs at native speed — roughly 3-5 seconds
+   per frame on consumer hardware."
