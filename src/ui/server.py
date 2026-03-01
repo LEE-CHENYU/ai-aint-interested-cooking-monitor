@@ -193,9 +193,51 @@ class UIServer:
             await asyncio.Future()  # Run forever
 
 
-async def _demo(image_dir: str | None = None):
+# ── TIMING PROFILES ─────────────────────────────────────────────
+# Each profile is a dict of sleep durations (seconds) keyed by
+# event name.  The demo sequence uses the same events regardless
+# of duration — only the pacing changes.
+#
+# 60s  ≈  1-minute speed run   (sleeps 54.5s + ~4.5s vlm = ~60s)
+# 5m   ≈  5-minute full demo   (sleeps 271s  + ~4.5s vlm + timer ticks ≈ 300s)
+
+TIMING = {
+    "60s": {
+        "startup":       3,
+        "s1_img1":       5,     "s1_img2":       3,
+        "s2":            8,
+        "s3_img1":       4.5,   "s3_img2":       3,
+        "s4_img":        1,     "s4_timer":      3.5,
+        "safety_img":    1,     "safety_alert":  5.5,
+        "s5_img":        1,     "s5_timer":      7,
+        "s6":            6,
+        "done":          3,
+        # timer tick settings (disabled for speed run)
+        "s4_ticks":      0,     # number of 1-second countdown ticks
+        "s5_ticks":      0,
+    },
+    "5m": {
+        "startup":       5,
+        "s1_img1":       30,    "s1_img2":       15,
+        "s2":            40,
+        "s3_img1":       25,    "s3_img2":       15,
+        "s4_img":        5,     "s4_timer":      5,
+        "safety_img":    5,     "safety_alert":  25,
+        "s5_img":        5,     "s5_timer":      8,
+        "s6":            30,
+        "done":          22,
+        # live countdown ticks shown on phone
+        "s4_ticks":      20,    # 20s of visible countdown (30→10)
+        "s5_ticks":      40,    # 40s of visible countdown (300→260)
+    },
+}
+
+
+async def _demo(image_dir: str | None = None,
+                duration: str = "60s"):
     """Demo mode: run server and send sample messages with images."""
     server = UIServer(image_dir=image_dir)
+    t = TIMING[duration]
 
     # Collect image files from demo directory if provided
     images = []
@@ -207,32 +249,16 @@ async def _demo(image_dir: str | None = None):
         )
 
     async def send_demo_sequence():
-        # ── 60-SECOND SPEED RUN ──────────────────────────────────
-        # Pacing designed for live presentation (~60s total).
-        # Elapsed times in comments assume ~0.5s per VLM delay.
-        #
-        #  0:00  start
-        #  0:03  Step 1 — VLM: dice tofu
-        #  0:09  Step 1 — VLM detects completion, auto-advance
-        #  0:12  Step 2 — user confirm: mince aromatics
-        #  0:20  Step 3 — VLM: heat oil
-        #  0:25  Step 3 — VLM detects completion, auto-advance
-        #  0:29  Step 4 — timer: doubanjiang (30s countdown)
-        #  0:34  SAFETY — boil-over detected!
-        #  0:41  Step 5 — timer: simmer (5 min shown)
-        #  0:50  Step 6 — VLM: cornstarch thickened
-        #  0:57  Done — celebration!
-        #  1:00  end
-        # ─────────────────────────────────────────────────────────
         import time
         t0 = time.monotonic()
 
         def elapsed():
             s = time.monotonic() - t0
-            return f"[{int(s):02d}s]"
+            m, sec = divmod(int(s), 60)
+            return f"[{m}:{sec:02d}]"
 
-        await asyncio.sleep(3)                                     # 0:03
-        print(f"\n{elapsed()} Starting demo sequence...")
+        await asyncio.sleep(t["startup"])
+        print(f"\n{elapsed()} Starting {duration} demo sequence...")
         total_imgs = len(images)
         img_idx = 0
 
@@ -247,6 +273,15 @@ async def _demo(image_dir: str | None = None):
                 await asyncio.sleep(0.5)
                 await server.send_vlm_result(vlm_result, latency_ms)
 
+        async def tick_timer(name, start, total, ticks):
+            """Send live countdown updates so the phone timer visibly ticks."""
+            for i in range(ticks):
+                remaining = start - i - 1
+                if remaining < 0:
+                    break
+                await asyncio.sleep(1)
+                await server.send_timer(name, remaining, total)
+
         # ── Step 1: VLM — dice tofu ──
         await server.send_step(1, 6, "Dice the tofu into 1-inch cubes",
                                "vlm", "mapo_tofu")
@@ -256,13 +291,13 @@ async def _demo(image_dir: str | None = None):
              "reason": "Tofu on cutting board", "step_complete": False},
             latency_ms=3200
         )
-        await asyncio.sleep(5)                                     # 0:09
+        await asyncio.sleep(t["s1_img1"])
         await next_image(
             {"dish": "mapo_tofu", "state": "prep", "safe": True,
              "reason": "Diced tofu visible", "step_complete": True},
             latency_ms=2800
         )
-        await asyncio.sleep(3)                                     # 0:12
+        await asyncio.sleep(t["s1_img2"])
 
         # ── Step 2: User confirm — mince aromatics ──
         await server.send_step(2, 6, "Mince garlic, ginger, and scallions",
@@ -273,7 +308,7 @@ async def _demo(image_dir: str | None = None):
              "reason": "Aromatics being minced", "step_complete": False},
             latency_ms=3100
         )
-        await asyncio.sleep(8)                                     # 0:21
+        await asyncio.sleep(t["s2"])
 
         # ── Step 3: VLM — heat oil ──
         await server.send_step(3, 6, "Heat oil in wok until shimmering",
@@ -284,13 +319,13 @@ async def _demo(image_dir: str | None = None):
              "reason": "Oil not hot yet", "step_complete": False},
             latency_ms=4100
         )
-        await asyncio.sleep(4.5)                                   # 0:25
+        await asyncio.sleep(t["s3_img1"])
         await next_image(
             {"dish": "mapo_tofu", "state": "simmering", "safe": True,
              "reason": "Oil shimmering in wok", "step_complete": True},
             latency_ms=3500
         )
-        await asyncio.sleep(3)                                     # 0:29
+        await asyncio.sleep(t["s3_img2"])
 
         # ── Step 4: Timer — doubanjiang ──
         await server.send_step(4, 6, "Add doubanjiang and cook for 30 seconds",
@@ -301,9 +336,11 @@ async def _demo(image_dir: str | None = None):
              "reason": "Doubanjiang frying", "step_complete": False},
             latency_ms=3300
         )
-        await asyncio.sleep(1)
+        await asyncio.sleep(t["s4_img"])
         await server.send_timer("step_4_timer", 30, 30)
-        await asyncio.sleep(3.5)                                   # 0:34
+        if t["s4_ticks"]:
+            await tick_timer("step_4_timer", 30, 30, t["s4_ticks"])
+        await asyncio.sleep(t["s4_timer"])
 
         # ── SAFETY ALERT — boil-over! ──
         await next_image(
@@ -311,11 +348,11 @@ async def _demo(image_dir: str | None = None):
              "reason": "Liquid spilling over rim", "step_complete": False},
             latency_ms=2900
         )
-        await asyncio.sleep(1)
+        await asyncio.sleep(t["safety_img"])
         await server.send_safety(
             "Boil-over detected! Reduce heat immediately!")
-        print(f"{elapsed()} ⚠ SAFETY ALERT: Boil-over!")
-        await asyncio.sleep(5.5)                                   # 0:41
+        print(f"{elapsed()} SAFETY ALERT: Boil-over!")
+        await asyncio.sleep(t["safety_alert"])
 
         # ── Step 5: Timer — simmer ──
         await server.send_step(5, 6,
@@ -327,9 +364,11 @@ async def _demo(image_dir: str | None = None):
              "reason": "Tofu simmering in broth", "step_complete": False},
             latency_ms=3800
         )
-        await asyncio.sleep(1)
-        await server.send_timer("step_5_timer", 15, 300)
-        await asyncio.sleep(7)                                     # 0:50
+        await asyncio.sleep(t["s5_img"])
+        await server.send_timer("step_5_timer", 300, 300)
+        if t["s5_ticks"]:
+            await tick_timer("step_5_timer", 300, 300, t["s5_ticks"])
+        await asyncio.sleep(t["s5_timer"])
 
         # ── Step 6: VLM — cornstarch ──
         await server.send_step(6, 6,
@@ -341,12 +380,12 @@ async def _demo(image_dir: str | None = None):
              "reason": "Thick glossy sauce", "step_complete": True},
             latency_ms=3600
         )
-        await asyncio.sleep(6)                                     # 0:57
+        await asyncio.sleep(t["s6"])
 
         # ── Done! ──
         await server.send_done("mapo_tofu")
         print(f"{elapsed()} Done! Mapo tofu complete.")
-        await asyncio.sleep(3)                                     # 1:00
+        await asyncio.sleep(t["done"])
         print(f"{elapsed()} Demo sequence finished.")
 
     await asyncio.gather(
@@ -363,11 +402,14 @@ if __name__ == "__main__":
     parser.add_argument(
         "--images", default=None,
         help="Directory of demo images to display on right panel")
+    parser.add_argument(
+        "--duration", choices=["60s", "5m"], default="60s",
+        help="Demo pacing: 60s speed run or 5m full presentation")
     args = parser.parse_args()
 
-    print("Running UI server in demo mode...")
+    print(f"Running UI server in demo mode ({args.duration})...")
     print("Open in browser:")
     print("  Phone only: http://localhost:8765/")
     print("  Full demo:  http://localhost:8765/demo")
     print()
-    asyncio.run(_demo(image_dir=args.images))
+    asyncio.run(_demo(image_dir=args.images, duration=args.duration))
