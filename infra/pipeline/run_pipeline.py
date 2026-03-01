@@ -26,6 +26,7 @@ from utils import (
     clear_vram,
     vram_stats,
     parse_prompts,
+    find_image,
     assess_task,
     build_training_dataset,
     make_epoch_callback,
@@ -245,15 +246,13 @@ def run_variations(tasks, source_dir, output_dir, settings, state):
         total_expected = len(config["rows"]) * len(config["cols"]) * num_variations
 
         for row in config["rows"]:
-            row_dir = var_dir / row
-            row_dir.mkdir(parents=True, exist_ok=True)
-
             for col in config["cols"]:
-                src_path = img_dir / row / f"{col}.png"
+                # Find source image (flat or nested layout)
+                src_path = find_image(img_dir, row, col)
                 key = f"{row}/{col}"
                 prompt = prompts.get(key, "")
 
-                if not src_path.exists() or not prompt:
+                if not src_path or not prompt:
                     continue
 
                 src_image = Image.open(str(src_path)).convert("RGB")
@@ -263,12 +262,13 @@ def run_variations(tasks, source_dir, output_dir, settings, state):
 
                 for v in range(num_variations):
                     count += 1
-                    fname = f"{col}_v{v + 1}.png"
-                    out_path = row_dir / fname
+                    # Save variations flat: {row}_{col}_v{N}.png
+                    fname = f"{row}_{col}_v{v + 1}.png"
+                    out_path = var_dir / fname
 
                     if out_path.exists():
                         labels.append({
-                            "file": f"{row}/{fname}", "row": row, "col": col,
+                            "file": fname, "row": row, "col": col,
                             "is_unsafe": is_unsafe, "variation": v + 1,
                         })
                         continue
@@ -288,13 +288,13 @@ def run_variations(tasks, source_dir, output_dir, settings, state):
 
                     result.save(str(out_path))
                     labels.append({
-                        "file": f"{row}/{fname}", "row": row, "col": col,
+                        "file": fname, "row": row, "col": col,
                         "is_unsafe": is_unsafe, "variation": v + 1,
                     })
 
                     if count % 20 == 0:
                         tag = "UNSAFE" if is_unsafe else "safe"
-                        print(f"    [{count}/{total_expected}] {row}/{fname} [{tag}]")
+                        print(f"    [{count}/{total_expected}] {fname} [{tag}]")
 
         with open(var_labels, "w") as f:
             json.dump(labels, f, indent=2)

@@ -65,6 +65,45 @@ def parse_prompts(prompt_file):
 
 
 # =============================================================================
+# Image Path Resolution
+# =============================================================================
+
+def find_image(base_dir, row, col):
+    """Find an image file, handling both flat and nested directory layouts.
+
+    Checks (in order):
+      1. {base_dir}/{row}/{col}.png       (nested: row subdirectory)
+      2. {base_dir}/{row}_{col}.png       (flat: underscore-separated)
+    Returns the Path if found, else None.
+    """
+    base = Path(base_dir)
+    for candidate in [
+        base / row / f"{col}.png",
+        base / f"{row}_{col}.png",
+    ]:
+        if candidate.exists():
+            return candidate
+    return None
+
+
+def find_variation(base_dir, row, col, v):
+    """Find a variation image, handling both flat and nested layouts.
+
+    Checks (in order):
+      1. {base_dir}/{row}/{col}_v{v}.png  (nested)
+      2. {base_dir}/{row}_{col}_v{v}.png  (flat)
+    """
+    base = Path(base_dir)
+    for candidate in [
+        base / row / f"{col}_v{v}.png",
+        base / f"{row}_{col}_v{v}.png",
+    ]:
+        if candidate.exists():
+            return candidate
+    return None
+
+
+# =============================================================================
 # JSON Response Parsing
 # =============================================================================
 
@@ -122,9 +161,9 @@ def build_training_dataset(task_config, source_dir, variations_dir=None):
             is_unsafe = col in unsafe_cols
             repeat = oversample if is_unsafe else 1
 
-            # Source image
-            img_path = source_path / row / f"{col}.png"
-            if img_path.exists():
+            # Source image (handles both flat and nested layouts)
+            img_path = find_image(source_path, row, col)
+            if img_path:
                 for _ in range(repeat):
                     samples.append(_make_sample(img_path, system_prompt, gt_response))
 
@@ -132,8 +171,8 @@ def build_training_dataset(task_config, source_dir, variations_dir=None):
             if var_path:
                 v = 1
                 while True:
-                    vimg = var_path / row / f"{col}_v{v}.png"
-                    if not vimg.exists():
+                    vimg = find_variation(var_path, row, col, v)
+                    if not vimg:
                         break
                     for _ in range(repeat):
                         samples.append(_make_sample(vimg, system_prompt, gt_response))
@@ -181,8 +220,8 @@ def assess_task(model, tokenizer, task_config, source_dir):
 
     for row in task_config["rows"]:
         for col in task_config["cols"]:
-            img_path = source_path / row / f"{col}.png"
-            if not img_path.exists():
+            img_path = find_image(source_path, row, col)
+            if not img_path:
                 continue
 
             image = Image.open(str(img_path)).convert("RGB")
