@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Kitchen Monitor - Demo Presenter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FFF8E7;
+    --warm-bg: #FEF0D5;
+    --orange: #FF6B35;
+    --orange-dark: #E5552A;
+    --yellow: #FFB627;
+    --green: #06D6A0;
+    --green-dark: #05B384;
+    --red: #EF476F;
+    --brown: #5C4033;
+    --brown-light: #8B6F5E;
+    --white: #FFFFFF;
+    --dark-bg: #1A1A2E;
+    --dark-card: #222244;
+    --dark-border: #333366;
+    --dark-text: #E0E0F0;
+    --dark-muted: #8888AA;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--dark-bg);
+    height: 100vh;
+    overflow: hidden;
+    color: var(--dark-text);
+  }
+
+  /* ─── SPLIT LAYOUT ─── */
+  .presenter {
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    height: 100vh;
+    gap: 0;
+  }
+
+  /* ─── LEFT: PHONE MOCKUP ─── */
+  .phone-panel {
+    background: linear-gradient(180deg, #2A2A4A 0%, #1A1A2E 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    border-right: 2px solid var(--dark-border);
+    position: relative;
+  }
+
+  .phone-label {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--dark-muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+
+  .phone-frame {
+    width: 375px;
+    height: calc(100vh - 120px);
+    max-height: 812px;
+    border-radius: 40px;
+    overflow: hidden;
+    border: 4px solid #444466;
+    box-shadow:
+      0 0 0 2px #333355,
+      0 20px 60px rgba(0, 0, 0, 0.5),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    position: relative;
+    background: var(--warm-bg);
+  }
+
+  .phone-frame iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  /* Notch */
+  .phone-notch {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 28px;
+    background: #444466;
+    border-radius: 0 0 20px 20px;
+    z-index: 10;
+  }
+
+  /* ─── RIGHT: CAMERA FEED ─── */
+  .camera-panel {
+    display: flex;
+    flex-direction: column;
+    padding: 32px 40px;
+    overflow: hidden;
+  }
+
+  .camera-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-shrink: 0;
+  }
+
+  .camera-title {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: var(--dark-text);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .camera-title .rec-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--red);
+    animation: rec-blink 1.5s ease-in-out infinite;
+  }
+
+  @keyframes rec-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .camera-status {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--dark-muted);
+    background: rgba(255, 255, 255, 0.05);
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--dark-border);
+  }
+
+  /* Image display area */
+  .image-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-height: 0;
+  }
+
+  .image-display {
+    flex: 1;
+    background: var(--dark-card);
+    border-radius: 16px;
+    border: 2px solid var(--dark-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    min-height: 0;
+  }
+
+  .image-display img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+    transition: opacity 0.4s ease;
+  }
+
+  .image-display img.fade-in {
+    animation: img-fade-in 0.5s ease;
+  }
+
+  @keyframes img-fade-in {
+    from { opacity: 0; transform: scale(0.96); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  /* Waiting state */
+  .image-placeholder {
+    text-align: center;
+    color: var(--dark-muted);
+  }
+
+  .image-placeholder .icon {
+    font-size: 4rem;
+    margin-bottom: 12px;
+    opacity: 0.5;
+    animation: camera-float 3s ease-in-out infinite;
+  }
+
+  @keyframes camera-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .image-placeholder .text {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 500;
+    font-size: 1.1rem;
+  }
+
+  /* Image filename label */
+  .image-label {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.7);
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    padding: 4px 10px;
+    border-radius: 6px;
+  }
+
+  /* Image counter */
+  .image-counter {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.7);
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    padding: 4px 10px;
+    border-radius: 6px;
+  }
+
+  /* ─── VLM OUTPUT PANEL ─── */
+  .vlm-panel {
+    background: var(--dark-card);
+    border-radius: 12px;
+    border: 1px solid var(--dark-border);
+    padding: 14px 18px;
+    flex-shrink: 0;
+    max-height: 160px;
+    overflow-y: auto;
+  }
+
+  .vlm-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .vlm-panel-title {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: var(--orange);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+
+  .vlm-latency {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--dark-muted);
+  }
+
+  .vlm-output {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    color: var(--dark-text);
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+
+  .vlm-output .key {
+    color: var(--orange);
+  }
+
+  .vlm-output .val-string {
+    color: var(--green);
+  }
+
+  .vlm-output .val-bool-true {
+    color: var(--green);
+    font-weight: 700;
+  }
+
+  .vlm-output .val-bool-false {
+    color: var(--red);
+    font-weight: 700;
+  }
+
+  /* ─── BOTTOM BAR ─── */
+  .demo-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-top: 1px solid var(--dark-border);
+    margin-top: 12px;
+    flex-shrink: 0;
+  }
+
+  .demo-bar-left {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--dark-muted);
+  }
+
+  .demo-bar-right {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .model-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: rgba(255, 107, 53, 0.12);
+    color: var(--orange);
+    border: 1px solid rgba(255, 107, 53, 0.2);
+  }
+
+  .device-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: rgba(6, 214, 160, 0.1);
+    color: var(--green);
+    border: 1px solid rgba(6, 214, 160, 0.2);
+  }
+</style>
+</head>
+<body>
+
+<div class="presenter">
+
+  <!-- LEFT: PHONE MOCKUP -->
+  <div class="phone-panel">
+    <div class="phone-label">User's Phone</div>
+    <div class="phone-frame">
+      <div class="phone-notch"></div>
+      <iframe src="/" title="Phone UI"></iframe>
+    </div>
+  </div>
+
+  <!-- RIGHT: CAMERA FEED -->
+  <div class="camera-panel">
+
+    <div class="camera-header">
+      <div class="camera-title">
+        <span class="rec-dot"></span>
+        Kitchen Camera Feed
+      </div>
+      <div class="camera-status" id="cameraStatus">Waiting for images...</div>
+    </div>
+
+    <div class="image-container">
+
+      <div class="image-display" id="imageDisplay">
+        <!-- Placeholder shown before first image -->
+        <div class="image-placeholder" id="imagePlaceholder">
+          <div class="icon">📷</div>
+          <div class="text">Waiting for camera feed...</div>
+        </div>
+        <!-- The actual image (hidden until first image arrives) -->
+        <img id="cameraImage" style="display:none" alt="Kitchen camera feed">
+        <div class="image-label" id="imageLabel" style="display:none"></div>
+        <div class="image-counter" id="imageCounter" style="display:none"></div>
+      </div>
+
+      <!-- VLM detection output -->
+      <div class="vlm-panel">
+        <div class="vlm-panel-header">
+          <div class="vlm-panel-title">VLM Detection</div>
+          <div class="vlm-latency" id="vlmLatency"></div>
+        </div>
+        <div class="vlm-output" id="vlmOutput">Waiting for inference...</div>
+      </div>
+
+    </div>
+
+    <div class="demo-bar">
+      <div class="demo-bar-left">AI Kitchen Cooking Monitor</div>
+      <div class="demo-bar-right">
+        <span class="model-badge">Gemma 3 4B VLM</span>
+        <span class="device-badge">On-Device</span>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  var ws = null;
+  var RECONNECT_DELAY = 2000;
+
+  function $(id) { return document.getElementById(id); }
+
+  // ─── SAFE VLM OUTPUT RENDERING ───
+  function renderVlmOutput(data) {
+    var container = $('vlmOutput');
+    while (container.firstChild) {
+      container.removeChild(container.firstChild);
+    }
+
+    var keys = Object.keys(data);
+    // Opening brace
+    container.appendChild(document.createTextNode('{\n'));
+
+    for (var i = 0; i < keys.length; i++) {
+      var key = keys[i];
+      var val = data[key];
+
+      // Indent
+      container.appendChild(document.createTextNode('  '));
+
+      // Key
+      var keySpan = document.createElement('span');
+      keySpan.className = 'key';
+      keySpan.textContent = '"' + key + '"';
+      container.appendChild(keySpan);
+
+      container.appendChild(document.createTextNode(': '));
+
+      // Value
+      var valSpan = document.createElement('span');
+      if (typeof val === 'boolean') {
+        valSpan.className = val ? 'val-bool-true' : 'val-bool-false';
+        valSpan.textContent = String(val);
+      } else {
+        valSpan.className = 'val-string';
+        valSpan.textContent = '"' + String(val) + '"';
+      }
+      container.appendChild(valSpan);
+
+      // Comma + newline
+      if (i < keys.length - 1) {
+        container.appendChild(document.createTextNode(','));
+      }
+      container.appendChild(document.createTextNode('\n'));
+    }
+
+    // Closing brace
+    container.appendChild(document.createTextNode('}'));
+  }
+
+  // ─── WEBSOCKET ───
+  function connect() {
+    var host = location.hostname || 'localhost';
+    var port = location.port || '8765';
+    ws = new WebSocket('ws://' + host + ':' + port + '/ws');
+
+    ws.onopen = function() {
+      $('cameraStatus').textContent = 'Connected';
+    };
+
+    ws.onclose = function() {
+      $('cameraStatus').textContent = 'Reconnecting...';
+      setTimeout(connect, RECONNECT_DELAY);
+    };
+
+    ws.onerror = function() { ws.close(); };
+
+    ws.onmessage = function(event) {
+      var msg = JSON.parse(event.data);
+      handleMessage(msg);
+    };
+  }
+
+  // ─── MESSAGE HANDLER ───
+  function handleMessage(msg) {
+    if (msg.type === 'image') {
+      showImage(msg);
+    }
+    if (msg.type === 'vlm_result') {
+      showVlmResult(msg);
+    }
+  }
+
+  // ─── IMAGE DISPLAY ───
+  function showImage(msg) {
+    var img = $('cameraImage');
+    var placeholder = $('imagePlaceholder');
+    var label = $('imageLabel');
+    var counter = $('imageCounter');
+
+    placeholder.style.display = 'none';
+    img.style.display = 'block';
+    label.style.display = 'block';
+
+    // Set image source
+    if (msg.base64) {
+      img.src = 'data:image/png;base64,' + msg.base64;
+    } else if (msg.url) {
+      img.src = msg.url;
+    }
+
+    // Trigger fade-in
+    img.classList.remove('fade-in');
+    void img.offsetWidth; // force reflow
+    img.classList.add('fade-in');
+
+    // Update labels
+    label.textContent = msg.filename || '';
+
+    if (msg.index !== undefined && msg.total !== undefined) {
+      counter.style.display = 'block';
+      counter.textContent = msg.index + ' / ' + msg.total;
+    }
+
+    $('cameraStatus').textContent = 'Frame ' + (msg.index || '?');
+  }
+
+  // ─── VLM RESULT ───
+  function showVlmResult(msg) {
+    var data = msg.result || {};
+    renderVlmOutput(data);
+
+    if (msg.latency_ms) {
+      $('vlmLatency').textContent = msg.latency_ms + 'ms';
+    }
+  }
+
+  // ─── INIT ───
+  connect();
+})();
+</script>
+</body>
+</html>
