@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>AI Kitchen Monitor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FFF8E7;
+    --warm-bg: #FEF0D5;
+    --orange: #FF6B35;
+    --orange-dark: #E5552A;
+    --orange-light: #FF8C5A;
+    --yellow: #FFB627;
+    --yellow-light: #FFD166;
+    --green: #06D6A0;
+    --green-dark: #05B384;
+    --red: #EF476F;
+    --red-dark: #D63A5E;
+    --brown: #5C4033;
+    --brown-light: #8B6F5E;
+    --white: #FFFFFF;
+    --card-shadow: 0 6px 0 rgba(92, 64, 51, 0.15), 0 8px 24px rgba(92, 64, 51, 0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--warm-bg);
+    min-height: 100dvh;
+    overflow-x: hidden;
+    color: var(--brown);
+    position: relative;
+  }
+
+  /* Subtle kitchen tile pattern */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 25px 25px, rgba(92, 64, 51, 0.03) 2px, transparent 2px),
+      radial-gradient(circle at 75px 75px, rgba(92, 64, 51, 0.03) 2px, transparent 2px);
+    background-size: 100px 100px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ─── HEADER ─── */
+  .header {
+    background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+    padding: 16px 20px;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 4px 0 rgba(229, 85, 42, 0.4), 0 6px 20px rgba(255, 107, 53, 0.25);
+  }
+
+  .header h1 {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--white);
+    text-shadow: 0 2px 0 rgba(92, 64, 51, 0.2);
+    letter-spacing: 0.5px;
+  }
+
+  .header .subtitle {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 600;
+    margin-top: 2px;
+  }
+
+  .dish-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(4px);
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--white);
+    margin-top: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
+  /* ─── MAIN CONTENT ─── */
+  .content {
+    padding: 20px 16px;
+    max-width: 420px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-height: calc(100dvh - 80px);
+  }
+
+  /* ─── STEP PROGRESS ─── */
+  .progress-bar {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    padding: 4px 0;
+  }
+
+  .progress-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(92, 64, 51, 0.15);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    border: 2px solid transparent;
+  }
+
+  .progress-dot.done {
+    background: var(--green);
+    border-color: var(--green-dark);
+  }
+
+  .progress-dot.active {
+    background: var(--orange);
+    border-color: var(--orange-dark);
+    transform: scale(1.3);
+    animation: dot-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes dot-pulse {
+    0%, 100% { transform: scale(1.3); }
+    50% { transform: scale(1.5); }
+  }
+
+  /* ─── STEP CARD ─── */
+  .step-card-container {
+    position: relative;
+    min-height: 200px;
+  }
+
+  .step-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: var(--card-shadow);
+    border-left: 6px solid var(--orange);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .step-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle at top right, rgba(255, 182, 39, 0.08), transparent 70%);
+    pointer-events: none;
+  }
+
+  .step-number {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: var(--orange);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+  }
+
+  .step-instruction {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 1.35rem;
+    line-height: 1.35;
+    color: var(--brown);
+    margin-bottom: 16px;
+  }
+
+  .step-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 24px;
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+
+  .step-indicator.watching {
+    background: rgba(255, 107, 53, 0.1);
+    color: var(--orange);
+  }
+
+  .step-indicator .eye {
+    display: inline-block;
+    animation: eye-blink 3s ease-in-out infinite;
+  }
+
+  @keyframes eye-blink {
+    0%, 90%, 100% { opacity: 1; }
+    95% { opacity: 0; }
+  }
+
+  .step-indicator.timing {
+    background: rgba(255, 182, 39, 0.12);
+    color: #D4930D;
+  }
+
+  .step-indicator.confirming {
+    background: rgba(6, 214, 160, 0.1);
+    color: var(--green-dark);
+  }
+
+  /* Step slide animation */
+  .step-card.slide-out {
+    animation: slide-out-left 0.4s cubic-bezier(0.55, 0, 1, 0.45) forwards;
+  }
+
+  .step-card.slide-in {
+    animation: slide-in-right 0.5s cubic-bezier(0, 0.55, 0.45, 1) forwards;
+  }
+
+  @keyframes slide-out-left {
+    0% { transform: translateX(0) scale(1); opacity: 1; }
+    100% { transform: translateX(-110%) scale(0.9); opacity: 0; }
+  }
+
+  @keyframes slide-in-right {
+    0% { transform: translateX(110%) scale(0.9); opacity: 0; }
+    100% { transform: translateX(0) scale(1); opacity: 1; }
+  }
+
+  /* ─── TIMER ─── */
+  .timer-section {
+    display: none;
+  }
+
+  .timer-section.visible {
+    display: block;
+  }
+
+  .timer-card {
+    background: linear-gradient(135deg, var(--yellow), var(--yellow-light));
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 6px 0 rgba(212, 147, 13, 0.3), 0 8px 24px rgba(255, 182, 39, 0.2);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .timer-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .timer-label {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: rgba(92, 64, 51, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 4px;
+  }
+
+  .timer-display {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 700;
+    font-size: 3.5rem;
+    color: var(--brown);
+    text-shadow: 0 2px 0 rgba(255, 255, 255, 0.3);
+    line-height: 1.1;
+    position: relative;
+    z-index: 1;
+  }
+
+  .timer-name {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: rgba(92, 64, 51, 0.7);
+    margin-top: 4px;
+  }
+
+  /* Timer progress ring */
+  .timer-ring {
+    width: 160px;
+    height: 160px;
+    margin: 0 auto 8px;
+    position: relative;
+  }
+
+  .timer-ring svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+  }
+
+  .timer-ring .bg {
+    fill: none;
+    stroke: rgba(92, 64, 51, 0.1);
+    stroke-width: 8;
+  }
+
+  .timer-ring .progress {
+    fill: none;
+    stroke: var(--brown);
+    stroke-width: 8;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 1s linear;
+  }
+
+  .timer-ring .time-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .timer-card.urgent {
+    animation: timer-urgent 0.5s ease-in-out infinite alternate;
+    background: linear-gradient(135deg, #FF8C5A, var(--orange));
+  }
+
+  @keyframes timer-urgent {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.02); }
+  }
+
+  /* ─── DONE BUTTON ─── */
+  .done-section {
+    display: none;
+    margin-top: auto;
+    padding-bottom: 20px;
+  }
+
+  .done-section.visible {
+    display: block;
+  }
+
+  .done-btn {
+    display: block;
+    width: 100%;
+    padding: 20px;
+    background: linear-gradient(135deg, var(--green), var(--green-dark));
+    color: var(--white);
+    border: none;
+    border-radius: 20px;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 700;
+    font-size: 1.4rem;
+    cursor: pointer;
+    box-shadow: 0 6px 0 rgba(5, 128, 94, 0.5), 0 8px 24px rgba(6, 214, 160, 0.3);
+    text-shadow: 0 2px 0 rgba(0, 0, 0, 0.1);
+    transition: all 0.1s ease;
+    position: relative;
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .done-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    transition: left 0.5s ease;
+  }
+
+  .done-btn:hover::after {
+    left: 100%;
+  }
+
+  .done-btn:active {
+    transform: translateY(4px);
+    box-shadow: 0 2px 0 rgba(5, 128, 94, 0.5), 0 4px 12px rgba(6, 214, 160, 0.2);
+    animation: btn-bounce 0.3s ease;
+  }
+
+  @keyframes btn-bounce {
+    0% { transform: translateY(4px) scale(1); }
+    50% { transform: translateY(0px) scale(1.03); }
+    100% { transform: translateY(0px) scale(1); }
+  }
+
+  /* ─── SAFETY ALERT ─── */
+  .safety-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(239, 71, 111, 0.15);
+    backdrop-filter: blur(2px);
+    z-index: 100;
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 100px;
+  }
+
+  .safety-overlay.visible {
+    display: flex;
+    animation: overlay-in 0.3s ease;
+  }
+
+  @keyframes overlay-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .safety-alert {
+    background: linear-gradient(135deg, var(--red), var(--red-dark));
+    color: var(--white);
+    padding: 28px 24px;
+    border-radius: 24px;
+    max-width: 350px;
+    width: 90%;
+    text-align: center;
+    box-shadow:
+      0 8px 0 rgba(180, 40, 70, 0.4),
+      0 12px 40px rgba(239, 71, 111, 0.4);
+    animation: alert-shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  }
+
+  @keyframes alert-shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-6px); }
+    20%, 40%, 60%, 80% { transform: translateX(6px); }
+  }
+
+  .safety-icon {
+    font-size: 3rem;
+    margin-bottom: 8px;
+    display: block;
+    animation: icon-pulse 1s ease-in-out infinite;
+  }
+
+  @keyframes icon-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+  }
+
+  .safety-title {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    text-shadow: 0 2px 0 rgba(0,0,0,0.15);
+    margin-bottom: 8px;
+  }
+
+  .safety-message {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    opacity: 0.9;
+    line-height: 1.4;
+  }
+
+  .safety-dismiss {
+    margin-top: 16px;
+    padding: 10px 28px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 14px;
+    color: white;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .safety-dismiss:active {
+    background: rgba(255, 255, 255, 0.35);
+  }
+
+  /* ─── RECIPE DONE CELEBRATION ─── */
+  .celebration {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, var(--cream), var(--warm-bg));
+    z-index: 200;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .celebration.visible {
+    display: flex;
+    animation: celebrate-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  @keyframes celebrate-in {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  .celebration-emoji {
+    font-size: 5rem;
+    animation: celebrate-bounce 1s ease-in-out infinite;
+  }
+
+  @keyframes celebrate-bounce {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-20px) rotate(-5deg); }
+    75% { transform: translateY(-10px) rotate(5deg); }
+  }
+
+  .celebration-title {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 700;
+    font-size: 2rem;
+    color: var(--brown);
+    text-align: center;
+  }
+
+  .celebration-sub {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--brown-light);
+  }
+
+  /* Confetti particles */
+  .confetti {
+    position: fixed;
+    z-index: 201;
+    animation: confetti-fall linear forwards;
+  }
+
+  @keyframes confetti-fall {
+    0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+  }
+
+  /* ─── WELCOME SCREEN ─── */
+  .welcome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100dvh - 80px);
+    text-align: center;
+    gap: 12px;
+    padding: 40px 20px;
+  }
+
+  .welcome-emoji {
+    font-size: 4rem;
+    animation: welcome-float 3s ease-in-out infinite;
+  }
+
+  @keyframes welcome-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  .welcome-title {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: var(--brown);
+  }
+
+  .welcome-sub {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--brown-light);
+    max-width: 280px;
+  }
+
+  .connection-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--red);
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+
+  .connection-dot.connected {
+    background: var(--green);
+    animation: dot-glow 2s ease-in-out infinite;
+  }
+
+  @keyframes dot-glow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(6, 214, 160, 0.4); }
+    50% { box-shadow: 0 0 0 6px rgba(6, 214, 160, 0); }
+  }
+
+  .status-text {
+    font-size: 0.8rem;
+    color: var(--brown-light);
+    font-weight: 600;
+  }
+
+  /* ─── COOKING SCREEN ─── */
+  .cooking-screen {
+    display: none;
+  }
+
+  .cooking-screen.visible {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 1;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <h1>AI Kitchen Monitor</h1>
+  <div class="subtitle">your on-device cooking copilot</div>
+  <div class="dish-badge" id="dishBadge" style="display:none"></div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- WELCOME -->
+  <div class="welcome" id="welcomeScreen">
+    <div class="welcome-emoji">🍳</div>
+    <div class="welcome-title">Ready to Cook!</div>
+    <div class="welcome-sub">Waiting for a recipe from the kitchen monitor...</div>
+    <div class="status-text">
+      <span class="connection-dot" id="connDot"></span>
+      <span id="connText">Connecting...</span>
+    </div>
+  </div>
+
+  <!-- COOKING SCREEN -->
+  <div class="cooking-screen" id="cookingScreen">
+
+    <!-- Progress dots -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Step card -->
+    <div class="step-card-container">
+      <div class="step-card" id="stepCard">
+        <div class="step-number" id="stepNumber">STEP 1 OF 6</div>
+        <div class="step-instruction" id="stepInstruction">Loading...</div>
+        <div class="step-indicator watching" id="stepIndicator">
+          <span class="eye">👀</span> <span class="indicator-text">Watching...</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Timer -->
+    <div class="timer-section" id="timerSection">
+      <div class="timer-card" id="timerCard">
+        <div class="timer-label">TIMER</div>
+        <div class="timer-ring">
+          <svg viewBox="0 0 160 160">
+            <circle class="bg" cx="80" cy="80" r="70"/>
+            <circle class="progress" id="timerRing" cx="80" cy="80" r="70"
+              stroke-dasharray="440" stroke-dashoffset="0"/>
+          </svg>
+          <div class="time-text">
+            <div class="timer-display" id="timerDisplay">05:00</div>
+          </div>
+        </div>
+        <div class="timer-name" id="timerName"></div>
+      </div>
+    </div>
+
+    <!-- Done button -->
+    <div class="done-section" id="doneSection">
+      <button class="done-btn" id="doneBtn">✅ DONE!</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- SAFETY ALERT OVERLAY -->
+<div class="safety-overlay" id="safetyOverlay">
+  <div class="safety-alert">
+    <span class="safety-icon">🚨</span>
+    <div class="safety-title" id="safetyTitle">WARNING</div>
+    <div class="safety-message" id="safetyMessage"></div>
+    <button class="safety-dismiss" id="safetyDismissBtn">Got it!</button>
+  </div>
+</div>
+
+<!-- CELEBRATION -->
+<div class="celebration" id="celebration">
+  <div class="celebration-emoji">🎉</div>
+  <div class="celebration-title" id="celebrationTitle">Dish Complete!</div>
+  <div class="celebration-sub">Enjoy your meal!</div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  // ─── STATE ───
+  var ws = null;
+  var currentStep = null;
+  var totalSteps = 0;
+  var currentDish = '';
+  var timerInterval = null;
+  var timerRemaining = 0;
+  var timerTotal = 0;
+  var RECONNECT_DELAY = 2000;
+  var CIRCUMFERENCE = 2 * Math.PI * 70;
+
+  // ─── DOM REFS ───
+  function $(id) { return document.getElementById(id); }
+
+  // ─── SAFE DOM HELPERS ───
+  function setIndicator(type, emoji, text) {
+    var indicator = $('stepIndicator');
+    indicator.className = 'step-indicator ' + type;
+
+    // Clear children safely
+    while (indicator.firstChild) {
+      indicator.removeChild(indicator.firstChild);
+    }
+
+    if (emoji) {
+      var emojiSpan = document.createElement('span');
+      if (type === 'watching') emojiSpan.className = 'eye';
+      emojiSpan.textContent = emoji;
+      indicator.appendChild(emojiSpan);
+    }
+
+    var textSpan = document.createElement('span');
+    textSpan.className = 'indicator-text';
+    textSpan.textContent = ' ' + text;
+    indicator.appendChild(textSpan);
+  }
+
+  // ─── WEBSOCKET ───
+  function connect() {
+    var host = location.hostname || 'localhost';
+    var port = location.port || '8765';
+    ws = new WebSocket('ws://' + host + ':' + port + '/ws');
+
+    ws.onopen = function() {
+      $('connDot').classList.add('connected');
+      $('connText').textContent = 'Connected';
+    };
+
+    ws.onclose = function() {
+      $('connDot').classList.remove('connected');
+      $('connText').textContent = 'Reconnecting...';
+      setTimeout(connect, RECONNECT_DELAY);
+    };
+
+    ws.onerror = function() { ws.close(); };
+
+    ws.onmessage = function(event) {
+      var msg = JSON.parse(event.data);
+      handleMessage(msg);
+    };
+  }
+
+  // ─── MESSAGE HANDLER ───
+  function handleMessage(msg) {
+    switch (msg.type) {
+      case 'step':
+        showStep(msg);
+        break;
+      case 'timer':
+        updateTimer(msg);
+        break;
+      case 'safety':
+        showSafety(msg);
+        break;
+      case 'done':
+        showCelebration(msg);
+        break;
+    }
+  }
+
+  // ─── STEP UPDATES ───
+  function showStep(msg) {
+    if (!currentStep) {
+      $('welcomeScreen').style.display = 'none';
+      $('cookingScreen').classList.add('visible');
+      currentDish = msg.dish || '';
+      totalSteps = msg.total_steps || 6;
+      if (currentDish) {
+        var badge = $('dishBadge');
+        badge.textContent = formatDish(currentDish);
+        badge.style.display = 'inline-block';
+      }
+      buildProgressDots(totalSteps);
+    }
+
+    var card = $('stepCard');
+
+    if (currentStep && currentStep !== msg.step_id) {
+      card.classList.add('slide-out');
+      setTimeout(function() {
+        updateStepContent(msg);
+        card.classList.remove('slide-out');
+        card.classList.add('slide-in');
+        setTimeout(function() { card.classList.remove('slide-in'); }, 500);
+      }, 400);
+    } else {
+      updateStepContent(msg);
+      card.classList.add('slide-in');
+      setTimeout(function() { card.classList.remove('slide-in'); }, 500);
+    }
+
+    currentStep = msg.step_id;
+    updateProgressDots(msg.step_id);
+
+    var doneSection = $('doneSection');
+    if (msg.completion_type === 'user_confirm') {
+      doneSection.classList.add('visible');
+    } else {
+      doneSection.classList.remove('visible');
+    }
+
+    if (msg.completion_type !== 'timer') {
+      $('timerSection').classList.remove('visible');
+      clearInterval(timerInterval);
+    }
+
+    if (msg.instruction) {
+      speak('Step ' + msg.step_id + ': ' + msg.instruction);
+    }
+  }
+
+  function updateStepContent(msg) {
+    $('stepNumber').textContent = 'STEP ' + msg.step_id + ' OF ' + (msg.total_steps || totalSteps);
+    $('stepInstruction').textContent = msg.instruction;
+
+    switch (msg.completion_type) {
+      case 'vlm':
+        setIndicator('watching', '👀', 'Watching...');
+        break;
+      case 'timer':
+        setIndicator('timing', '⏱️', 'Timer will start');
+        break;
+      case 'user_confirm':
+        setIndicator('confirming', '👆', 'Tap Done when ready');
+        break;
+    }
+  }
+
+  // ─── PROGRESS DOTS ───
+  function buildProgressDots(total) {
+    var bar = $('progressBar');
+    while (bar.firstChild) {
+      bar.removeChild(bar.firstChild);
+    }
+    for (var i = 1; i <= total; i++) {
+      var dot = document.createElement('div');
+      dot.className = 'progress-dot';
+      dot.dataset.step = i;
+      bar.appendChild(dot);
+    }
+  }
+
+  function updateProgressDots(activeId) {
+    var dots = document.querySelectorAll('.progress-dot');
+    for (var i = 0; i < dots.length; i++) {
+      var step = parseInt(dots[i].dataset.step);
+      dots[i].classList.remove('done', 'active');
+      if (step < activeId) dots[i].classList.add('done');
+      if (step === activeId) dots[i].classList.add('active');
+    }
+  }
+
+  // ─── TIMER ───
+  function updateTimer(msg) {
+    var section = $('timerSection');
+    section.classList.add('visible');
+
+    timerRemaining = msg.remaining_seconds;
+    timerTotal = msg.total_seconds;
+
+    renderTimer();
+
+    setIndicator('timing', '⏱️', formatTime(timerRemaining));
+
+    clearInterval(timerInterval);
+    timerInterval = setInterval(function() {
+      timerRemaining = Math.max(0, timerRemaining - 1);
+      renderTimer();
+      setIndicator('timing', '⏱️', formatTime(timerRemaining));
+      if (timerRemaining <= 0) clearInterval(timerInterval);
+    }, 1000);
+  }
+
+  function renderTimer() {
+    $('timerDisplay').textContent = formatTime(timerRemaining);
+
+    var ring = $('timerRing');
+    var progress = timerTotal > 0 ? (1 - timerRemaining / timerTotal) : 0;
+    ring.setAttribute('stroke-dasharray', String(CIRCUMFERENCE));
+    ring.setAttribute('stroke-dashoffset', String(CIRCUMFERENCE * (1 - progress)));
+
+    var card = $('timerCard');
+    if (timerRemaining <= 30 && timerRemaining > 0) {
+      card.classList.add('urgent');
+    } else {
+      card.classList.remove('urgent');
+    }
+  }
+
+  function formatTime(seconds) {
+    var m = Math.floor(seconds / 60);
+    var s = seconds % 60;
+    return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+  }
+
+  // ─── DONE BUTTON ───
+  function handleDone() {
+    if (!currentStep || !ws) return;
+    ws.send(JSON.stringify({
+      type: 'user_confirm',
+      step_id: currentStep,
+    }));
+    $('doneSection').classList.remove('visible');
+  }
+
+  // ─── SAFETY ALERT ───
+  function showSafety(msg) {
+    $('safetyMessage').textContent = msg.message;
+    $('safetyOverlay').classList.add('visible');
+    speak(msg.message, true);
+  }
+
+  function dismissSafety() {
+    $('safetyOverlay').classList.remove('visible');
+  }
+
+  // ─── CELEBRATION ───
+  function showCelebration(msg) {
+    var dish = msg.dish ? formatDish(msg.dish) : 'Your dish';
+    $('celebrationTitle').textContent = dish + ' is ready!';
+    $('celebration').classList.add('visible');
+    speak(dish + ' is done! Enjoy your meal!');
+    spawnConfetti();
+  }
+
+  function spawnConfetti() {
+    var colors = ['#FF6B35', '#FFB627', '#06D6A0', '#EF476F', '#FFD166', '#FF8C5A'];
+    for (var i = 0; i < 40; i++) {
+      var el = document.createElement('div');
+      el.className = 'confetti';
+      el.style.left = (Math.random() * 100) + 'vw';
+      el.style.background = colors[Math.floor(Math.random() * colors.length)];
+      el.style.width = (8 + Math.random() * 8) + 'px';
+      el.style.height = (8 + Math.random() * 8) + 'px';
+      el.style.animationDuration = (2 + Math.random() * 2) + 's';
+      el.style.animationDelay = (Math.random() * 0.8) + 's';
+      el.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+      document.body.appendChild(el);
+      (function(elem) {
+        setTimeout(function() { elem.remove(); }, 5000);
+      })(el);
+    }
+  }
+
+  // ─── TTS (Web Speech API) ───
+  function speak(text, urgent) {
+    if (!('speechSynthesis' in window)) return;
+    var utter = new SpeechSynthesisUtterance(text);
+    utter.rate = urgent ? 1.1 : 0.95;
+    utter.pitch = urgent ? 1.2 : 1.0;
+    speechSynthesis.cancel();
+    speechSynthesis.speak(utter);
+  }
+
+  // ─── UTILS ───
+  function formatDish(name) {
+    return name.replace(/_/g, ' ').replace(/\b\w/g, function(c) { return c.toUpperCase(); });
+  }
+
+  // ─── EVENT LISTENERS ───
+  $('doneBtn').addEventListener('click', handleDone);
+  $('safetyDismissBtn').addEventListener('click', dismissSafety);
+
+  // ─── INIT ───
+  connect();
+})();
+</script>
+</body>
+</html>
